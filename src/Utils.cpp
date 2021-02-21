@@ -9,7 +9,7 @@ double clamp(double min, double max, double num)
     return num;
 }
 
-int random(int min, int max) //range : [min, max]
+int random(int min, int max)
 {
     static bool first = true;
     if (first)
@@ -18,4 +18,9 @@ int random(int min, int max) //range : [min, max]
         first = false;
     }
     return min + rand() % ((max + 1) - min);
+}
+
+double lerp(double a, double b, double t)
+{
+    return (a + (t * (b - a)));
 }
