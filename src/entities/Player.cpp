@@ -44,3 +44,8 @@ void Player::process_render(sf::RenderWindow *window)
 {
     window->draw(this->shape);
 }
+
+const sf::Vector2f &Player::get_position() const
+{
+    return this->position;
+}

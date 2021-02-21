@@ -2,7 +2,7 @@
 
 #include "Entity.hpp"
 
-class BasicEnemy : public Entity
+class SmartEnemy : public Entity
 {
 private:
     sf::Vector2f position;
@@ -11,7 +11,7 @@ private:
     sf::RectangleShape shape;
 
 public:
-    BasicEnemy();
+    SmartEnemy();
 
     void process_update(const double deltaTime) override;
 

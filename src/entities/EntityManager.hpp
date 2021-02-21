@@ -17,4 +17,6 @@ public:
     void process_render(sf::RenderWindow *window);
 
     void spawn(EntityType entityType, uint32_t amount);
+
+    std::vector<Entity *> get_all_entity_with(EntityType type);
 };

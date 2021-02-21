@@ -6,7 +6,7 @@ enum class EntityType
 {
     Player,
     BasicEnemy,
-    SmartEnemy
+    SmartEnemy,
 };
 
 class Entity

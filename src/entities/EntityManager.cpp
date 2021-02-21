@@ -2,6 +2,7 @@
 
 #include "Player.hpp"
 #include "BasicEnemy.hpp"
+#include "SmartEnemy.hpp"
 
 EntityManager::~EntityManager()
 {
@@ -50,10 +51,34 @@ void EntityManager::spawn(EntityType entityType, uint32_t amount)
         }
         case EntityType::BasicEnemy:
         {
-            BasicEnemy *enemy = new BasicEnemy();
-            this->entities.push_back(std::move(enemy));
+            BasicEnemy *basicEnemy = new BasicEnemy();
+            this->entities.push_back(std::move(basicEnemy));
             break;
         }
+        case EntityType::SmartEnemy:
+        {
+            SmartEnemy *smartEnemy = new SmartEnemy();
+            this->entities.push_back(std::move(smartEnemy));
+            break;
+        }
+        default:
+            break;
         }
     }
+}
+
+std::vector<Entity *> EntityManager::get_all_entity_with(EntityType type)
+{
+    std::vector<Entity *> request;
+    if (this->entities.empty())
+        return request;
+    for (int i = this->entities.size() - 1; i >= 0; i--)
+    {
+        Entity *entity = this->entities[i];
+        if (entity->get_entity_type() == type)
+        {
+            request.emplace_back(entity);
+        }
+    }
+    return request;
 }
