@@ -10,6 +10,8 @@ private:
     std::vector<Entity *> entities;
 
 public:
+    ~EntityManager();
+
     void process_update(const double deltaTime);
 
     void process_render(sf::RenderWindow *window);
