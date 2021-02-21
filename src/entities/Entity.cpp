@@ -1,13 +1,13 @@
 #include "Entity.hpp"
 
-Entity::Entity(EntityID entityID)
+Entity::Entity(EntityType entityType)
 {
-    this->entityID = entityID;
+    this->entityType = entityType;
 }
 
-EntityID Entity::get_entity_id() const
+EntityType Entity::get_entity_type() const
 {
-    return this->entityID;
+    return this->entityType;
 }
 
 void Entity::process_update(const double deltaTime) {}
