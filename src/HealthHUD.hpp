@@ -3,7 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-struct PlayerHealthHUD
+struct HealthHUD
 {
     uint32_t health;
     uint32_t maxHealth;
@@ -13,6 +13,6 @@ struct PlayerHealthHUD
     sf::RectangleShape backgroundBar;
 };
 
-PlayerHealthHUD hud_create(sf::Font *font);
-void hud_process_data(PlayerHealthHUD *hud);
-void hud_process_render(sf::RenderWindow *window, PlayerHealthHUD *hud);
+HealthHUD health_hud_create(sf::Font *font);
+void health_hud_process_data(HealthHUD *hud);
+void health_hud_process_render(sf::RenderWindow *window, HealthHUD *hud);

@@ -35,7 +35,7 @@ void player_process_movement(Player *player, WindowSettings *settings)
     player->shape.setPosition(player->position.x, player->position.y);
 }
 
-void player_process_collision(Player *player, std::vector<BasicEnemy> &basicEnemies, PlayerHealthHUD *hud)
+void player_process_collision(Player *player, std::vector<BasicEnemy> &basicEnemies, HealthHUD *hud)
 {
     if (basicEnemies.empty())
         return;

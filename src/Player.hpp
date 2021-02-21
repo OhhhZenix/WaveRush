@@ -4,7 +4,7 @@
 
 #include "WindowSettings.hpp"
 #include "BasicEnemy.hpp"
-#include "PlayerHealthHUD.hpp"
+#include "HealthHUD.hpp"
 
 struct Player
 {
@@ -16,5 +16,5 @@ struct Player
 
 Player player_create(WindowSettings *settings);
 void player_process_movement(Player *player, WindowSettings *settings);
-void player_process_collision(Player *player, std::vector<BasicEnemy> &basicEnemies, PlayerHealthHUD* hud);
+void player_process_collision(Player *player, std::vector<BasicEnemy> &basicEnemies, HealthHUD *hud);
 void player_process_render(sf::RenderWindow *window, Player *player);

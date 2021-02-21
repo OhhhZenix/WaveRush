@@ -1,8 +1,8 @@
-#include "PlayerHealthHUD.hpp"
+#include "HealthHUD.hpp"
 
-PlayerHealthHUD hud_create(sf::Font *font)
+HealthHUD health_hud_create(sf::Font *font)
 {
-    PlayerHealthHUD hud;
+    HealthHUD hud;
     hud.info.setFont(*font);
     hud.info.setCharacterSize(30);
     hud.info.setFillColor(sf::Color::White);
@@ -21,13 +21,13 @@ PlayerHealthHUD hud_create(sf::Font *font)
     return hud;
 }
 
-void hud_process_data(PlayerHealthHUD *hud)
+void health_hud_process_data(HealthHUD *hud)
 {
     hud->info.setString(std::string(std::to_string(hud->health) + "/" + std::to_string(hud->maxHealth)));
     hud->healthBar.setSize(sf::Vector2f(hud->health * 2, 50));
 }
 
-void hud_process_render(sf::RenderWindow *window, PlayerHealthHUD *hud)
+void health_hud_process_render(sf::RenderWindow *window, HealthHUD *hud)
 {
     window->draw(hud->backgroundBar);
     window->draw(hud->overlayBar);
