@@ -24,6 +24,7 @@ void Game::run()
     {
         this->entityManager.spawn(EntityType::Player, 1);
         this->entityManager.spawn(EntityType::BasicEnemy, 1);
+        this->entityManager.spawn(EntityType::SmartEnemy, 1);
     }
 
     // Loop
@@ -72,7 +73,7 @@ sf::RenderWindow *Game::get_window() const
     return this->window;
 }
 
-const EntityManager &Game::get_entity_manager() const
+EntityManager &Game::get_entity_manager()
 {
     return this->entityManager;
 }

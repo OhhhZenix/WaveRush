@@ -26,7 +26,7 @@ public:
 
     sf::RenderWindow *get_window() const;
 
-    const EntityManager &get_entity_manager() const;
+    EntityManager &get_entity_manager();
 
 private:
     void process_event(sf::Event *event);

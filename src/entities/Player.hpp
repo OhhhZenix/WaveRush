@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "core/Game.hpp"
 #include "Entity.hpp"
 
@@ -19,4 +17,6 @@ public:
     void process_update(const double deltaTime) override;
 
     void process_render(sf::RenderWindow *window) override;
+
+    const sf::Vector2f &get_position() const;
 };
