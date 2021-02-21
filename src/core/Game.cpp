@@ -34,7 +34,7 @@ void Game::run()
         {
             // Update delta time
             {
-                deltaTime = deltaClock.getElapsedTime().asSeconds();
+                deltaTime = deltaClock.restart().asSeconds();
             }
 
             // Works with the events incoming
