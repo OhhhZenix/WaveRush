@@ -10,9 +10,12 @@ private:
     sf::Vector2f speed;
     sf::Vector2f size;
     sf::RectangleShape shape;
+    uint32_t speedLevel;
 
 public:
     Player();
+
+    void process_event(sf::Event *event) override;
 
     void process_update(const double deltaTime) override;
 

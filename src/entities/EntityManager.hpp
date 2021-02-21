@@ -12,6 +12,8 @@ private:
 public:
     ~EntityManager();
 
+    void process_event(sf::Event *event);
+
     void process_update(const double deltaTime);
 
     void process_render(sf::RenderWindow *window);
