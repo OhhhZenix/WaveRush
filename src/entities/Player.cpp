@@ -6,7 +6,7 @@
 Player::Player() : Entity(EntityID::Player)
 {
     this->size = sf::Vector2f(50, 50);
-    this->speed = sf::Vector2f(20, 20);
+    this->speed = sf::Vector2f(550, 550);
     this->position = sf::Vector2f(Game::instance().get_settings()->width / 2, Game::instance().get_settings()->height / 2);
     this->shape.setSize(this->size);
     this->shape.setFillColor(sf::Color::Green);
