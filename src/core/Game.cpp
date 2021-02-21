@@ -22,7 +22,8 @@ void Game::run()
 {
     // Init
     {
-        this->entityManager.spawn(EntityID::Player, 1);
+        this->entityManager.spawn(EntityType::Player, 1);
+        this->entityManager.spawn(EntityType::BasicEnemy, 1);
     }
 
     // Loop

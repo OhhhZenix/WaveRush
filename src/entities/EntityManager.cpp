@@ -7,7 +7,7 @@ EntityManager::~EntityManager()
 {
     if (!this->entities.empty())
     {
-        for (int i = this->entities.size(); i >= 0; i--)
+        for (int i = this->entities.size() - 1; i >= 0; i--)
         {
             Entity *entity = this->entities[i];
             delete entity;
@@ -36,20 +36,24 @@ void EntityManager::process_render(sf::RenderWindow *window)
     }
 }
 
-void EntityManager::spawn(EntityID entityID, uint32_t amount)
+void EntityManager::spawn(EntityType entityType, uint32_t amount)
 {
     for (int i = 0; i < amount; i++)
     {
-        switch (entityID)
+        switch (entityType)
         {
-        case EntityID::Player:
+        case EntityType::Player:
+        {
             Player *player = new Player();
             this->entities.push_back(std::move(player));
             break;
-        case EntityID::BasicEnemy:
+        }
+        case EntityType::BasicEnemy:
+        {
             BasicEnemy *enemy = new BasicEnemy();
             this->entities.push_back(std::move(enemy));
             break;
+        }
         }
     }
 }

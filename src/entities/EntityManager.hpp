@@ -16,5 +16,5 @@ public:
 
     void process_render(sf::RenderWindow *window);
 
-    void spawn(EntityID entityID, uint32_t amount);
+    void spawn(EntityType entityType, uint32_t amount);
 };

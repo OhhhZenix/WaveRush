@@ -3,10 +3,10 @@
 #include "core/Game.hpp"
 #include "Utils.hpp"
 
-BasicEnemy::BasicEnemy() : Entity(EntityID::BasicEnemy)
+BasicEnemy::BasicEnemy() : Entity(EntityType::BasicEnemy)
 {
     this->size = sf::Vector2f(25, 25);
-    this->speed = sf::Vector2f(10, 10);
+    this->speed = sf::Vector2f(700, 700);
     this->position.x = random(0, Game::instance().get_settings()->width - this->size.x);
     this->position.y = random(0, Game::instance().get_settings()->height - this->size.y);
     this->shape.setSize(this->size);

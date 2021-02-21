@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-enum class EntityID
+enum class EntityType
 {
     Player,
     BasicEnemy,
@@ -12,12 +12,12 @@ enum class EntityID
 class Entity
 {
 private:
-    EntityID entityID;
+    EntityType entityType;
 
 public:
-    Entity(EntityID entityID);
+    Entity(EntityType entityType);
 
-    EntityID get_entity_id() const;
+    EntityType get_entity_type() const;
 
     virtual void process_update(const double deltaTime);
 
