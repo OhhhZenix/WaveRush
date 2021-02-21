@@ -1,3 +1,5 @@
+#include "Utils.hpp"
+
 double clamp(double min, double max, double num)
 {
     if (num <= min)
