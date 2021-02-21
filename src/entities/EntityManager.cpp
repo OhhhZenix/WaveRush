@@ -17,6 +17,16 @@ EntityManager::~EntityManager()
     }
 }
 
+void EntityManager::process_event(sf::Event *event)
+{
+    if (this->entities.empty())
+        return;
+    for (Entity *entity : this->entities)
+    {
+        entity->process_event(event);
+    }
+}
+
 void EntityManager::process_update(const double deltaTime)
 {
     if (this->entities.empty())

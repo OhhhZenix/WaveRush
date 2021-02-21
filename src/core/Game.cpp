@@ -80,6 +80,7 @@ EntityManager &Game::get_entity_manager()
 
 void Game::process_event(sf::Event *event)
 {
+    this->entityManager.process_event(event);
     if (event->type == sf::Event::Closed)
         this->window->close();
 }
