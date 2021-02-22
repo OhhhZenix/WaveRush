@@ -52,6 +52,7 @@ void Game::Run()
 {
     // Init
     {
+    	m_EntityManager.Spawn(EntityType::SmartEnemy, 1);
         m_EntityManager.Spawn(EntityType::Player, 1);
         m_EntityManager.Spawn(EntityType::BasicEnemy, 4);
     }

@@ -8,7 +8,7 @@ BasicEnemy::BasicEnemy()
 {
     m_Size = {25, 25};
     m_Velocity = {700, 700};
-    m_Position = {random(0, Game::Instance().GetSettings()->Width - m_Size.X), random(0, Game::Instance().GetSettings()->Height - m_Size.Y)};
+    m_Position = {(float)random(0, Game::Instance().GetSettings()->Width - m_Size.X), (float)random(0, Game::Instance().GetSettings()->Height - m_Size.Y)};
     m_Color = {255, 0, 0, 255};
     m_OutlineColor = {0, 0, 0, 255};
     m_OutlineThickness = 3;
