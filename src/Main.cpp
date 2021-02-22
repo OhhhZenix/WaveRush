@@ -1,6 +1,7 @@
+
 #include <iostream>
-#include "core/Game.hpp"
 #include <SDL.h>
+#include "core/Game.hpp"
 
 /*
 - Allow adjustable speed for player (✅)
@@ -20,7 +21,7 @@ Function = pascal
 variables = param -> p_Var, member -> m_Var, function/method var -> f_Var
 */
 
-int main(void)
+int main()
 {
 	//Game::Instance().Run();
 	//
