@@ -1,5 +1,8 @@
 #include "Utils.hpp"
 
+#include <cmath>
+#include <ctime>
+
 double clamp(double min, double max, double num)
 {
     if (num <= min)
