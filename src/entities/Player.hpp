@@ -5,13 +5,13 @@
 
 class Player : public Entity
 {
-private:
-    uint32_t m_VelocityLevel;
+ private:
+	uint32_t m_VelocityLevel;
 
-public:
-    Player();
+ public:
+	Player();
 
-    void ProcessEvent(SDL_Event *p_Event) override;
+	void ProcessEvent(SDL_Event* p_Event) override;
 
-    void ProcessUpdate(const double p_DeltaTime) override;
+	void ProcessUpdate(float p_DeltaTime) override;
 };

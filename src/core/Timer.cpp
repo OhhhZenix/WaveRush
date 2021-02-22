@@ -2,16 +2,14 @@
 
 #include "SDL.h"
 
-Timer::Timer()
-{
+Timer::Timer() {
     m_StartTime = 0;
     m_PausedTime = 0;
     m_Started = false;
     m_Paused = false;
 }
 
-void Timer::Start()
-{
+void Timer::Start() {
     m_Started = true;
     m_Paused = false;
 
@@ -19,8 +17,7 @@ void Timer::Start()
     m_PausedTime = 0;
 }
 
-void Timer::Stop()
-{
+void Timer::Stop() {
     m_Started = false;
     m_Paused = false;
 
@@ -28,10 +25,8 @@ void Timer::Stop()
     m_PausedTime = 0;
 }
 
-void Timer::Pause()
-{
-    if (m_Started && !m_Paused)
-    {
+void Timer::Pause() {
+    if (m_Started && !m_Paused) {
         m_Paused = true;
 
         m_PausedTime = SDL_GetTicks() - m_StartTime;
@@ -39,10 +34,8 @@ void Timer::Pause()
     }
 }
 
-void Timer::Unpause()
-{
-    if (m_Started && m_Paused)
-    {
+void Timer::Unpause() {
+    if (m_Started && m_Paused) {
         m_Paused = false;
 
         m_StartTime = SDL_GetTicks() - m_PausedTime;
@@ -50,20 +43,17 @@ void Timer::Unpause()
     }
 }
 
-int Timer::GetTicks()
-{
+int Timer::GetTicks() const {
     if (m_Started)
         return m_Paused ? m_PausedTime : SDL_GetTicks() - m_StartTime;
 
     return 0;
 }
 
-bool Timer::IsStarted() const
-{
+bool Timer::IsStarted() const {
     return m_Started;
 }
 
-bool Timer::IsPaused() const
-{
+bool Timer::IsPaused() const {
     return m_Paused;
 }

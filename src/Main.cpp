@@ -21,6 +21,6 @@ variables = param -> p_Var, member -> m_Var, function/method var -> f_Var
 
 int main()
 {
-    Game::Instance().Run();
-    return 0;
+	Game::Instance().Run();
+	return 0;
 }

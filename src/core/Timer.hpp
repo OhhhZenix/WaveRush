@@ -2,26 +2,26 @@
 
 class Timer
 {
-private:
-    int m_StartTime;
-    int m_PausedTime;
-    bool m_Started;
-    bool m_Paused;
+ private:
+	int m_StartTime;
+	int m_PausedTime;
+	bool m_Started;
+	bool m_Paused;
 
-public:
-    Timer();
+ public:
+	Timer();
 
-    void Start();
+	void Start();
 
-    void Stop();
+	void Stop();
 
-    void Pause();
+	void Pause();
 
-    void Unpause();
+	void Unpause();
 
-    int GetTicks();
+	int GetTicks() const;
 
-    bool IsStarted() const;
+	bool IsStarted() const;
 
-    bool IsPaused() const;
+	bool IsPaused() const;
 };

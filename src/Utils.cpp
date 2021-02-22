@@ -1,15 +1,11 @@
 #include "Utils.hpp"
 
-#include <cmath>
-#include <ctime>
+#include <random>
 
-int random(int min, int max)
+int Random(int p_Min, int p_Max)
 {
-    static bool first = true;
-    if (first)
-    {
-        srand(time(NULL)); //seeding for the first time only!
-        first = false;
-    }
-    return min + rand() % ((max + 1) - min);
+	std::random_device f_Device;
+	std::default_random_engine f_Gen(f_Device());
+	std::uniform_int_distribution<int> f_Dist(p_Min, p_Max);
+	return f_Dist(f_Gen);
 }

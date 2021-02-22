@@ -4,8 +4,8 @@
 
 class BasicEnemy : public Entity
 {
-public:
-    BasicEnemy();
+ public:
+	BasicEnemy();
 
-    void ProcessUpdate(const double p_DeltaTime) override;
+	void ProcessUpdate(float p_DeltaTime) override;
 };

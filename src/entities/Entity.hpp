@@ -4,15 +4,13 @@
 
 #include "math/Vector2.hpp"
 
-enum class EntityType
-{
+enum class EntityType {
     Player,
     BasicEnemy,
     SmartEnemy,
 };
 
-class Entity
-{
+class Entity {
 private:
     EntityType m_EntityType;
 
@@ -39,7 +37,7 @@ public:
 
     virtual void ProcessEvent(SDL_Event *p_Event);
 
-    virtual void ProcessUpdate(const double p_DeltaTime);
+    virtual void ProcessUpdate(float p_DeltaTime);
 
     virtual void ProcessRender(SDL_Renderer *p_Renderer);
 };

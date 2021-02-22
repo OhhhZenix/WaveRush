@@ -2,4 +2,4 @@
 
 #include <iostream>
 
-int random(int min, int max);
+int Random(int p_Min, int p_Max);
