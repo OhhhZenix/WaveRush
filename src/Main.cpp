@@ -19,7 +19,7 @@ Function = pascal
 variables = param -> p_Var, member -> m_Var, function/method var -> f_Var
 */
 
-void main()
+int main()
 {
     Game::Instance().Run();
 }
