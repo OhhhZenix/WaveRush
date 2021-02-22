@@ -7,11 +7,11 @@ add_executable(WaveRush ${SRCS})
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 # SFML
-set(BUILD_SHARED_LIBS OFF)
-set(SFML_BUILD_EXAMPLES OFF)
-set(SFML_USE_STATIC_STD_LIBS ON)
-add_subdirectory(deps/SFML)
-target_link_libraries(${PROJECT_NAME} sfml-graphics)
+set(SDL_SHARED_ENABLED_BY_DEFAULT OFF)
+set(SDL_STATIC_ENABLED_BY_DEFAULT ON)
+add_subdirectory(deps/SDL)
+target_include_directories(${PROJECT_NAME} PUBLIC deps/SDL/include)
+target_link_libraries(${PROJECT_NAME} SDL2-static)
 
 # Post build
 add_custom_command(
