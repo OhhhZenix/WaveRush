@@ -3,14 +3,11 @@
 #include <vector>
 
 #include "core/WindowSettings.hpp"
-#include "entities/EntityManager.hpp"
 
 class Game
 {
 private:
     WindowSettings m_Settings;
-    sf::RenderWindow *m_Window;
-    EntityManager m_EntityManager;
 
 private:
     Game();
@@ -24,14 +21,12 @@ public:
 
     const WindowSettings *GetSettings() const;
 
-    EntityManager &GetEntityManager();
-
 private:
-    void ProcessEvent(sf::Event *p_Event);
+    void ProcessEvent();
 
     void ProcessUpdate(const double p_DeltaTime);
 
-    void ProcessRender(sf::RenderWindow *p_Window);
+    void ProcessRender();
 
 public:
     Game(Game const &) = delete;
