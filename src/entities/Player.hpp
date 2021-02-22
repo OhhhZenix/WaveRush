@@ -6,20 +6,20 @@
 class Player : public Entity
 {
 private:
-    sf::Vector2f position;
-    sf::Vector2f speed;
-    sf::Vector2f size;
-    sf::RectangleShape shape;
-    uint32_t speedLevel;
+    sf::Vector2f m_Position;
+    sf::Vector2f m_Speed;
+    sf::Vector2f m_Size;
+    sf::RectangleShape m_Shape;
+    uint32_t m_SpeedLevel;
 
 public:
     Player();
 
-    void process_event(sf::Event *event) override;
+    void ProcessEvent(sf::Event *p_Event) override;
 
-    void process_update(const double deltaTime) override;
+    void ProcessUpdate(const double p_DeltaTime) override;
 
-    void process_render(sf::RenderWindow *window) override;
+    void ProcessRender(sf::RenderWindow *p_Window) override;
 
-    const sf::Vector2f &get_position() const;
+    const sf::Vector2f &GetPosition() const;
 };

@@ -1,17 +1,17 @@
 #include "Entity.hpp"
 
-Entity::Entity(EntityType entityType)
+Entity::Entity(EntityType p_EntityType)
 {
-    this->entityType = entityType;
+    m_EntityType = p_EntityType;
 }
 
-EntityType Entity::get_entity_type() const
+EntityType Entity::GetEntityType() const
 {
-    return this->entityType;
+    return m_EntityType;
 }
 
-void Entity::process_event(sf::Event *event) {}
+void Entity::ProcessEvent(sf::Event *p_Event) {}
 
-void Entity::process_update(const double deltaTime) {}
+void Entity::ProcessUpdate(const double p_DeltaTime) {}
 
-void Entity::process_render(sf::RenderWindow *window) {}
+void Entity::ProcessRender(sf::RenderWindow *p_Window) {}

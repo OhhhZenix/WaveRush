@@ -6,69 +6,69 @@
 
 EntityManager::~EntityManager()
 {
-    if (!this->entities.empty())
+    if (!m_Entities.empty())
     {
-        for (int i = this->entities.size() - 1; i >= 0; i--)
+        for (int i = m_Entities.size() - 1; i >= 0; i--)
         {
-            Entity *entity = this->entities[i];
+            Entity *entity = m_Entities[i];
             delete entity;
         }
-        this->entities.clear();
+        m_Entities.clear();
     }
 }
 
-void EntityManager::process_event(sf::Event *event)
+void EntityManager::ProcessEvent(sf::Event *p_Event)
 {
-    if (this->entities.empty())
+    if (m_Entities.empty())
         return;
-    for (Entity *entity : this->entities)
+    for (Entity *entity : m_Entities)
     {
-        entity->process_event(event);
+        entity->ProcessEvent(p_Event);
     }
 }
 
-void EntityManager::process_update(const double deltaTime)
+void EntityManager::ProcessUpdate(const double p_DeltaTime)
 {
-    if (this->entities.empty())
+    if (m_Entities.empty())
         return;
-    for (Entity *entity : this->entities)
+    for (Entity *entity : m_Entities)
     {
-        entity->process_update(deltaTime);
+        entity->ProcessUpdate(p_DeltaTime);
     }
 }
 
-void EntityManager::process_render(sf::RenderWindow *window)
+void EntityManager::ProcessRender(sf::RenderWindow *p_Window)
 {
-    if (this->entities.empty())
+    if (m_Entities.empty())
         return;
-    for (Entity *entity : this->entities)
+    for (Entity *entity : m_Entities)
     {
-        entity->process_render(window);
+        entity->ProcessRender(p_Window);
     }
 }
 
-void EntityManager::spawn(EntityType entityType, uint32_t amount)
+void EntityManager::Spawn(EntityType p_EntityType, uint32_t p_Amount)
 {
-    for (int i = 0; i < amount; i++)
+    for (int i = 0; i < p_Amount; i++)
     {
-        switch (entityType)
+        switch (p_EntityType)
         {
         case EntityType::Player:
         {
             Player *player = new Player();
-            this->entities.push_back(std::move(player));
+            m_Entities.push_back(std::move(player));
             break;
         }
         case EntityType::BasicEnemy:
         {
             BasicEnemy *basicEnemy = new BasicEnemy();
-            this->entities.push_back(std::move(basicEnemy));
+            m_Entities.push_back(std::move(basicEnemy));
             break;
         }
         case EntityType::SmartEnemy:
         {
             SmartEnemy *smartEnemy = new SmartEnemy();
-            this->entities.push_back(std::move(smartEnemy));
+            m_Entities.push_back(std::move(smartEnemy));
             break;
         }
         default:
@@ -77,15 +77,15 @@ void EntityManager::spawn(EntityType entityType, uint32_t amount)
     }
 }
 
-std::vector<Entity *> EntityManager::get_all_entity_with(EntityType type)
+std::vector<Entity *> EntityManager::GetAllEntityWith(EntityType p_EntityType)
 {
     std::vector<Entity *> request;
-    if (this->entities.empty())
+    if (m_Entities.empty())
         return request;
-    for (int i = this->entities.size() - 1; i >= 0; i--)
+    for (int i = m_Entities.size() - 1; i >= 0; i--)
     {
-        Entity *entity = this->entities[i];
-        if (entity->get_entity_type() == type)
+        Entity *entity = m_Entities[i];
+        if (entity->GetEntityType() == p_EntityType)
         {
             request.emplace_back(entity);
         }
