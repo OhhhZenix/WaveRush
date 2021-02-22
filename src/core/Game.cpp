@@ -4,93 +4,88 @@
 
 Game::Game()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(this->settings.width, this->settings.height), this->settings.title);
+    m_Window = new sf::RenderWindow(sf::VideoMode(m_Settings.Width, m_Settings.Height), m_Settings.Title);
 }
 
 Game::~Game()
 {
-    delete this->window;
+    delete m_Window;
 }
 
-Game &Game::instance()
+Game &Game::Instance()
 {
-    static Game instance;
-    return instance;
+    static Game s_Instance;
+    return s_Instance;
 }
 
-void Game::run()
+void Game::Run()
 {
     // Init
     {
-        this->entityManager.spawn(EntityType::Player, 1);
-        this->entityManager.spawn(EntityType::BasicEnemy, 1);
-        this->entityManager.spawn(EntityType::SmartEnemy, 1);
+        m_EntityManager.Spawn(EntityType::Player, 1);
+        m_EntityManager.Spawn(EntityType::BasicEnemy, 10);
+        m_EntityManager.Spawn(EntityType::SmartEnemy, 10);
     }
 
     // Loop
     {
-        sf::Clock deltaClock;
-        double deltaTime = 0;
+        sf::Clock f_DeltaClock;
+        double f_DeltaTime = 0;
 
-        while (this->window->isOpen())
+        while (m_Window->isOpen())
         {
             // Update delta time
             {
-                deltaTime = deltaClock.restart().asSeconds();
+                f_DeltaTime = f_DeltaClock.restart().asSeconds();
             }
 
             // Works with the events incoming
             {
-                sf::Event event;
-                while (this->window->pollEvent(event))
+                sf::Event f_Event;
+                while (m_Window->pollEvent(f_Event))
                 {
-                    process_event(&event);
+                    ProcessEvent(&f_Event);
                 }
             }
 
             // Update everything in the game
             {
-                process_update(deltaTime);
+                ProcessUpdate(f_DeltaTime);
             }
 
             // Renders everything in the game
             {
-                this->window->clear(sf::Color(123, 86, 255));
-                process_render(this->window);
-                this->window->display();
+                m_Window->clear(sf::Color(123, 86, 255));
+                ProcessRender(m_Window);
+                m_Window->display();
             }
         }
     }
 }
 
-const WindowSettings *Game::get_settings() const
+const WindowSettings *Game::GetSettings() const
 {
-    return &(this->settings);
+    return &m_Settings;
 }
 
-sf::RenderWindow *Game::get_window() const
+EntityManager &Game::GetEntityManager()
 {
-    return this->window;
+    return m_EntityManager;
 }
 
-EntityManager &Game::get_entity_manager()
+void Game::ProcessEvent(sf::Event *p_Event)
 {
-    return this->entityManager;
+    m_EntityManager.ProcessEvent(p_Event);
+    if (p_Event->type == sf::Event::Closed)
+        m_Window->close();
 }
 
-void Game::process_event(sf::Event *event)
+void Game::ProcessUpdate(const double p_DeltaTime)
 {
-    this->entityManager.process_event(event);
-    if (event->type == sf::Event::Closed)
-        this->window->close();
+    m_EntityManager.ProcessUpdate(p_DeltaTime);
 }
 
-void Game::process_update(const double deltaTime)
+void Game::ProcessRender(sf::RenderWindow *p_Window)
 {
-    this->entityManager.process_update(deltaTime);
-}
-
-void Game::process_render(sf::RenderWindow *window)
-{
-    this->entityManager.process_render(this->window);
+    m_EntityManager.ProcessRender(p_Window);
 }

@@ -7,18 +7,18 @@
 class EntityManager
 {
 private:
-    std::vector<Entity *> entities;
+    std::vector<Entity *> m_Entities;
 
 public:
     ~EntityManager();
 
-    void process_event(sf::Event *event);
+    void ProcessEvent(sf::Event *p_Event);
 
-    void process_update(const double deltaTime);
+    void ProcessUpdate(const double p_DeltaTime);
 
-    void process_render(sf::RenderWindow *window);
+    void ProcessRender(sf::RenderWindow *p_Window);
 
-    void spawn(EntityType entityType, uint32_t amount);
+    void Spawn(EntityType p_EntityType, uint32_t p_Amount);
 
-    std::vector<Entity *> get_all_entity_with(EntityType type);
+    std::vector<Entity *> GetAllEntityWith(EntityType p_EntityType);
 };

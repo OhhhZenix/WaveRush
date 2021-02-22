@@ -5,15 +5,15 @@
 class BasicEnemy : public Entity
 {
 private:
-    sf::Vector2f position;
-    sf::Vector2f speed;
-    sf::Vector2f size;
-    sf::RectangleShape shape;
+    sf::Vector2f m_Position;
+    sf::Vector2f m_Speed;
+    sf::Vector2f m_Size;
+    sf::RectangleShape m_Shape;
 
 public:
     BasicEnemy();
 
-    void process_update(const double deltaTime) override;
+    void ProcessUpdate(const double p_DeltaTime) override;
 
-    void process_render(sf::RenderWindow *window) override;
+    void ProcessRender(sf::RenderWindow *p_Window) override;
 };

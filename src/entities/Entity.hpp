@@ -12,16 +12,16 @@ enum class EntityType
 class Entity
 {
 private:
-    EntityType entityType;
+    EntityType m_EntityType;
 
 public:
-    Entity(EntityType entityType);
+    Entity(EntityType p_EntityType);
 
-    EntityType get_entity_type() const;
+    EntityType GetEntityType() const;
 
-    virtual void process_event(sf::Event *event);
+    virtual void ProcessEvent(sf::Event *p_Event);
 
-    virtual void process_update(const double deltaTime);
+    virtual void ProcessUpdate(const double p_DeltaTime);
 
-    virtual void process_render(sf::RenderWindow *window);
+    virtual void ProcessRender(sf::RenderWindow *p_Window);
 };

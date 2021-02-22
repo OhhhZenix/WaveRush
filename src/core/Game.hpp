@@ -8,9 +8,9 @@
 class Game
 {
 private:
-    WindowSettings settings;
-    sf::RenderWindow *window;
-    EntityManager entityManager;
+    WindowSettings m_Settings;
+    sf::RenderWindow *m_Window;
+    EntityManager m_EntityManager;
 
 private:
     Game();
@@ -18,22 +18,20 @@ private:
 public:
     ~Game();
 
-    static Game &instance();
+    static Game &Instance();
 
-    void run();
+    void Run();
 
-    const WindowSettings *get_settings() const;
+    const WindowSettings *GetSettings() const;
 
-    sf::RenderWindow *get_window() const;
-
-    EntityManager &get_entity_manager();
+    EntityManager &GetEntityManager();
 
 private:
-    void process_event(sf::Event *event);
+    void ProcessEvent(sf::Event *p_Event);
 
-    void process_update(const double deltaTime);
+    void ProcessUpdate(const double p_DeltaTime);
 
-    void process_render(sf::RenderWindow *window);
+    void ProcessRender(sf::RenderWindow *p_Window);
 
 public:
     Game(Game const &) = delete;
