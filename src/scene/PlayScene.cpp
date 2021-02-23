@@ -8,7 +8,8 @@ PlayScene::PlayScene()
 {
 	// Add entities
 	GetEntityManager().SpawnPlayer(1);
-	GetEntityManager().SpawnBasicEnemy(1);
+	GetEntityManager().SpawnSmartEnemy(10);
+	GetEntityManager().SpawnBasicEnemy(10);
 
 	// Register systems
 	GetSystemManager().RegisterSystem(new PlayerMovementSystem());
