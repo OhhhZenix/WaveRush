@@ -1,7 +1,7 @@
 #pragma once
 
 #include <random>
-#include <glm/glm.hpp>
+#include <cmath>
 
 #define SquaredValue(a) ((a) * (a))
 
@@ -13,7 +13,7 @@
 
 #define ClampValue(a, b, c) (MinValue(MaxValue(c, a), b))
 
-#define Distance(p_X1, p_Y1, p_X2, p_Y2) sqrt(pow((p_X1) - (p_X2), 2) + pow((p_Y1) - (p_Y2), 2))
+#define Distance2D(p_X1, p_Y1, p_X2, p_Y2) sqrt(pow((p_X1) - (p_X2), 2) + pow((p_Y1) - (p_Y2), 2))
 
 inline float RandomF(float p_Min, float p_Max)
 {
@@ -21,9 +21,4 @@ inline float RandomF(float p_Min, float p_Max)
 	std::mt19937 f_MT(f_RandomDevice());
 	std::uniform_real_distribution<float> f_Dist(p_Min, p_Max);
 	return f_Dist(f_MT);
-}
-
-inline float DistanceVec2(glm::vec2 v1, glm::vec2 v2)
-{
-	return sqrt(SquaredValue(v2.x - v1.x) + SquaredValue(v2.y - v1.y));
 }
