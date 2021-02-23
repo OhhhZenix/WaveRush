@@ -7,6 +7,42 @@
 #include "component/RectangleShapeComponent.hpp"
 #include "component/PositionComponent.hpp"
 #include "component/VelocityComponent.hpp"
+#include "component/VelocityLevelComponent.hpp"
+
+float VelocityByLevel(uint32_t p_Level)
+{
+	return 600.0f + ((p_Level - 1) * 100.0f);
+}
+
+void PlayerMovementSystem::ProcessEvents(SDL_Event& p_Event, entt::registry& p_Registry)
+{
+	auto f_View = p_Registry.view<VelocityLevelComponent, VelocityComponent>();
+	f_View.each([p_Event](VelocityLevelComponent& f_Level, VelocityComponent& f_Velocity)
+	{
+		if (p_Event.type == SDL_KEYUP)
+		{
+			switch (p_Event.key.keysym.sym)
+			{
+			case SDLK_LSHIFT:
+			{
+				f_Level.Value = ClampValue(1, 10, f_Level.Value + 1);
+				float f_NewVelocity = VelocityByLevel(f_Level.Value);
+				f_Velocity.Value = { f_NewVelocity, f_NewVelocity };
+				break;
+			}
+			case SDLK_LCTRL:
+			{
+				f_Level.Value = ClampValue(1, 10, f_Level.Value - 1);
+				float f_NewVelocity = VelocityByLevel(f_Level.Value);
+				f_Velocity.Value = { f_NewVelocity, f_NewVelocity };
+				break;
+			}
+			default:
+				break;
+			}
+		}
+	});
+}
 
 void PlayerMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& p_Registry)
 {
