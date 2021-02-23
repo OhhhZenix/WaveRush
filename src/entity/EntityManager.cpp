@@ -85,6 +85,9 @@ void EntityManager::SpawnSmartEnemy(int32_t p_Amount)
 	{
 		auto f_SmartEnemy = CreateEntity();
 
+		// Basic identification
+		m_Registry.emplace<TagComponent>(f_SmartEnemy, TagType::SmartEnemy);
+
 		// Make it render-able
 		SDL_Color f_Color = { 25, 25, 100, 255 };
 		glm::vec2 f_Size = { 25, 25 };
