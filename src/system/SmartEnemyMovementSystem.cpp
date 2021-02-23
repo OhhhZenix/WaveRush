@@ -39,7 +39,7 @@ void SmartEnemyMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& 
 					auto& f_PositionSearch = f_ViewSearch.get<PositionComponent>(f_Entity);
 
 					// Calculates the distance from player to enemy;
-					auto f_CurrentDistance = Distance(f_PositionSearch.Value.x, f_PositionSearch.Value.y, f_Position
+					auto f_CurrentDistance = Distance2D(f_PositionSearch.Value.x, f_PositionSearch.Value.y, f_Position
 						.Value.x, f_Position.Value.y);
 
 					// If less or equal change the target
@@ -61,12 +61,8 @@ void SmartEnemyMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& 
 		{
 			auto& f_PlayerPosition = f_ViewSearch.get<PositionComponent>(f_Player);
 			auto& f_Velocity = f_View.get<VelocityComponent>(f_Enemy);
-			auto f_Distance = Distance(f_PlayerPosition.Value.x, f_PlayerPosition.Value.y, f_Position
+			auto f_Distance = Distance2D(f_PlayerPosition.Value.x, f_PlayerPosition.Value.y, f_Position
 				.Value.x, f_Position.Value.y);
-			printf("Distance %f\n", f_Distance);
-			printf("LerpX: %f, LerpY: %f\n", LerpValue(f_Position.Value.x, f_PlayerPosition.Value.x,
-				f_Velocity.Value.x * f_Distance * p_DeltaTime), LerpValue(f_Position.Value.y, f_PlayerPosition.Value.y,
-				f_Velocity.Value.y * f_Distance * p_DeltaTime));
 			f_Position.Value.x = LerpValue(f_Position.Value.x, f_PlayerPosition.Value.x,
 				f_Velocity.Value.x * f_Distance * p_DeltaTime);
 			f_Position.Value.y = LerpValue(f_Position.Value.y, f_PlayerPosition.Value.y,

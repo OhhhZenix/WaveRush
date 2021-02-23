@@ -13,7 +13,7 @@
 
 #define ClampValue(a, b, c) (MinValue(MaxValue(c, a), b))
 
-#define Distance(p_X1, p_Y1, p_X2, p_Y2) sqrt(pow((p_X1) - (p_X2), 2) + pow((p_Y1) - (p_Y2), 2))
+#define Distance2D(p_X1, p_Y1, p_X2, p_Y2) sqrt(pow((p_X1) - (p_X2), 2) + pow((p_Y1) - (p_Y2), 2))
 
 inline float RandomF(float p_Min, float p_Max)
 {
