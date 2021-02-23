@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include <cmath>
 
 #define SquaredValue(a) ((a) * (a))
 
@@ -11,6 +12,8 @@
 #define MinValue(a, b) (((a) < (b)) ? (a) : (b))
 
 #define ClampValue(a, b, c) (MinValue(MaxValue(c, a), b))
+
+#define Distance(p_X1, p_Y1, p_X2, p_Y2) sqrt(pow((p_X1) - (p_X2), 2) + pow((p_Y1) - (p_Y2), 2))
 
 inline float RandomF(float p_Min, float p_Max)
 {
