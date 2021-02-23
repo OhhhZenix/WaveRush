@@ -74,12 +74,12 @@ void Game::Run()
                 }
             }
 
-            // Handles updating everything in the game
-            ProcessUpdate(f_DeltaTime);
-
             // Resets the delta time
             f_DeltaTime = static_cast<double>(f_DeltaTimer.GetTicks() / 1000.0);
             f_DeltaTimer.Start();
+
+            // Handles updating everything in the game
+            ProcessUpdate(f_DeltaTime);
 
             // Handles rendering everything in the game
             {
