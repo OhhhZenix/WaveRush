@@ -17,7 +17,7 @@ void SmartEnemyMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& 
 
 			// Lerp to player position
 			{
-				f_View.each([f_Position](const TagComponent& f_Tag2, RectangleShapeComponent& f_RectShape2, PositionComponent& f_Position2)
+				f_View.each([&](const TagComponent& f_Tag2, RectangleShapeComponent& f_RectShape2, PositionComponent& f_Position2)
 				{
 					// Some variables for tweaking.
 					float atraction = 0.001; // Velocity torward the players. 
