@@ -69,7 +69,7 @@ void SmartEnemyMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& 
 				f_Velocity.Value.y * f_Distance * p_DeltaTime));
 			f_Position.Value.x = LerpValue(f_Position.Value.x, f_PlayerPosition.Value.x,
 				f_Velocity.Value.x * f_Distance * p_DeltaTime);
-			f_Position.Value.x = LerpValue(f_Position.Value.y, f_PlayerPosition.Value.y,
+			f_Position.Value.y = LerpValue(f_Position.Value.y, f_PlayerPosition.Value.y,
 				f_Velocity.Value.y * f_Distance * p_DeltaTime);
 		}
 	}
