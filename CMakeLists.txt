@@ -5,16 +5,28 @@ include(cmake/VcpkgToolchain.cmake)
 # Create the project
 project(WaveRush)
 
-# SDL
+# Finding SDL
 find_package(SDL2 REQUIRED)
 
+# Finding glm
+find_package(glm REQUIRED)
+
+# Finding EnTT
+find_package(EnTT REQUIRED)
+
 # Target
-file(GLOB_RECURSE SRCS "src/*.cpp")
+file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
 add_executable(WaveRush ${SRCS})
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-# SDL
+# Linking SDL
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+
+# Linking glm
+target_link_libraries(${PROJECT_NAME} PRIVATE glm)
+
+# Linking EnTT
+target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
 
 # Post build
 add_custom_command(
