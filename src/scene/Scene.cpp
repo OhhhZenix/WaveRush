@@ -10,7 +10,7 @@ EntityManager& Scene::GetEntityManager()
 	return m_EntityManager;
 }
 
-void Scene::ProcessEvents(SDL_Event* p_Event)
+void Scene::ProcessEvents(SDL_Event& p_Event)
 {
 	// No need to fill it out
 }

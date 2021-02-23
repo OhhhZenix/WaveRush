@@ -1,6 +1,6 @@
 #include "PlayScene.hpp"
 
-
+#include "system/PlayerMovementSystem.hpp"
 #include "system/RenderRectShapeSystem.hpp"
 
 PlayScene::PlayScene()
@@ -9,5 +9,6 @@ PlayScene::PlayScene()
 	GetEntityManager().SpawnPlayer(1);
 
 	// Register systems
+	GetSystemManager().RegisterSystem(new PlayerMovementSystem());
 	GetSystemManager().RegisterSystem(new RenderRectShapeSystem());
 }

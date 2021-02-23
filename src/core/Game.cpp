@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 #include <iostream>
+#include "core/Timer.hpp"
 #include "scene/PlayScene.hpp"
 
 Game::Game()
@@ -43,20 +44,22 @@ void Game::Run()
 	}
 
 	SDL_Event f_Event;
+	Timer f_DeltaTimer;
+	float f_DeltaTime = 1.0f / 60.0f;
+
 	while (m_Running)
 	{
 		// Event related work
 		{
 			while (SDL_PollEvent(&f_Event))
 			{
-				ProcessEvents(&f_Event);
+				ProcessEvents(f_Event);
 			}
 		}
 
 		// Update related work
 		{
-			// TODO: Impl delta time
-			ProcessUpdate(1.0f);
+			ProcessUpdate(f_DeltaTime);
 		}
 
 		// Render related work
@@ -73,6 +76,12 @@ void Game::Run()
 			// Update screen
 			SDL_RenderPresent(m_Renderer);
 		}
+
+		// Resets the delta time
+		{
+			f_DeltaTime = f_DeltaTimer.GetTicks() / 1000.0f;
+			f_DeltaTimer.Start();
+		}
 	}
 }
 
@@ -81,11 +90,11 @@ WindowSettings& Game::GetSettings()
 	return m_Settings;
 }
 
-void Game::ProcessEvents(SDL_Event* p_Event)
+void Game::ProcessEvents(SDL_Event& p_Event)
 {
 	m_SceneManager.GetActiveScene().GetSystemManager()
 		.ProcessEvents(p_Event, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
-	if (p_Event->type == SDL_QUIT)
+	if (p_Event.type == SDL_QUIT)
 		m_Running = false;
 }
 

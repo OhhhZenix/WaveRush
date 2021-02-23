@@ -37,7 +37,7 @@ class Game
 	WindowSettings& GetSettings();
 
  private:
-	void ProcessEvents(SDL_Event* p_Event);
+	void ProcessEvents(SDL_Event& p_Event);
 
 	void ProcessUpdate(float p_DeltaTime);
 

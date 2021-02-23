@@ -22,8 +22,8 @@ void EntityManager::SpawnPlayer(int32_t p_Amount)
 	{
 		auto player = CreateEntity();
 
-		// This make sure the entity we are creating is going to be a player
-		m_Registry.emplace_or_replace<TagComponent>(player, TagType::Player);
+		// This make sure the entity we are creating is going to be a playerw
+		m_Registry.emplace<TagComponent>(player, TagType::Player);
 
 		// This make sure it gets displayed on the screen
 		m_Registry.emplace<RectangleShapeComponent>(player, SDL_Color{ 0, 255, 0, 255 }, glm::vec2(50, 50), SDL_Color{ 0, 0, 0,255 }, (int)5);
@@ -35,4 +35,3 @@ void EntityManager::SpawnPlayer(int32_t p_Amount)
 		m_Registry.emplace<VelocityComponent>(player, glm::vec2(600, 600));
 	}
 }
-

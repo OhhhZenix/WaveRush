@@ -8,18 +8,11 @@
 #include "component/PositionComponent.hpp"
 #include "component/VelocityComponent.hpp"
 
-void PlayerMovementSystem::ProcessEvents(SDL_Event* p_Event, entt::registry& p_Registry)
-{
-	printf("Hello from Event\n");
-}
-
 void PlayerMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& p_Registry)
 {
-	SDL_PumpEvents();
-	const uint8_t* f_KeyboardState = SDL_GetKeyboardState(nullptr);
 	auto f_View = p_Registry.view<const TagComponent, RectangleShapeComponent, PositionComponent, VelocityComponent>();
 	f_View
-		.each([f_KeyboardState, p_DeltaTime](const TagComponent& f_Tag, RectangleShapeComponent& f_RectShape, PositionComponent& f_Position, VelocityComponent& f_Velocity)
+		.each([p_DeltaTime](const TagComponent& f_Tag, RectangleShapeComponent& f_RectShape, PositionComponent& f_Position, VelocityComponent& f_Velocity)
 		{
 			// Checks to make sure it is some sort of player entity
 			if (f_Tag.Value != TagType::Player)
@@ -27,9 +20,10 @@ void PlayerMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& p_Re
 
 			// Check for player input for movement
 			{
+				SDL_PumpEvents();
+				const uint8_t* f_KeyboardState = SDL_GetKeyboardState(nullptr);
 				if (f_KeyboardState[SDL_SCANCODE_W])
-					// f_Position.Y -= f_Velocity.Value.y * p_DeltaTime;
-					printf("Pressed W\n");
+					f_Position.Y -= f_Velocity.Value.y * p_DeltaTime;
 				if (f_KeyboardState[SDL_SCANCODE_S])
 					f_Position.Y += f_Velocity.Value.y * p_DeltaTime;
 				if (f_KeyboardState[SDL_SCANCODE_A])
