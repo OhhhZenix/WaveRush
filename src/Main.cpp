@@ -1,11 +1,7 @@
 #include "core/Game.hpp"
 
-int main(int argc, char* argv[])
+int main(void)
 {
-	// Unused argc, argv
-	(void)argc;
-	(void)argv;
-
 	// Runs the game
 	Game::Instance().Run();
 
