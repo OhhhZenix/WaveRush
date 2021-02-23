@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <SDL.h>
 #include <entt/entt.hpp>
+#include "system/SystemManager.hpp"
+#include "scene/Scene.hpp"
 
 struct WindowSettings
 {
@@ -17,8 +19,8 @@ class Game
  private:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
+	Scene* m_ActiveScene;
 	WindowSettings m_Settings;
-
 	bool m_Running;
 
  private:

@@ -1,6 +1,6 @@
 #include "core/Game.hpp"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	// Unused argc, argv
 	(void)argc;
