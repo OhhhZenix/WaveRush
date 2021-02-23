@@ -7,6 +7,7 @@ PlayScene::PlayScene()
 {
 	// Add entities
 	GetEntityManager().SpawnPlayer(1);
+	GetEntityManager().SpawnBasicEnemy(1);
 
 	// Register systems
 	GetSystemManager().RegisterSystem(new PlayerMovementSystem());

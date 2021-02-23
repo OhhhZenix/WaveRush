@@ -13,4 +13,6 @@ class EntityManager
 	entt::entity CreateEntity();
 
 	void SpawnPlayer(int32_t p_Amount);
+
+	void SpawnBasicEnemy(int32_t p_Amount);
 };

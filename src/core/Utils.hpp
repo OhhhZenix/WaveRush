@@ -9,3 +9,7 @@
 #define MinValue(a, b) (((a) < (b)) ? (a) : (b))
 
 #define ClampValue(a, b, c) (MinValue(MaxValue(c, a), b))
+
+inline float RandomF(float p_Min, float p_Max) {
+	
+}
