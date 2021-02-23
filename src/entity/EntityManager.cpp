@@ -57,6 +57,9 @@ void EntityManager::SpawnBasicEnemy(int32_t p_Amount)
 	{
 		auto f_BasicEnemy = CreateEntity();
 
+		// Basic identification
+		m_Registry.emplace<TagComponent>(f_BasicEnemy, TagType::BasicEnemy);
+
 		// Make it render-able
 		SDL_Color f_Color = { 255, 0, 0, 255 };
 		glm::vec2 f_Size = { 25, 25 };
@@ -65,7 +68,6 @@ void EntityManager::SpawnBasicEnemy(int32_t p_Amount)
 		m_Registry.emplace<RectangleShapeComponent>(f_BasicEnemy, f_Color, f_Size, f_OutlineColor, f_OutlineThickness);
 
 		// Give it position
-
 		float f_X_Position = RandomF(0.0f, Game::Instance().GetSettings().Width); 
 		float f_Y_Position = RandomF(0.0f, Game::Instance().GetSettings().Height); 
 		m_Registry.emplace<PositionComponent>(f_BasicEnemy, f_X_Position, f_Y_Position);
@@ -89,5 +91,8 @@ void EntityManager::SpawnSmartEnemy(int32_t p_Amount)
 
 		// Give it position
 		m_Registry.emplace<PositionComponent>(f_SmartEnemy, 100.0f, 100.0f);
+
+		// Give it velocity
+		m_Registry.emplace<VelocityComponent>(f_BasicEnemy, glm::vec2(700, 700));
 	}
 }

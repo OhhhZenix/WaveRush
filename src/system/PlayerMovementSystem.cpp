@@ -11,7 +11,7 @@
 
 float VelocityByLevel(uint32_t p_Level)
 {
-	return 600.0f + ((p_Level - 1) * 100.0f);
+	return 600.0f + ((float)(p_Level - 1) * 100.0f);
 }
 
 void PlayerMovementSystem::ProcessEvents(SDL_Event& p_Event, entt::registry& p_Registry)
