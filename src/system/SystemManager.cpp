@@ -4,9 +4,9 @@ SystemManager::~SystemManager()
 {
 	if (!m_Systems.empty())
 	{
-		for (size_t i = m_Systems.size() - 1; i >= 0; --i)
+		for (System* f_System : m_Systems)
 		{
-			delete m_Systems[i];
+			delete f_System;
 		}
 		m_Systems.clear();
 	}

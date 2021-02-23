@@ -4,6 +4,7 @@ enum class TagType
 {
 	Entity,
 	Player,
+	SmartEnemy,
 };
 
 struct TagComponent

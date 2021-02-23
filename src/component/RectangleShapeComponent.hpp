@@ -1,11 +1,12 @@
 #pragma  once
 
 #include <glm/glm.hpp>
+#include <SDL.h>
 
 struct RectangleShapeComponent
 {
-	glm::vec4 Color = glm::vec4();
+	SDL_Color Color = { 0, 0, 0, 255 };
 	glm::vec2 Size = glm::vec2();
-	glm::vec4 OutlineColor = glm::vec4();
-	uint32_t OutlineThickness = 0;
+	SDL_Color OutlineColor = { 0, 0, 0, 255 };
+	int32_t OutlineThickness = 0;
 };

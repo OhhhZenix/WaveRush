@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <SDL.h>
 #include <entt/entt.hpp>
+#include <scene/SceneManager.hpp>
 #include "system/SystemManager.hpp"
 #include "scene/Scene.hpp"
 
@@ -19,7 +20,7 @@ class Game
  private:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
-	Scene* m_ActiveScene;
+	SceneManager m_SceneManager;
 	WindowSettings m_Settings;
 	bool m_Running;
 

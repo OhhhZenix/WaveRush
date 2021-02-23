@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 #include <iostream>
+#include "scene/PlayScene.hpp"
 
 Game::Game()
 {
@@ -17,8 +18,6 @@ Game::Game()
 
 	if (m_Renderer == nullptr)
 		std::exit(EXIT_FAILURE);
-
-	m_ActiveScene = new Scene();
 
 	m_Running = true;
 }
@@ -38,8 +37,12 @@ Game& Game::Instance()
 
 void Game::Run()
 {
-	SDL_Event f_Event;
+	// Init
+	{
+		m_SceneManager.SetActiveScene(new PlayScene());
+	}
 
+	SDL_Event f_Event;
 	while (m_Running)
 	{
 		// Event related work
@@ -75,18 +78,21 @@ void Game::Run()
 
 void Game::ProcessEvents(SDL_Event& p_Event)
 {
-	m_ActiveScene->GetSystemManager().ProcessEvents(p_Event, m_ActiveScene->GetEntityManager().GetRegistry());
+	m_SceneManager.GetActiveScene().GetSystemManager()
+		.ProcessEvents(p_Event, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
 	if (p_Event.type == SDL_QUIT)
 		m_Running = false;
 }
 
 void Game::ProcessUpdate(float p_DeltaTime)
 {
-	m_ActiveScene->ProcessUpdate(p_DeltaTime);
-	m_ActiveScene->GetSystemManager().ProcessUpdate(p_DeltaTime, m_ActiveScene->GetEntityManager().GetRegistry());
+	m_SceneManager.GetActiveScene().ProcessUpdate(p_DeltaTime);
+	m_SceneManager.GetActiveScene().GetSystemManager()
+		.ProcessUpdate(p_DeltaTime, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
 }
 
 void Game::ProcessRender(SDL_Renderer* p_Renderer)
 {
-	m_ActiveScene->GetSystemManager().ProcessRender(p_Renderer, m_ActiveScene->GetEntityManager().GetRegistry());
+	m_SceneManager.GetActiveScene().GetSystemManager()
+		.ProcessRender(p_Renderer, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
 }
