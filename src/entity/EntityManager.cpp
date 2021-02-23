@@ -38,8 +38,8 @@ void EntityManager::SpawnPlayer(int32_t p_Amount)
 		m_Registry.emplace<RectangleShapeComponent>(f_Player, f_Color, f_Size, f_OutlineColor, f_OutlineThickness);
 
 		// This allows us to know where the f_Player is
-		m_Registry.emplace<PositionComponent>(f_Player, (float)(Game::Instance().GetSettings().Width / 2.0f), (float)(
-			Game::Instance().GetSettings().Height / 2.0f));
+		m_Registry.emplace<PositionComponent>(f_Player, glm::vec2((float)(Game::Instance().GetSettings().Width / 2.0f), (float)(
+			Game::Instance().GetSettings().Height / 2.0f)));
 
 		// This allows us to determine how fast the will move
 		m_Registry.emplace<VelocityComponent>(f_Player, glm::vec2(600, 600));
@@ -68,9 +68,9 @@ void EntityManager::SpawnBasicEnemy(int32_t p_Amount)
 		m_Registry.emplace<RectangleShapeComponent>(f_BasicEnemy, f_Color, f_Size, f_OutlineColor, f_OutlineThickness);
 
 		// Give it position
-		float f_X_Position = RandomF(0.0f, Game::Instance().GetSettings().Width); 
-		float f_Y_Position = RandomF(0.0f, Game::Instance().GetSettings().Height); 
-		m_Registry.emplace<PositionComponent>(f_BasicEnemy, f_X_Position, f_Y_Position);
+		float f_X_Position = RandomF(0.0f, Game::Instance().GetSettings().Width);
+		float f_Y_Position = RandomF(0.0f, Game::Instance().GetSettings().Height);
+		m_Registry.emplace<PositionComponent>(f_BasicEnemy, glm::vec2(f_X_Position, f_Y_Position));
 
 		// Give it velocity
 		m_Registry.emplace<VelocityComponent>(f_BasicEnemy, glm::vec2(700, 700));
@@ -95,6 +95,6 @@ void EntityManager::SpawnSmartEnemy(int32_t p_Amount)
 		// Give it position
 		float f_X_Position = RandomF(0.0f, Game::Instance().GetSettings().Width);
 		float f_Y_Position = RandomF(0.0f, Game::Instance().GetSettings().Height);
-		m_Registry.emplace<PositionComponent>(f_SmartEnemy, f_X_Position, f_Y_Position);
+		m_Registry.emplace<PositionComponent>(f_SmartEnemy, glm::vec2(f_X_Position, f_Y_Position));
 	}
 }

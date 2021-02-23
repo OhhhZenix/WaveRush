@@ -1,8 +1,8 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 struct PositionComponent
 {
-	float X = 0.0f;
-	float Y = 0.0f;
-	float Z = 0.0f;
+	glm::vec2 Value = glm::vec2();
 };

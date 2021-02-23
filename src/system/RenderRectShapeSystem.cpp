@@ -8,7 +8,7 @@ void RenderRectShapeSystem::ProcessRender(SDL_Renderer* p_Renderer, entt::regist
 	auto f_View = p_Registry.view<PositionComponent, RectangleShapeComponent>();
 	f_View.each([p_Renderer](PositionComponent& f_Position, RectangleShapeComponent& f_RectShape)
 	{
-		SDL_Rect f_Rect{ (int)f_Position.X, (int)f_Position.Y, (int)f_RectShape.Size.x, (int)f_RectShape.Size.x };
+		SDL_Rect f_Rect{ (int)f_Position.Value.x, (int)f_Position.Value.y, (int)f_RectShape.Size.x, (int)f_RectShape.Size.x };
 
 		if (f_RectShape.OutlineThickness > 0)
 		{
