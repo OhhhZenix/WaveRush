@@ -1,7 +1,6 @@
 {
-  "name": "WaveRush",
+  "name": "wave-rush",
   "version": "1.0.0",
-  "description": "A simple game",
   "dependencies": [
     "sdl2"
   ]

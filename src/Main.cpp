@@ -3,10 +3,10 @@
 
 #include <SDL.h>
 
-#define SCREEN_WIDTH    800
-#define SCREEN_HEIGHT   600
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	// Unused argc, argv
 	(void)argc;
@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 
 #if defined linux && SDL_VERSION_ATLEAST(2, 0, 8)
 	// Disable compositor bypass
-	if(!SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0"))
+	if (!SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0"))
 	{
 		std::cout << "SDL can not disable compositor bypass!" << std::endl;
 		return 0;
@@ -30,11 +30,11 @@ int main(int argc, char* argv[])
 #endif
 
 	// Create window
-	SDL_Window* window = SDL_CreateWindow("Basic C++ SDL project",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		SCREEN_WIDTH, SCREEN_HEIGHT,
-		SDL_WINDOW_SHOWN);
+	SDL_Window *window = SDL_CreateWindow("Basic C++ SDL project",
+										  SDL_WINDOWPOS_UNDEFINED,
+										  SDL_WINDOWPOS_UNDEFINED,
+										  SCREEN_WIDTH, SCREEN_HEIGHT,
+										  SDL_WINDOW_SHOWN);
 	if (!window)
 	{
 		std::cout << "Window could not be created!" << std::endl
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	else
 	{
 		// Create renderer
-		SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (!renderer)
 		{
 			std::cout << "Renderer could not be created!" << std::endl
@@ -61,7 +61,6 @@ int main(int argc, char* argv[])
 			// Square position: In the middle of the screen
 			squareRect.x = SCREEN_WIDTH / 2 - squareRect.w / 2;
 			squareRect.y = SCREEN_HEIGHT / 2 - squareRect.h / 2;
-
 
 			// Event loop exit flag
 			bool quit = false;
