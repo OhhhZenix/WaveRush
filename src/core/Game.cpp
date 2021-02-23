@@ -59,7 +59,7 @@ void Game::Run()
 		// Render related work
 		{
 			// Set clear color
-			SDL_SetRenderDrawColor(m_Renderer, 255, 255, 255, 255);
+			SDL_SetRenderDrawColor(m_Renderer, 64, 64, 64, 255);
 
 			// Clear screen
 			SDL_RenderClear(m_Renderer);
