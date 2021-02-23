@@ -4,5 +4,5 @@
 
 struct PositionComponent
 {
-	glm::vec2 Value = glm::vec2();
+	glm::vec2 Value = glm::vec2(0.0f, 0.0f);
 };
