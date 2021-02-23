@@ -10,7 +10,7 @@ void PlayerMovementSystem::ProcessUpdate(float p_DeltaTime, entt::registry& p_Re
 	{
 		if (f_Tag.Value != TagType::Player)
 			return;
-		printf("POsition %f\n", f_Position.X);
+		printf("Position %f\n", f_Position.X);
 		f_Position.X++;
 	});
 }
