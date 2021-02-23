@@ -4,5 +4,5 @@
 
 struct VelocityLevelComponent
 {
-	int32_t Value;
+	int32_t Value = 1;
 };

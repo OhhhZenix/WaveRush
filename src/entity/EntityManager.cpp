@@ -99,8 +99,5 @@ void EntityManager::SpawnSmartEnemy(int32_t p_Amount)
 		float f_X_Position = RandomF(0.0f, Game::Instance().GetSettings().Width);
 		float f_Y_Position = RandomF(0.0f, Game::Instance().GetSettings().Height);
 		m_Registry.emplace<PositionComponent>(f_SmartEnemy, glm::vec2(f_X_Position, f_Y_Position));
-
-		// Give it velocity
-		m_Registry.emplace<VelocityComponent>(f_SmartEnemy, glm::vec2(0.025, 0.025));
 	}
 }
