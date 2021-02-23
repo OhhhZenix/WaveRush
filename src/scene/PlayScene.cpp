@@ -2,6 +2,7 @@
 
 #include "system/PlayerMovementSystem.hpp"
 #include "system/RenderRectShapeSystem.hpp"
+#include "system/BasicEnemyMovementSystem.hpp"
 
 PlayScene::PlayScene()
 {
@@ -12,4 +13,5 @@ PlayScene::PlayScene()
 	// Register systems
 	GetSystemManager().RegisterSystem(new PlayerMovementSystem());
 	GetSystemManager().RegisterSystem(new RenderRectShapeSystem());
+	GetSystemManager().RegisterSystem(new BasicEnemyMovementSystem());
 }

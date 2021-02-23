@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "core/Game.hpp"
+#include "core/Utils.hpp"
 #include "component/VelocityLevelComponent.hpp"
 #include "component/TagComponent.hpp"
 #include "component/RectangleShapeComponent.hpp"
@@ -56,6 +57,9 @@ void EntityManager::SpawnBasicEnemy(int32_t p_Amount)
 	{
 		auto f_BasicEnemy = CreateEntity();
 
+		// Basic identification
+		m_Registry.emplace<TagComponent>(f_BasicEnemy, TagType::BasicEnemy);
+
 		// Make it render-able
 		SDL_Color f_Color = { 255, 0, 0, 255 };
 		glm::vec2 f_Size = { 25, 25 };
@@ -64,6 +68,11 @@ void EntityManager::SpawnBasicEnemy(int32_t p_Amount)
 		m_Registry.emplace<RectangleShapeComponent>(f_BasicEnemy, f_Color, f_Size, f_OutlineColor, f_OutlineThickness);
 
 		// Give it position
-		m_Registry.emplace<PositionComponent>(f_BasicEnemy, 100.0f, 100.0f);
+		float f_PositionX = RandomF(0.0f, (float)Game::Instance().GetSettings().Width);
+		float f_PositionY = RandomF(0.0f, (float)Game::Instance().GetSettings().Height);
+		m_Registry.emplace<PositionComponent>(f_BasicEnemy, f_PositionX, f_PositionY);
+
+		// Give it velocity
+		m_Registry.emplace<VelocityComponent>(f_BasicEnemy, glm::vec2(700, 700));
 	}
 }
