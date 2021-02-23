@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "core/Game.hpp"
+#include "core/Utils.hpp"
 #include "component/VelocityLevelComponent.hpp"
 #include "component/TagComponent.hpp"
 #include "component/RectangleShapeComponent.hpp"
@@ -64,6 +65,29 @@ void EntityManager::SpawnBasicEnemy(int32_t p_Amount)
 		m_Registry.emplace<RectangleShapeComponent>(f_BasicEnemy, f_Color, f_Size, f_OutlineColor, f_OutlineThickness);
 
 		// Give it position
-		m_Registry.emplace<PositionComponent>(f_BasicEnemy, 100.0f, 100.0f);
+
+		float f_X_Position = RandomF(0.0f, Game::Instance().GetSettings().Width); 
+		float f_Y_Position = RandomF(0.0f, Game::Instance().GetSettings().Height); 
+		m_Registry.emplace<PositionComponent>(f_BasicEnemy, f_X_Position, f_Y_Position);
+	}
+}
+
+void EntityManager::SpawnSmartEnemy(int32_t p_Amount)
+{
+	if (p_Amount <= 0)
+		return;
+	for (size_t i = 0; i < p_Amount; ++i)
+	{
+		auto f_SmartEnemy = CreateEntity();
+
+		// Make it render-able
+		SDL_Color f_Color = { 25, 25, 100, 255 };
+		glm::vec2 f_Size = { 25, 25 };
+		SDL_Color f_OutlineColor = { 0, 0, 0, 255 };
+		int32_t f_OutlineThickness = 3;
+		m_Registry.emplace<RectangleShapeComponent>(f_SmartEnemy, f_Color, f_Size, f_OutlineColor, f_OutlineThickness);
+
+		// Give it position
+		m_Registry.emplace<PositionComponent>(f_SmartEnemy, 100.0f, 100.0f);
 	}
 }
