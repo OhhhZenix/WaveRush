@@ -15,4 +15,6 @@ class EntityManager
 	void SpawnPlayer(int32_t p_Amount);
 
 	void SpawnBasicEnemy(int32_t p_Amount);
+
+	void SpawnSmartEnemy(int32_t p_Amount);
 };
