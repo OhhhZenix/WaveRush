@@ -49,7 +49,7 @@ void Game::Run()
 		{
 			while (SDL_PollEvent(&f_Event))
 			{
-				ProcessEvents(f_Event);
+				ProcessEvents(&f_Event);
 			}
 		}
 
@@ -76,11 +76,16 @@ void Game::Run()
 	}
 }
 
-void Game::ProcessEvents(SDL_Event& p_Event)
+WindowSettings& Game::GetSettings()
+{
+	return m_Settings;
+}
+
+void Game::ProcessEvents(SDL_Event* p_Event)
 {
 	m_SceneManager.GetActiveScene().GetSystemManager()
 		.ProcessEvents(p_Event, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
-	if (p_Event.type == SDL_QUIT)
+	if (p_Event->type == SDL_QUIT)
 		m_Running = false;
 }
 

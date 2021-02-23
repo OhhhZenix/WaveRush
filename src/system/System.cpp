@@ -1,6 +1,6 @@
 #include "System.hpp"
 
-void System::ProcessEvents(SDL_Event& p_Event, entt::registry& p_Registry)
+void System::ProcessEvents(SDL_Event* p_Event, entt::registry& p_Registry)
 {
 	// No need to fill it out
 }

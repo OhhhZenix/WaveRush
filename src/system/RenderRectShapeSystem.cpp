@@ -20,7 +20,6 @@ void RenderRectShapeSystem::ProcessRender(SDL_Renderer* p_Renderer, entt::regist
 			SDL_RenderFillRect(p_Renderer, &f_Outline);
 		}
 
-		printf("%i %i %i %i\n",f_RectShape.Color.r,f_RectShape.Color.g, f_RectShape.Color.b, f_RectShape.Color.a );
 		SDL_SetRenderDrawColor(p_Renderer, f_RectShape.Color.r, f_RectShape.Color.g, f_RectShape.Color.b, f_RectShape.Color.a);
 		SDL_RenderFillRect(p_Renderer, &f_Rect);
 	});

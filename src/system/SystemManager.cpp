@@ -17,7 +17,7 @@ void SystemManager::RegisterSystem(System* p_System)
 	m_Systems.emplace_back(p_System);
 }
 
-void SystemManager::ProcessEvents(SDL_Event& p_Event, entt::registry& p_Registry)
+void SystemManager::ProcessEvents(SDL_Event* p_Event, entt::registry& p_Registry)
 {
 	if (m_Systems.empty())
 		return;

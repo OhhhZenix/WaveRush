@@ -11,4 +11,6 @@ class EntityManager
 	entt::registry& GetRegistry();
 
 	entt::entity CreateEntity();
+
+	void SpawnPlayer(int32_t p_Amount);
 };

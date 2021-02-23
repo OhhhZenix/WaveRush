@@ -14,7 +14,7 @@ class Scene
 
 	EntityManager& GetEntityManager();
 
-	virtual void ProcessEvents(SDL_Event& p_Event);
+	virtual void ProcessEvents(SDL_Event* p_Event);
 
 	virtual void ProcessUpdate(float p_DeltaTime);
 

@@ -11,7 +11,7 @@ class SystemManager
  public:
 	~SystemManager();
 
-	void ProcessEvents(SDL_Event& p_Event, entt::registry& p_Registry);
+	void ProcessEvents(SDL_Event* p_Event, entt::registry& p_Registry);
 
 	void ProcessUpdate(float p_DeltaTime, entt::registry& p_Registry);
 
