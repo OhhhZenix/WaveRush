@@ -19,16 +19,28 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime, entt::registry& p_Registry
             {
                 Particle& f_Particle = f_ParticleSystem.Particles[i];
                 
+                // Chack if delay is not done
+                if (f_Particle.Delay > 0){
+                    f_Particle.Delay -= 1 * p_DeltaTime;
+                    continue;
+                }
+
                 // Check if particle is dead
                 if (f_Particle.Life <= 0)
                 {
-                    f_Particle.Position.Value = f_Position.Value + glm::vec2(RandomF(-20, 20), RandomF(-20, 20));
+                    f_Particle.Position.Value = f_Position.Value;
+                    f_Particle.Velocity.Value = glm::vec2(
+                        RandomF(-f_ParticleSystem.Velocity, f_ParticleSystem.Velocity),
+                        RandomF(-f_ParticleSystem.Velocity, f_ParticleSystem.Velocity)
+                    );
+
                     f_Particle.Life = f_ParticleSystem.MaxLifetime;
                 };
 
                 // Add velocity to particle and substract life
                 if (f_Particle.Life > 0)
                 {
+                    f_Particle.Position.Value += f_Particle.Velocity.Value;
                     f_Particle.Life -= 1 * p_DeltaTime;
                 }
             }
@@ -59,6 +71,11 @@ void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer, entt::registry& p_R
             {
                 Particle f_Particle = f_ParticleSystem.Particles[i];
                 
+                // Check if delay is not done
+                if (f_Particle.Delay > 0){
+                    continue;
+                }
+
                 // Check if particle is dead
                 if (f_Particle.Life <= 0)
                     continue;

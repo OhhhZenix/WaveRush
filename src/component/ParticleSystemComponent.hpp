@@ -9,6 +9,7 @@
 struct Particle
 {
     float Life = 0.0f;
+    float Delay = 0.0f;
     PositionComponent Position;
     VelocityComponent Velocity;
 };
@@ -18,7 +19,6 @@ struct ParticleSystemComponent
     uint32_t MaxParticles;
     float MaxLifetime;
     float Velocity;
-    float Angle;
     RectangleShapeComponent RefShape;
     Particle *Particles;
 };

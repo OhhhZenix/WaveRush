@@ -12,7 +12,9 @@ PlayScene::PlayScene()
 	GetEntityManager().SpawnPlayer(1);
 	GetEntityManager().SpawnSmartEnemy(10);
 	GetEntityManager().SpawnBasicEnemy(10);
-	GetEntityManager().SpawnParticleSystem(10, 0, 1000, 0);
+	
+	SDL_Color f_ParticleColor = {255, 0, 0, 255};
+	GetEntityManager().SpawnParticleSystem(30, 2, 0.01, f_ParticleColor);
 
 	// Register systems
 	GetSystemManager().RegisterSystem(new PlayerMovementSystem());
