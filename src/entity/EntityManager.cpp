@@ -103,7 +103,7 @@ void EntityManager::SpawnSmartEnemy(int32_t p_Amount)
 	}
 }
 
-void EntityManager::SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLifetime, float p_Velocity, SDL_Color p_Color)
+void EntityManager::SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLifetime, float p_Velocity, SDL_Colour p_Color, SDL_Colour p_Color2)
 {
 	auto f_ParticleSystem = CreateEntity();
 
@@ -119,10 +119,10 @@ void EntityManager::SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLife
 		f_Particles[i].Delay = RandomF(0.0f, p_MaxLifetime);
 	}
 
-		/* Properties of the reference particle */
+	/* Properties of the reference particle */
 	glm::vec2 size = glm::vec2(10, 10);
 	RectangleShapeComponent f_RefShape = {p_Color, size, p_Color, 0};
-	m_Registry.emplace<ParticleSystemComponent>(f_ParticleSystem, p_MaxParticles, p_MaxLifetime, p_Velocity, f_RefShape, f_Particles);
+	m_Registry.emplace<ParticleSystemComponent>(f_ParticleSystem, p_MaxParticles, p_MaxLifetime, p_Velocity, p_Color, p_Color2, f_RefShape, f_Particles);
 
 
 	// Set Position

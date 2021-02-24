@@ -14,7 +14,8 @@ PlayScene::PlayScene()
 	GetEntityManager().SpawnBasicEnemy(10);
 	
 	SDL_Color f_ParticleColor = {255, 0, 0, 255};
-	GetEntityManager().SpawnParticleSystem(30, 2, 0.01, f_ParticleColor);
+	SDL_Color f_ParticleColor2 = {0, 0, 255, 0};
+	GetEntityManager().SpawnParticleSystem(500, 3, 0.1, f_ParticleColor, f_ParticleColor2);
 
 	// Register systems
 	GetSystemManager().RegisterSystem(new PlayerMovementSystem());

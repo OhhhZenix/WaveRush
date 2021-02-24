@@ -59,13 +59,6 @@ void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer, entt::registry& p_R
                 return;
 
             // Set color to draw
-            SDL_SetRenderDrawColor(
-                p_Renderer,
-                f_ParticleSystem.RefShape.Color.r,
-                f_ParticleSystem.RefShape.Color.g,
-                f_ParticleSystem.RefShape.Color.b,
-                f_ParticleSystem.RefShape.Color.a
-                );
 
             for (int i = 0; i < f_ParticleSystem.MaxParticles; ++i)
             {
@@ -83,6 +76,14 @@ void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer, entt::registry& p_R
                 // Add velocity to particle and substract life
                 if (f_Particle.Life > 0)
                 {
+                    SDL_SetRenderDrawColor(
+                        p_Renderer,
+                        LerpValue(f_ParticleSystem.Color.r, f_ParticleSystem.Color2.r, f_Particle.Life /f_ParticleSystem.MaxLifetime),
+                        LerpValue(f_ParticleSystem.Color.g, f_ParticleSystem.Color2.g, f_Particle.Life /f_ParticleSystem.MaxLifetime),
+                        LerpValue(f_ParticleSystem.Color.b, f_ParticleSystem.Color2.b, f_Particle.Life /f_ParticleSystem.MaxLifetime),
+                        LerpValue(f_ParticleSystem.Color.a, f_ParticleSystem.Color2.a, f_Particle.Life /f_ParticleSystem.MaxLifetime)
+                    );
+
                     SDL_Rect f_Rect = {
                         (int)f_Particle.Position.Value.x,
                         (int)f_Particle.Position.Value.y,

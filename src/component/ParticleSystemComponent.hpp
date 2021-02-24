@@ -19,6 +19,10 @@ struct ParticleSystemComponent
     uint32_t MaxParticles;
     float MaxLifetime;
     float Velocity;
+
+    SDL_Color Color = { 0, 0, 0, 0 };
+	SDL_Color Color2 = { 0, 0, 0, 0 };
+
     RectangleShapeComponent RefShape;
     Particle *Particles;
 };

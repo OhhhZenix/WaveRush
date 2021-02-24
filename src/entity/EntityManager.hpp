@@ -19,5 +19,5 @@ class EntityManager
 
 	void SpawnSmartEnemy(int32_t p_Amount);
 
-	void SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLifetime, float p_MaxVelocity, SDL_Color p_Color);
+	void SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLifetime, float p_MaxVelocity, SDL_Colour p_Color, SDL_Colour p_Color2);
 };
