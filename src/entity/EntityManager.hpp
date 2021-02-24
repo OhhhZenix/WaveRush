@@ -1,6 +1,7 @@
 #pragma once
 
 #include <entt/entt.hpp>
+#include <SDL.h>
 
 class EntityManager
 {
@@ -17,4 +18,6 @@ class EntityManager
 	void SpawnBasicEnemy(int32_t p_Amount);
 
 	void SpawnSmartEnemy(int32_t p_Amount);
+
+	void SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLifetime, float p_MaxVelocity, SDL_Color p_Color);
 };

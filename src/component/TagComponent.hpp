@@ -6,6 +6,7 @@ enum class TagType
 	Player,
 	BasicEnemy,
 	SmartEnemy,
+	ParticleSystem,
 };
 
 struct TagComponent

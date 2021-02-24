@@ -8,6 +8,7 @@
 #include "component/RectangleShapeComponent.hpp"
 #include "component/PositionComponent.hpp"
 #include "component/VelocityComponent.hpp"
+#include "component/ParticleSystemComponent.hpp"
 
 entt::registry& EntityManager::GetRegistry()
 {
@@ -100,4 +101,31 @@ void EntityManager::SpawnSmartEnemy(int32_t p_Amount)
 		float f_Y_Position = RandomF(0.0f, Game::Instance().GetSettings().Height);
 		m_Registry.emplace<PositionComponent>(f_SmartEnemy, glm::vec2(f_X_Position, f_Y_Position));
 	}
+}
+
+void EntityManager::SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLifetime, float p_Velocity, SDL_Color p_Color)
+{
+	auto f_ParticleSystem = CreateEntity();
+
+	// Identification
+	m_Registry.emplace<TagComponent>(f_ParticleSystem, TagType::ParticleSystem);
+
+	// Initialize Particles
+	Particle *f_Particles = new Particle[p_MaxParticles];
+
+	// Initialize with random delay for variation
+	for (uint32_t i = 0; i < p_MaxParticles; ++i)
+	{
+		f_Particles[i].Delay = RandomF(0.0f, p_MaxLifetime);
+	}
+
+		/* Properties of the reference particle */
+	glm::vec2 size = glm::vec2(10, 10);
+	RectangleShapeComponent f_RefShape = {p_Color, size, p_Color, 0};
+	m_Registry.emplace<ParticleSystemComponent>(f_ParticleSystem, p_MaxParticles, p_MaxLifetime, p_Velocity, f_RefShape, f_Particles);
+
+
+	// Set Position
+	m_Registry.emplace<PositionComponent>(f_ParticleSystem, glm::vec2(100.0f, 100.0f));
+
 }
