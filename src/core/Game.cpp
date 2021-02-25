@@ -83,6 +83,8 @@ void Game::Run()
 			f_DeltaTimer.Start();
 		}
 	}
+
+	// TODO: ProcessDestroy??
 }
 
 WindowSettings& Game::GetSettings()
