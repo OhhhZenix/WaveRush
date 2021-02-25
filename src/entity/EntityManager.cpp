@@ -122,10 +122,9 @@ void EntityManager::SpawnParticleSystem(uint32_t p_MaxParticles, float p_MaxLife
 	/* Properties of the reference particle */
 	glm::vec2 size = glm::vec2(10, 10);
 	RectangleShapeComponent f_RefShape = {p_Color, size, p_Color, 0};
-	m_Registry.emplace<ParticleSystemComponent>(f_ParticleSystem, p_MaxParticles, p_MaxLifetime, p_Velocity, p_Color, p_Color2, f_RefShape, f_Particles);
+	m_Registry.emplace<ParticleSystemComponent>(f_ParticleSystem, p_MaxParticles, p_MaxLifetime, p_Velocity, p_Color, p_Color2, f_RefShape, f_Particles, new bool(false));
 
 
 	// Set Position
 	m_Registry.emplace<PositionComponent>(f_ParticleSystem, glm::vec2(100.0f, 100.0f));
-
 }
