@@ -16,6 +16,17 @@ struct Particle
 
 struct ParticleSystemComponent
 {
+    ~ParticleSystemComponent()
+    {
+        if (*Destroyed)
+        {
+            // printf("ParticleSystemComponent Destroyed! (Particles: %p)\n", Particles);
+            delete[] Particles;
+        }
+
+        *Destroyed = true;
+    }
+
     uint32_t MaxParticles;
     float MaxLifetime;
     float Velocity;
@@ -25,4 +36,6 @@ struct ParticleSystemComponent
 
     RectangleShapeComponent RefShape;
     Particle *Particles;
+
+    bool *Destroyed;
 };

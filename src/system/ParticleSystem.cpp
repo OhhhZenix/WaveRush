@@ -51,7 +51,7 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime, entt::registry& p_Registry
 void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer, entt::registry& p_Registry)
 {
     auto f_View = p_Registry.view<const TagComponent, PositionComponent, ParticleSystemComponent>();
-    f_View.each([p_Renderer](const TagComponent& f_Tag, PositionComponent& f_Position, ParticleSystemComponent f_ParticleSystem)
+    f_View.each([p_Renderer](const TagComponent& f_Tag, PositionComponent& f_Position, ParticleSystemComponent& f_ParticleSystem)
     {
         if (f_Tag.Value == TagType::ParticleSystem){
             

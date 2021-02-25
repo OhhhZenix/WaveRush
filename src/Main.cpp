@@ -34,6 +34,6 @@ int main(int argc, char* argv[])
 	// Runs the game
 	Game::Instance().Run();
 
-	printf("Allocated Heap: %u, Total Heap: %u", allocatedHeap, totalHeap);
+	printf("Allocated Heap: %u, Total Heap: %u\n", allocatedHeap, totalHeap);
 	return 0;
 }
