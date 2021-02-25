@@ -11,5 +11,10 @@ enum class TagType
 
 struct TagComponent
 {
+	~TagComponent()
+	{
+		printf("TagComponent Destroyed\n");
+	};
+
 	TagType Value = TagType::Entity;
 };
