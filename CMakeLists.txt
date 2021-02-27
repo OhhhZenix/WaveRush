@@ -12,13 +12,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(WaveRush)
 
 # Finding SDL
-find_package(SDL2 REQUIRED)
+find_package(SDL2 CONFIG REQUIRED)
 
 # Finding glm
-find_package(glm REQUIRED)
+find_package(glm CONFIG REQUIRED)
 
 # Finding EnTT
-find_package(EnTT REQUIRED)
+find_package(EnTT CONFIG REQUIRED)
 
 # Target
 file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
