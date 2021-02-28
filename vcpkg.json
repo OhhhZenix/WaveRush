@@ -2,8 +2,6 @@
   "name": "wave-rush",
   "version": "1.0.0",
   "dependencies": [
-    "sdl2",
-    "glm",
-    "entt"
+    "sdl2"
   ]
 }
