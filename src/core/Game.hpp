@@ -1,12 +1,7 @@
 #pragma once
 
-#include <string>
-#include <cstdint>
-#include <SDL.h>
-#include <entt/entt.hpp>
-#include <scene/SceneManager.hpp>
-#include "system/SystemManager.hpp"
-#include "scene/Scene.hpp"
+#include "Core/PCH.hpp"
+#include "Scene/SceneManager.hpp"
 
 struct WindowSettings
 {
@@ -36,6 +31,8 @@ class Game
 
 	WindowSettings& GetSettings();
 
+	SceneManager& GetSceneManager();
+
  private:
 	void ProcessEvents(SDL_Event& p_Event);
 
@@ -44,6 +41,15 @@ class Game
 	void ProcessRender(SDL_Renderer* p_Renderer);
 
  public:
+	// Copy construct
 	Game(Game const&) = delete;
-	void operator=(Game const&) = delete;
+
+	// Move construct
+	Game(Game&&) = delete;
+
+	// Copy assign
+	Game& operator=(Game const&) = delete;
+
+	// Move assign
+	Game& operator=(Game&&) = delete;
 };

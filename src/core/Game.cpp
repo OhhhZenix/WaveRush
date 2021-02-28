@@ -1,8 +1,7 @@
 #include "Game.hpp"
 
-#include <iostream>
-#include "core/Timer.hpp"
-#include "scene/PlayScene.hpp"
+#include "Core/Timer.hpp"
+#include "Scene/PlayScene.hpp"
 
 Game::Game()
 {
@@ -79,7 +78,7 @@ void Game::Run()
 
 		// Resets the delta time
 		{
-			f_DeltaTime = f_DeltaTimer.GetTicks() / 1000.0f;
+			f_DeltaTime = static_cast<float>(f_DeltaTimer.GetTicks()) / 1000.0f;
 			f_DeltaTimer.Start();
 		}
 	}
@@ -92,23 +91,28 @@ WindowSettings& Game::GetSettings()
 	return m_Settings;
 }
 
+SceneManager& Game::GetSceneManager()
+{
+	return m_SceneManager;
+}
+
 void Game::ProcessEvents(SDL_Event& p_Event)
 {
-	m_SceneManager.GetActiveScene().GetSystemManager()
-		.ProcessEvents(p_Event, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
+	m_SceneManager.GetActiveScene().GetEntityManager().ProcessEvents(p_Event);
+	m_SceneManager.GetActiveScene().ProcessEvents(p_Event);
+
 	if (p_Event.type == SDL_QUIT)
 		m_Running = false;
 }
 
 void Game::ProcessUpdate(float p_DeltaTime)
 {
+	m_SceneManager.GetActiveScene().GetEntityManager().ProcessUpdate(p_DeltaTime);
 	m_SceneManager.GetActiveScene().ProcessUpdate(p_DeltaTime);
-	m_SceneManager.GetActiveScene().GetSystemManager()
-		.ProcessUpdate(p_DeltaTime, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
 }
 
 void Game::ProcessRender(SDL_Renderer* p_Renderer)
 {
-	m_SceneManager.GetActiveScene().GetSystemManager()
-		.ProcessRender(p_Renderer, m_SceneManager.GetActiveScene().GetEntityManager().GetRegistry());
+	m_SceneManager.GetActiveScene().GetEntityManager().ProcessRender(p_Renderer);
+	m_SceneManager.GetActiveScene().ProcessRender(p_Renderer);
 }

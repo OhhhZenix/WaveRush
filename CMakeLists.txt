@@ -14,25 +14,17 @@ project(WaveRush)
 # Finding SDL
 find_package(SDL2 CONFIG REQUIRED)
 
-# Finding glm
-find_package(glm CONFIG REQUIRED)
-
-# Finding EnTT
-find_package(EnTT CONFIG REQUIRED)
-
 # Target
+set(TARGET_NAME WaveRush)
 file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
-add_executable(WaveRush ${SRCS})
-target_include_directories(${PROJECT_NAME} PUBLIC src)
+add_executable(${TARGET_NAME} ${SRCS})
+target_include_directories(${TARGET_NAME} PUBLIC src)
+
+# Creates precompiled header
+target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
 
 # Linking SDL
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
-
-# Linking glm
-target_link_libraries(${PROJECT_NAME} PRIVATE glm)
-
-# Linking EnTT
-target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
+target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
 
 # Post build
 add_custom_command(

@@ -21,7 +21,7 @@ class Timer
 
 	int GetTicks();
 
-	bool IsStarted() const;
+	[[nodiscard]] bool IsStarted() const;
 
-	bool IsPaused() const;
+	[[nodiscard]] bool IsPaused() const;
 };

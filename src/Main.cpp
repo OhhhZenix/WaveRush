@@ -1,4 +1,4 @@
-#include "core/Game.hpp"
+#include "Core/Game.hpp"
 
 unsigned allocatedHeap = 0, totalHeap = 0;
 void *operator new(size_t sz)

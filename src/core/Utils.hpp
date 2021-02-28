@@ -1,7 +1,7 @@
 #pragma once
 
-#include <random>
-#include <cmath>
+#include "Core/PCH.hpp"
+#include "Math/Vec2.hpp"
 
 #define SquaredValue(a) ((a) * (a))
 
@@ -22,3 +22,17 @@ inline float RandomF(float p_Min, float p_Max)
 	std::uniform_real_distribution<float> f_Dist(p_Min, p_Max);
 	return f_Dist(f_MT);
 }
+
+struct PolarCoord
+{
+	float Angle;
+	float Magnitude;
+
+	Vec2f ToCartesian() const
+	{
+		return {
+			Magnitude * cos(Angle),
+			Magnitude * sin(Angle)
+		};
+	}
+};

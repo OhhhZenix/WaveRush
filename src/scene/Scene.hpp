@@ -1,17 +1,13 @@
 #pragma once
 
-#include "system/SystemManager.hpp"
-#include "entity/EntityManager.hpp"
+#include "Entity/EntityManager.hpp"
 
 class Scene
 {
  private:
-	SystemManager m_SystemManager;
 	EntityManager m_EntityManager;
 
  public:
-	SystemManager& GetSystemManager();
-
 	EntityManager& GetEntityManager();
 
 	virtual void ProcessEvents(SDL_Event& p_Event);
