@@ -10,8 +10,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Create the project
 project(WaveRush)
 
-# Finding SDL
+# Finding SDL & FreeType
 find_package(SDL2 CONFIG REQUIRED)
+#find_package(Freetype REQUIRED)
 
 # Target
 set(TARGET_NAME WaveRush)
