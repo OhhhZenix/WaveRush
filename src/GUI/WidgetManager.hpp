@@ -2,23 +2,24 @@
 
 #include "Core/PCH.hpp"
 #include "GUI/Widget.hpp"
-#include <vector>
 
 class WidgetManager
 {
-    private:
-        std::vector<Widget*> m_WidgetList;
+ private:
+	std::vector<Widget*> m_WidgetList;
 
-    public:
-        Widget *AddWidget(Widget *p_Widget);
+ public:
+	~WidgetManager();
 
-        void RemoveWidget(Widget *p_Widget);
+	Widget* AddWidget(Widget* p_Widget);
 
-        std::vector<Widget*>& GetWidgets();
+	void RemoveWidget(Widget* p_Widget);
 
-        void ProcessEvents(SDL_Event& p_Event);
+	std::vector<Widget*>& GetWidgets();
 
-	    void ProcessUpdate(float p_DeltaTime);
+	void ProcessEvents(SDL_Event& p_Event);
 
-	    void ProcessRender(SDL_Renderer* p_Renderer);
+	void ProcessUpdate(float p_DeltaTime);
+
+	void ProcessRender(SDL_Renderer* p_Renderer);
 };

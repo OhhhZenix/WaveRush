@@ -1,5 +1,15 @@
 #include "GUI/WidgetManager.hpp"
 
+WidgetManager::~WidgetManager()
+{
+	if	(!m_WidgetList.empty()) {
+		for (Widget* f_Widget : m_WidgetList) {
+			delete f_Widget;
+		}
+		m_WidgetList.clear();
+	}
+}
+
 Widget *WidgetManager::AddWidget(Widget *p_Widget)
 {
     m_WidgetList.emplace_back(p_Widget);
