@@ -9,16 +9,16 @@ PlayScene::PlayScene()
 {
 	ParticleDescriptor f_EnemyParticle =
 		ParticleDescriptor(
-			0.5, 5, 10,
+			0.1, 5, 10,
 			{255, 0, 0, 255},
 			{255, 255, 0, 0},
-			Vec2f(10, 10),
+			Vec2f(25, 25),
 			Vec2f(5, 5)
 			);
 
 	ParticleDescriptor f_PlayerParticle =
 		ParticleDescriptor(
-			0.5, 5, 10,
+			0.3, 5, 10,
 			{0, 255, 0, 255},
 			{0, 0, 255, 0},
 			Vec2f(50, 50),
