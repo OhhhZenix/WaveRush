@@ -33,8 +33,8 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime)
 		if (p.Life <= 0)
 		{
 			p.Life = m_ParticleDesc.Lifetime;
-			p.Position.Y = m_Position.Y - (m_ParticleDesc.InitialSize.Y / 2);
-			p.Position.X = m_Position.X - (m_ParticleDesc.InitialSize.X / 2);
+			p.Position.Y = m_Position.Y;
+			p.Position.X = m_Position.X;
 			p.Delay = RandomF(0.0, m_ParticleDesc.Lifetime * 0.5);
 
 			float f_Magnitude = RandomF(
@@ -65,11 +65,16 @@ void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer)
 			continue;
 
 		// Correct Resizing
+		Vec2f f_Size = Vec2f(
+			LerpValue(m_ParticleDesc.FinalSize.X, m_ParticleDesc.InitialSize.X, p.Life / m_ParticleDesc.Lifetime),
+			LerpValue(m_ParticleDesc.FinalSize.Y, m_ParticleDesc.InitialSize.Y, p.Life / m_ParticleDesc.Lifetime)
+		);
+
 		SDL_Rect f_Rect = {
-			(int)p.Position.X,
-			(int)p.Position.Y,
-			(int)LerpValue(m_ParticleDesc.FinalSize.X, m_ParticleDesc.InitialSize.X, p.Life / m_ParticleDesc.Lifetime),
-			(int)LerpValue(m_ParticleDesc.FinalSize.Y, m_ParticleDesc.InitialSize.Y, p.Life / m_ParticleDesc.Lifetime)
+			(int)(p.Position.X - (f_Size.X / 2)),
+			(int)(p.Position.Y - (f_Size.Y / 2)),
+			(int)f_Size.X,
+			(int)f_Size.Y
 		};
 
 		SDL_SetRenderDrawColor(

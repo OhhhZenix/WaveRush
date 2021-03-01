@@ -1,6 +1,8 @@
 #pragma once
 
-class MainMenuScene
-{
+#include "Scene/Scene.hpp"
 
+class MainMenuScene : public Scene
+{
+    
 };
