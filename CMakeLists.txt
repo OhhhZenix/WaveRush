@@ -10,9 +10,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Create the project
 project(WaveRush)
 
-# Finding SDL & FreeType
+# Finding SDL
 find_package(SDL2 CONFIG REQUIRED)
-#find_package(Freetype REQUIRED)
+
+# Finding SDL-TTF
+find_package(sdl2-ttf CONFIG REQUIRED)
 
 # Target
 set(TARGET_NAME WaveRush)
@@ -25,6 +27,9 @@ target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
 
 # Linking SDL
 target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+
+# Linking SDL-TTF
+target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2_ttf)
 
 # Post build
 add_custom_command(
