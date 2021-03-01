@@ -18,6 +18,7 @@ class Entity
 	RectangleShape m_Shape;
 	Vec2f m_Position;
 	Vec2f m_Velocity;
+	uint32_t m_Layer = 0;
 
  public:
 	explicit Entity(EntityType p_EntityType = EntityType::Entity);
@@ -43,4 +44,8 @@ class Entity
 	[[nodiscard]] const Vec2f& GetVelocity() const;
 
 	void SetVelocity(const Vec2f& p_Velocity);
+
+	[[nodiscard]] const uint32_t& GetLayer() const;
+
+	void SetLayer(const uint32_t& p_Layer);
 };

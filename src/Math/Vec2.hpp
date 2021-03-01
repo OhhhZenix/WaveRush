@@ -24,8 +24,44 @@ struct Vec2f
 		Value = p_Value;
 	}
 
+	// Vec2 Operations
+
 	inline Vec2f operator+(const Vec2f& p_Other) const
 	{
 		return Vec2f(_mm_add_ps(this->Value, p_Other.Value));
 	}
+
+	inline Vec2f operator+=(const Vec2f& p_Other)
+	{
+		this->Value = _mm_add_ps(this->Value, p_Other.Value);
+		return *this;
+	}
+
+	inline Vec2f operator-(const Vec2f& p_Other) const
+	{
+		return Vec2f(_mm_sub_ps(this->Value, p_Other.Value));
+	}
+
+	inline Vec2f operator-=(const Vec2f& p_Other)
+	{
+		this->Value = _mm_sub_ps(this->Value, p_Other.Value);
+		return *this;
+	}
+
+	inline Vec2f operator*(const Vec2f& p_Other) const
+	{
+		return Vec2f(_mm_mul_ps(this->Value, p_Other.Value));
+	}
+
+	// Scalar Operations
+	inline Vec2f operator*(float p_Other) const
+	{
+		return Vec2f(this->X * p_Other, this->Y * p_Other);
+	}
+
+	inline Vec2f operator/(float p_Other) const
+	{
+		return Vec2f(this->X / p_Other, this->Y / p_Other);
+	}
+
 };
