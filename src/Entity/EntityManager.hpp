@@ -9,7 +9,7 @@ class EntityManager
 	std::vector<Entity*> m_Entities;
 
  public:
-	void AddEntity(Entity* p_Entity);
+	Entity *AddEntity(Entity* p_Entity);
 
 	void RemoveEntity(Entity* p_Entity);
 

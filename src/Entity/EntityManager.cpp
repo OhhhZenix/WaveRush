@@ -1,8 +1,10 @@
 #include "EntityManager.hpp"
+#include <algorithm>
 
-void EntityManager::AddEntity(Entity* p_Entity)
+Entity *EntityManager::AddEntity(Entity* p_Entity)
 {
 	m_Entities.emplace_back(p_Entity);
+	return p_Entity;
 }
 
 void EntityManager::RemoveEntity(Entity* p_Entity)
@@ -39,6 +41,11 @@ void EntityManager::ProcessRender(SDL_Renderer* p_Renderer)
 {
 	if (m_Entities.empty())
 		return;
+
+	// Sort Entities by layer;
+	std::sort(m_Entities.begin(), m_Entities.end(), [](Entity *f_Ent1, Entity *f_Ent2){
+		return f_Ent1->GetLayer() < f_Ent2->GetLayer();
+	});
 
 	for (Entity* f_Entity : m_Entities)
 		f_Entity->ProcessRender(p_Renderer);

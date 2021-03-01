@@ -68,3 +68,13 @@ void Entity::SetVelocity(const Vec2f& p_Velocity)
 {
 	m_Velocity = p_Velocity;
 }
+
+const uint32_t& Entity::GetLayer() const
+{
+	return m_Layer;
+}
+
+void Entity::SetLayer(const uint32_t& p_Layer)
+{
+	m_Layer = p_Layer;
+}
