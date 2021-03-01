@@ -51,13 +51,13 @@ void Player::ProcessUpdate(float p_DeltaTime)
 	{
 		SDL_PumpEvents();
 		const uint8_t* f_KeyboardState = SDL_GetKeyboardState(nullptr);
-		if (f_KeyboardState[SDL_SCANCODE_W])
+		if (f_KeyboardState[SDL_SCANCODE_W] || f_KeyboardState[SDL_SCANCODE_UP])
 			m_Position.Y -= m_Velocity.Y * p_DeltaTime;
-		if (f_KeyboardState[SDL_SCANCODE_S])
+		if (f_KeyboardState[SDL_SCANCODE_S] || f_KeyboardState[SDL_SCANCODE_DOWN])
 			m_Position.Y += m_Velocity.Y * p_DeltaTime;
-		if (f_KeyboardState[SDL_SCANCODE_A])
+		if (f_KeyboardState[SDL_SCANCODE_A] || f_KeyboardState[SDL_SCANCODE_LEFT])
 			m_Position.X -= m_Velocity.X * p_DeltaTime;
-		if (f_KeyboardState[SDL_SCANCODE_D])
+		if (f_KeyboardState[SDL_SCANCODE_D] || f_KeyboardState[SDL_SCANCODE_RIGHT])
 			m_Position.X += m_Velocity.X * p_DeltaTime;
 	}
 
