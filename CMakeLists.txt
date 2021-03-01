@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Sets up vcpkg
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE PATH "Path to vcpkg toolchain")
-message(STATUS "CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}") 
+include(cmake/VcpkgToolchain.cmake)
 
 # Standard
 set(CMAKE_CXX_STANDARD 20)
