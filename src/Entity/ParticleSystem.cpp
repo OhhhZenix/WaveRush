@@ -25,7 +25,7 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime)
 		// particle delay;
 		if (p.Delay > 0)
 		{
-			p.Delay -= 1 * p_DeltaTime;
+			p.Delay -= p_DeltaTime / 3 * 2;
 			continue;
 		}
 
@@ -42,7 +42,7 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime)
 				m_ParticleDesc.MaxVelocity
 				);
 
-			float f_Angle = RandomF(0.1, 2 * 3.1416);
+			float f_Angle = RandomF(0.1, 2 * 3.1415926535f);
 
 			p.Velocity = Vec2f(
 				f_Magnitude * cos(f_Angle),
@@ -53,7 +53,7 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime)
 		}
 
 		p.Position += p.Velocity * p_DeltaTime;
-		p.Life -= 1 * p_DeltaTime;
+		p.Life -= p_DeltaTime;
 	}
 }
 
