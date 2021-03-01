@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 
-include(cmake/VcpkgToolchain.cmake)
+# Sets up vcpkg
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE PATH "Path to vcpkg toolchain")
+message(STATUS "CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}") 
 
 # Standard
 set(CMAKE_CXX_STANDARD 20)
@@ -10,27 +12,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(WaveRush)
 
 # Finding SDL
-find_package(SDL2 REQUIRED)
-
-# Finding glm
-find_package(glm REQUIRED)
-
-# Finding EnTT
-find_package(EnTT REQUIRED)
+find_package(SDL2 CONFIG REQUIRED)
 
 # Target
+set(TARGET_NAME WaveRush)
 file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
-add_executable(WaveRush ${SRCS})
-target_include_directories(${PROJECT_NAME} PUBLIC src)
+add_executable(${TARGET_NAME} ${SRCS})
+target_include_directories(${TARGET_NAME} PUBLIC src)
+
+# Creates precompiled header
+target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
 
 # Linking SDL
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
-
-# Linking glm
-target_link_libraries(${PROJECT_NAME} PRIVATE glm)
-
-# Linking EnTT
-target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
+target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
 
 # Post build
 add_custom_command(
