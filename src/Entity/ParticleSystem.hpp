@@ -14,7 +14,7 @@ struct ParticleDescriptor
 	Vec2f InitialSize;
 	Vec2f FinalSize;
 
-	ParticleDescriptor(
+	explicit ParticleDescriptor(
 		float p_Lifetime = 10,
 		float p_MinVel = 10,
 		float p_MaxVel = 10,
