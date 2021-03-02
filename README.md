@@ -1,4 +1,5 @@
 # WaveRush
+![build](https://github.com/OhhhZenix/WaveRush/actions/workflows/build.yml/badge.svg) <br>
  A simple game made in C++
 
 # How to work on
