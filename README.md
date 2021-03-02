@@ -1,5 +1,6 @@
 # WaveRush
-![build](https://github.com/OhhhZenix/WaveRush/actions/workflows/build.yml/badge.svg) <br>
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Build](https://github.com/OhhhZenix/WaveRush/actions/workflows/build.yml/badge.svg) <br>
  A simple game made in C++
 
 # How to work on

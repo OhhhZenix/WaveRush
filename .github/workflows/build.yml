@@ -22,10 +22,4 @@ jobs:
         working-directory: ${{github.workspace}}/build
         shell: bash
         run: cmake --build . --config ${{ matrix.build-type }}
-
-      - name: Workflow Webhook Action
-        uses: distributhor/workflow-webhook@v1.0.5
-        env:
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
-          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
 on: [ push ]
