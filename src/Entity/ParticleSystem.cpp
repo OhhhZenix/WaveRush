@@ -1,5 +1,5 @@
 #include "ParticleSystem.hpp"
-#include "core/Utils.hpp"
+#include "Core/Utils.hpp"
 
 ParticleSystem::ParticleSystem(const Vec2f& p_Position, size_t p_ParticleNum, const ParticleDescriptor& p_ParticleDesc) 
 : Entity(EntityType::Particle)

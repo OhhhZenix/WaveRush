@@ -2,7 +2,6 @@
 
 #include "Entity/Entity.hpp"
 #include "Math/Vec2.hpp"
-#include <vector>
 
 struct ParticleDescriptor
 {
