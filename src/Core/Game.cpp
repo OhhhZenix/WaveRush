@@ -8,6 +8,9 @@ Game::Game()
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		std::exit(EXIT_FAILURE);
 
+	if (TTF_Init() < 0)
+		std::exit(EXIT_FAILURE);
+
 	m_Window = SDL_CreateWindow(m_Settings.Title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_Settings
 		.Width, m_Settings.Height, SDL_WINDOW_SHOWN);
 
@@ -26,6 +29,7 @@ Game::~Game()
 {
 	SDL_DestroyRenderer(m_Renderer);
 	SDL_DestroyWindow(m_Window);
+	TTF_Quit();
 	SDL_Quit();
 }
 
@@ -39,6 +43,8 @@ void Game::Run()
 {
 	// Init
 	{
+		m_FontManager.LoadFont("assets/fonts/JetBrainsMono.ttf");
+		m_FontManager.LoadFont("assets/fonts/Alphakind.ttf");
 		m_SceneManager.SetActiveScene(new PlayScene());
 	}
 
@@ -46,6 +52,8 @@ void Game::Run()
 	Timer f_DeltaTimer;
 	float f_DeltaTime = 1.0f / 60.0f;
 
+	
+	
 	while (m_Running)
 	{
 		// Event related work
@@ -96,6 +104,11 @@ SceneManager& Game::GetSceneManager()
 	return m_SceneManager;
 }
 
+FontManager& Game::GetFontManager()
+{
+	return m_FontManager;
+}
+
 void Game::ProcessEvents(SDL_Event& p_Event)
 {
 	m_SceneManager.GetActiveScene().GetEntityManager().ProcessEvents(p_Event);
@@ -115,4 +128,5 @@ void Game::ProcessRender(SDL_Renderer* p_Renderer)
 {
 	m_SceneManager.GetActiveScene().GetEntityManager().ProcessRender(p_Renderer);
 	m_SceneManager.GetActiveScene().ProcessRender(p_Renderer);
+	m_SceneManager.GetActiveScene().GetWidgetManager().ProcessRender(p_Renderer);
 }

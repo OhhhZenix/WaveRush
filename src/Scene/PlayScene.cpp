@@ -5,6 +5,8 @@
 #include "Entity/SmartEnemy.hpp"
 #include "Entity/ParticleSystem.hpp"
 
+#include "GUI/Text.hpp"
+
 PlayScene::PlayScene()
 {
 	ParticleDescriptor f_EnemyParticle =
@@ -25,7 +27,7 @@ PlayScene::PlayScene()
 			Vec2f(10, 10)
 			);
 
-
+	// Entity
 	auto f_Player = GetEntityManager().AddEntity(new Player(Vec2f(500, 500)));
 	f_Player->SetLayer(5);
 
@@ -45,4 +47,7 @@ PlayScene::PlayScene()
 	{
 		GetEntityManager().AddEntity(new SmartEnemy());
 	}
+
+	// GUI
+	GetWidgetManager().AddWidget(new Text(Vec2f(0, 0), "JetBrainsMono.ttf", "Cool", {0, 0, 0, 255}));
 }

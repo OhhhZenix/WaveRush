@@ -2,21 +2,16 @@
 
 #include <functional>
 #include "Core/PCH.hpp"
-
-/* 
-Widget Needs:
-    An Input event.
-    Draw function.
-
-*/
-
+#include "Math/Vec2.hpp"
 
 class Widget
 {
     protected:
-        std::function<void()> function;
+        Vec2f m_Position;
 
     public:
+        explicit Widget() = default;
+
         virtual void ProcessEvents(SDL_Event& p_Event) = 0;
 
 	    virtual void ProcessUpdate(float p_DeltaTime) = 0;

@@ -2,6 +2,7 @@
 
 #include "Core/PCH.hpp"
 #include "Scene/SceneManager.hpp"
+#include "FontManager.hpp"
 
 struct WindowSettings
 {
@@ -16,6 +17,7 @@ class Game
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
 	SceneManager m_SceneManager;
+	FontManager m_FontManager;
 	WindowSettings m_Settings;
 	bool m_Running;
 
@@ -32,6 +34,8 @@ class Game
 	WindowSettings& GetSettings();
 
 	SceneManager& GetSceneManager();
+
+	FontManager& GetFontManager();
 
  private:
 	void ProcessEvents(SDL_Event& p_Event);

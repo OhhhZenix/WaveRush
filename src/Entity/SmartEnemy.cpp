@@ -4,7 +4,7 @@ SmartEnemy::SmartEnemy(const Vec2f& p_Position)
 	: Entity(EntityType::SmartEnemy), m_Attraction(0.001), m_Repulsion(-0.005)
 {
 	m_Position = p_Position;
-	m_Shape.Color = { 25, 25, 100, 255 };
+	m_Shape.Color = { 150, 0, 255, 255 };
 	m_Shape.Size = { 25, 25 };
 	m_Shape.OutlineColor = { 0, 0, 0, 255 };
 	m_Shape.OutlineThickness = 3;
