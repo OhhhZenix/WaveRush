@@ -4,15 +4,15 @@
 
 class SceneManager
 {
- private:
-	Scene* m_ActiveScene;
+    private:
+    Scene* m_ActiveScene;
 
- public:
-	SceneManager();
+    public:
+    SceneManager();
 
-	~SceneManager();
+    ~SceneManager();
 
-	Scene& GetActiveScene();
+    Scene& GetActiveScene();
 
-	void SetActiveScene(Scene* p_NewScene);
+    void SetActiveScene(Scene* p_NewScene);
 };

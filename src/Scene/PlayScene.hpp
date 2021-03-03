@@ -4,9 +4,9 @@
 
 class PlayScene : public Scene
 {
- private:
-	// Some private data
+    private:
+    // Some private data
 
- public:
-	PlayScene();
+    public:
+    PlayScene();
 };

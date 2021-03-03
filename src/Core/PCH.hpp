@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 #include <immintrin.h>

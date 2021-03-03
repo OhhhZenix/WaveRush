@@ -4,5 +4,4 @@
 
 class MainMenuScene : public Scene
 {
-    
 };

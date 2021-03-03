@@ -5,19 +5,19 @@
 
 class EntityManager
 {
- private:
-	std::vector<Entity*> m_Entities;
+    private:
+    std::vector<Entity*> m_Entities;
 
- public:
-	Entity *AddEntity(Entity *p_Entity);
+    public:
+    Entity* AddEntity(Entity* p_Entity);
 
-	void RemoveEntity(Entity *p_Entity);
+    void RemoveEntity(Entity* p_Entity);
 
-	std::vector<Entity*>& GetEntities();
+    std::vector<Entity*>& GetEntities();
 
-	void ProcessEvents(SDL_Event& p_Event);
+    void ProcessEvents(SDL_Event& p_Event);
 
-	void ProcessUpdate(float p_DeltaTime);
+    void ProcessUpdate(float p_DeltaTime);
 
-	void ProcessRender(SDL_Renderer* p_Renderer);
+    void ProcessRender(SDL_Renderer* p_Renderer);
 };
