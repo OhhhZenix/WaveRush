@@ -2,53 +2,58 @@
 
 #include "Core/PCH.hpp"
 #include "Scene/SceneManager.hpp"
+#include "FontManager.hpp"
 
-struct WindowSettings {
-    std::string Title = "WaveRush";
-    uint32_t Width = 1280;
-    uint32_t Height = 720;
+struct WindowSettings
+{
+	std::string Title = "WaveRush";
+	uint32_t Width = 1280;
+	uint32_t Height = 720;
 };
 
 class Game
 {
-    private:
-    SDL_Window* m_Window;
-    SDL_Renderer* m_Renderer;
-    SceneManager m_SceneManager;
-    WindowSettings m_Settings;
-    bool m_Running;
+ private:
+	SDL_Window* m_Window;
+	SDL_Renderer* m_Renderer;
+	SceneManager m_SceneManager;
+	FontManager m_FontManager;
+	WindowSettings m_Settings;
+	bool m_Running;
 
-    private:
-    Game();
+ private:
+	Game();
 
-    ~Game();
+	~Game();
 
-    public:
-    static Game& Instance();
+ public:
+	static Game& Instance();
 
-    void Run();
+	void Run();
 
-    WindowSettings& GetSettings();
+	WindowSettings& GetSettings();
 
-    SceneManager& GetSceneManager();
+	SceneManager& GetSceneManager();
 
-    private:
-    void ProcessEvents(SDL_Event& p_Event);
+	FontManager& GetFontManager();
 
-    void ProcessUpdate(float p_DeltaTime);
+ private:
+	void ProcessEvents(SDL_Event& p_Event);
 
-    void ProcessRender(SDL_Renderer* p_Renderer);
+	void ProcessUpdate(float p_DeltaTime);
 
-    public:
-    // Copy construct
-    Game(Game const&) = delete;
+	void ProcessRender(SDL_Renderer* p_Renderer);
 
-    // Move construct
-    Game(Game&&) = delete;
+ public:
+	// Copy construct
+	Game(Game const&) = delete;
 
-    // Copy assign
-    Game& operator=(Game const&) = delete;
+	// Move construct
+	Game(Game&&) = delete;
 
-    // Move assign
-    Game& operator=(Game&&) = delete;
+	// Copy assign
+	Game& operator=(Game const&) = delete;
+
+	// Move assign
+	Game& operator=(Game&&) = delete;
 };
