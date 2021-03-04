@@ -2,6 +2,5 @@
 
 #include "Scene/Scene.hpp"
 
-class MainMenuScene : public Scene
-{
+class MainMenuScene : public Scene {
 };

@@ -3,21 +3,22 @@
 #include "Core/PCH.hpp"
 #include "Entity/Entity.hpp"
 
-class EntityManager
-{
-    private:
-    std::vector<Entity*> m_Entities;
+class EntityManager {
+private:
+	std::vector<Entity*> m_Entities;
 
-    public:
-    Entity* AddEntity(Entity* p_Entity);
+public:
+	~EntityManager();
 
-    void RemoveEntity(Entity* p_Entity);
+	Entity* AddEntity(Entity* p_Entity);
 
-    std::vector<Entity*>& GetEntities();
+	void RemoveEntity(Entity* p_Entity);
 
-    void ProcessEvents(SDL_Event& p_Event);
+	std::vector<Entity*>& GetEntities();
 
-    void ProcessUpdate(float p_DeltaTime);
+	void ProcessEvents(SDL_Event& p_Event);
 
-    void ProcessRender(SDL_Renderer* p_Renderer);
+	void ProcessUpdate(float p_DeltaTime);
+
+	void ProcessRender(SDL_Renderer* p_Renderer);
 };

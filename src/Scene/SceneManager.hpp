@@ -2,17 +2,16 @@
 
 #include "Scene/Scene.hpp"
 
-class SceneManager
-{
-    private:
-    Scene* m_ActiveScene;
+class SceneManager {
+private:
+	Scene* m_ActiveScene;
 
-    public:
-    SceneManager();
+public:
+	SceneManager();
 
-    ~SceneManager();
+	~SceneManager();
 
-    Scene& GetActiveScene();
+	Scene& GetActiveScene();
 
-    void SetActiveScene(Scene* p_NewScene);
+	void SetActiveScene(Scene* p_NewScene);
 };

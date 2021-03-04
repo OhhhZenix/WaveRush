@@ -1,19 +1,17 @@
 #pragma once
 
 #include "Core/PCH.hpp"
-#include "Scene/SceneManager.hpp"
 #include "FontManager.hpp"
+#include "Scene/SceneManager.hpp"
 
-struct WindowSettings
-{
+struct WindowSettings {
 	std::string Title = "WaveRush";
 	uint32_t Width = 1280;
 	uint32_t Height = 720;
 };
 
-class Game
-{
- private:
+class Game {
+private:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
 	SceneManager m_SceneManager;
@@ -21,12 +19,12 @@ class Game
 	WindowSettings m_Settings;
 	bool m_Running;
 
- private:
+private:
 	Game();
 
 	~Game();
 
- public:
+public:
 	static Game& Instance();
 
 	void Run();
@@ -37,14 +35,14 @@ class Game
 
 	FontManager& GetFontManager();
 
- private:
+private:
 	void ProcessEvents(SDL_Event& p_Event);
 
 	void ProcessUpdate(float p_DeltaTime);
 
 	void ProcessRender(SDL_Renderer* p_Renderer);
 
- public:
+public:
 	// Copy construct
 	Game(Game const&) = delete;
 

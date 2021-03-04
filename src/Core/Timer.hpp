@@ -1,27 +1,26 @@
 #pragma once
 
-class Timer
-{
-    private:
-    int m_StartTime;
-    int m_PausedTime;
-    bool m_Started;
-    bool m_Paused;
+class Timer {
+private:
+	int m_StartTime;
+	int m_PausedTime;
+	bool m_Started;
+	bool m_Paused;
 
-    public:
-    Timer();
+public:
+	Timer();
 
-    void Start();
+	void Start();
 
-    void Stop();
+	void Stop();
 
-    void Pause();
+	void Pause();
 
-    void Unpause();
+	void Unpause();
 
-    int GetTicks();
+	int GetTicks();
 
-    [[nodiscard]] bool IsStarted() const;
+	[[nodiscard]] bool IsStarted() const;
 
-    [[nodiscard]] bool IsPaused() const;
+	[[nodiscard]] bool IsPaused() const;
 };

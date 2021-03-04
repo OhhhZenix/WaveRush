@@ -3,14 +3,12 @@
 #include "Entity/EntityManager.hpp"
 #include "GUI/WidgetManager.hpp"
 
-class Scene
-{
- private:
+class Scene {
+private:
 	EntityManager m_EntityManager;
-
 	WidgetManager m_WidgetManager;
 
- public:
+public:
 	EntityManager& GetEntityManager();
 
 	WidgetManager& GetWidgetManager();
