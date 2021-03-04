@@ -8,12 +8,7 @@ Text::Text(const Vec2f& p_Position, const std::string& p_FontName, const std::st
 	m_Color = p_Color;
 	m_Font = Game::Instance().GetFontManager().GetFont(p_FontName);
 	m_FontSurface = TTF_RenderText_Blended(m_Font, m_Text.c_str(), m_Color);
-	m_FontTexture = SDL_CreateTextureFromSurface(nullptr, m_FontSurface);
-}
-
-Text::~Text() {
-	SDL_DestroyTexture(m_FontTexture);
-	SDL_FreeSurface(m_FontSurface);
+	m_FontTexture = SDL_CreateTextureFromSurface(Game::Instance().GetRenderer(), m_FontSurface);
 }
 
 void Text::ProcessRender(SDL_Renderer* p_Renderer) {

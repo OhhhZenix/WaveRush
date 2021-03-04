@@ -12,33 +12,26 @@ FontManager::~FontManager() {
 	}
 }
 
-void FontManager::LoadFont(const char* p_Path) {
+void FontManager::LoadFont(const char* p_FontPath) {
 	// Open font
-	TTF_Font* f_Font = TTF_OpenFont(p_Path, 64);
-
+	TTF_Font* f_Font = TTF_OpenFont(p_FontPath, 64);
 	if (f_Font == nullptr) {
-		std::cout << "[Font] \"" << p_Path << "\" not found.\n";
+		std::cout << "[Font] \"" << p_FontPath << "\" not found.\n";
 		return;
 	}
 
-	// Tokenize to get the name
-	std::stringstream f_Tokenizer(p_Path);
-	std::string f_Filename;
-	while (getline(f_Tokenizer, f_Filename, '/')) {
-	}
-
-	std::cout << f_Filename << " stored.\n";
-
-	m_FontList.emplace(f_Filename, f_Font);
+	// Save font
+	std::cout << p_FontPath << " found.\n";
+	m_FontList.emplace(p_FontPath, f_Font);
 }
 
-TTF_Font* FontManager::GetFont(const std::string& p_FontName) {
-	TTF_Font* f_Font = m_FontList.at(p_FontName);
+TTF_Font* FontManager::GetFont(const std::string& p_FontPath) {
+	TTF_Font* f_Font = m_FontList.at(p_FontPath);
 	if (f_Font) {
-		std::cout << "[Font] \"" << p_FontName << "\" found.";
+		std::cout << "[Font] \"" << p_FontPath << "\" found.";
 		return f_Font;
 	}
 
-	std::cout << "[Font] \"" << p_FontName << "\" Is not stored.";
+	std::cout << "[Font] \"" << p_FontPath << "\" is not stored.";
 	return nullptr;
 }

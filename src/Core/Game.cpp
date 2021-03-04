@@ -75,6 +75,10 @@ void Game::Run() {
 	}
 }
 
+SDL_Renderer* Game::GetRenderer() {
+	return m_Renderer;
+}
+
 WindowSettings& Game::GetSettings() {
 	return m_Settings;
 }

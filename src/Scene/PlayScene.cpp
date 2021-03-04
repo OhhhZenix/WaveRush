@@ -44,5 +44,5 @@ PlayScene::PlayScene() {
 	}
 
 	// GUI
-	GetWidgetManager().AddWidget(new Text(Vec2f(0, 0), "JetBrainsMono.ttf", "Cool", { 0, 0, 0, 255 }));
+	GetWidgetManager().AddWidget(new Text(Vec2f(0, 0), "assets/fonts/JetBrainsMono.ttf", "Cool", { 0, 0, 0, 255 }));
 }

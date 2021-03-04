@@ -9,7 +9,7 @@ private:
 public:
 	~FontManager();
 
-	void LoadFont(const char* p_Path);
+	void LoadFont(const char* p_FontPath);
 
-	TTF_Font* GetFont(const std::string& p_FontName);
+	TTF_Font* GetFont(const std::string& p_FontPath);
 };

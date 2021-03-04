@@ -29,6 +29,8 @@ public:
 
 	void Run();
 
+	SDL_Renderer* GetRenderer();
+
 	WindowSettings& GetSettings();
 
 	SceneManager& GetSceneManager();
