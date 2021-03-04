@@ -14,8 +14,8 @@ class Game {
 private:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
+	FontManager* m_FontManager;
 	SceneManager m_SceneManager;
-	FontManager m_FontManager;
 	WindowSettings m_Settings;
 	bool m_Running;
 
@@ -33,9 +33,9 @@ public:
 
 	WindowSettings& GetSettings();
 
-	SceneManager& GetSceneManager();
-
 	FontManager& GetFontManager();
+
+	SceneManager& GetSceneManager();
 
 private:
 	void ProcessEvents(SDL_Event& p_Event);

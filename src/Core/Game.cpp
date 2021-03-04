@@ -27,10 +27,12 @@ Game::Game() {
 		std::exit(EXIT_FAILURE);
 	}
 
+	m_FontManager = new FontManager();
 	m_Running = true;
 }
 
 Game::~Game() {
+	delete m_FontManager;
 	SDL_DestroyRenderer(m_Renderer);
 	SDL_DestroyWindow(m_Window);
 	TTF_Quit();
@@ -83,12 +85,12 @@ WindowSettings& Game::GetSettings() {
 	return m_Settings;
 }
 
-SceneManager& Game::GetSceneManager() {
-	return m_SceneManager;
+FontManager& Game::GetFontManager() {
+	return *m_FontManager;
 }
 
-FontManager& Game::GetFontManager() {
-	return m_FontManager;
+SceneManager& Game::GetSceneManager() {
+	return m_SceneManager;
 }
 
 void Game::ProcessEvents(SDL_Event& p_Event) {

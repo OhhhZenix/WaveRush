@@ -2,11 +2,11 @@
 
 #include "Core/Game.hpp"
 
-Text::Text(const Vec2f& p_Position, const std::string& p_FontName, const std::string& p_Text, SDL_Color p_Color) :
+Text::Text(const Vec2f& p_Position, const std::string& p_FontPath, const std::string& p_Text, SDL_Color p_Color) :
 		Widget(p_Position) {
 	m_Text = p_Text;
 	m_Color = p_Color;
-	m_Font = Game::Instance().GetFontManager().GetFont(p_FontName);
+	m_Font = Game::Instance().GetFontManager().GetFont(p_FontPath);
 	m_FontSurface = TTF_RenderText_Blended(m_Font, m_Text.c_str(), m_Color);
 	m_FontTexture = SDL_CreateTextureFromSurface(Game::Instance().GetRenderer(), m_FontSurface);
 }
