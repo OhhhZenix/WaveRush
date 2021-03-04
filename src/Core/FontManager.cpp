@@ -3,7 +3,7 @@
 FontManager::~FontManager() {
 	if (!m_FontList.empty()) {
 		for (auto& [f_Key, f_Value] : m_FontList) {
-			if (f_Value != nullptr) {
+			if (f_Value == nullptr) {
 				continue;
 			}
 			TTF_CloseFont(f_Value);
