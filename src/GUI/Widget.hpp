@@ -5,10 +5,10 @@
 
 class Widget {
 protected:
-	Vec2f m_Position;
+	Vec2<float> m_Position;
 
 public:
-	explicit Widget(const Vec2f& p_Position = Vec2f());
+	explicit Widget(const Vec2<float>& p_Position = Vec2<float>());
 
 	virtual ~Widget() = default;
 

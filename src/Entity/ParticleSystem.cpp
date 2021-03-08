@@ -2,7 +2,7 @@
 
 #include "Core/Utils.hpp"
 
-ParticleDescriptor::ParticleDescriptor(float p_Lifetime, float p_MinVelocity, float p_MaxVelocity, SDL_Color p_InitialColor, SDL_Color p_FinalColor, Vec2f p_InitialSize, Vec2f p_FinalSize) {
+ParticleDescriptor::ParticleDescriptor(float p_Lifetime, float p_MinVelocity, float p_MaxVelocity, SDL_Color p_InitialColor, SDL_Color p_FinalColor, Vec2<float> p_InitialSize, Vec2<float> p_FinalSize) {
 	Lifetime = p_Lifetime;
 	MinVelocity = p_MinVelocity;
 	MaxVelocity = p_MaxVelocity;
@@ -12,7 +12,7 @@ ParticleDescriptor::ParticleDescriptor(float p_Lifetime, float p_MinVelocity, fl
 	FinalSize = p_FinalSize;
 }
 
-ParticleSystem::ParticleSystem(const Vec2f& p_Position, size_t p_ParticleNum, const ParticleDescriptor& p_ParticleDesc) :
+ParticleSystem::ParticleSystem(const Vec2<float>& p_Position, size_t p_ParticleNum, const ParticleDescriptor& p_ParticleDesc) :
 		Entity(EntityType::Particle) {
 	m_Position = p_Position;
 	m_ParticleList.resize(p_ParticleNum);
@@ -49,7 +49,7 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime) {
 
 			float f_Angle = RandomF(0.1, 2 * 3.1415926535f);
 
-			p.Velocity = Vec2f(
+			p.Velocity = Vec2<float>(
 					f_Magnitude * cos(f_Angle),
 					f_Magnitude * sin(f_Angle));
 
@@ -68,7 +68,7 @@ void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer) {
 		}
 
 		// Correct Resizing
-		Vec2f f_Size = Vec2f(
+		Vec2<float> f_Size = Vec2<float>(
 				LerpValue(m_ParticleDesc.FinalSize.X, m_ParticleDesc.InitialSize.X, p.Life / m_ParticleDesc.Lifetime),
 				LerpValue(m_ParticleDesc.FinalSize.Y, m_ParticleDesc.InitialSize.Y, p.Life / m_ParticleDesc.Lifetime));
 

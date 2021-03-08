@@ -1,6 +1,6 @@
 #include "BasicEnemy.hpp"
 
-BasicEnemy::BasicEnemy(const Vec2f& p_Position) :
+BasicEnemy::BasicEnemy(const Vec2<float>& p_Position) :
 		Entity(EntityType::BasicEnemy) {
 	m_Speed = 0.3f;
 	m_Position = p_Position;

@@ -37,19 +37,19 @@ void Entity::SetShape(const RectangleShape& p_Shape) {
 	m_Shape = p_Shape;
 }
 
-const Vec2f& Entity::GetPosition() const {
+const Vec2<float>& Entity::GetPosition() const {
 	return m_Position;
 }
 
-void Entity::SetPosition(const Vec2f& p_Position) {
+void Entity::SetPosition(const Vec2<float>& p_Position) {
 	m_Position = p_Position;
 }
 
-const Vec2f& Entity::GetVelocity() const {
+const Vec2<float>& Entity::GetVelocity() const {
 	return m_Velocity;
 }
 
-void Entity::SetVelocity(const Vec2f& p_Velocity) {
+void Entity::SetVelocity(const Vec2<float>& p_Velocity) {
 	m_Velocity = p_Velocity;
 }
 

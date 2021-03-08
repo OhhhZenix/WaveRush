@@ -12,7 +12,7 @@ private:
 
 public:
 	explicit Text(
-			const Vec2f& p_Position = Vec2f(0, 0),
+			const Vec2<float>& p_Position = Vec2<float>(0, 0),
 			const std::string& p_FontPath = "assets/fonts/JetBrainsMono.ttf",
 			const std::string& p_Text = "Empty Text",
 			SDL_Color p_Color = { 0, 0, 0, 255 });

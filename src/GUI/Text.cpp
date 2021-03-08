@@ -2,7 +2,7 @@
 
 #include "Core/Game.hpp"
 
-Text::Text(const Vec2f& p_Position, const std::string& p_FontPath, const std::string& p_Text, SDL_Color p_Color) :
+Text::Text(const Vec2<float>& p_Position, const std::string& p_FontPath, const std::string& p_Text, SDL_Color p_Color) :
 		Widget(p_Position) {
 	m_Text = p_Text;
 	m_Color = p_Color;

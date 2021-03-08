@@ -1,6 +1,6 @@
 #include "Widget.hpp"
 
-Widget::Widget(const Vec2f& p_Position) {
+Widget::Widget(const Vec2<float>& p_Position) {
 	m_Position = p_Position;
 }
 

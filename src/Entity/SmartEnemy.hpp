@@ -10,7 +10,7 @@ private:
 	float m_Repulsion;
 
 public:
-	explicit SmartEnemy(const Vec2f& p_Position = Vec2f(RandomF(0, Game::Instance().GetSettings().Width), RandomF(0, Game::Instance().GetSettings().Height)));
+	explicit SmartEnemy(const Vec2<float>& p_Position = Vec2<float>(RandomF(0, Game::Instance().GetSettings().Width), RandomF(0, Game::Instance().GetSettings().Height)));
 
 	void ProcessUpdate(float p_DeltaTime) override;
 };

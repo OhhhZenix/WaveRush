@@ -26,7 +26,7 @@ struct PolarCoord {
 	float Angle;
 	float Magnitude;
 
-	Vec2f ToCartesian() const {
+	Vec2<float> ToCartesian() const {
 		return {
 			Magnitude * cos(Angle),
 			Magnitude * sin(Angle)
