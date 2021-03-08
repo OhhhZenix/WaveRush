@@ -19,7 +19,7 @@ ParticleSystem::ParticleSystem(const Vec2<float>& p_Position, size_t p_ParticleN
 	m_ParticleDesc = p_ParticleDesc;
 
 	for (Particle& p : m_ParticleList) {
-		p.Delay = RandomF(0.1, p_ParticleDesc.Lifetime);
+		p.Delay = Random<float>(0.1, p_ParticleDesc.Lifetime);
 	}
 }
 
@@ -41,13 +41,13 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime) {
 			p.Life = m_ParticleDesc.Lifetime;
 			p.Position.Y = m_Position.Y;
 			p.Position.X = m_Position.X;
-			p.Delay = RandomF(0.0, m_ParticleDesc.Lifetime * 0.5);
+			p.Delay = Random<float>(0.0, m_ParticleDesc.Lifetime * 0.5);
 
-			float f_Magnitude = RandomF(
+			float f_Magnitude = Random<float>(
 					m_ParticleDesc.MinVelocity,
 					m_ParticleDesc.MaxVelocity);
 
-			float f_Angle = RandomF(0.1, 2 * 3.1415926535f);
+			float f_Angle = Random<float>(0.1, 2 * 3.1415926535f);
 
 			p.Velocity = Vec2<float>(
 					f_Magnitude * cos(f_Angle),
