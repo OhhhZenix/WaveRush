@@ -6,5 +6,6 @@ build/
 .idea/
 cmake-build-*/
 
-# Vcpkg
-vcpkg/
+# Visual Studio
+.vs/
+out/
