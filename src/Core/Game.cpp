@@ -3,9 +3,13 @@
 #include "Core/Timer.hpp"
 
 Game::Game() {
+
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		std::exit(EXIT_FAILURE);
 	}
+
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
 	if (TTF_Init() < 0) {
 		std::exit(EXIT_FAILURE);
@@ -104,11 +108,12 @@ void Game::ProcessEvents(SDL_Event& p_Event) {
 
 void Game::ProcessUpdate(float p_DeltaTime) {
 	m_SceneManager.GetActiveScene().GetEntityManager().ProcessUpdate(p_DeltaTime);
+	m_SceneManager.GetActiveScene().GetWidgetManager().ProcessUpdate(p_DeltaTime);
 	m_SceneManager.GetActiveScene().ProcessUpdate(p_DeltaTime);
 }
 
 void Game::ProcessRender(SDL_Renderer* p_Renderer) {
 	m_SceneManager.GetActiveScene().GetEntityManager().ProcessRender(p_Renderer);
-	m_SceneManager.GetActiveScene().ProcessRender(p_Renderer);
 	m_SceneManager.GetActiveScene().GetWidgetManager().ProcessRender(p_Renderer);
+	m_SceneManager.GetActiveScene().ProcessRender(p_Renderer);
 }
