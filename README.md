@@ -1,12 +1,12 @@
-# WaveRush
+# wave_rush
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-![Build](https://github.com/OhhhZenix/WaveRush/actions/workflows/build.yml/badge.svg)
+![Build](https://github.com/OhhhZenix/wave_rush/actions/workflows/build.yml/badge.svg)
 [![Discord Chat](https://img.shields.io/discord/308323056592486420.svg)](https://discord.gg/9yV8pPZXfY) <br>
  A simple game made in C++
 
 # How to work on
 ### Step 1: Fork the repository
-In https://github.com/OhhhZenix/WaveRush, look for the fork icon in the top right. Click it to create a fork of the repository (repo).
+In https://github.com/OhhhZenix/wave_rush, look for the fork icon in the top right. Click it to create a fork of the repository (repo).
 
 Basically, this will copy the repo into your GitHub account url. It should create a copy at https://github.com/YOURUSERNAME/website, where `YOURUSERNAME` is replaced with exactly that.
 
@@ -21,13 +21,13 @@ First, navigate to the folder will you want to contain the project.
 Next, in your shell, navigate and run the following command:
 
 ```bash
-git clone --recursive https://github.com/YOURUSERNAME/WaveRush.git
+git clone --recursive https://github.com/YOURUSERNAME/wave_rush.git
 ```
 
-You should now have a new folder called `WaveRush`. Verify this by going into the directory:
+You should now have a new folder called `wave_rush`. Verify this by going into the directory:
 
 ```bash
-cd WaveRush
+cd wave_rush
 ```
 
 Next, verify that youe local repo is pointing to the correct `origin` url (That is, the forked repo on your GitHub account):
@@ -35,21 +35,21 @@ Next, verify that youe local repo is pointing to the correct `origin` url (That 
 git remote -v
 ```
 
-You should see `fetch` and `push` urls with links to your forked repo under your account (Ex: `https://github.com/YOURUSERNAME/WaveRush.git`). You are all set to make working changes to the project on your local machine.
+You should see `fetch` and `push` urls with links to your forked repo under your account (Ex: `https://github.com/YOURUSERNAME/wave_rush.git`). You are all set to make working changes to the project on your local machine.
 
 However, we still need a way to keep our local repo up to date with the github servers. To do so, you must add a remote upstream to incorporate changes made while you are also working on your local repo. Run the following command to add a remote upstream and update your local repo with recent changes from the GitHub servers:
 
 ```bash
-git remote add upstream https://github.com/OhhhZenix/WaveRush.git
+git remote add upstream https://github.com/OhhhZenix/wave_rush.git
 git fetch upstream
 ```
 
 After adding the remote upstream, you should now see it if you run `git remote -v` again:
 ```bash
-origin https://github.com/YOURUSERNAME/WaveRush.git (fetch)
-origin https://github.com/YOURUSERNAME/WaveRush.git (push)
-upstream https://github.com/OhhhZenix/WaveRush.git (fetch)
-upstream https://github.com/OhhhZenix/WaveRush.git (push)
+origin https://github.com/YOURUSERNAME/wave_rush.git (fetch)
+origin https://github.com/YOURUSERNAME/wave_rush.git (push)
+upstream https://github.com/OhhhZenix/wave_rush.git (fetch)
+upstream https://github.com/OhhhZenix/wave_rush.git (push)
 ```
 
 ### Step 3: Edit and run the code
