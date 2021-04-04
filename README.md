@@ -2,7 +2,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Build](https://github.com/OhhhZenix/wave_rush/actions/workflows/build.yml/badge.svg)
 [![Discord Chat](https://img.shields.io/discord/308323056592486420.svg)](https://discord.gg/9yV8pPZXfY) <br>
- A simple game made in C++
+ A simple game made in Rust
 
 # How to work on
 ### Step 1: Fork the repository
