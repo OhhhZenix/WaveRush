@@ -1,26 +1,37 @@
-use crate::{
-    ecs::component::{
-        position::Position,
-        rectangle::Rectangle,
-        tag::{Tag, TagType},
-    },
-    RENDER_SIZE,
+use amethyst::{
+    assets::Handle,
+    core::Transform,
+    ecs::{Component, DenseVecStorage},
+    prelude::{Builder, WorldExt},
+    renderer::{SpriteRender, SpriteSheet},
+    shred::World,
 };
-use macroquad::prelude::RED;
-use specs::{Builder, Entity, World, WorldExt};
 
-pub fn spawn_player(world: &mut World) -> Entity {
-    return world
+use crate::ecs::component::{position::Position, rectangle::Rectangle};
+
+pub struct Player {
+    pub speed_level: u32,
+}
+
+impl Player {
+    pub fn new() -> Self {
+        return Self { speed_level: 1 };
+    }
+}
+
+impl Component for Player {
+    type Storage = DenseVecStorage<Self>;
+}
+
+pub fn spawn_player(world: &mut World, sprite_sheet_handle: Handle<SpriteSheet>) {
+    let sprite_render = SpriteRender::new(sprite_sheet_handle, 0);
+    let mut transform = Transform::default();
+    transform.set_translation_xyz(100.0, 100.0, 0.0);
+
+    world
         .create_entity()
-        .with(Tag(TagType::Player))
-        .with(Rectangle {
-            w: 32.0,
-            h: 32.0,
-            color: RED,
-        })
-        .with(Position {
-            x: RENDER_SIZE.x / 2.0,
-            y: RENDER_SIZE.y / 2.0,
-        })
+        .with(Player::new())
+        .with(transform)
+        .with(sprite_render)
         .build();
 }

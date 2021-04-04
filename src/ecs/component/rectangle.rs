@@ -1,9 +1,17 @@
-use macroquad::prelude::Color;
-use specs::{prelude::*, Component};
+use amethyst::ecs::{Component, DenseVecStorage};
 
-#[derive(Component)]
 pub struct Rectangle {
-    pub w: f32,
-    pub h: f32,
-    pub color: Color,
+    w: f32,
+    h: f32,
+    color: [f32; 4],
+}
+
+impl Rectangle {
+    pub fn new(w: f32, h: f32, color: [f32; 4]) -> Self {
+        return Self { w, h, color };
+    }
+}
+
+impl Component for Rectangle {
+    type Storage = DenseVecStorage<Self>;
 }

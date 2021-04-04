@@ -1,7 +1,18 @@
-use specs::{prelude::*, Component};
+use core::f32;
 
-#[derive(Component)]
+use amethyst::ecs::{Component, DenseVecStorage};
+
 pub struct Position {
-    pub x: f32,
-    pub y: f32,
+    x: f32,
+    y: f32,
+}
+
+impl Position {
+    pub fn new(x: f32, y: f32) -> Self {
+        return Self { x, y };
+    }
+}
+
+impl Component for Position {
+    type Storage = DenseVecStorage<Self>;
 }

@@ -1,74 +1,55 @@
 pub mod ecs;
-pub mod game;
-pub mod scene;
+pub mod state;
 
-use game::Game;
-use macroquad::prelude::*;
-use scene::{play_scene::PlayScene, Scene};
-
-pub struct Vec2<T> {
-    x: T,
-    y: T,
-}
-
-pub struct UpdateArgs {
-    pub dt: f32,
-}
-
-impl Default for UpdateArgs {
-    fn default() -> Self {
-        return Self {
-            dt: get_frame_time(),
-        };
-    }
-}
-
-pub struct RenderArgs {
-    pub scale: Vec2<f32>,
-}
-
-impl Default for RenderArgs {
-    fn default() -> Self {
-        return Self {
-            scale: Vec2 {
-                x: (screen_width() / RENDER_SIZE.x) as f32,
-                y: (screen_height() / RENDER_SIZE.y) as f32,
-            },
-        };
-    }
-}
-
-pub const RENDER_SIZE: Vec2<f32> = Vec2 {
-    x: 640 as f32,
-    y: 360 as f32,
+use amethyst::{
+    core::TransformBundle,
+    input::{InputBundle, StringBindings},
+    prelude::*,
+    renderer::{
+        plugins::{RenderFlat2D, RenderToWindow},
+        types::DefaultBackend,
+        RenderingBundle,
+    },
+    utils::application_root_dir,
 };
+use ecs::system::player_movement_system::PlayerMovementSystem;
+use state::play_state::PlayState;
 
-fn window_conf() -> Conf {
-    return Conf {
-        window_title: "Wave Rush".to_owned(),
-        window_width: 1280,
-        window_height: 720,
-        ..Default::default()
-    };
-}
+pub const RENDER_WIDTH: f32 = 640.0;
+pub const RENDER_HEIGHT: f32 = 360.0;
 
-#[macroquad::main(window_conf)]
-async fn main() {
-    // do some initilization
-    let mut game = Game::new(PlayScene::new());
+fn main() -> Result<(), amethyst::Error> {
+    amethyst::start_logger(Default::default());
 
-    // start main loop
-    loop {
-        // handle input & update logic
-        game.get_scene().update(UpdateArgs::default());
+    let app_root = application_root_dir()?;
+    let assets_dir = app_root.join("assets/");
+    let display_config_path = app_root.join("config/display.ron");
 
-        // clear frame
-        clear_background(BLACK);
+    let binding_path = app_root.join("config/bindings.ron");
+    let input_bundle =
+        InputBundle::<StringBindings>::new().with_bindings_from_file(binding_path)?;
 
-        // draw frame
-        game.get_scene().render(RenderArgs::default());
+    let game_data = GameDataBuilder::default()
+        .with_bundle(
+            RenderingBundle::<DefaultBackend>::new()
+                // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
+                .with_plugin(
+                    RenderToWindow::from_config_path(display_config_path)?
+                        .with_clear([0.0, 0.0, 0.0, 1.0]),
+                )
+                // RenderFlat2D plugin is used to render entities with a `SpriteRender` component.
+                .with_plugin(RenderFlat2D::default()),
+        )?
+        .with_bundle(TransformBundle::new())?
+        .with_bundle(input_bundle)?
+        .with(
+            PlayerMovementSystem,
+            "player_movement_system",
+            &["input_system"],
+        );
 
-        // swap buffer
-        next_frame().await;
-    }
+    let mut game = Application::new(assets_dir, PlayState, game_data)?;
+    game.run();
+
+    Ok(())
 }
