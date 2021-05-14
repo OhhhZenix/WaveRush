@@ -1,25 +1,22 @@
 name: Build
+env:
+  CARGO_TERM_COLOR: always
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
 jobs:
-  # job:
-  #   name: ${{ matrix.os }}-${{ matrix.build-type }}
-  #   runs-on: ${{matrix.os}}
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       build-type: [ Debug, Release ]
-  #       os: [ ubuntu-latest, macos-latest, windows-latest ]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Create Build Environment
-  #       run: cmake -E make_directory ${{github.workspace}}/build
-
-  #     - name: Configure CMake
-  #       shell: bash
-  #       working-directory: ${{github.workspace}}/build
-  #       run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
-
-  #     - name: Build
-  #       working-directory: ${{github.workspace}}/build
-  #       shell: bash
-  #       run: cmake --build . --config ${{ matrix.build-type }}
-on: [ push ]
+  job:
+    name: ${{ matrix.os }} - Build & Tests
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build --verbose
+      - name: Run tests
+        run: cargo test --verbose
