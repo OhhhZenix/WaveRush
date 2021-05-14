@@ -1,11 +1,14 @@
 # wave_rush
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-![Build](https://github.com/OhhhZenix/wave_rush/actions/workflows/build.yml/badge.svg)
+![CI](https://github.com/OhhhZenix/wave_rush/actions/workflows/ci.yml/badge.svg)
 [![Discord Chat](https://img.shields.io/discord/308323056592486420.svg)](https://discord.gg/9yV8pPZXfY) <br>
- A simple game made in Rust
+A simple game made in Rust
 
 # How to work on
+
 ### Step 1: Fork the repository
+
 In https://github.com/OhhhZenix/wave_rush, look for the fork icon in the top right. Click it to create a fork of the repository (repo).
 
 Basically, this will copy the repo into your GitHub account url. It should create a copy at https://github.com/YOURUSERNAME/website, where `YOURUSERNAME` is replaced with exactly that.
@@ -31,6 +34,7 @@ cd wave_rush
 ```
 
 Next, verify that youe local repo is pointing to the correct `origin` url (That is, the forked repo on your GitHub account):
+
 ```bash
 git remote -v
 ```
@@ -45,6 +49,7 @@ git fetch upstream
 ```
 
 After adding the remote upstream, you should now see it if you run `git remote -v` again:
+
 ```bash
 origin https://github.com/YOURUSERNAME/wave_rush.git (fetch)
 origin https://github.com/YOURUSERNAME/wave_rush.git (push)
@@ -151,4 +156,4 @@ remote: Total 11 (delta 5), reused 7 (delta 4), pack-reused 0
 Unpacking objects: 100% (11/11), 8.25 KiB | 402.00 KiB/s, done.
 ```
 
-If this shows, then feel free to cower in fear or ask for help in the discord server. 
+If this shows, then feel free to cower in fear or ask for help in the discord server.
