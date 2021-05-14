@@ -1,55 +1,32 @@
-pub mod ecs;
+pub mod entity;
+pub mod player;
 pub mod state;
 
-use amethyst::{
-    core::TransformBundle,
-    input::{InputBundle, StringBindings},
-    prelude::*,
-    renderer::{
-        plugins::{RenderFlat2D, RenderToWindow},
-        types::DefaultBackend,
-        RenderingBundle,
-    },
-    utils::application_root_dir,
-};
-use ecs::system::player_movement_system::PlayerMovementSystem;
-use state::play_state::PlayState;
+use bevy::prelude::*;
+use entity::EntityType;
+use player::PlayerPlugin;
 
-pub const RENDER_WIDTH: f32 = 640.0;
-pub const RENDER_HEIGHT: f32 = 360.0;
+pub const ARENA_WIDTH: f32 = 640.0;
+pub const ARENA_HEIGHT: f32 = 360.0;
 
-fn main() -> Result<(), amethyst::Error> {
-    amethyst::start_logger(Default::default());
+fn main() {
+    App::build()
+        .add_plugins(DefaultPlugins)
+        .add_plugin(PlayerPlugin)
+        .add_startup_system(setup.system())
+        .add_system_to_stage(CoreStage::PreUpdate, size_scaling.system())
+        .run();
+}
 
-    let app_root = application_root_dir()?;
-    let assets_dir = app_root.join("assets/");
-    let display_config_path = app_root.join("config/display.ron");
+fn setup(mut commands: Commands) {
+    commands.spawn_bundle(OrthographicCameraBundle::new_2d());
+}
 
-    let binding_path = app_root.join("config/bindings.ron");
-    let input_bundle =
-        InputBundle::<StringBindings>::new().with_bindings_from_file(binding_path)?;
-
-    let game_data = GameDataBuilder::default()
-        .with_bundle(
-            RenderingBundle::<DefaultBackend>::new()
-                // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
-                .with_plugin(
-                    RenderToWindow::from_config_path(display_config_path)?
-                        .with_clear([0.0, 0.0, 0.0, 1.0]),
-                )
-                // RenderFlat2D plugin is used to render entities with a `SpriteRender` component.
-                .with_plugin(RenderFlat2D::default()),
-        )?
-        .with_bundle(TransformBundle::new())?
-        .with_bundle(input_bundle)?
-        .with(
-            PlayerMovementSystem,
-            "player_movement_system",
-            &["input_system"],
-        );
-
-    let mut game = Application::new(assets_dir, PlayState, game_data)?;
-    game.run();
-
-    Ok(())
+fn size_scaling(windows: Res<Windows>, query: Query<&mut Transform, With<EntityType>>) {
+    query.for_each_mut(|mut transform| {
+        let window = windows.get_primary().unwrap();
+        let scale_x = window.width() / ARENA_WIDTH;
+        let scale_y = window.height() / ARENA_HEIGHT;
+        transform.scale = Vec3::new(scale_x, scale_y, 1.0);
+    });
 }
