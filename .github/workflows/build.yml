@@ -17,7 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install libasound2-dev
-        run: sudo apt-get install libasound2-dev
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            sudo apt-get install libasound2-dev
+          fi
       - name: Build
         run: cargo build --verbose
       - name: Run tests
