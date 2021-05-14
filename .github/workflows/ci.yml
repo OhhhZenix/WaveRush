@@ -8,7 +8,7 @@ on:
     branches: [dev]
 jobs:
   build:
-    name: ${{ matrix.os }} - Build & Tests
+    name: Build
     runs-on: ${{matrix.os}}
     strategy:
       fail-fast: false
@@ -47,18 +47,15 @@ jobs:
         run: cargo test --verbose
   rustfmt:
     name: Rustfmt
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Install Rust
-        run: rustup update stable && rustup default stable && rustup component add rustfmt
+      - uses: actions/checkout@v2
       - run: cargo fmt -- --check
   clippy_check:
     name: Clippy
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: rustup component add clippy
+      - uses: actions/checkout@v2
       - uses: actions-rs/clippy-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
