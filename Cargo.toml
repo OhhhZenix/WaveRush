@@ -3,8 +3,14 @@ name = "wave_rush"
 version = "0.1.0"
 authors = ["OhhhZenix <33815423+OhhhZenix@users.noreply.github.com>"]
 edition = "2018"
+build = "scripts/build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = "0.5.0"
+glutin = "0.26.0"
+gl = "0.14.0"
+
+[build-dependencies]
+gl_generator = "0.14.0"
+fs_extra = "1.1"
