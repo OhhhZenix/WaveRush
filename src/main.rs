@@ -1,7 +1,3 @@
-pub(crate) mod gl {
-    include!(concat!(env!("OUT_DIR"), "/gl_bindings.rs"));
-}
-
 pub mod graphics;
 
 pub const APP_NAME: &str = "Wave Rush";
@@ -12,32 +8,59 @@ pub fn test() {}
 fn main() {
     env_logger::init();
 
-    let event_loop = glutin::event_loop::EventLoop::new();
+    let event_loop = winit::event_loop::EventLoop::new();
 
-    let mut renderer = graphics::Renderer::new(&event_loop);
+    let window = winit::window::WindowBuilder::new()
+        .with_title(APP_NAME)
+        .with_min_inner_size(winit::dpi::PhysicalSize {
+            width: GAME_SIZE[0],
+            height: GAME_SIZE[1],
+        })
+        .with_inner_size(winit::dpi::PhysicalSize {
+            width: 1280,
+            height: 720,
+        })
+        .build(&event_loop)
+        .expect("Could not create a window!");
+
+    let mut renderer = futures::executor::block_on(graphics::Renderer::new(&window));
 
     // let mut world = World::new();
 
     event_loop.run(move |event, _, control_flow| {
-        *control_flow = glutin::event_loop::ControlFlow::Wait;
+        *control_flow = winit::event_loop::ControlFlow::Poll;
         match event {
-            glutin::event::Event::LoopDestroyed => {
+            winit::event::Event::LoopDestroyed => {
                 return;
             }
-            glutin::event::Event::MainEventsCleared => {
-                renderer.begin();
-                renderer.render();
-                renderer.end();
+            winit::event::Event::MainEventsCleared => {
+                match renderer.render() {
+                    Ok(_) => {}
+                    // Recreate the swap_chain if lost
+                    Err(wgpu::SwapChainError::Lost) => renderer.resize(renderer.size()),
+                    // The system is out of memory, we should probably quit
+                    Err(wgpu::SwapChainError::OutOfMemory) => {
+                        *control_flow = winit::event_loop::ControlFlow::Exit
+                    }
+                    // All other errors (Outdated, Timeout) should be resolved by the next frame
+                    Err(error) => eprintln!("{:?}", error),
+                }
             }
-            glutin::event::Event::RedrawRequested(_) => {
-                renderer.swap_buffers();
+            winit::event::Event::RedrawRequested(_) => {
+                // renderer.swap_buffers();
             }
-            glutin::event::Event::WindowEvent { ref event, .. } => match event {
-                glutin::event::WindowEvent::Resized(physical_size) => {
+            winit::event::Event::WindowEvent {
+                ref event,
+                window_id,
+            } if window_id == window.id() => match event {
+                winit::event::WindowEvent::Resized(physical_size) => {
                     renderer.resize(*physical_size);
                 }
-                glutin::event::WindowEvent::CloseRequested => {
-                    *control_flow = glutin::event_loop::ControlFlow::Exit
+                winit::event::WindowEvent::ScaleFactorChanged { new_inner_size, .. } => {
+                    renderer.resize(**new_inner_size);
+                }
+                winit::event::WindowEvent::CloseRequested => {
+                    *control_flow = winit::event_loop::ControlFlow::Exit
                 }
                 _ => (),
             },
