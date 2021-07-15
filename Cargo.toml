@@ -6,14 +6,8 @@ edition = "2018"
 build = "scripts/build.rs"
 
 [build-dependencies]
-fs_extra = "1.2"
-gl_generator = "0.14"
+fs_extra = "1.2.0"
 
 [dependencies]
-image = "0.23"
-winit = "0.25"
-cgmath = "0.18"
-env_logger = "0.8"
-log = "0.4"
-wgpu = "0.8"
-futures = "0.3"
+macroquad = "0.3.7"
+specs = "0.17.0"

@@ -1,70 +1,56 @@
-pub mod graphics;
+pub mod components;
+pub mod systems;
+
+use macroquad::prelude::*;
+use specs::prelude::*;
 
 pub const APP_NAME: &str = "Wave Rush";
-pub const GAME_SIZE: [u32; 2] = [640, 360];
+pub const GAME_WIDTH: f32 = 640.0;
+pub const GAME_HEIGHT: f32 = 360.0;
 
-pub fn test() {}
+fn window_conf() -> Conf {
+    Conf {
+        window_title: "Wave Rush".to_owned(),
+        window_width: 1280,
+        window_height: 720,
+        ..Default::default()
+    }
+}
 
-fn main() {
-    env_logger::init();
+pub fn scale_factor() -> f32 {
+    // (screen_height() / GAME_HEIGHT).min(screen_width() / GAME_WIDTH)
+    (screen_width() / GAME_WIDTH).min(screen_height() / GAME_HEIGHT)
+}
 
-    let event_loop = winit::event_loop::EventLoop::new();
+#[macroquad::main(window_conf)]
+async fn main() {
+    let mut world = World::new();
+    world.register::<components::Position>();
+    world.register::<components::Rectangle>();
 
-    let window = winit::window::WindowBuilder::new()
-        .with_title(APP_NAME)
-        .with_min_inner_size(winit::dpi::PhysicalSize {
-            width: GAME_SIZE[0],
-            height: GAME_SIZE[1],
+    let mut db = DispatcherBuilder::new()
+        .with(systems::PlayerSystem, "PlayerSystem", &[])
+        .build();
+
+    world
+        .create_entity()
+        .with(components::Position {
+            x: screen_width() / 2.0,
+            y: screen_height() / 2.0,
         })
-        .with_inner_size(winit::dpi::PhysicalSize {
-            width: 1280,
-            height: 720,
+        .with(components::Rectangle {
+            width: 32.0,
+            height: 32.0,
+            color: RED,
         })
-        .build(&event_loop)
-        .expect("Could not create a window!");
+        .build();
 
-    let mut renderer = futures::executor::block_on(graphics::Renderer::new(&window));
+    loop {
+        clear_background(GRAY);
 
-    // let mut world = World::new();
+        db.dispatch(&world);
+        world.maintain();
 
-    event_loop.run(move |event, _, control_flow| {
-        *control_flow = winit::event_loop::ControlFlow::Poll;
-        match event {
-            winit::event::Event::LoopDestroyed => {
-                return;
-            }
-            winit::event::Event::MainEventsCleared => {
-                match renderer.render() {
-                    Ok(_) => {}
-                    // Recreate the swap_chain if lost
-                    Err(wgpu::SwapChainError::Lost) => renderer.resize(renderer.size()),
-                    // The system is out of memory, we should probably quit
-                    Err(wgpu::SwapChainError::OutOfMemory) => {
-                        *control_flow = winit::event_loop::ControlFlow::Exit
-                    }
-                    // All other errors (Outdated, Timeout) should be resolved by the next frame
-                    Err(error) => eprintln!("{:?}", error),
-                }
-            }
-            winit::event::Event::RedrawRequested(_) => {
-                // renderer.swap_buffers();
-            }
-            winit::event::Event::WindowEvent {
-                ref event,
-                window_id,
-            } if window_id == window.id() => match event {
-                winit::event::WindowEvent::Resized(physical_size) => {
-                    renderer.resize(*physical_size);
-                }
-                winit::event::WindowEvent::ScaleFactorChanged { new_inner_size, .. } => {
-                    renderer.resize(**new_inner_size);
-                }
-                winit::event::WindowEvent::CloseRequested => {
-                    *control_flow = winit::event_loop::ControlFlow::Exit
-                }
-                _ => (),
-            },
-            _ => (),
-        }
-    });
+        next_frame().await
+    }
 }
