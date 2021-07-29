@@ -1,4 +1,5 @@
 pub mod components;
+pub mod entity;
 pub mod systems;
 
 use macroquad::prelude::*;
@@ -27,23 +28,29 @@ async fn main() {
     let mut world = World::new();
     world.register::<components::Position>();
     world.register::<components::Rectangle>();
+    world.register::<components::Velocity>();
+    world.register::<components::Tag>();
 
     let mut db = DispatcherBuilder::new()
-        .with(systems::PlayerSystem, "PlayerSystem", &[])
+        .with(
+            systems::rendering::RenderRectangle,
+            "systems::rendering::RenderRectangle",
+            &[],
+        )
+        .with(
+            systems::PlayerMovement,
+            "systems::PlayerMovement",
+            &["systems::rendering::RenderRectangle"],
+        )
+        .with(
+            systems::BasicEnemyMovement,
+            "systems::BasicEnemyMovement",
+            &["systems::rendering::RenderRectangle"],
+        )
         .build();
 
-    world
-        .create_entity()
-        .with(components::Position {
-            x: screen_width() / 2.0,
-            y: screen_height() / 2.0,
-        })
-        .with(components::Rectangle {
-            width: 32.0,
-            height: 32.0,
-            color: RED,
-        })
-        .build();
+    entity::Player::spawn(&mut world);
+    entity::BasicEnemy::spawn(&mut world);
 
     loop {
         clear_background(GRAY);

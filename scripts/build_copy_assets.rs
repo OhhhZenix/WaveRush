@@ -17,11 +17,9 @@ impl BuildScript for CopyAssets {
             .unwrap();
         println!("Assets Directory: {:?}", destination);
 
+        let paths_to_copy = vec!["assets/"];
         let mut copy_options = fs_extra::dir::CopyOptions::new();
         copy_options.overwrite = true;
-
-        let mut paths_to_copy = Vec::new();
-        paths_to_copy.push("assets/");
 
         fs_extra::copy_items(&paths_to_copy, destination, &copy_options).unwrap();
     }
