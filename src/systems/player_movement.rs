@@ -14,30 +14,39 @@ impl<'a> System<'a> for PlayerMovement {
     );
 
     fn run(&mut self, data: Self::SystemData) {
+        #[cfg(feature = "profile")]
+        puffin::profile_scope!(stdext::function_name!());
+
         let (tag, rect, mut pos) = data;
-        for (tag, rect, pos) in (&tag, &rect, &mut pos).join() {
-            // check if the entity is a player
-            if *tag != components::Tag::Player {
-                continue;
-            }
+        (&tag, &rect, &mut pos)
+            .join()
+            .filter(|(tag, _, _)| **tag == components::Tag::Player)
+            .for_each(|(_, rect, pos)| {
+                // input
+                if is_key_down(KeyCode::Right) {
+                    pos.x += PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                }
+                if is_key_down(KeyCode::Left) {
+                    pos.x -= PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                }
+                if is_key_down(KeyCode::Down) {
+                    pos.y += PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                }
+                if is_key_down(KeyCode::Up) {
+                    pos.y -= PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                }
 
-            // input
-            if is_key_down(KeyCode::Right) {
-                pos.x += PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
-            }
-            if is_key_down(KeyCode::Left) {
-                pos.x -= PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
-            }
-            if is_key_down(KeyCode::Down) {
-                pos.y += PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
-            }
-            if is_key_down(KeyCode::Up) {
-                pos.y -= PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
-            }
-
-            // clamping
-            pos.x = (0.0_f32).max(pos.x.min(screen_width() - (rect.width * scale_factor())));
-            pos.y = (0.0_f32).max(pos.y.min(screen_height() - (rect.height * scale_factor())));
-        }
+                // clamping
+                pos.x = clamp(
+                    pos.x.into(),
+                    0.0,
+                    (screen_width() - (rect.width * scale_factor())).into(),
+                ) as f32;
+                pos.y = clamp(
+                    pos.y.into(),
+                    0.0,
+                    (screen_height() - (rect.height * scale_factor())).into(),
+                ) as f32;
+            });
     }
 }

@@ -4,6 +4,7 @@ use specs::prelude::*;
 pub enum Tag {
     Player,
     BasicEnemy,
+    SmartEnemy,
 }
 
 impl Component for Tag {

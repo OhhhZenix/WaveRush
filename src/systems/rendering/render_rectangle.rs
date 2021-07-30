@@ -1,7 +1,6 @@
-use macroquad::prelude::draw_rectangle;
-use specs::prelude::*;
-
 use crate::{components, scale_factor};
+use macroquad::prelude::*;
+use specs::prelude::*;
 
 pub struct RenderRectangle;
 
@@ -12,8 +11,11 @@ impl<'a> System<'a> for RenderRectangle {
     );
 
     fn run(&mut self, data: Self::SystemData) {
+        #[cfg(feature = "profile")]
+        puffin::profile_scope!(stdext::function_name!());
+
         let (pos, rect) = data;
-        for (pos, rect) in (&pos, &rect).join() {
+        (&pos, &rect).join().for_each(|(pos, rect)| {
             draw_rectangle(
                 pos.x,
                 pos.y,
@@ -21,6 +23,6 @@ impl<'a> System<'a> for RenderRectangle {
                 rect.height * scale_factor(),
                 rect.color,
             );
-        }
+        });
     }
 }
