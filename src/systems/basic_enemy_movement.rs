@@ -1,4 +1,4 @@
-use crate::{components, scale_factor};
+use crate::{GAME_HEIGHT, GAME_WIDTH, components, scale_factor};
 use macroquad::prelude::*;
 use specs::prelude::*;
 
@@ -22,15 +22,15 @@ impl<'a> System<'a> for BasicEnemyMovement {
             .filter(|(tag, _, _, _)| **tag == components::Tag::BasicEnemy)
             .for_each(|(_, rect, pos, velocity)| {
                 // movement
-                pos.x += velocity.x * scale_factor() * get_frame_time();
-                pos.y += velocity.y * scale_factor() * get_frame_time();
+                pos.x += velocity.x *  get_frame_time();
+                pos.y += velocity.y *  get_frame_time();
 
                 // change direction
-                if pos.x <= 0.0 || pos.x >= screen_width() - (rect.width * scale_factor()) {
+                if pos.x <= 0.0 || pos.x >= GAME_WIDTH - (rect.width ) {
                     velocity.x *= -1.0;
                 }
 
-                if pos.y <= 0.0 || pos.y >= screen_height() - (rect.height * scale_factor()) {
+                if pos.y <= 0.0 || pos.y >= GAME_HEIGHT - (rect.height) {
                     velocity.y *= -1.0;
                 }
 
@@ -38,12 +38,12 @@ impl<'a> System<'a> for BasicEnemyMovement {
                 pos.x = clamp(
                     pos.x.into(),
                     0.0,
-                    (screen_width() - (rect.width * scale_factor())).into(),
+                    (GAME_WIDTH - (rect.width)).into(),
                 ) as f32;
                 pos.y = clamp(
                     pos.y.into(),
                     0.0,
-                    (screen_height() - (rect.height * scale_factor())).into(),
+                    (GAME_HEIGHT - (rect.height)).into(),
                 ) as f32;
             });
     }

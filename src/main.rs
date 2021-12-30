@@ -47,11 +47,16 @@ async fn main() {
             "systems::BasicEnemyMovement",
             &[],
         )
+         .with(
+            systems::SmartEnemyMovement,
+            "systems::SmartEnemyMovement",
+            &[],
+        )
         .build();
 
     entity::Player::spawn(&mut world);
 
-    for _ in 0..100 {
+    for _ in 0..10 {
         entity::BasicEnemy::spawn(&mut world);
     }
 

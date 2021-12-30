@@ -2,7 +2,7 @@ use ::rand::{thread_rng, Rng};
 use macroquad::prelude::*;
 use specs::prelude::*;
 
-use crate::components;
+use crate::{GAME_HEIGHT, GAME_WIDTH, components};
 
 const BASIC_ENEMY_WIDTH: f32 = 16.0;
 const BASIC_ENEMY_HEIGHT: f32 = 16.0;
@@ -16,8 +16,8 @@ impl BasicEnemy {
         let mut rng = thread_rng();
 
         let (pos_x, pos_y) = (
-            rng.gen_range(0..((screen_width() - BASIC_ENEMY_WIDTH) as u32)),
-            rng.gen_range(0..((screen_height() - BASIC_ENEMY_HEIGHT) as u32)),
+            rng.gen_range(0..((GAME_WIDTH - BASIC_ENEMY_WIDTH) as u32)),
+            rng.gen_range(0..((GAME_HEIGHT - BASIC_ENEMY_HEIGHT) as u32)),
         );
 
         let velocity_x = {

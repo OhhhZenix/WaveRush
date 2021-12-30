@@ -1,4 +1,4 @@
-use crate::components;
+use crate::{GAME_HEIGHT, GAME_WIDTH, components};
 use macroquad::prelude::*;
 use specs::prelude::*;
 
@@ -10,8 +10,8 @@ impl Player {
             .create_entity()
             .with(components::Tag::Player)
             .with(components::Position {
-                x: screen_width() / 2.0,
-                y: screen_height() / 2.0,
+                x: GAME_WIDTH / 2.0,
+                y: GAME_HEIGHT / 2.0,
             })
             .with(components::Rectangle {
                 width: 32.0,

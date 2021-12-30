@@ -17,8 +17,8 @@ impl<'a> System<'a> for RenderRectangle {
         let (pos, rect) = data;
         (&pos, &rect).join().for_each(|(pos, rect)| {
             draw_rectangle(
-                pos.x,
-                pos.y,
+                pos.x * scale_factor(),
+                pos.y * scale_factor(),
                 rect.width * scale_factor(),
                 rect.height * scale_factor(),
                 rect.color,

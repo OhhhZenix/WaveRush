@@ -1,4 +1,4 @@
-use crate::{components, scale_factor};
+use crate::{GAME_HEIGHT, GAME_WIDTH, components, scale_factor};
 use macroquad::prelude::*;
 use specs::prelude::*;
 
@@ -24,28 +24,28 @@ impl<'a> System<'a> for PlayerMovement {
             .for_each(|(_, rect, pos)| {
                 // input
                 if is_key_down(KeyCode::Right) {
-                    pos.x += PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                    pos.x += PLAYER_BASE_SPEED  * get_frame_time();
                 }
                 if is_key_down(KeyCode::Left) {
-                    pos.x -= PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                    pos.x -= PLAYER_BASE_SPEED  * get_frame_time();
                 }
                 if is_key_down(KeyCode::Down) {
-                    pos.y += PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                    pos.y += PLAYER_BASE_SPEED  * get_frame_time();
                 }
                 if is_key_down(KeyCode::Up) {
-                    pos.y -= PLAYER_BASE_SPEED * scale_factor() * get_frame_time();
+                    pos.y -= PLAYER_BASE_SPEED  * get_frame_time();
                 }
 
                 // clamping
                 pos.x = clamp(
                     pos.x.into(),
                     0.0,
-                    (screen_width() - (rect.width * scale_factor())).into(),
+                    (GAME_WIDTH - (rect.width)).into(),
                 ) as f32;
                 pos.y = clamp(
                     pos.y.into(),
                     0.0,
-                    (screen_height() - (rect.height * scale_factor())).into(),
+                    (GAME_HEIGHT - (rect.height )).into(),
                 ) as f32;
             });
     }
