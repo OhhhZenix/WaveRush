@@ -1,10 +1,14 @@
-pub mod rendering;
+mod render_system;
+pub use self::render_system::RenderSystem;
 
-mod basic_enemy_movement;
-pub use self::basic_enemy_movement::BasicEnemyMovement;
+mod clamp_system;
+pub use self::clamp_system::ClampSystem;
 
-mod player_movement;
-pub use self::player_movement::PlayerMovement;
+mod player_system;
+pub use self::player_system::PlayerSystem;
 
-mod smart_enemy_movement;
-pub use self::smart_enemy_movement::SmartEnemyMovement;
+mod basic_enemy_system;
+pub use self::basic_enemy_system::BasicEnemySystem;
+
+mod smart_enemy_system;
+pub use self::smart_enemy_system::SmartEnemySystem;

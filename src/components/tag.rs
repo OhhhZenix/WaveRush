@@ -1,12 +1,6 @@
-use specs::prelude::*;
-
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug, Clone)]
 pub enum Tag {
     Player,
     BasicEnemy,
     SmartEnemy,
-}
-
-impl Component for Tag {
-    type Storage = VecStorage<Self>;
 }

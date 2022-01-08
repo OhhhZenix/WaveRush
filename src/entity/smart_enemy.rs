@@ -1,20 +1,30 @@
 use crate::components;
-use macroquad::prelude::*;
-use specs::prelude::*;
+use hecs::{Entity, World};
+use macroquad::prelude::{screen_height, screen_width, Color, Vec2};
+use rand::{thread_rng, Rng};
+
+const SMART_ENEMY_WIDTH: f32 = 24.0;
+const SMART_ENEMY_HEIGHT: f32 = 24.0;
 
 pub struct SmartEnemy;
 
 impl SmartEnemy {
     pub fn spawn(world: &mut World) -> Entity {
-        world
-            .create_entity()
-            .with(components::Tag::SmartEnemy)
-            .with(components::Position { x: 1.0, y: 1.0 })
-            .with(components::Rectangle {
-                width: 16.0,
-                height: 16.0,
-                color: YELLOW,
-            })
-            .build()
+        let mut rng = thread_rng();
+
+        let (position_x, position_y) = (
+            rng.gen_range(0..((screen_width() - SMART_ENEMY_WIDTH) as u32)),
+            rng.gen_range(0..((screen_height() - SMART_ENEMY_HEIGHT) as u32)),
+        );
+
+        world.spawn((
+            components::Tag::SmartEnemy,
+            components::Position { value: Vec2::new(position_x as f32, position_y as f32) },
+            components::Renderable::Rectangle {
+                width: SMART_ENEMY_WIDTH,
+                height: SMART_ENEMY_HEIGHT,
+                color: Color::from_rgba(150, 0, 255, 255),
+            },
+        ))
     }
 }
