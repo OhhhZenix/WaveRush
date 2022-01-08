@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies
         if: matrix.os == 'ubuntu-latest'
         run: |
+          sudo apt-get update --fix-missing
           sudo apt-get install libudev-dev
           sudo apt-get install pkg-config 
           sudo apt-get install libx11-dev
