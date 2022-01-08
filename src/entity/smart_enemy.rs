@@ -19,7 +19,9 @@ impl SmartEnemy {
 
         world.spawn((
             components::Tag::SmartEnemy,
-            components::Position { value: Vec2::new(position_x as f32, position_y as f32) },
+            components::Position {
+                value: Vec2::new(position_x as f32, position_y as f32),
+            },
             components::Renderable::Rectangle {
                 width: SMART_ENEMY_WIDTH,
                 height: SMART_ENEMY_HEIGHT,

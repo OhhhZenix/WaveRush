@@ -20,23 +20,25 @@ impl BasicEnemy {
 
         let velocity_x = {
             if rng.gen_range(1..100) < 50 {
-                1.0 as f32
+                1.0
             } else {
-                -1.0 as f32
+                -1.0
             }
         };
 
         let velocity_y = {
             if rng.gen_range(1..100) > 50 {
-                1.0 as f32
+                1.0
             } else {
-                -1.0 as f32
+                -1.0
             }
         };
 
         world.spawn((
             components::Tag::BasicEnemy,
-            components::Position { value: Vec2::new(position_x as f32, position_y as f32) },
+            components::Position {
+                value: Vec2::new(position_x as f32, position_y as f32),
+            },
             // components::Renderable::Rectangle {
             //     width: BASIC_ENEMY_WIDTH,
             //     height: BASIC_ENEMY_HEIGHT,

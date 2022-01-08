@@ -12,10 +12,12 @@ impl Player {
     pub fn spawn(world: &mut World) -> Entity {
         world.spawn((
             components::Tag::Player,
-            components::Position { value: Vec2::new(
-                (screen_width() / 2.0) - PLAYER_WIDTH,
-                (screen_height() / 2.0) - PLAYER_HEIGHT,
-            ) },
+            components::Position {
+                value: Vec2::new(
+                    (screen_width() / 2.0) - PLAYER_WIDTH,
+                    (screen_height() / 2.0) - PLAYER_HEIGHT,
+                ),
+            },
             // components::Renderable::Rectangle {
             //     width: PLAYER_WIDTH,
             //     height: PLAYER_HEIGHT,

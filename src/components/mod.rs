@@ -1,11 +1,11 @@
 mod position;
-pub use self::position::Position;
+pub use self::position::*;
 
 mod renderable;
-pub use self::renderable::Renderable;
+pub use self::renderable::*;
 
 mod tag;
-pub use self::tag::Tag;
+pub use self::tag::*;
 
 mod velocity;
-pub use self::velocity::Velocity;
+pub use self::velocity::*;
