@@ -49,8 +49,7 @@ impl BasicEnemy {
                 color: WHITE,
             },
             components::Velocity {
-                x: velocity_x,
-                y: velocity_y,
+                value: Vec2::new(velocity_x, velocity_y),
             },
         ))
     }

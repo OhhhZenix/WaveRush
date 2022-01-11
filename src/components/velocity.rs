@@ -1,4 +1,5 @@
+use macroquad::prelude::Vec2;
+
 pub struct Velocity {
-    pub x: f32,
-    pub y: f32,
+    pub value: Vec2,
 }

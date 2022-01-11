@@ -1,8 +1,8 @@
 use crate::components;
 use hecs::World;
-use macroquad::prelude::{get_frame_time, is_key_down, KeyCode};
+use macroquad::prelude::{is_key_down, KeyCode};
 
-const PLAYER_BASE_SPEED: f32 = 1000.0;
+const PLAYER_BASE_SPEED: f32 = 15.0;
 
 pub struct PlayerSystem;
 
@@ -16,16 +16,16 @@ impl PlayerSystem {
             }
 
             if is_key_down(KeyCode::Right) {
-                position.value.x += PLAYER_BASE_SPEED * get_frame_time();
+                position.value.x += PLAYER_BASE_SPEED;
             }
             if is_key_down(KeyCode::Left) {
-                position.value.x -= PLAYER_BASE_SPEED * get_frame_time();
+                position.value.x -= PLAYER_BASE_SPEED;
             }
             if is_key_down(KeyCode::Down) {
-                position.value.y += PLAYER_BASE_SPEED * get_frame_time();
+                position.value.y += PLAYER_BASE_SPEED;
             }
             if is_key_down(KeyCode::Up) {
-                position.value.y -= PLAYER_BASE_SPEED * get_frame_time();
+                position.value.y -= PLAYER_BASE_SPEED;
             }
         }
     }

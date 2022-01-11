@@ -1,7 +1,7 @@
 use crate::components;
 use hecs::World;
 
-const SMART_ENEMY_ATTRACTION: f32 = 0.035;
+const SMART_ENEMY_ATTRACTION: f32 = 1.5;
 const SMART_ENEMY_REPULSION: f32 = -0.005;
 
 pub struct SmartEnemySystem;

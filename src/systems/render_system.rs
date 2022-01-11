@@ -5,7 +5,7 @@ use macroquad::prelude::{draw_rectangle, draw_texture};
 pub struct RenderSystem;
 
 impl RenderSystem {
-    pub fn run(world: &mut World) {
+    pub fn run(world: &mut World, _interpolation: f64) {
         for (_, (renderable, position)) in
             &mut world.query::<(&components::Renderable, &components::Position)>()
         {
