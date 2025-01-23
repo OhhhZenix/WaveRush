@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Standard
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Create the project
@@ -36,7 +36,7 @@ FetchContent_Declare(
 
 # Target
 set(TARGET_NAME WaveRush)
-file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
+file(GLOB_RECURSE SRCS "src/*.c")
 add_executable(${TARGET_NAME} ${SRCS})
 target_include_directories(${TARGET_NAME} PUBLIC src)
 
