@@ -13,15 +13,14 @@ include(FetchContent)
 
 # Setup raylib
 FetchContent_Declare(
-  raylib
-  GIT_REPOSITORY https://github.com/raysan5/raylib
-  GIT_TAG 5.5
+    raylib
+    GIT_REPOSITORY https://github.com/raysan5/raylib
+    GIT_TAG 5.5
 )
 FetchContent_MakeAvailable(raylib)
 
 # Add the executable
-file(GLOB_RECURSE SRCS "src/*.c")
-add_executable(${PROJECT_NAME} ${SRCS})
+add_executable(${PROJECT_NAME} src/main.c)
 
 # Add the include folder
 target_include_directories(${PROJECT_NAME} PUBLIC src)
@@ -31,8 +30,17 @@ target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Post build
 add_custom_command(
-        TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory 
-        ${CMAKE_SOURCE_DIR}/assets 
+    TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMAND
+        ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:raylib>
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+)
+
+add_custom_command(
+    TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMAND
+        ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets
         $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
 )
