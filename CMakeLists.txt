@@ -17,6 +17,7 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/libsdl-org/SDL
     GIT_TAG release-3.2.0
 )
+set(BUILD_SHARED_LIBS ON CACHE INTERNAL "")
 FetchContent_MakeAvailable(sdl)
 
 # Add the executable
@@ -38,7 +39,7 @@ add_custom_command(
     TARGET ${PROJECT_NAME}
     POST_BUILD
     COMMAND
-        ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:sdl>
+        ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:SDL3::SDL3>
         $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )
 
