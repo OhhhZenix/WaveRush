@@ -12,7 +12,7 @@ struct Window {
 
 static struct Window context = {};
 
-void WindowInit(const char* title, uint32_t width, uint32_t height) {
+void* WindowInit(const char* title, uint32_t width, uint32_t height) {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	context.ptr = SDL_CreateWindow(title, width, height, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
@@ -22,6 +22,8 @@ void WindowInit(const char* title, uint32_t width, uint32_t height) {
 	}
 
 	context.should_close = false;
+
+	return context.ptr;
 }
 
 void WindowCleanup() {
