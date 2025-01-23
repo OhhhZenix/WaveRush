@@ -9,6 +9,7 @@ void RendererInit() {
 	context.renderer = SDL_CreateRenderer(context.window, NULL);
 
 	if (context.renderer == NULL) {
+		printf("Error: Could not create renderer.");
 		exit(EXIT_FAILURE);
 	}
 }

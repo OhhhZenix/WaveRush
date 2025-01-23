@@ -11,6 +11,7 @@ void WindowInit(const char* title, uint32_t width, uint32_t height) {
 	context.window = SDL_CreateWindow(title, width, height, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
 	if (context.window == NULL) {
+		printf("Error: Could not create window.");
 		exit(EXIT_FAILURE);
 	}
 
