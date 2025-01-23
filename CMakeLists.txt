@@ -20,7 +20,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raylib)
 
 # Add the executable
-add_executable(${PROJECT_NAME} src/main.c)
+add_executable(${PROJECT_NAME} src/main.c src/core/allocator.c)
 
 # Add the include folder
 target_include_directories(${PROJECT_NAME} PUBLIC src)
