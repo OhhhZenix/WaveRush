@@ -11,22 +11,6 @@ project(WaveRush)
 # Add FetchContent
 include(FetchContent)
 
-# Setup SDL2
-FetchContent_Declare(
-  SDL2
-  GIT_REPOSITORY https://github.com/libsdl-org/SDL/
-  GIT_TAG        release-2.30.11
-)
-FetchContent_MakeAvailable(SDL2)
-
-# Setup SDL2_ttf
-FetchContent_Declare(
-  SDL2_ttf
-  GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf/
-  GIT_TAG        release-2.24.0
-)
-FetchContent_MakeAvailable(SDL2_ttf)
-
 # Setup raylib
 FetchContent_Declare(
   raylib
@@ -45,12 +29,6 @@ target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
 
 # Linking raylib
 target_link_libraries(${TARGET_NAME} PRIVATE raylib)
-
-# Linking SDL
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2 SDL2main)
-
-# Linking SDL2_ttf
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2_ttf)
 
 # Post build
 add_custom_command(
