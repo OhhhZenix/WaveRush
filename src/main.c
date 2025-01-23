@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]) {
 	uint32_t memInMegabytes = 1 * 1024 * 1024;
-	ArenaAlloc(memInMegabytes);
+	ArenaInit(memInMegabytes);
 	void* window = WindowInit("Hello World", 640, 360);
 	RendererInit(window);
 
