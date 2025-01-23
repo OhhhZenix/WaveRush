@@ -2,10 +2,10 @@
 
 #include <stdbool.h>
 
-struct App {
+struct EngineContext {
 	void* window;
 	void* renderer;
 	bool should_close;
 };
 
-extern struct App context;
+extern struct EngineContext context;

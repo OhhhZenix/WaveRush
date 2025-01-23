@@ -1,3 +1,3 @@
 #include "core/engine.h"
 
-struct App context = { 0 };
+struct EngineContext context = { 0 };
