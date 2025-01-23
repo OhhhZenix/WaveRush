@@ -27,6 +27,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SDL2_ttf)
 
+# Setup raylib
+FetchContent_Declare(
+  raylib
+  GIT_REPOSITORY https://github.com/raysan5/raylib
+  GIT_TAG 5.5
+)
+
 # Target
 set(TARGET_NAME WaveRush)
 file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
@@ -35,6 +42,9 @@ target_include_directories(${TARGET_NAME} PUBLIC src)
 
 # Creates precompiled header
 target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
+
+# Linking raylib
+target_link_libraries(${TARGET_NAME} PRIVATE raylib)
 
 # Linking SDL
 target_link_libraries(${TARGET_NAME} PRIVATE SDL2 SDL2main)
@@ -45,5 +55,7 @@ target_link_libraries(${TARGET_NAME} PRIVATE SDL2_ttf)
 # Post build
 add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
+        COMMAND ${CMAKE_COMMAND} -E copy_directory 
+        ${CMAKE_SOURCE_DIR}/assets 
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
 )
