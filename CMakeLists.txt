@@ -1,20 +1,31 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Sets up vcpkg
-include(cmake/VcpkgToolchain.cmake)
-
 # Standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Create the project
 project(WaveRush)
 
-# Finding SDL
-find_package(SDL2 CONFIG REQUIRED)
+# Add FetchContent
+include(FetchContent)
 
-# Finding SDL-TTF
-find_package(sdl2-ttf CONFIG REQUIRED)
+# Setup SDL2
+FetchContent_Declare(
+  SDL2
+  GIT_REPOSITORY https://github.com/libsdl-org/SDL/
+  GIT_TAG        release-2.30.11
+)
+FetchContent_MakeAvailable(SDL2)
+
+# Setup SDL2_ttf
+FetchContent_Declare(
+  SDL2_ttf
+  GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf/
+  GIT_TAG        release-2.24.0
+)
+FetchContent_MakeAvailable(SDL2_ttf)
 
 # Target
 set(TARGET_NAME WaveRush)
@@ -26,10 +37,10 @@ target_include_directories(${TARGET_NAME} PUBLIC src)
 target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
 
 # Linking SDL
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(${TARGET_NAME} PRIVATE SDL2 SDL2main)
 
-# Linking SDL-TTF
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2_ttf)
+# Linking SDL2_ttf
+target_link_libraries(${TARGET_NAME} PRIVATE SDL2_ttf)
 
 # Post build
 add_custom_command(
