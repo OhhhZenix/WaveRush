@@ -18,6 +18,8 @@ FetchContent_Declare(
     GIT_TAG release-3.2.0
 )
 set(BUILD_SHARED_LIBS ON CACHE INTERNAL "")
+
+# Bring content to scope
 FetchContent_MakeAvailable(sdl)
 
 # Add the executable
