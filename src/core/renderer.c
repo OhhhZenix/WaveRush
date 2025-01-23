@@ -1,36 +1,29 @@
 #include "core/renderer.h"
-#include "SDL3/SDL_render.h"
 
+#include "core/engine.h"
 #include <SDL3/SDL.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-struct Renderer {
-	SDL_Renderer* ptr;
-};
+void RendererInit() {
+	context.renderer = SDL_CreateRenderer(context.window, NULL);
 
-static struct Renderer context = {};
-
-void RendererInit(void* window) {
-	SDL_Window* sdl_window = (SDL_Window*)window;
-
-	context.ptr = SDL_CreateRenderer(sdl_window, NULL);
-
-	if (context.ptr == NULL) {
+	if (context.renderer == NULL) {
 		exit(EXIT_FAILURE);
 	}
 }
 
 void RendererCleanup() {
-	SDL_DestroyRenderer(context.ptr);
+	SDL_DestroyRenderer(context.renderer);
 }
 
 void RenderBegin(struct Color color) {
-	SDL_SetRenderDrawColor(context.ptr, color.r, color.g, color.b, color.a);
-	SDL_RenderClear(context.ptr);
+	SDL_SetRenderDrawColor(context.renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderClear(context.renderer);
 }
 
 void RenderEnd() {
-	SDL_RenderPresent(context.ptr);
+	SDL_RenderPresent(context.renderer);
 }
 
 void DrawRectangle(int32_t x, int32_t y, uint32_t width, uint32_t height, struct Color color) {
@@ -40,6 +33,6 @@ void DrawRectangle(int32_t x, int32_t y, uint32_t width, uint32_t height, struct
 		.w = width,
 		.h = height,
 	};
-	SDL_SetRenderDrawColor(context.ptr, color.r, color.g, color.b, color.a);
-	SDL_RenderFillRect(context.ptr, &rect);
+	SDL_SetRenderDrawColor(context.renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderFillRect(context.renderer, &rect);
 }

@@ -9,7 +9,7 @@ struct Color {
 	uint8_t a;
 };
 
-void RendererInit(void* window);
+void RendererInit();
 void RendererCleanup();
 void RenderBegin(struct Color color);
 void RenderEnd();
