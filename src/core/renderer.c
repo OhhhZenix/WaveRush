@@ -24,8 +24,8 @@ void RendererCleanup() {
 	SDL_DestroyRenderer(context.ptr);
 }
 
-void RenderBegin() {
-	SDL_SetRenderDrawColor(context.ptr, 0, 0, 0, 255);
+void RenderBegin(struct Color color) {
+	SDL_SetRenderDrawColor(context.ptr, color.r, color.g, color.b, color.a);
 	SDL_RenderClear(context.ptr);
 }
 
@@ -33,13 +33,13 @@ void RenderEnd() {
 	SDL_RenderPresent(context.ptr);
 }
 
-void DrawRectangle(int32_t x, int32_t y, uint32_t width, uint32_t height) {
+void DrawRectangle(int32_t x, int32_t y, uint32_t width, uint32_t height, struct Color color) {
 	SDL_FRect rect = {
 		.x = x,
 		.y = y,
 		.w = width,
 		.h = height,
 	};
-	SDL_SetRenderDrawColor(context.ptr, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(context.ptr, color.r, color.g, color.b, color.a);
 	SDL_RenderFillRect(context.ptr, &rect);
 }

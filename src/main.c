@@ -12,8 +12,8 @@ int main(int argc, char* argv[]) {
 
 	while (!WindowShouldClose()) {
 		WindowPollEvents();
-		RenderBegin();
-		DrawRectangle(0, 0, 32, 32);
+		RenderBegin((struct Color){ 0, .a = 255 });
+		DrawRectangle(0, 0, 32, 32, (struct Color){ 255, 255, 255, 255 });
 		RenderEnd();
 	}
 
