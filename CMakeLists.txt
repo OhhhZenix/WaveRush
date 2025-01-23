@@ -11,13 +11,13 @@ project(WaveRush)
 # Add FetchContent
 include(FetchContent)
 
-# Setup raylib
+# Setup SDL
 FetchContent_Declare(
-    raylib
-    GIT_REPOSITORY https://github.com/raysan5/raylib
-    GIT_TAG 5.5
+    sdl
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL
+    GIT_TAG release-3.2.0
 )
-FetchContent_MakeAvailable(raylib)
+FetchContent_MakeAvailable(sdl)
 
 # Add the executable
 add_executable(
@@ -30,18 +30,19 @@ add_executable(
 # Add the include folder
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-# Linking raylib
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+# Linking SDL
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
-# Post build
+# Copy SDL
 add_custom_command(
     TARGET ${PROJECT_NAME}
     POST_BUILD
     COMMAND
-        ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:raylib>
+        ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:sdl>
         $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )
 
+# Copy assets folder
 add_custom_command(
     TARGET ${PROJECT_NAME}
     POST_BUILD
