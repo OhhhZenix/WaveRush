@@ -19,17 +19,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
-# Target
-set(TARGET_NAME WaveRush)
+# Add the executable
 file(GLOB_RECURSE SRCS "src/*.c")
-add_executable(${TARGET_NAME} ${SRCS})
-target_include_directories(${TARGET_NAME} PUBLIC src)
+add_executable(${PROJECT_NAME} ${SRCS})
 
-# Creates precompiled header
-target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
+# Add the include folder
+target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 # Linking raylib
-target_link_libraries(${TARGET_NAME} PRIVATE raylib)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Post build
 add_custom_command(
