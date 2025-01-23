@@ -1,8 +1,6 @@
 #include "core/window.h"
-#include "SDL3/SDL_events.h"
-#include "SDL3/SDL_video.h"
-#include "core/engine.h"
 
+#include "core/engine.h"
 #include <SDL3/SDL.h>
 #include <stdlib.h>
 
