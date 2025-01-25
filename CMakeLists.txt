@@ -27,10 +27,6 @@ add_executable(
     ${PROJECT_NAME}
     src/main.c
     src/core/allocator.c
-    src/core/engine.c
-    src/core/window.c
-    src/core/renderer.c
-    src/core/input.c
 )
 
 # Add the include folder
