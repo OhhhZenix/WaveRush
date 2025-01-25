@@ -11,16 +11,16 @@ project(WaveRush)
 # Add FetchContent
 include(FetchContent)
 
-# Setup SDL
+# Setup nebula
 FetchContent_Declare(
-    sdl
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL
-    GIT_TAG release-3.2.0
+    nebula
+    GIT_REPOSITORY https://github.com/OhhhZenix/nebula
+    GIT_TAG main
 )
-set(BUILD_SHARED_LIBS ON CACHE INTERNAL "")
+set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
 
 # Bring content to scope
-FetchContent_MakeAvailable(sdl)
+FetchContent_MakeAvailable(nebula)
 
 # Add the executable
 add_executable(
@@ -32,15 +32,15 @@ add_executable(
 # Add the include folder
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-# Linking SDL
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
+# Linking nebula
+target_link_libraries(${PROJECT_NAME} PRIVATE nebula)
 
-# Copy SDL
+# Copy nebula
 add_custom_command(
     TARGET ${PROJECT_NAME}
     POST_BUILD
     COMMAND
-        ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:SDL3::SDL3>
+        ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:nebula>
         $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )
 
