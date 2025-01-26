@@ -13,18 +13,18 @@ struct Arena {
 
 static struct Arena context = {};
 
-void ArenaInit(uint32_t size) {
+void arena_init(uint32_t size) {
 	context.size = size;
 	context.used = 0;
 	context.memory = malloc(size);
 }
 
-void ArenaCleanup() {
+void arena_cleanup() {
 	free(context.memory);
 	context.memory = NULL;
 }
 
-void* ArenaAlloc(uint32_t size) {
+void* arena_alloc(uint32_t size) {
 	assert(context.used + size > context.size);
 	void* ptr = (char*)context.memory + context.used;
 	context.used += size;

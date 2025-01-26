@@ -2,6 +2,6 @@
 
 #include <stdint.h>
 
-void ArenaInit(uint32_t size);
-void ArenaCleanup();
-void* ArenaAlloc(uint32_t size);
+void arena_init(uint32_t size);
+void arena_cleanup();
+void* arena_alloc(uint32_t size);
