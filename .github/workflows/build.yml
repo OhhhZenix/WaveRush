@@ -9,8 +9,8 @@ jobs:
         build-type: [ Debug, Release ]
         os: [ ubuntu-latest, macos-latest, windows-latest ]
     steps:
+      - uses: actions/checkout@v2
       - name: Create Build Environment
-        uses: actions/checkout@v2
         run: cmake -E make_directory ${{github.workspace}}/build
       
       - name: Set up GITHUB_TOKEN for FetchContent
