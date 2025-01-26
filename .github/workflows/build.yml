@@ -14,8 +14,10 @@ jobs:
       - name: Create Build Environment
         run: cmake -E make_directory ${{github.workspace}}/build
       
-      - name: Set up GITHUB_TOKEN for FetchContent
-        run: git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+      - name: Configure git
+        env:
+          TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
 
       - name: Configure CMake
         shell: bash
