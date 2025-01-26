@@ -29,8 +29,8 @@ int main(int argc, char* argv[]) {
 			y += 100 * dt;
 		}
 
-		nebula_render_begin((struct Color){ 0, .a = 255 });
-		nebula_draw_rect(x, y, 32, 32, (struct Color){ 255, 255, 255, 255 });
+		nebula_render_begin((struct NebulaColor){ .a = 255 });
+		nebula_draw_rect(x, y, 32, 32, (struct NebulaColor){ 255 });
 		nebula_render_end();
 	}
 
