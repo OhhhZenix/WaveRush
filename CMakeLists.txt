@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.5)
 
 # Standard
 # set(CMAKE_C_STANDARD 23)
@@ -17,7 +17,7 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/OhhhZenix/nebula
     GIT_TAG main
 )
-set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
+set(BUILD_SHARED_LIBS ON CACHE INTERNAL "")
 
 # Bring content to scope
 FetchContent_MakeAvailable(nebula)
