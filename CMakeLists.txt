@@ -28,6 +28,7 @@ FetchContent_Declare(
 # Set lib options
 set(SDL_TESTS OFF CACHE INTERNAL "")
 set(SDL_EXAMPLES OFF CACHE INTERNAL "")
+set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
 
 # Bring content to scope
 FetchContent_MakeAvailable(glm sdl)
@@ -36,6 +37,8 @@ FetchContent_MakeAvailable(glm sdl)
 add_executable(
     ${PROJECT_NAME}
     src/Main.cpp
+    src/Core/Game.cpp
+    src/Entity/Player.cpp
 )
 
 # Add the include folder
