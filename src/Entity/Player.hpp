@@ -1,6 +1,9 @@
 #pragma once
 
+#include <SDL3/SDL.h>
 #include <glm/vec2.hpp>
+
+struct Game;
 
 struct Player {
 	glm::vec2 position;
@@ -8,6 +11,6 @@ struct Player {
 
 	Player(glm::vec2 startingPosition);
 	~Player();
-	void update();
-	void render();
+	void update(Game* game);
+	void render(Game* game);
 };

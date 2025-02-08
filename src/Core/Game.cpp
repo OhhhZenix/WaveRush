@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+#include "Entity/Player.hpp"
+
 Game::Game() {
 	SDL_Init(SDL_INIT_VIDEO);
 	this->window = SDL_CreateWindow("Wave Rush", 640, 320, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
@@ -27,11 +29,11 @@ void Game::run() {
 			}
 		}
 
-		this->player->update();
+		this->player->update(this);
 
 		SDL_SetRenderDrawColor(this->renderer, 0, 0, 0, 255);
 		SDL_RenderClear(this->renderer);
-		this->player->render();
+		this->player->render(this);
 		SDL_RenderPresent(this->renderer);
 	}
 }

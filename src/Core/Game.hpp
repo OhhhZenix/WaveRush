@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Entity/Player.hpp"
 #include <SDL3/SDL.h>
+
+struct Player;
 
 struct Game {
 	SDL_Window* window = nullptr;
