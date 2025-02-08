@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stdint.h>
 #include <cstdint>
 
 typedef int8_t i8;
