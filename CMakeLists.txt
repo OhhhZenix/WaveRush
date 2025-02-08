@@ -11,39 +11,38 @@ project(WaveRush)
 # Add FetchContent
 include(FetchContent)
 
-# Setup nebula
+# Setup glm
 FetchContent_Declare(
-    nebula
-    GIT_REPOSITORY https://github.com/OhhhZenix/nebula
-    GIT_TAG main
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm
+    GIT_TAG 1.0.1
 )
-set(BUILD_SHARED_LIBS ON CACHE INTERNAL "")
+
+# Setup sdl
+FetchContent_Declare(
+    sdl
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL
+    GIT_TAG release-3.2.4
+)
+
+# Set lib options
+set(SDL_TESTS OFF CACHE INTERNAL "")
+set(SDL_EXAMPLES OFF CACHE INTERNAL "")
 
 # Bring content to scope
-FetchContent_MakeAvailable(nebula)
+FetchContent_MakeAvailable(glm sdl)
 
 # Add the executable
 add_executable(
     ${PROJECT_NAME}
-    src/main.c
-    src/core/allocator.c
+    src/Main.cpp
 )
 
 # Add the include folder
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 # Linking nebula
-target_link_libraries(${PROJECT_NAME} PRIVATE nebula)
-
-# Copy nebula
-add_custom_command(
-    TARGET ${PROJECT_NAME}
-    POST_BUILD
-    COMMAND
-        ${CMAKE_COMMAND} -E copy_directory
-        $<TARGET_FILE_DIR:nebula>
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>
-)
+target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm SDL3::SDL3)
 
 # Copy assets folder
 add_custom_command(
