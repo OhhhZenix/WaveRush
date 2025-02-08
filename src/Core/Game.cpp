@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 #include "Entity/Player.hpp"
+#include "SDL3/SDL_events.h"
 
 Game::Game() {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -23,6 +24,12 @@ void Game::run() {
 			switch (event.type) {
 				case SDL_EVENT_QUIT:
 					this->isRunning = false;
+					break;
+				case SDL_EVENT_KEY_DOWN:
+					this->is_key_down[event.key.key] = true;
+					break;
+				case SDL_EVENT_KEY_UP:
+					this->is_key_down[event.key.key] = false;
 					break;
 				default:
 					break;
