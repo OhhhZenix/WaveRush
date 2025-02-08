@@ -1,7 +1,6 @@
 #include "Game.hpp"
 
 #include "Entity/Player.hpp"
-#include "SDL3/SDL_events.h"
 
 Game::Game() {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -15,6 +14,20 @@ Game::~Game() {
 	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->window);
 	SDL_Quit();
+}
+
+f64 Game::getDeltaTime() {
+	static u64 currentTime = 0;
+	static u64 lastTime = 0;
+
+	lastTime = currentTime;
+	currentTime = SDL_GetPerformanceCounter();
+
+	return ((currentTime - lastTime) * 1000 / (double)SDL_GetPerformanceFrequency());
+}
+
+f64 Game::getDeltaTimeInSeconds() {
+	return this->getDeltaTime() / 1000;
 }
 
 void Game::run() {

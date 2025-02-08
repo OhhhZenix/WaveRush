@@ -15,5 +15,7 @@ struct Game {
 
 	Game();
 	~Game();
+	f64 getDeltaTime();
+	f64 getDeltaTimeInSeconds();
 	void run();
 };
