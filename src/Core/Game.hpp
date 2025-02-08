@@ -10,7 +10,7 @@ struct Game {
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
 	bool isRunning = true;
-	std::unordered_map<uint32_t, bool> is_key_down = {};
+	std::unordered_map<uint32_t, bool> isKeyDown = {};
 	Player* player = nullptr;
 
 	Game();

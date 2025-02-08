@@ -26,10 +26,10 @@ void Game::run() {
 					this->isRunning = false;
 					break;
 				case SDL_EVENT_KEY_DOWN:
-					this->is_key_down[event.key.key] = true;
+					this->isKeyDown[event.key.key] = true;
 					break;
 				case SDL_EVENT_KEY_UP:
-					this->is_key_down[event.key.key] = false;
+					this->isKeyDown[event.key.key] = false;
 					break;
 				default:
 					break;
