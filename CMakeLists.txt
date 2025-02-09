@@ -35,6 +35,7 @@ FetchContent_Declare(
 # Set lib options
 set(SDL_TESTS OFF CACHE INTERNAL "")
 set(SDL_EXAMPLES OFF CACHE INTERNAL "")
+set(SDLIMAGE_TESTS OFF CACHE INTERNAL "")
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
 
 # Bring content to scope
