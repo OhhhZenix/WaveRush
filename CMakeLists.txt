@@ -25,13 +25,20 @@ FetchContent_Declare(
     GIT_TAG release-3.2.4
 )
 
+# Setup sdl_image
+FetchContent_Declare(
+    sdl_image
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_image
+    GIT_TAG release-3.2.0
+)
+
 # Set lib options
 set(SDL_TESTS OFF CACHE INTERNAL "")
 set(SDL_EXAMPLES OFF CACHE INTERNAL "")
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
 
 # Bring content to scope
-FetchContent_MakeAvailable(glm sdl)
+FetchContent_MakeAvailable(glm sdl sdl_image)
 
 # Add the executable
 add_executable(
@@ -45,7 +52,12 @@ add_executable(
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 # Linking nebula
-target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm SDL3::SDL3)
+target_link_libraries(
+    ${PROJECT_NAME} PRIVATE 
+    glm::glm 
+    SDL3::SDL3 
+    SDL3_image::SDL3_image
+)
 
 # Copy assets folder
 add_custom_command(
