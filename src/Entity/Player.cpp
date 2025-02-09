@@ -2,6 +2,8 @@
 
 #include "Core/Game.hpp"
 #include "Core/Types.hpp"
+#include "glm/fwd.hpp"
+#include <iostream>
 
 Player::Player(glm::vec2 startingPosition) {
 	this->position = startingPosition;
@@ -11,8 +13,10 @@ Player::~Player() {}
 
 void Player::update(Game* game) {
 	glm::vec2 direction = { 0, 0 };
-	f32 speed = 1;
-	f32 dt = game->getDeltaTimeInSeconds();
+	f32 distance = 1000;
+	f32 time = game->deltaTime;
+
+	std::cout << time << std::endl;
 
 	if (game->isKeyDown[SDLK_UP]) {
 		direction.y -= 1;
@@ -31,7 +35,7 @@ void Player::update(Game* game) {
 	}
 
 	if (glm::length(direction) > 0) {
-		this->position += glm::normalize(direction * speed * dt);
+		this->position += glm::normalize(direction) * distance * time;
 	}
 }
 

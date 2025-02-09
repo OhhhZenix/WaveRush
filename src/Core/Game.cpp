@@ -16,20 +16,6 @@ Game::~Game() {
 	SDL_Quit();
 }
 
-f64 Game::getDeltaTime() {
-	static u64 currentTime = 0;
-	static u64 lastTime = 0;
-
-	lastTime = currentTime;
-	currentTime = SDL_GetPerformanceCounter();
-
-	return ((currentTime - lastTime) * 1000 / (double)SDL_GetPerformanceFrequency());
-}
-
-f64 Game::getDeltaTimeInSeconds() {
-	return this->getDeltaTime() / 1000;
-}
-
 void Game::run() {
 	SDL_Event event = { 0 };
 	while (isRunning) {
@@ -55,5 +41,9 @@ void Game::run() {
 		SDL_RenderClear(this->renderer);
 		this->player->render(this);
 		SDL_RenderPresent(this->renderer);
+
+		this->lastTime = this->currentTime;
+		this->currentTime = SDL_GetPerformanceCounter();
+		this->deltaTime = (this->currentTime - this->lastTime) / (f64)SDL_GetPerformanceFrequency();
 	}
 }
