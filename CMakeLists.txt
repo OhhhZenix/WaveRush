@@ -10,11 +10,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 
-# temporarily fix for sdl_image not building https://github.com/libsdl-org/SDL/issues/10250
-if(MSVC)
-  enable_language(ASM_MASM)
-endif()
-
 # Create the project
 project(WaveRush)
 
