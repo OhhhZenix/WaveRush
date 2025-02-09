@@ -38,6 +38,11 @@ set(SDL_EXAMPLES OFF CACHE INTERNAL "")
 set(SDLIMAGE_TESTS OFF CACHE INTERNAL "")
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
 
+# temporarily fix https://github.com/libsdl-org/SDL/issues/10250
+set(CMAKE_ASM_COMPILE_OPTIONS_MSVC_DEBUG_INFORMATION_FORMAT_Embedded "")
+set(CMAKE_ASM_COMPILE_OPTIONS_MSVC_DEBUG_INFORMATION_FORMAT_ProgramDatabase "")
+set(CMAKE_ASM_COMPILE_OPTIONS_MSVC_DEBUG_INFORMATION_FORMAT_EditAndContinue "")
+
 # Bring content to scope
 FetchContent_MakeAvailable(glm sdl sdl_image)
 
