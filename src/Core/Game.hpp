@@ -23,5 +23,5 @@ struct Game {
 
 	Game();
 	~Game();
-	void run();
+	void Run();
 };

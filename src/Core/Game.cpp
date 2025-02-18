@@ -26,7 +26,7 @@ Game::~Game() {
 	SDL_Quit();
 }
 
-void Game::run() {
+void Game::Run() {
 	SDL_Event event = { 0 };
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
@@ -45,11 +45,11 @@ void Game::run() {
 			}
 		}
 
-		this->player->update(this);
+		this->player->Update(this);
 
 		SDL_SetRenderDrawColor(this->renderer, 0, 0, 0, 255);
 		SDL_RenderClear(this->renderer);
-		this->player->render(this);
+		this->player->Render(this);
 		SDL_RenderPresent(this->renderer);
 
 		this->lastTime = this->currentTime;

@@ -3,13 +3,13 @@
 #include "Core/Game.hpp"
 #include "Core/Types.hpp"
 
+#include <SDL3/SDL.h>
+
 Player::Player(glm::vec2 startingPosition) {
 	this->position = startingPosition;
 }
 
-Player::~Player() {}
-
-void Player::update(Game* game) {
+void Player::Update(Game* game) {
 	glm::vec2 direction = { 0, 0 };
 	f32 distance = 1000;
 	f32 time = game->deltaTime;
@@ -35,7 +35,7 @@ void Player::update(Game* game) {
 	}
 }
 
-void Player::render(Game* game) {
+void Player::Render(Game* game) {
 	SDL_FRect rect = { this->position.x, this->position.y, this->size.x, this->size.y };
 	SDL_SetRenderDrawColor(game->renderer, 255, 255, 255, 255);
 	SDL_RenderTexture(game->renderer, game->textures[TEXTURE_PLAYER], nullptr, &rect);

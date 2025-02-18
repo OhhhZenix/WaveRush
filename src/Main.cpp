@@ -2,7 +2,7 @@
 
 int main() {
 	Game* instance = new Game();
-	instance->run();
+	instance->Run();
 	delete instance;
 	return 0;
 }
