@@ -4,6 +4,9 @@
 #include <SDL3/SDL.h>
 #include <unordered_map>
 
+constexpr u32 GAME_WIDTH = 640;
+constexpr u32 GAME_HEIGHT = 360;
+
 struct Player;
 
 enum TextureKey {
