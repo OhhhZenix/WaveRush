@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.30)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(BUILD_SHARED_LIBS OFF)
 
 # set the output directory for built objects.
 # This makes sure that the dynamic library goes into the build directory automatically.
@@ -37,12 +38,6 @@ FetchContent_Declare(
     GIT_TAG release-3.2.0
 )
 
-# Set lib options
-set(SDL_TESTS OFF CACHE INTERNAL "")
-set(SDL_EXAMPLES OFF CACHE INTERNAL "")
-set(SDLIMAGE_TESTS OFF CACHE INTERNAL "")
-set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
-
 # Bring content to scope
 FetchContent_MakeAvailable(glm sdl sdl_image)
 
@@ -50,9 +45,8 @@ FetchContent_MakeAvailable(glm sdl sdl_image)
 add_executable(
     ${PROJECT_NAME}
     Source/Main.cpp
+    Source/Core/ArenaAllocator.cpp
     Source/Core/Game.cpp
-    Source/Entity/BasicEnemy.cpp
-    Source/Entity/Player.cpp
 )
 
 # Add the include folder
