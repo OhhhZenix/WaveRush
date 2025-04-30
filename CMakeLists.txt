@@ -49,14 +49,14 @@ FetchContent_MakeAvailable(glm sdl sdl_image)
 # Add the executable
 add_executable(
     ${PROJECT_NAME}
-    src/Main.cpp
-    src/Core/Game.cpp
-    src/Entity/BasicEnemy.cpp
-    src/Entity/Player.cpp
+    Source/Main.cpp
+    Source/Core/Game.cpp
+    Source/Entity/BasicEnemy.cpp
+    Source/Entity/Player.cpp
 )
 
 # Add the include folder
-target_include_directories(${PROJECT_NAME} PUBLIC src)
+target_include_directories(${PROJECT_NAME} PUBLIC Include)
 
 # Linking nebula
 target_link_libraries(
