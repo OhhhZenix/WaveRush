@@ -1,9 +1,5 @@
 #pragma once
 
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <immintrin.h>
-#include <xmmintrin.h>
 #include <cmath>
 #include <cstdint>
 #include <functional>
@@ -13,3 +9,6 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+#include <SDL.h>
+#include <SDL_ttf.h>
