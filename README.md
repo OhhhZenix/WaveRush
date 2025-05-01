@@ -13,7 +13,7 @@ Here are some questions and answers to get started.
 To generate the project use:
 
 ```sh
-cmake -S . -B build -G "Ninja"
+cmake -S . -B build -G "Ninja" -DCMAKE_POLICY_VERSION_MINIMUM="3.10"
 ```
 
 ### How to build the project?
