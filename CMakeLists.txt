@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.16)
 
 # Standard
 set(CMAKE_CXX_STANDARD 23)
@@ -8,8 +8,8 @@ set(BUILD_SHARED_LIBS OFF)
 
 # set the output directory for built objects.
 # This makes sure that the dynamic library goes into the build directory automatically.
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 
 # Create the project
 project(WaveRush)
@@ -17,47 +17,68 @@ project(WaveRush)
 # Add FetchContent
 include(FetchContent)
 
-# Setup glm
-FetchContent_Declare(
-    glm
-    GIT_REPOSITORY https://github.com/g-truc/glm
-    GIT_TAG 1.0.1
-)
-
 # Setup sdl
 FetchContent_Declare(
     sdl
     GIT_REPOSITORY https://github.com/libsdl-org/SDL
-    GIT_TAG release-3.2.4
+    GIT_TAG release-2.32.4
+)
+
+# Setup sdl_ttf
+FetchContent_Declare(
+    sdl_ttf
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf
+    GIT_TAG release-2.24.0
 )
 
 # Setup sdl_image
 FetchContent_Declare(
     sdl_image
     GIT_REPOSITORY https://github.com/libsdl-org/SDL_image
-    GIT_TAG release-3.2.0
+    GIT_TAG release-2.8.8
 )
 
+# Set lib options
+set(SDL2TTF_VENDORED ON CACHE INTERNAL "")
+
 # Bring content to scope
-FetchContent_MakeAvailable(glm sdl sdl_image)
+FetchContent_MakeAvailable(sdl sdl_ttf sdl_image)
 
 # Add the executable
 add_executable(
     ${PROJECT_NAME}
-    Source/Main.cpp
-    Source/Core/ArenaAllocator.cpp
-    Source/Core/Game.cpp
+    src/Core/FontManager.cpp
+    src/Core/Game.cpp
+    src/Core/Timer.cpp
+    src/Entity/BasicEnemy.cpp
+    src/Entity/Entity.cpp
+    src/Entity/EntityManager.cpp
+    src/Entity/ParticleSystem.cpp
+    src/Entity/Player.cpp
+    src/Entity/SmartEnemy.cpp
+    src/GUI/Text.cpp
+    src/GUI/Widget.cpp
+    src/GUI/WidgetManager.cpp
+    src/Scene/MainMenuScene.cpp
+    src/Scene/PlayScene.cpp
+    src/Scene/Scene.cpp
+    src/Scene/SceneManager.cpp
+    src/Main.cpp
 )
 
-# Add the include folder
-target_include_directories(${PROJECT_NAME} PUBLIC Include)
+# Creates precompiled header
+target_precompile_headers(${PROJECT_NAME} PRIVATE src/Core/PCH.hpp)
 
-# Linking nebula
+# Add the include folder
+target_include_directories(${PROJECT_NAME} PUBLIC src)
+
+# Linking libraries
 target_link_libraries(
     ${PROJECT_NAME} PRIVATE 
-    glm::glm 
-    SDL3::SDL3 
-    SDL3_image::SDL3_image
+    $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
+    $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+    SDL2_ttf
+    SDL2_image
 )
 
 # Copy assets folder
