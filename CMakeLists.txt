@@ -11,6 +11,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
 set(BUILD_SHARED_LIBS OFF)
 
+include(cmake/GLM.cmake)
 include(cmake/SDL.cmake)
 
 # Set lib options
@@ -26,6 +27,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(
     ${PROJECT_NAME} PRIVATE 
+    # glm
+    glm::glm
     # sdl
     $<TARGET_NAME_IF_EXISTS:SDL3::SDL3main>
     $<IF:$<TARGET_EXISTS:SDL3::SDL3>,SDL3::SDL3,SDL3::SDL3-static>
