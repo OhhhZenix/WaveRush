@@ -19,6 +19,7 @@ include(cmake/SDL.cmake)
 add_executable(
     ${PROJECT_NAME}
     src/Main.cpp
+    src/Global.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
@@ -26,8 +27,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC src)
 target_link_libraries(
     ${PROJECT_NAME} PRIVATE 
     # sdl
-    $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
-    $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+    $<TARGET_NAME_IF_EXISTS:SDL3::SDL3main>
+    $<IF:$<TARGET_EXISTS:SDL3::SDL3>,SDL3::SDL3,SDL3::SDL3-static>
     # sdl_ttf
     # $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
     # sdl_image
