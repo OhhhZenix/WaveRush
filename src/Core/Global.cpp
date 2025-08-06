@@ -2,5 +2,7 @@
 
 Global global = {
 	.window = nullptr,
-	.renderer = nullptr
+	.renderer = nullptr,
+	.is_keydown = {},
+	.player = {},
 };

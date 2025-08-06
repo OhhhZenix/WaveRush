@@ -20,7 +20,8 @@ include(cmake/SDL.cmake)
 add_executable(
     ${PROJECT_NAME}
     src/Main.cpp
-    src/Global.cpp
+    src/Core/Global.cpp
+    src/Entity/Player.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
