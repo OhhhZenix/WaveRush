@@ -7,15 +7,20 @@
 constexpr float PLAYER_SPEED = 1.0f;
 constexpr float PLAYER_SIZE = 32.0f;
 
-Player::Player(const glm::vec2& position) {
-	this->position = position;
+void player_init(Player* self) {
+	if (!self) {
+		return;
+	}
+
+	self->position.x = 0;
+	self->position.y = 0;
 }
 
-glm::vec2 Player::getPosition() const {
-	return this->position;
-}
+void player_update(Player* self) {
+	if (!self) {
+		return;
+	}
 
-void Player::processUpdate() {
 	glm::vec2 velocity = { 0, 0 };
 
 	if (global.is_keydown[SDLK_W]) {
@@ -34,11 +39,15 @@ void Player::processUpdate() {
 		velocity.x = 1;
 	}
 
-	this->position += velocity * PLAYER_SPEED;
+	self->position += velocity * PLAYER_SPEED;
 }
 
-void Player::processRender() {
-	SDL_FRect rect = { this->position.x, this->position.y, PLAYER_SIZE, PLAYER_SIZE };
+void player_render(Player* self) {
+	if (!self) {
+		return;
+	}
+
+	SDL_FRect rect = { self->position.x, self->position.y, PLAYER_SIZE, PLAYER_SIZE };
 	SDL_SetRenderDrawColor(global.renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(global.renderer, &rect);
 }

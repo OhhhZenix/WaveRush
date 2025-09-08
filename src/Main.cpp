@@ -1,6 +1,7 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 
 #include "Core/Global.hpp"
+#include "Entity/Player.hpp"
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_main.h>
@@ -45,12 +46,15 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event) {
 }
 
 SDL_AppResult SDL_AppIterate(void* appstate) {
-	global.player.processUpdate();
+	// update
+	player_update(&global.player);
 
+	// render
 	SDL_SetRenderDrawColor(global.renderer, 64, 64, 64, 255);
 	SDL_RenderClear(global.renderer);
-	global.player.processRender();
+	player_render(&global.player);
 	SDL_RenderPresent(global.renderer);
+
 	return SDL_APP_CONTINUE;
 }
 
