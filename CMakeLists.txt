@@ -22,6 +22,7 @@ add_executable(
     src/Main.cpp
     src/Core/Global.cpp
     src/Entity/Player.cpp
+    src/Entity/BasicEnemy.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)

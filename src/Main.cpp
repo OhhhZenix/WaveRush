@@ -27,6 +27,12 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
 		return SDL_APP_FAILURE;
 	}
 
+	global.basic_enemies.push_back({});
+
+	for (auto& enemy : global.basic_enemies) {
+		basic_enemy_init(&enemy);
+	}
+
 	return SDL_APP_CONTINUE;
 }
 
@@ -49,10 +55,20 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
 	// update
 	player_update(&global.player);
 
+	for (auto& enemy : global.basic_enemies) {
+		basic_enemy_update(&enemy);
+	}
+
 	// render
 	SDL_SetRenderDrawColor(global.renderer, 64, 64, 64, 255);
 	SDL_RenderClear(global.renderer);
+
 	player_render(&global.player);
+
+	for (auto& enemy : global.basic_enemies) {
+		basic_enemy_render(&enemy);
+	}
+
 	SDL_RenderPresent(global.renderer);
 
 	return SDL_APP_CONTINUE;

@@ -1,11 +1,9 @@
 #include "Entity/Player.hpp"
 
+#include "Core/Constants.hpp"
 #include "Core/Global.hpp"
 #include <SDL3/SDL_rect.h>
 #include <SDL3/SDL_scancode.h>
-
-constexpr float PLAYER_SPEED = 1.0f;
-constexpr float PLAYER_SIZE = 32.0f;
 
 void player_init(Player* self) {
 	if (!self) {
@@ -48,6 +46,6 @@ void player_render(Player* self) {
 	}
 
 	SDL_FRect rect = { self->position.x, self->position.y, PLAYER_SIZE, PLAYER_SIZE };
-	SDL_SetRenderDrawColor(global.renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(global.renderer, 0, 255, 0, 255);
 	SDL_RenderFillRect(global.renderer, &rect);
 }

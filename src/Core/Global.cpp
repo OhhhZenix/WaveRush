@@ -5,4 +5,5 @@ Global global = {
 	.renderer = nullptr,
 	.is_keydown = {},
 	.player = {},
+	.basic_enemies = {},
 };
