@@ -20,9 +20,10 @@ include(cmake/SDL.cmake)
 add_executable(
     ${PROJECT_NAME}
     src/Main.cpp
-    src/Core/Global.cpp
-    src/Entity/Player.cpp
-    src/Entity/BasicEnemy.cpp
+    src/WaveRush/Core/Global.cpp
+    src/WaveRush/Entity/Player.cpp
+    src/WaveRush/Entity/BasicEnemy.cpp
+    src/WaveRush/Scene/PlayScene.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)

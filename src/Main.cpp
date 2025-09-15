@@ -1,7 +1,7 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 
-#include "Core/Global.hpp"
-#include "Entity/Player.hpp"
+#include "WaveRush/Core/Global.hpp"
+#include "WaveRush/Scene/PlayScene.hpp"
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_main.h>
@@ -27,11 +27,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
 		return SDL_APP_FAILURE;
 	}
 
-	global.basic_enemies.push_back({});
-
-	for (auto& enemy : global.basic_enemies) {
-		basic_enemy_init(&enemy);
-	}
+	play_scene_init(&global.play_scene);
 
 	return SDL_APP_CONTINUE;
 }
@@ -53,22 +49,12 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event) {
 
 SDL_AppResult SDL_AppIterate(void* appstate) {
 	// update
-	player_update(&global.player);
-
-	for (auto& enemy : global.basic_enemies) {
-		basic_enemy_update(&enemy);
-	}
+	play_scene_update(&global.play_scene);
 
 	// render
 	SDL_SetRenderDrawColor(global.renderer, 64, 64, 64, 255);
 	SDL_RenderClear(global.renderer);
-
-	player_render(&global.player);
-
-	for (auto& enemy : global.basic_enemies) {
-		basic_enemy_render(&enemy);
-	}
-
+	play_scene_render(&global.play_scene);
 	SDL_RenderPresent(global.renderer);
 
 	return SDL_APP_CONTINUE;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Types.hpp"
+#include "WaveRush/Core/Types.hpp"
 
 constexpr usize SCREEN_WIDTH = 640;
 constexpr usize SCREEN_HEIGHT = 360;

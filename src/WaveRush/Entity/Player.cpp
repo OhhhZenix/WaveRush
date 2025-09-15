@@ -1,7 +1,7 @@
-#include "Entity/Player.hpp"
+#include "WaveRush/Entity/Player.hpp"
 
-#include "Core/Constants.hpp"
-#include "Core/Global.hpp"
+#include "WaveRush/Core/Constants.hpp"
+#include "WaveRush/Core/Global.hpp"
 #include <SDL3/SDL_rect.h>
 #include <SDL3/SDL_scancode.h>
 
