@@ -1,8 +1,11 @@
 #include "WaveRush/Scene/PlayScene.hpp"
 
 void play_scene_init(PlayScene* self) {
+	self->wave = 1;
+
 	player_init(&self->player);
 
+	self->basic_enemies.clear();
 	self->basic_enemies.push_back({});
 	for (auto& enemy : self->basic_enemies) {
 		basic_enemy_init(&enemy);
