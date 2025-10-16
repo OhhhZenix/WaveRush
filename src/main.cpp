@@ -1,9 +1,10 @@
+#include "wr/constants.h"
 #include "wr/scene/play_scene.h"
 #include <raylib.h>
 
 int main() {
-  InitWindow(800, 450, "Wave Rush");
-  SetTargetFPS(60);
+  InitWindow(GAME_WIDTH, GAME_HEIGHT, "Wave Rush");
+  SetTargetFPS(TARGET_FPS);
 
   PlayScene scene;
   wr_play_scene_init(&scene);
