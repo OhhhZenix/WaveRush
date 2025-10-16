@@ -1,4 +1,4 @@
 #pragma once
 
-#define GAME_WIDTH 800
-#define GAME_HEIGHT 450
+constexpr int GAME_WIDTH = 800;
+constexpr int GAME_HEIGHT = 450;
