@@ -5,40 +5,28 @@ set(OUT_DIR ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUT_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUT_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUT_DIR})
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
 set(BUILD_SHARED_LIBS OFF)
 
-include(cmake/GLM.cmake)
-include(cmake/SDL.cmake)
-
-# Set lib options
-# set(SDL2TTF_VENDORED ON CACHE INTERNAL "")
+include(cmake/raylib.cmake)
 
 add_executable(
     ${PROJECT_NAME}
-    src/Main.cpp
-    src/WaveRush/Core/Global.cpp
-    src/WaveRush/Entity/Player.cpp
-    src/WaveRush/Entity/BasicEnemy.cpp
-    src/WaveRush/Scene/PlayScene.cpp
+    src/main.cpp
+    src/wr/core/array_list.cpp
+    src/wr/entity/enemy/bouncer.cpp
+    src/wr/entity/player.cpp
+    src/wr/scene/play_scene.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(
     ${PROJECT_NAME} PRIVATE 
-    # glm
-    glm::glm
-    # sdl
-    $<TARGET_NAME_IF_EXISTS:SDL3::SDL3main>
-    $<IF:$<TARGET_EXISTS:SDL3::SDL3>,SDL3::SDL3,SDL3::SDL3-static>
-    # sdl ttf
-    # $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
-    # sdl image
-    # $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
+    raylib
 )
 
 add_custom_command(
