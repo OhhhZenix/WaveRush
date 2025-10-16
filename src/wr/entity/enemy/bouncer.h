@@ -1,8 +1,6 @@
 #pragma once
 
-typedef struct bouncer Bouncer;
-
-struct bouncer {
+struct Bouncer {
   float x;
   float y;
   float radius;
