@@ -1,8 +1,6 @@
 #pragma once
 
-typedef struct array_list ArrayList;
-
-struct array_list {
+struct ArrayList {
   int size;
   int length;
   void *items;
