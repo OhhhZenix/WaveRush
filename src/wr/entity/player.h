@@ -1,8 +1,6 @@
 #pragma once
 
-typedef struct player Player;
-
-struct player {
+struct Player {
   float x;
   float y;
   float width;
