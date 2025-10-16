@@ -3,9 +3,7 @@
 #include "wr/core/array_list.h"
 #include "wr/entity/player.h"
 
-typedef struct play_scene PlayScene;
-
-struct play_scene {
+struct PlayScene {
   Player player;
   ArrayList bouncers;
 };
