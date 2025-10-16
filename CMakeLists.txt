@@ -18,6 +18,7 @@ add_executable(
     src/main.cpp
     src/wr/core/array_list.cpp
     src/wr/entity/enemy/bouncer.cpp
+    src/wr/entity/enemy/seeker.cpp
     src/wr/entity/player.cpp
     src/wr/scene/play_scene.cpp
 )
