@@ -3,6 +3,10 @@
 #include <raylib.h>
 
 void wr_bouncer_init(Bouncer *self, float x, float y) {
+  if (self == nullptr) {
+    return;
+  }
+
   self->x = x;
   self->y = y;
   self->radius = 16.0f;
@@ -11,6 +15,10 @@ void wr_bouncer_init(Bouncer *self, float x, float y) {
 }
 
 void wr_bouncer_update(Bouncer *self) {
+  if (self == nullptr) {
+    return;
+  }
+
   self->x += self->speed_x;
   self->y += self->speed_y;
 
@@ -24,5 +32,9 @@ void wr_bouncer_update(Bouncer *self) {
 }
 
 void wr_bouncer_draw(Bouncer *self) {
+  if (self == nullptr) {
+    return;
+  }
+
   DrawCircle(self->x, self->y, self->radius, GREEN);
 }

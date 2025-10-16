@@ -4,6 +4,10 @@
 #include "wr/entity/player.h"
 
 void wr_play_scene_init(PlayScene *self) {
+  if (self == nullptr) {
+    return;
+  }
+
   wr_player_init(&self->player, 100.0f, 100.0f);
 
   wr_array_list_init(&self->bouncers, sizeof(Bouncer), 10);
@@ -15,6 +19,10 @@ void wr_play_scene_init(PlayScene *self) {
 }
 
 void wr_play_scene_update(PlayScene *self) {
+  if (self == nullptr) {
+    return;
+  }
+
   wr_player_move(&self->player);
 
   for (int i = 0; i < 5; i++) {
@@ -24,6 +32,10 @@ void wr_play_scene_update(PlayScene *self) {
 }
 
 void wr_play_scene_draw(PlayScene *self) {
+  if (self == nullptr) {
+    return;
+  }
+
   wr_player_draw(&self->player);
 
   for (int i = 0; i < 5; i++) {
