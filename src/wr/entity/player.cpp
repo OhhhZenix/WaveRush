@@ -3,10 +3,13 @@
 
 constexpr float PLAYER_SPEED = 2.0f;
 
-void wr_player_init(Player *self, float x, float y) {
-  if (self == nullptr) {
-    return;
-  }
+void
+wr_player_init (Player *self, float x, float y)
+{
+  if (self == nullptr)
+    {
+      return;
+    }
 
   self->x = x;
   self->y = y;
@@ -14,32 +17,42 @@ void wr_player_init(Player *self, float x, float y) {
   self->height = 32;
 }
 
-void wr_player_move(Player *self) {
-  if (self == nullptr) {
-    return;
-  }
+void
+wr_player_move (Player *self)
+{
+  if (self == nullptr)
+    {
+      return;
+    }
 
-  if (IsKeyDown(KEY_W)) {
-    self->y -= PLAYER_SPEED;
-  }
+  if (IsKeyDown (KEY_W))
+    {
+      self->y -= PLAYER_SPEED;
+    }
 
-  if (IsKeyDown(KEY_S)) {
-    self->y += PLAYER_SPEED;
-  }
+  if (IsKeyDown (KEY_S))
+    {
+      self->y += PLAYER_SPEED;
+    }
 
-  if (IsKeyDown(KEY_A)) {
-    self->x -= PLAYER_SPEED;
-  }
+  if (IsKeyDown (KEY_A))
+    {
+      self->x -= PLAYER_SPEED;
+    }
 
-  if (IsKeyDown(KEY_D)) {
-    self->x += PLAYER_SPEED;
-  }
+  if (IsKeyDown (KEY_D))
+    {
+      self->x += PLAYER_SPEED;
+    }
 }
 
-void wr_player_draw(Player *self) {
-  if (self == nullptr) {
-    return;
-  }
+void
+wr_player_draw (Player *self)
+{
+  if (self == nullptr)
+    {
+      return;
+    }
 
-  DrawRectangle(self->x, self->y, self->width, self->height, BLUE);
+  DrawRectangle (self->x, self->y, self->width, self->height, BLUE);
 }

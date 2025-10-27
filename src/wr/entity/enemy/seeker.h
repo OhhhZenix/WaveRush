@@ -1,3 +1,5 @@
 #pragma once
 
-struct Seeker {};
+struct Seeker
+{
+};
