@@ -28,7 +28,7 @@ wr_play_scene_update (wr_play_scene *self)
   if (self == nullptr)
     return;
 
-  wr_player_move (&self->player);
+  wr_player_move (&self->player, GetScreenWidth (), GetScreenHeight ());
 
   for (int i = 0; i < self->bouncers.length; i++)
     {
