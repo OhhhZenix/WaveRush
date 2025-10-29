@@ -4,7 +4,7 @@
 constexpr float PLAYER_SPEED = 2.0f;
 
 void
-wr_player_init (Player *self, float x, float y)
+wr_player_init (wr_player *self, float x, float y)
 {
   if (self == nullptr)
     {
@@ -18,7 +18,7 @@ wr_player_init (Player *self, float x, float y)
 }
 
 void
-wr_player_move (Player *self)
+wr_player_move (wr_player *self)
 {
   if (self == nullptr)
     {
@@ -47,7 +47,7 @@ wr_player_move (Player *self)
 }
 
 void
-wr_player_draw (Player *self)
+wr_player_draw (wr_player *self)
 {
   if (self == nullptr)
     {

@@ -3,7 +3,7 @@
 #include <string.h>
 
 void
-wr_array_list_init (ArrayList *self, int size, int count)
+wr_array_list_init (wr_array_list *self, int size, int count)
 {
   if (self == NULL)
     {
@@ -17,7 +17,7 @@ wr_array_list_init (ArrayList *self, int size, int count)
 }
 
 void
-wr_array_list_cleanup (ArrayList *self)
+wr_array_list_cleanup (wr_array_list *self)
 {
   if (self == NULL)
     {
@@ -31,7 +31,7 @@ wr_array_list_cleanup (ArrayList *self)
 }
 
 int
-wr_array_list_add (ArrayList *self, void *item)
+wr_array_list_add (wr_array_list *self, void *item)
 {
   if (self == NULL)
     {
@@ -44,7 +44,7 @@ wr_array_list_add (ArrayList *self, void *item)
 }
 
 void *
-wr_array_list_get (ArrayList *self, int index)
+wr_array_list_get (wr_array_list *self, int index)
 {
   if (self == NULL)
     {

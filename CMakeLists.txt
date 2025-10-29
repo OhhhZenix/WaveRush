@@ -16,6 +16,7 @@ include(cmake/raylib.cmake)
 add_executable(
     ${PROJECT_NAME}
     src/main.cpp
+    src/wr/utils.cpp
     src/wr/core/array_list.cpp
     src/wr/entity/enemy/bouncer.cpp
     src/wr/entity/enemy/seeker.cpp

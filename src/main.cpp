@@ -5,10 +5,11 @@
 int
 main ()
 {
+  SetConfigFlags (FLAG_WINDOW_RESIZABLE);
   InitWindow (GAME_WIDTH, GAME_HEIGHT, "Wave Rush");
   SetTargetFPS (TARGET_FPS);
 
-  PlayScene scene;
+  wr_play_scene scene;
   wr_play_scene_init (&scene);
 
   while (!WindowShouldClose ())

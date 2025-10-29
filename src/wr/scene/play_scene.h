@@ -3,12 +3,12 @@
 #include "wr/core/array_list.h"
 #include "wr/entity/player.h"
 
-struct PlayScene
+struct wr_play_scene
 {
-  Player player;
-  ArrayList bouncers;
+  wr_player player;
+  wr_array_list bouncers;
 };
 
-void wr_play_scene_init (PlayScene *self);
-void wr_play_scene_update (PlayScene *self);
-void wr_play_scene_draw (PlayScene *self);
+void wr_play_scene_init (wr_play_scene *self);
+void wr_play_scene_update (wr_play_scene *self);
+void wr_play_scene_draw (wr_play_scene *self);
