@@ -9,19 +9,19 @@ float wr_clampf(float value, float min, float max) {
 }
 
 bool wr_collision_rect_circle(
-    float rx,
-    float ry,
-    float rw,
-    float rh,
-    float cx,
-    float cy,
-    float r
+    float rect_x,
+    float rect_y,
+    float rect_width,
+    float rect_height,
+    float circle_x,
+    float circle_y,
+    float circle_radius
 ) {
-    float closestX = wr_clampf(cx, rx, rx + rw);
-    float closestY = wr_clampf(cy, ry, ry + rh);
+    float closest_x = wr_clampf(circle_x, rect_x, rect_x + rect_width);
+    float closest_y = wr_clampf(circle_y, rect_y, rect_y + rect_height);
 
-    float dx = cx - closestX;
-    float dy = cy - closestY;
+    float dx = circle_x - closest_x;
+    float dy = circle_y - closest_y;
 
-    return (dx * dx + dy * dy) <= (r * r);
+    return (dx * dx + dy * dy) <= (circle_radius * circle_radius);
 }
