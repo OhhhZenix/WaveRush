@@ -1,24 +1,27 @@
 #include "wr/utils.h"
 
-float
-wr_clampf (float value, float min, float max)
-{
-  if (value < min)
-    return min;
-  if (value > max)
-    return max;
-  return value;
+float wr_clampf(float value, float min, float max) {
+    if (value < min)
+        return min;
+    if (value > max)
+        return max;
+    return value;
 }
 
-bool
-wr_collision_rect_circle (float rx, float ry, float rw, float rh, float cx,
-                          float cy, float r)
-{
-  float closestX = wr_clampf (cx, rx, rx + rw);
-  float closestY = wr_clampf (cy, ry, ry + rh);
+bool wr_collision_rect_circle(
+    float rx,
+    float ry,
+    float rw,
+    float rh,
+    float cx,
+    float cy,
+    float r
+) {
+    float closestX = wr_clampf(cx, rx, rx + rw);
+    float closestY = wr_clampf(cy, ry, ry + rh);
 
-  float dx = cx - closestX;
-  float dy = cy - closestY;
+    float dx = cx - closestX;
+    float dy = cy - closestY;
 
-  return (dx * dx + dy * dy) <= (r * r);
+    return (dx * dx + dy * dy) <= (r * r);
 }

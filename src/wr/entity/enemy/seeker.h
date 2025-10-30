@@ -1,5 +1,3 @@
 #pragma once
 
-struct wr_seeker
-{
-};
+struct wr_seeker {};
