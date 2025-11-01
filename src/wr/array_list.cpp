@@ -1,4 +1,4 @@
-#include "wr/core/array_list.h"
+#include "wr/array_list.h"
 
 #include <stdlib.h>
 #include <string.h>

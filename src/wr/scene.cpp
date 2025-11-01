@@ -1,9 +1,9 @@
-#include "wr/scene/play_scene.h"
+#include "wr/scene.h"
 
-#include "raylib.h"
-#include "wr/core/array_list.h"
-#include "wr/entity/enemy/bouncer.h"
-#include "wr/entity/player.h"
+#include <raylib.h>
+
+#include "wr/array_list.h"
+#include "wr/entity.h"
 #include "wr/utils.h"
 
 void wr_play_scene_init(wr_play_scene* self) {
@@ -20,11 +20,11 @@ void wr_play_scene_init(wr_play_scene* self) {
     }
 }
 
-void wr_play_scene_update(wr_play_scene* self) {
+void wr_play_scene_update(wr_play_scene* self, wr_scene* current_scene) {
     if (self == nullptr)
         return;
 
-    wr_player_move(&self->player, GetScreenWidth(), GetScreenHeight());
+    wr_player_update(&self->player, GetScreenWidth(), GetScreenHeight());
 
     for (int i = 0; i < self->bouncers.length; i++) {
         wr_bouncer* bouncer =
@@ -44,6 +44,10 @@ void wr_play_scene_update(wr_play_scene* self) {
             continue;
 
         wr_player_init(&self->player, 100.0f, 100.0f);
+    }
+
+    if (IsKeyPressed(KEY_SPACE)) {
+        *current_scene = WR_SCENE_MENU;
     }
 }
 
