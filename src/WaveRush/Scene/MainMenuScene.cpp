@@ -42,6 +42,14 @@ void MainMenuScene::Update(Game& game) {
         rect.x += rect.vel_x;
         rect.y += rect.vel_y;
     }
+
+    if (IsKeyPressed(KEY_A)) {
+        game.GotoNextScene(std::make_unique<MainMenuScene>());
+    }
+
+    if (IsKeyPressed(KEY_D)) {
+        game.GotoPreviousScene();
+    }
 }
 
 void MainMenuScene::Render(const Game& game) {

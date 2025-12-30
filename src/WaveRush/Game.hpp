@@ -11,6 +11,8 @@ class Game {
   public:
     Game();
     ~Game();
+    void GotoPreviousScene();
+    void GotoNextScene(std::unique_ptr<Scene> scene);
     void Run();
 
   private:
