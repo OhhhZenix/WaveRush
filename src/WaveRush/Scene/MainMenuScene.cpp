@@ -1,7 +1,5 @@
 #include "WaveRush/Scene/MainMenuScene.hpp"
 
-#include <memory>
-
 #include "WaveRush/Constants.hpp"
 #include "WaveRush/Utils.hpp"
 #include "raylib.h"
