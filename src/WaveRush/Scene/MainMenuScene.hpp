@@ -1,5 +1,7 @@
 #pragma once
 
+#include <raylib.h>
+
 #include <vector>
 
 #include "WaveRush/Scene.hpp"
@@ -18,6 +20,7 @@ class MainMenuScene: public Scene {
         float y;
         float w;
         float h;
+        Color color;
     };
 
     std::vector<Rect> rects;
