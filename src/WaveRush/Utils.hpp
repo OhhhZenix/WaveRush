@@ -4,13 +4,13 @@
 #include <random>
 #include <type_traits>
 
+namespace WaveRush {
+
 template<typename T>
 T GenerateRandomRange(T min, T max) {
-    static std::mt19937 rng(
-        static_cast<unsigned>(
-            std::chrono::system_clock::now().time_since_epoch().count()
-        )
-    );
+    static std::mt19937 rng(static_cast<unsigned>(
+        std::chrono::system_clock::now().time_since_epoch().count()
+    ));
 
     if constexpr (std::is_floating_point_v<T>) {
         std::uniform_real_distribution<T> dist(min, max);
@@ -26,3 +26,5 @@ T GenerateRandomRange(T min, T max) {
         return static_cast<T>(dist(rng));
     }
 }
+
+} // namespace WaveRush
