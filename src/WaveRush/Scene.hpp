@@ -6,8 +6,7 @@ namespace WaveRush {
 
 class Scene {
   public:
-    inline virtual ~Scene() {}
-
+    virtual ~Scene();
     virtual void Update(Game& game) = 0;
     virtual void Render(const Game& game) = 0;
 };

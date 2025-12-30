@@ -18,6 +18,7 @@ add_executable(
     src/Main.cpp
     src/WaveRush/Utils.cpp
     src/WaveRush/Game.cpp
+    src/WaveRush/Scene.cpp
     src/WaveRush/Scene/MainMenuScene.cpp
 )
 
