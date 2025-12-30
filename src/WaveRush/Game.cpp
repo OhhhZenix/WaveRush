@@ -19,8 +19,8 @@ void Game::GotoPreviousScene() {
     this->scene.pop();
 }
 
-void Game::GotoNextScene(std::unique_ptr<Scene> scene) {
-    this->scene.push(std::move(scene));
+void Game::GotoNextScene(Scene* scene) {
+    this->scene.emplace(std::move(scene));
 }
 
 void Game::Run() {

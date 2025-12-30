@@ -12,7 +12,7 @@ class Game {
     Game();
     ~Game();
     void GotoPreviousScene();
-    void GotoNextScene(std::unique_ptr<Scene> scene);
+    void GotoNextScene(Scene* scene);
     void Run();
 
   private:
