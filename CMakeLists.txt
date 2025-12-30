@@ -21,6 +21,7 @@ add_executable(
     src/WaveRush/Scene.cpp
     src/WaveRush/Scene/MainMenuScene.cpp
     src/WaveRush/Scene/PlayScene.cpp
+    src/WaveRush/Widget.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
