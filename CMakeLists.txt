@@ -20,6 +20,7 @@ add_executable(
     src/WaveRush/Game.cpp
     src/WaveRush/Scene.cpp
     src/WaveRush/Scene/MainMenuScene.cpp
+    src/WaveRush/Scene/PlayScene.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
