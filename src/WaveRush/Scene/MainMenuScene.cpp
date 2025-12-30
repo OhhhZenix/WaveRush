@@ -50,7 +50,7 @@ void MainMenuScene::Update(Game& game) {
     }
 }
 
-void MainMenuScene::Render(const Game& game) {
+void MainMenuScene::Render() {
     for (auto& rect : this->rects) {
         DrawRectangle(rect.x, rect.y, rect.w, rect.h, rect.color);
     }

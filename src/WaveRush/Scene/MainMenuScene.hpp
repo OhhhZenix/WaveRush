@@ -13,7 +13,7 @@ class MainMenuScene: public Scene {
   public:
     MainMenuScene();
     void Update(Game& game) override;
-    void Render(const Game& game) override;
+    void Render() override;
 
   private:
     struct Rect {
