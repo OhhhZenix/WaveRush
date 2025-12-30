@@ -4,7 +4,6 @@
 
 #include <vector>
 
-#include "WaveRush/Game.hpp"
 #include "WaveRush/Scene.hpp"
 
 namespace WaveRush {
