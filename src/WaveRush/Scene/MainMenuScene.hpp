@@ -4,6 +4,7 @@
 
 #include <vector>
 
+#include "WaveRush/Game.hpp"
 #include "WaveRush/Scene.hpp"
 
 namespace WaveRush {
@@ -11,8 +12,8 @@ namespace WaveRush {
 class MainMenuScene: public Scene {
   public:
     MainMenuScene();
-    void Update() override;
-    void Render() override;
+    void Update(Game& game) override;
+    void Render(const Game& game) override;
 
   private:
     struct Rect {

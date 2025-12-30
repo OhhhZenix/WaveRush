@@ -1,7 +1,10 @@
 #include "WaveRush/Scene/MainMenuScene.hpp"
 
+#include <memory>
+
 #include "WaveRush/Constants.hpp"
 #include "WaveRush/Utils.hpp"
+#include "raylib.h"
 
 namespace WaveRush {
 
@@ -29,7 +32,7 @@ MainMenuScene::MainMenuScene() {
     }
 }
 
-void MainMenuScene::Update() {
+void MainMenuScene::Update(Game& game) {
     for (auto& rect : this->rects) {
         if (rect.x <= 0 || rect.x >= GAME_WIDTH - rect.w)
             rect.vel_x *= -1.f;
@@ -41,7 +44,7 @@ void MainMenuScene::Update() {
     }
 }
 
-void MainMenuScene::Render() {
+void MainMenuScene::Render(const Game& game) {
     for (auto& rect : this->rects) {
         DrawRectangle(rect.x, rect.y, rect.w, rect.h, rect.color);
     }

@@ -1,11 +1,15 @@
 #pragma once
 
+#include "WaveRush/Game.hpp"
+
 namespace WaveRush {
 
 class Scene {
   public:
-    virtual void Update() = 0;
-    virtual void Render() = 0;
+    inline virtual ~Scene() {}
+
+    virtual void Update(Game& game) = 0;
+    virtual void Render(const Game& game) = 0;
 };
 
 } // namespace WaveRush
