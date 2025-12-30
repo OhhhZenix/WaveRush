@@ -44,11 +44,11 @@ void MainMenuScene::Update(Game& game) {
     }
 
     if (IsKeyPressed(KEY_A)) {
-        game.GotoNextScene(std::make_unique<MainMenuScene>());
+        game.GotoPreviousScene();
     }
 
     if (IsKeyPressed(KEY_D)) {
-        game.GotoPreviousScene();
+        game.GotoNextScene(std::make_unique<MainMenuScene>());
     }
 }
 
