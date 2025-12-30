@@ -5,7 +5,7 @@ set(OUT_DIR ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUT_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUT_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUT_DIR})
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
@@ -15,24 +15,23 @@ include(cmake/raylib.cmake)
 
 add_executable(
     ${PROJECT_NAME}
-    src/main.cpp
-    src/wr/array_list.cpp
-    src/wr/entity.cpp
-    src/wr/scene.cpp
-    src/wr/utils.cpp
+    src/Main.cpp
+    src/WaveRush/Utils.cpp
+    src/WaveRush/Game.cpp
+    src/WaveRush/Scene/MainMenuScene.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(
-    ${PROJECT_NAME} PRIVATE 
+    ${PROJECT_NAME} PRIVATE
     raylib
 )
 
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND
-        ${CMAKE_COMMAND} -E copy_directory 
+        ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/assets
         $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
 )
