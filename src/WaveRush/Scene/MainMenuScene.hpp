@@ -21,6 +21,8 @@ class MainMenuScene: public Scene {
         float w;
         float h;
         Color color;
+        float vel_x;
+        float vel_y;
     };
 
     std::vector<Rect> rects;
