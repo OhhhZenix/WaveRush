@@ -1,6 +1,7 @@
 #include "WaveRush/Scene/MainMenuScene.hpp"
 
 #include "WaveRush/Constants.hpp"
+#include "WaveRush/Scene/PlayScene.hpp"
 #include "WaveRush/Utils.hpp"
 #include "raylib.h"
 
@@ -46,7 +47,7 @@ void MainMenuScene::Update(Game& game) {
     }
 
     if (IsKeyPressed(KEY_D)) {
-        game.GotoNextScene(new MainMenuScene());
+        game.GotoNextScene(new PlayScene());
     }
 }
 
