@@ -20,7 +20,7 @@ void Game::GotoPreviousScene() {
 }
 
 void Game::GotoNextScene(Scene* scene) {
-    this->scene.emplace(std::move(scene));
+    this->scene.emplace(scene);
 }
 
 void Game::Run() {
