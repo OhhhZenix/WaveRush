@@ -37,7 +37,11 @@ bool Button::IsLeftClicked() {
 }
 
 bool Button::IsRightClicked() {
-    return false;
+    if (!this->IsHovered())
+        return false;
+    if (!IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+        return false;
+    return true;
 }
 
 int Button::GetX() const {
