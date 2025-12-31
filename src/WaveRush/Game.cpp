@@ -32,7 +32,7 @@ void Game::Run() {
         this->scene.top()->Update(*this);
 
         BeginDrawing();
-        ClearBackground(WHITE);
+        ClearBackground(BLACK);
         this->scene.top()->Render();
         EndDrawing();
     }
