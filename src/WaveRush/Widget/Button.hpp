@@ -13,7 +13,7 @@ class Button: public Widget {
         int width = 120,
         int height = 60,
         Color color = WHITE,
-        Color hoverColor = GRAY
+        Color hoverColor = LIGHTGRAY
     );
     bool IsHovered();
     bool IsLeftClicked();
