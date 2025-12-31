@@ -31,9 +31,15 @@ MainMenuScene::MainMenuScene() {
     }
 
     auto button_gap = 20;
-    auto button_width = 120;
+    auto button_width = 180;
     auto button_height = 60;
-    this->play_button = {0, 0, button_width, button_height};
+    auto button_count = 2;
+    this->play_button = {
+        (GAME_WIDTH - button_width) / 2,
+        (GAME_HEIGHT - (button_height * button_count)) / 2,
+        button_width,
+        button_height
+    };
     this->exit_button = {
         this->play_button.GetX(),
         this->play_button.GetY() + this->play_button.GetHeight() + button_gap,
