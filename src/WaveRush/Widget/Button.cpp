@@ -4,9 +4,21 @@ namespace WaveRush {
 
 // Button::~Button() {}
 
-void Button::OnClick(int button, auto action) {}
+bool Button::IsHovered() {
+    return false;
+}
 
-void Button::OnClickAny(int buttons[], auto action) {}
+void Button::OnClick(int button, std::function<void()> action) {
+    if (!IsHovered())
+        return;
+    action();
+}
+
+void Button::OnClickAny(int buttons[], std::function<void()> action) {
+    if (!IsHovered())
+        return;
+    action();
+}
 
 void Button::Render() {}
 

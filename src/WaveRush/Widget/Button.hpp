@@ -1,13 +1,16 @@
 #pragma once
 
+#include <functional>
+
 #include "WaveRush/Widget.hpp"
 
 namespace WaveRush {
 
 class Button: public Widget {
   public:
-    void OnClick(int button, auto action);
-    void OnClickAny(int buttons[], auto action);
+    bool IsHovered();
+    void OnClick(int button, std::function<void()> action);
+    void OnClickAny(int buttons[], std::function<void()> action);
     void Render() override;
 
   private:
