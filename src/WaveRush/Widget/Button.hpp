@@ -1,7 +1,5 @@
 #pragma once
 
-#include <functional>
-
 #include "WaveRush/Widget.hpp"
 #include "raylib.h"
 
