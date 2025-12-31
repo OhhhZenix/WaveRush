@@ -11,7 +11,7 @@ class Button: public Widget {
         int x = 0,
         int y = 0,
         int width = 120,
-        int height = 120,
+        int height = 60,
         Color color = WHITE,
         Color hoverColor = GRAY
     );
