@@ -18,8 +18,12 @@ class Button: public Widget {
         Color hoverColor = GRAY
     );
     bool IsHovered();
-    void OnClick(int button, std::function<void()> action);
-    void OnClickAny(int buttons[], std::function<void()> action);
+    bool IsLeftClicked();
+    bool IsRightClicked();
+    int GetX() const;
+    int GetY() const;
+    int GetWidth() const;
+    int GetHeight() const;
     void Render() override;
 
   private:

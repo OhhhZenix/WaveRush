@@ -27,7 +27,8 @@ class MainMenuScene: public Scene {
     };
 
     std::vector<Rect> rects;
-    Button button {60, 60, 120, 120};
+    Button play_button;
+    Button exit_button;
 };
 
 } // namespace WaveRush

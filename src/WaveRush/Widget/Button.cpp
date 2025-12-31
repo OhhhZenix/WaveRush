@@ -28,16 +28,32 @@ bool Button::IsHovered() {
         && mouse_pos.y >= this->y && mouse_pos.y <= this->y + this->height;
 }
 
-void Button::OnClick(int button, std::function<void()> action) {
+bool Button::IsLeftClicked() {
     if (!this->IsHovered())
-        return;
-    action();
+        return false;
+    if (!IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        return false;
+    return true;
 }
 
-void Button::OnClickAny(int buttons[], std::function<void()> action) {
-    if (!this->IsHovered())
-        return;
-    action();
+bool Button::IsRightClicked() {
+    return false;
+}
+
+int Button::GetX() const {
+    return this->x;
+}
+
+int Button::GetY() const {
+    return this->y;
+}
+
+int Button::GetWidth() const {
+    return this->width;
+}
+
+int Button::GetHeight() const {
+    return this->height;
 }
 
 void Button::Render() {

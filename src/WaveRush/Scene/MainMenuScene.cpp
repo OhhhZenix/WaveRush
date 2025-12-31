@@ -1,5 +1,4 @@
 #include "WaveRush/Scene/MainMenuScene.hpp"
-#include <iostream>
 
 #include "WaveRush/Constants.hpp"
 #include "WaveRush/Scene/PlayScene.hpp"
@@ -30,6 +29,17 @@ MainMenuScene::MainMenuScene() {
             (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_y,
         });
     }
+
+    auto button_gap = 20;
+    auto button_width = 120;
+    auto button_height = 60;
+    this->play_button = {0, 0, button_width, button_height};
+    this->exit_button = {
+        this->play_button.GetX(),
+        this->play_button.GetY() + this->play_button.GetHeight() + button_gap,
+        button_width,
+        button_height
+    };
 }
 
 void MainMenuScene::Update(Game& game) {
@@ -43,24 +53,19 @@ void MainMenuScene::Update(Game& game) {
         rect.y += rect.vel_y;
     }
 
-    if (IsKeyPressed(KEY_A)) {
-        game.GotoPreviousScene();
-    }
-
-    if (IsKeyPressed(KEY_D)) {
+    if (this->play_button.IsLeftClicked()) {
         game.GotoNextScene(new PlayScene());
     }
 
-    if (button.IsHovered()) {
-        std::cout << "inside" << std::endl;
-    }
+    if (this->exit_button.IsLeftClicked()) {}
 }
 
 void MainMenuScene::Render() {
     for (auto& rect : this->rects) {
         DrawRectangle(rect.x, rect.y, rect.w, rect.h, rect.color);
     }
-    button.Render();
+    this->play_button.Render();
+    this->exit_button.Render();
 }
 
 } // namespace WaveRush
