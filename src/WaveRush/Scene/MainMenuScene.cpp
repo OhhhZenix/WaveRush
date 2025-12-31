@@ -58,7 +58,7 @@ void MainMenuScene::Update(Game& game) {
     }
 
     if (this->exit_button.IsLeftClicked()) {
-        game.SetRunning(false);
+        game.Close();
     }
 }
 

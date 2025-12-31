@@ -13,12 +13,11 @@ class Game {
     ~Game();
     void GotoPreviousScene();
     void GotoNextScene(Scene* scene);
-    bool IsRunning();
-    void SetRunning(bool value);
+    void Close();
     void Run();
 
   private:
-    bool running = false;
+    bool should_close = false;
     std::stack<std::unique_ptr<Scene>> scene;
 };
 

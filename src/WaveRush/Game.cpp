@@ -23,24 +23,24 @@ void Game::GotoNextScene(Scene* scene) {
     this->scene.emplace(scene);
 }
 
-bool Game::IsRunning() {
-    return this->running;
+void Game::Close() {
+     this->should_close = true;
 }
 
-void Game::SetRunning(bool value) {
-    this->running = value;
-}
 
 void Game::Run() {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(GAME_WIDTH, GAME_HEIGHT, "Wave Rush");
     SetTargetFPS(TARGET_FPS);
 
-    this->SetRunning(true);
-    while (this->IsRunning()) {
-        this->SetRunning(!WindowShouldClose());
+    while (!WindowShouldClose()) {
+        if (this->should_close)
+            break;
+
+        // update loop
         this->scene.top()->Update(*this);
 
+        // draw loop
         BeginDrawing();
         ClearBackground(BLACK);
         this->scene.top()->Render();
