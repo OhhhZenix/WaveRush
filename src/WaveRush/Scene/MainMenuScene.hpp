@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "WaveRush/Scene.hpp"
+#include "WaveRush/Widget/Button.hpp"
 
 namespace WaveRush {
 
@@ -26,6 +27,7 @@ class MainMenuScene: public Scene {
     };
 
     std::vector<Rect> rects;
+    Button button {60, 60, 120, 120};
 };
 
 } // namespace WaveRush

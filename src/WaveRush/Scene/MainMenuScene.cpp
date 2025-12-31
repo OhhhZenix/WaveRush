@@ -1,4 +1,5 @@
 #include "WaveRush/Scene/MainMenuScene.hpp"
+#include <iostream>
 
 #include "WaveRush/Constants.hpp"
 #include "WaveRush/Scene/PlayScene.hpp"
@@ -49,12 +50,17 @@ void MainMenuScene::Update(Game& game) {
     if (IsKeyPressed(KEY_D)) {
         game.GotoNextScene(new PlayScene());
     }
+
+    if (button.IsHovered()) {
+        std::cout << "inside" << std::endl;
+    }
 }
 
 void MainMenuScene::Render() {
     for (auto& rect : this->rects) {
         DrawRectangle(rect.x, rect.y, rect.w, rect.h, rect.color);
     }
+    button.Render();
 }
 
 } // namespace WaveRush
