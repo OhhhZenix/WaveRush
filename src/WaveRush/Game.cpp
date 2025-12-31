@@ -36,6 +36,8 @@ void Game::Run() {
         this->scene.top()->Render();
         EndDrawing();
     }
+
+    CloseWindow();
 }
 
 } // namespace WaveRush
