@@ -6,7 +6,7 @@
 
 namespace WaveRush {
 
-bool SceneManager::hasScenes() {
+bool SceneManager::HasScenes() {
     return !this->scenes.empty();
 }
 
