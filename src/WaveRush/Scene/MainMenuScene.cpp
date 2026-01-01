@@ -35,18 +35,16 @@ MainMenuScene::MainMenuScene() {
     auto button_width = 180;
     auto button_height = 60;
     auto button_count = 2;
-    this->play_button = {
-        (GAME_WIDTH - button_width) / 2,
-        (GAME_HEIGHT - (button_height * button_count)) / 2,
-        button_width,
-        button_height
-    };
-    this->exit_button = {
-        this->play_button.GetX(),
-        this->play_button.GetY() + this->play_button.GetHeight() + button_gap,
-        button_width,
-        button_height
-    };
+    this->play_button.SetX((GAME_WIDTH - button_width) / 2);
+    this->play_button.SetY((GAME_HEIGHT - (button_height * button_count)) / 2);
+    this->play_button.SetWidth(button_width);
+    this->play_button.SetHeight(button_height);
+    this->exit_button.SetX(this->play_button.GetX());
+    this->exit_button.SetY(
+        this->play_button.GetY() + this->play_button.GetHeight() + button_gap
+    );
+    this->exit_button.SetWidth(button_width);
+    this->exit_button.SetHeight(button_height);
 }
 
 void MainMenuScene::Update(Game& game) {
