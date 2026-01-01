@@ -1,7 +1,8 @@
 #pragma once
 
+#include <raylib.h>
+
 #include "WaveRush/Widget.hpp"
-#include "raylib.h"
 
 namespace WaveRush {
 
