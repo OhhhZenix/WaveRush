@@ -8,8 +8,6 @@ class Scene;
 
 class Game {
   public:
-    Game();
-    ~Game();
     SceneManager& GetSceneManager();
     void Close();
     void Run();
