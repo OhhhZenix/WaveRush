@@ -7,10 +7,6 @@
 
 namespace WaveRush {
 
-Game::Game() {}
-
-Game::~Game() {}
-
 SceneManager& Game::GetSceneManager() {
     return this->scene_manager;
 }
