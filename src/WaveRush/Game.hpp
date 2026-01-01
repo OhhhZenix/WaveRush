@@ -4,8 +4,6 @@
 
 namespace WaveRush {
 
-class Scene;
-
 class Game {
   public:
     SceneManager& GetSceneManager();
