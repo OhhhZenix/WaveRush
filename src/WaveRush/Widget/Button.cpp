@@ -1,7 +1,5 @@
 #include "WaveRush/Widget/Button.hpp"
 
-#include "raylib.h"
-
 namespace WaveRush {
 
 Button::Button(
