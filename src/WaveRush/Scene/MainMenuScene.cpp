@@ -1,9 +1,10 @@
 #include "WaveRush/Scene/MainMenuScene.hpp"
 
+#include <raylib.h>
+
 #include "WaveRush/Constants.hpp"
 #include "WaveRush/Scene/PlayScene.hpp"
 #include "WaveRush/Utils.hpp"
-#include "raylib.h"
 
 namespace WaveRush {
 
