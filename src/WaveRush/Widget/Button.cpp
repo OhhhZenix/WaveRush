@@ -58,6 +58,22 @@ int Button::GetHeight() const {
     return this->height;
 }
 
+void Button::SetX(int x) {
+    this->x = x;
+}
+
+void Button::SetY(int y) {
+    this->y = y;
+}
+
+void Button::SetWidth(int width) {
+    this->width = width;
+}
+
+void Button::SetHeight(int height) {
+    this->height = height;
+}
+
 void Button::Render() {
     DrawRectangle(
         this->x,

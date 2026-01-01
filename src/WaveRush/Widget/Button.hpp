@@ -23,6 +23,10 @@ class Button: public Widget {
     int GetY() const;
     int GetWidth() const;
     int GetHeight() const;
+    void SetX(int x);
+    void SetY(int y);
+    void SetWidth(int width);
+    void SetHeight(int height);
     void Render() override;
 
   private:
