@@ -24,14 +24,14 @@ void Game::GotoNextScene(Scene* scene) {
 }
 
 void Game::Close() {
-     this->should_close = true;
+    this->should_close = true;
 }
-
 
 void Game::Run() {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(GAME_WIDTH, GAME_HEIGHT, "Wave Rush");
     SetTargetFPS(TARGET_FPS);
+    SetExitKey(KEY_NULL);
 
     while (!WindowShouldClose()) {
         if (this->should_close)
