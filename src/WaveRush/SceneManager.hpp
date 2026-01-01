@@ -9,6 +9,7 @@ class Scene;
 
 class SceneManager {
   public:
+    bool hasScenes();
     Scene& GetCurrentScene();
     void GotoPreviousScene();
     void GotoNextScene(Scene* scene);

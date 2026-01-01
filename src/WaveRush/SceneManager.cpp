@@ -6,6 +6,10 @@
 
 namespace WaveRush {
 
+bool SceneManager::hasScenes() {
+    return !this->scenes.empty();
+}
+
 Scene& SceneManager::GetCurrentScene() {
     if (this->scenes.empty())
         throw std::runtime_error("SceneManager has no current scene");
