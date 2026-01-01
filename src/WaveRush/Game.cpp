@@ -7,20 +7,12 @@
 
 namespace WaveRush {
 
-Game::Game() {
-    this->scene.push(std::make_unique<MainMenuScene>());
-}
+Game::Game() {}
 
 Game::~Game() {}
 
-void Game::GotoPreviousScene() {
-    if (this->scene.size() <= 1)
-        return;
-    this->scene.pop();
-}
-
-void Game::GotoNextScene(Scene* scene) {
-    this->scene.emplace(scene);
+SceneManager& Game::GetSceneManager() {
+    return this->scene_manager;
 }
 
 void Game::Close() {
@@ -33,17 +25,19 @@ void Game::Run() {
     SetTargetFPS(TARGET_FPS);
     SetExitKey(KEY_NULL);
 
+    this->GetSceneManager().GotoNextScene(new MainMenuScene());
+
     while (!WindowShouldClose()) {
         if (this->should_close)
             break;
 
         // update loop
-        this->scene.top()->Update(*this);
+        this->GetSceneManager().GetCurrentScene().Update(*this);
 
         // draw loop
         BeginDrawing();
         ClearBackground(BLACK);
-        this->scene.top()->Render();
+        this->GetSceneManager().GetCurrentScene().Render();
         EndDrawing();
     }
 

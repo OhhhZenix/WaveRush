@@ -59,7 +59,7 @@ void MainMenuScene::Update(Game& game) {
     }
 
     if (this->play_button.IsLeftClicked()) {
-        game.GotoNextScene(new PlayScene());
+        game.GetSceneManager().GotoNextScene(new PlayScene());
     }
 
     if (this->exit_button.IsLeftClicked()) {

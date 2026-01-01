@@ -1,7 +1,6 @@
 #pragma once
 
-#include <memory>
-#include <stack>
+#include "WaveRush/SceneManager.hpp"
 
 namespace WaveRush {
 
@@ -11,14 +10,13 @@ class Game {
   public:
     Game();
     ~Game();
-    void GotoPreviousScene();
-    void GotoNextScene(Scene* scene);
+    SceneManager& GetSceneManager();
     void Close();
     void Run();
 
   private:
     bool should_close = false;
-    std::stack<std::unique_ptr<Scene>> scene;
+    SceneManager scene_manager;
 };
 
 } // namespace WaveRush
