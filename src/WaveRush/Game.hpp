@@ -6,6 +6,8 @@ namespace WaveRush {
 
 class Game {
   public:
+    Game();
+    ~Game();
     SceneManager& GetSceneManager();
     void Close();
     void Run();
