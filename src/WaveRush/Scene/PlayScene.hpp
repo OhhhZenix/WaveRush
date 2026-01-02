@@ -1,5 +1,6 @@
 #pragma once
 
+#include "WaveRush/EntityManager.hpp"
 #include "WaveRush/Scene.hpp"
 
 namespace WaveRush {
@@ -11,6 +12,7 @@ class PlayScene: public Scene {
     void Render() override;
 
   private:
+    EntityManager entity_manager;
 };
 
 } // namespace WaveRush
