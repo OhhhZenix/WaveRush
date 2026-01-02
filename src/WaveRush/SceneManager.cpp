@@ -26,4 +26,14 @@ void SceneManager::GotoNextScene(Scene* scene) {
     this->scenes.emplace(scene);
 }
 
+void SceneManager::Update(Game& game) {
+    if (this->HasScenes())
+        this->scenes.top()->Update(game);
+}
+
+void SceneManager::Render() {
+    if (this->HasScenes())
+        this->scenes.top()->Render();
+}
+
 } // namespace WaveRush
