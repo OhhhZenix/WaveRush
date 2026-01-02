@@ -32,14 +32,12 @@ void Game::Run() {
             break;
 
         // update loop
-        if (this->GetSceneManager().HasScenes())
-            this->GetSceneManager().GetCurrentScene().Update(*this);
+        this->GetSceneManager().Update(*this);
 
         // draw loop
         BeginDrawing();
         ClearBackground(BLACK);
-        if (this->GetSceneManager().HasScenes())
-            this->GetSceneManager().GetCurrentScene().Render();
+        this->GetSceneManager().Render();
         EndDrawing();
     }
 
