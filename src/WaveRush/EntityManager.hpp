@@ -14,6 +14,7 @@ using EntityList = std::vector<std::unique_ptr<Entity>>;
 class EntityManager {
   public:
     EntityList& GetEntities();
+    void AddEntity(Entity* entity);
     void Update(Game& game);
     void Render();
 
