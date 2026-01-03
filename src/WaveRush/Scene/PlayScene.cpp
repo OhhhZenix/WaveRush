@@ -14,7 +14,7 @@ void PlayScene::Update(Game& game) {
     if (!paused)
         entity_manager.Update(game);
 
-    if (IsKeyDown(KEY_ESCAPE))
+    if (IsKeyPressed(KEY_ESCAPE))
         this->paused = !paused;
 }
 
