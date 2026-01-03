@@ -6,7 +6,6 @@
 namespace WaveRush {
 
 class Game;
-
 class Entity;
 
 using EntityList = std::vector<std::unique_ptr<Entity>>;
