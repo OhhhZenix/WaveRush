@@ -74,6 +74,8 @@ void Button::SetHeight(int height) {
     this->height = height;
 }
 
+void Button::Update(Game& game) {}
+
 void Button::Render() {
     DrawRectangle(
         this->x,
