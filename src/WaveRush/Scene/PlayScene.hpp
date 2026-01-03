@@ -13,6 +13,7 @@ class PlayScene: public Scene {
 
   private:
     EntityManager entity_manager;
+    bool paused = false;
 };
 
 } // namespace WaveRush
