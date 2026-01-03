@@ -8,14 +8,16 @@ Button::Button(
     int width,
     int height,
     Color color,
-    Color hoverColor
+    Color hover_color,
+    ButtonCallback on_click
 ) {
     this->x = x;
     this->y = y;
     this->width = width;
     this->height = height;
     this->color = color;
-    this->hoverColor = hoverColor;
+    this->hover_color = hover_color;
+    this->on_click = on_click;
 }
 
 // Button::~Button() {}
@@ -74,7 +76,9 @@ void Button::SetHeight(int height) {
     this->height = height;
 }
 
-void Button::Update(Game& game) {}
+void Button::Update(Game& game) {
+    this->on_click(game);
+}
 
 void Button::Render() {
     DrawRectangle(
@@ -82,7 +86,7 @@ void Button::Render() {
         this->y,
         this->width,
         this->height,
-        this->IsHovered() ? this->hoverColor : this->color
+        this->IsHovered() ? this->hover_color : this->color
     );
 }
 
