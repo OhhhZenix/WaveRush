@@ -27,6 +27,7 @@ class Button: public Widget {
     void SetY(int y);
     void SetWidth(int width);
     void SetHeight(int height);
+    void Update(Game& game) override;
     void Render() override;
 
   private:
