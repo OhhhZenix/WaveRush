@@ -7,7 +7,7 @@ namespace WaveRush {
 
 class Widget {
   public:
-    virtual ~Widget();
+    virtual ~Widget() = default;
     virtual void Render() = 0;
     void AddChild(Widget* child);
 
