@@ -1,18 +1,14 @@
 #pragma once
 
-#include <memory>
-#include <vector>
-
 namespace WaveRush {
+
+class Game;
 
 class Widget {
   public:
     virtual ~Widget() = default;
+    virtual void Update(Game& game) = 0;
     virtual void Render() = 0;
-    void AddChild(Widget* child);
-
-  protected:
-    std::vector<std::unique_ptr<Widget>> children;
 };
 
 } // namespace WaveRush
