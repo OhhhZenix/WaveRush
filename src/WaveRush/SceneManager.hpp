@@ -6,7 +6,6 @@
 namespace WaveRush {
 
 class Scene;
-
 class Game;
 
 class SceneManager {
