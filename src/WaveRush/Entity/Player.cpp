@@ -1,6 +1,6 @@
 #include "WaveRush/Entity/Player.hpp"
 
-#include "raylib.h"
+#include <raylib.h>
 
 namespace WaveRush {
 
