@@ -1,7 +1,8 @@
 #include "WaveRush/Scene/PlayScene.hpp"
 
+#include <raylib.h>
+
 #include "WaveRush/Entity/Player.hpp"
-#include "raylib.h"
 
 namespace WaveRush {
 
