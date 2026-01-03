@@ -2,9 +2,13 @@
 
 #include <raylib.h>
 
+#include <functional>
+
 #include "WaveRush/Widget.hpp"
 
 namespace WaveRush {
+
+using ButtonCallback = std::function<void(Game&)>;
 
 class Button: public Widget {
   public:
@@ -14,7 +18,8 @@ class Button: public Widget {
         int width = 120,
         int height = 60,
         Color color = WHITE,
-        Color hoverColor = LIGHTGRAY
+        Color hoverColor = LIGHTGRAY,
+        ButtonCallback on_click = [](Game&) {}
     );
     bool IsHovered();
     bool IsLeftClicked();
@@ -36,7 +41,8 @@ class Button: public Widget {
     float width;
     float height;
     Color color;
-    Color hoverColor;
+    Color hover_color;
+    ButtonCallback on_click;
 };
 
 } // namespace WaveRush
