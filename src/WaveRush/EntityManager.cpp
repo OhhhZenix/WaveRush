@@ -13,15 +13,13 @@ void EntityManager::AddEntity(Entity* entity) {
 }
 
 void EntityManager::Update(Game& game) {
-    for (auto& entity : this->entities) {
+    for (auto& entity : this->entities)
         entity->Update(game);
-    }
 }
 
 void EntityManager::Render() {
-    for (auto& entity : this->entities) {
+    for (auto& entity : this->entities)
         entity->Render();
-    }
 }
 
 } // namespace WaveRush
