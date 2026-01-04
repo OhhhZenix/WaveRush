@@ -11,6 +11,38 @@ Player::Player(int x, int y, int width, int height) {
     this->height = height;
 }
 
+int Player::GetX() {
+    return this->x;
+}
+
+void Player::SetX(int x) {
+    this->x = x;
+}
+
+int Player::GetY() {
+    return this->y;
+}
+
+void Player::SetY(int y) {
+    this->y = y;
+}
+
+int Player::GetWidth() {
+    return this->width;
+}
+
+void Player::SetWidth(int width) {
+    this->width = width;
+}
+
+int Player::GetHeight() {
+    return this->height;
+}
+
+void Player::SetHeight(int height) {
+    this->height = height;
+}
+
 void Player::Update(Game& game) {
     if (IsKeyDown(KEY_A))
         this->x -= 1;
