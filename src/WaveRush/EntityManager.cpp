@@ -4,7 +4,7 @@
 
 namespace WaveRush {
 
-EntityList& EntityManager::GetEntities() {
+EntityManager::EntityList& EntityManager::GetEntities() {
     return this->entities;
 }
 
