@@ -1,8 +1,8 @@
 #pragma once
 
-#include "WaveRush/Game.hpp"
-
 namespace WaveRush {
+
+class Game;
 
 class Scene {
   public:
