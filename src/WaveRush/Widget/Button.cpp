@@ -9,7 +9,7 @@ Button::Button(
     int height,
     Color color,
     Color hover_color,
-    ButtonCallback on_click
+    Callback on_click
 ) {
     this->bounds.x = x;
     this->bounds.y = y;
