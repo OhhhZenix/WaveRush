@@ -37,35 +37,30 @@ MainMenuScene::MainMenuScene() {
     auto button_width = 180;
     auto button_height = 60;
     auto button_count = 2;
-    auto play_button = new Button(
-        (GAME_WIDTH - button_width) / 2,
-        (GAME_HEIGHT - (button_height * button_count)) / 2,
-        button_width,
-        button_height,
-        WHITE,
-        LIGHTGRAY,
-        [](Button& self, Game& game) {
-            if (!self.IsLeftClicked())
-                return;
+    auto play_button = new Button();
+    play_button->SetX((GAME_WIDTH - button_width) / 2);
+    play_button->SetY((GAME_HEIGHT - (button_height * button_count)) / 2);
+    play_button->SetWidth(button_width);
+    play_button->SetHeight(button_height);
+    play_button->SetOnClick([](Button& self, Game& game) {
+        if (!self.IsLeftClicked())
+            return;
 
-            game.GetSceneManager().GotoNextScene(new PlayScene());
-        }
+        game.GetSceneManager().GotoNextScene(new PlayScene());
+    });
+    auto exit_button = new Button();
+    exit_button->SetX(play_button->GetX());
+    exit_button->SetY(
+        play_button->GetY() + play_button->GetHeight() + button_gap
     );
-    // exit button
-    auto exit_button = new Button(
-        play_button->GetX(),
-        play_button->GetY() + play_button->GetHeight() + button_gap,
-        button_width,
-        button_height,
-        WHITE,
-        LIGHTGRAY,
-        [](Button& self, Game& game) {
-            if (!self.IsLeftClicked())
-                return;
+    exit_button->SetWidth(button_width);
+    exit_button->SetHeight(button_height);
+    exit_button->SetOnClick([](Button& self, Game& game) {
+        if (!self.IsLeftClicked())
+            return;
 
-            game.Close();
-        }
-    );
+        game.Close();
+    });
     this->widget_manager.AddWidget(play_button);
     this->widget_manager.AddWidget(exit_button);
 }
