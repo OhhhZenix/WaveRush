@@ -2,26 +2,6 @@
 
 namespace WaveRush {
 
-Button::Button(
-    int x,
-    int y,
-    int width,
-    int height,
-    Color color,
-    Color hover_color,
-    Callback on_click
-) {
-    this->bounds.x = x;
-    this->bounds.y = y;
-    this->bounds.width = width;
-    this->bounds.height = height;
-    this->color = color;
-    this->hover_color = hover_color;
-    this->on_click = on_click;
-}
-
-// Button::~Button() {}
-
 bool Button::IsHovered() {
     auto mouse_pos = GetMousePosition();
     return mouse_pos.x >= this->bounds.x
@@ -50,32 +30,36 @@ int Button::GetX() const {
     return this->bounds.x;
 }
 
-int Button::GetY() const {
-    return this->bounds.y;
-}
-
-int Button::GetWidth() const {
-    return this->bounds.width;
-}
-
-int Button::GetHeight() const {
-    return this->bounds.height;
-}
-
 void Button::SetX(int x) {
     this->bounds.x = x;
+}
+
+int Button::GetY() const {
+    return this->bounds.y;
 }
 
 void Button::SetY(int y) {
     this->bounds.y = y;
 }
 
+int Button::GetWidth() const {
+    return this->bounds.width;
+}
+
 void Button::SetWidth(int width) {
     this->bounds.width = width;
 }
 
+int Button::GetHeight() const {
+    return this->bounds.height;
+}
+
 void Button::SetHeight(int height) {
     this->bounds.height = height;
+}
+
+void Button::SetOnClick(Callback on_click) {
+    this->on_click = on_click;
 }
 
 void Button::Update(Game& game) {

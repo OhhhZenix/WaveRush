@@ -12,34 +12,37 @@ class Button: public Widget {
   public:
     using Callback = std::function<void(Button&, Game&)>;
 
-    Button(
-        int x = 0,
-        int y = 0,
-        int width = 120,
-        int height = 60,
-        Color color = WHITE,
-        Color hoverColor = LIGHTGRAY,
-        Callback on_click = [](Button&, Game&) {}
-    );
     bool IsHovered();
     bool IsLeftClicked();
     bool IsRightClicked();
+
     int GetX() const;
-    int GetY() const;
-    int GetWidth() const;
-    int GetHeight() const;
     void SetX(int x);
+
+    int GetY() const;
     void SetY(int y);
+
+    int GetWidth() const;
     void SetWidth(int width);
+
+    int GetHeight() const;
     void SetHeight(int height);
+
+    void SetOnClick(Callback on_click);
+
     void Update(Game& game) override;
     void Render() override;
 
   private:
-    Rectangle bounds;
-    Color color;
-    Color hover_color;
-    Callback on_click;
+    Rectangle bounds = {
+        .x = 0,
+        .y = 0,
+        .width = 24,
+        .height = 24,
+    };
+    Color color = WHITE;
+    Color hover_color = LIGHTGRAY;
+    Callback on_click = {};
 };
 
 } // namespace WaveRush
