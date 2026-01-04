@@ -3,6 +3,7 @@
 #include <raylib.h>
 
 #include "WaveRush/Constants.hpp"
+#include "WaveRush/Game.hpp"
 #include "WaveRush/Scene/PlayScene.hpp"
 #include "WaveRush/Utils.hpp"
 #include "WaveRush/Widget/Button.hpp"
