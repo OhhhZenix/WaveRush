@@ -45,35 +45,35 @@ bool Button::IsRightClicked() {
 }
 
 int Button::GetX() const {
-    return this->x;
+    return this->bounds.x;
 }
 
 int Button::GetY() const {
-    return this->y;
+    return this->bounds.y;
 }
 
 int Button::GetWidth() const {
-    return this->width;
+    return this->bounds.width;
 }
 
 int Button::GetHeight() const {
-    return this->height;
+    return this->bounds.height;
 }
 
 void Button::SetX(int x) {
-    this->x = x;
+    this->bounds.x = x;
 }
 
 void Button::SetY(int y) {
-    this->y = y;
+    this->bounds.y = y;
 }
 
 void Button::SetWidth(int width) {
-    this->width = width;
+    this->bounds.width = width;
 }
 
 void Button::SetHeight(int height) {
-    this->height = height;
+    this->bounds.height = height;
 }
 
 void Button::Update(Game& game) {
