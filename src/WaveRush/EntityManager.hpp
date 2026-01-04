@@ -3,10 +3,9 @@
 #include <memory>
 #include <vector>
 
-namespace WaveRush {
+#include "WaveRush/Entity.hpp"
 
-class Game;
-class Entity;
+namespace WaveRush {
 
 class EntityManager {
   public:

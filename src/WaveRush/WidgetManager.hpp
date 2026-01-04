@@ -3,10 +3,9 @@
 #include <memory>
 #include <vector>
 
-namespace WaveRush {
+#include "WaveRush/Widget.hpp"
 
-class Game;
-class Widget;
+namespace WaveRush {
 
 class WidgetManager {
   public:

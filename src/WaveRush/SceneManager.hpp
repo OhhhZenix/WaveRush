@@ -3,10 +3,9 @@
 #include <memory>
 #include <stack>
 
-namespace WaveRush {
+#include "WaveRush/Scene.hpp"
 
-class Scene;
-class Game;
+namespace WaveRush {
 
 class SceneManager {
   public:
