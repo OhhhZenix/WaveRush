@@ -36,10 +36,7 @@ class Button: public Widget {
     void Render() override;
 
   private:
-    float x;
-    float y;
-    float width;
-    float height;
+    Rectangle bounds;
     Color color;
     Color hover_color;
     ButtonCallback on_click;
