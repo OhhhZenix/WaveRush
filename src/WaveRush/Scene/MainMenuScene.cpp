@@ -48,6 +48,7 @@ MainMenuScene::MainMenuScene() {
 
         game.GetSceneManager().GotoNextScene(new PlayScene());
     });
+    play_button->SetText("Play");
     auto exit_button = new Button();
     exit_button->SetX(play_button->GetX());
     exit_button->SetY(
@@ -61,6 +62,7 @@ MainMenuScene::MainMenuScene() {
 
         game.Close();
     });
+    exit_button->SetText("Quit");
     this->widget_manager.AddWidget(play_button);
     this->widget_manager.AddWidget(exit_button);
 }

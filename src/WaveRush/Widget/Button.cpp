@@ -62,6 +62,14 @@ void Button::SetOnClick(Callback on_click) {
     this->on_click = on_click;
 }
 
+void Button::SetText(std::string text) {
+    this->text = text;
+}
+
+void Button::SetFontSize(int font_size) {
+    this->font_size = font_size;
+}
+
 void Button::Update(Game& game) {
     this->on_click(*this, game);
 }
@@ -74,6 +82,18 @@ void Button::Render() {
         this->bounds.height,
         this->IsHovered() ? this->hover_color : this->color
     );
+
+    if (!text.empty()) {
+        int text_width = MeasureText(text.c_str(), this->font_size);
+        DrawText(
+            text.c_str(),
+            bounds.x + bounds.width / 2 - static_cast<float>(text_width) / 2,
+            bounds.y + bounds.height / 2
+                - static_cast<float>(this->font_size) / 2,
+            this->font_size,
+            BLACK
+        );
+    }
 }
 
 } // namespace WaveRush

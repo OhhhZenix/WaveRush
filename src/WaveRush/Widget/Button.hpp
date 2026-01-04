@@ -3,6 +3,7 @@
 #include <raylib.h>
 
 #include <functional>
+#include <string>
 
 #include "WaveRush/Widget.hpp"
 
@@ -29,6 +30,8 @@ class Button: public Widget {
     void SetHeight(int height);
 
     void SetOnClick(Callback on_click);
+    void SetText(std::string text);
+    void SetFontSize(int font_size);
 
     void Update(Game& game) override;
     void Render() override;
@@ -43,6 +46,8 @@ class Button: public Widget {
     Color color = WHITE;
     Color hover_color = LIGHTGRAY;
     Callback on_click = {};
+    std::string text = "";
+    int font_size = 12;
 };
 
 } // namespace WaveRush
