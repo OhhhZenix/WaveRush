@@ -5,6 +5,7 @@
 #include "WaveRush/Constants.hpp"
 #include "WaveRush/Scene/PlayScene.hpp"
 #include "WaveRush/Utils.hpp"
+#include "WaveRush/Widget/Button.hpp"
 
 namespace WaveRush {
 
@@ -35,16 +36,37 @@ MainMenuScene::MainMenuScene() {
     auto button_width = 180;
     auto button_height = 60;
     auto button_count = 2;
-    this->play_button.SetX((GAME_WIDTH - button_width) / 2);
-    this->play_button.SetY((GAME_HEIGHT - (button_height * button_count)) / 2);
-    this->play_button.SetWidth(button_width);
-    this->play_button.SetHeight(button_height);
-    this->exit_button.SetX(this->play_button.GetX());
-    this->exit_button.SetY(
-        this->play_button.GetY() + this->play_button.GetHeight() + button_gap
+    auto play_button = new Button(
+        (GAME_WIDTH - button_width) / 2,
+        (GAME_HEIGHT - (button_height * button_count)) / 2,
+        button_width,
+        button_height,
+        WHITE,
+        LIGHTGRAY,
+        [](Button& self, Game& game) {
+            if (!self.IsLeftClicked())
+                return;
+
+            game.GetSceneManager().GotoNextScene(new PlayScene());
+        }
     );
-    this->exit_button.SetWidth(button_width);
-    this->exit_button.SetHeight(button_height);
+    // exit button
+    auto exit_button = new Button(
+        play_button->GetX(),
+        play_button->GetY() + play_button->GetHeight() + button_gap,
+        button_width,
+        button_height,
+        WHITE,
+        LIGHTGRAY,
+        [](Button& self, Game& game) {
+            if (!self.IsLeftClicked())
+                return;
+
+            game.Close();
+        }
+    );
+    this->widget_manager.AddWidget(play_button);
+    this->widget_manager.AddWidget(exit_button);
 }
 
 void MainMenuScene::Update(Game& game) {
@@ -58,21 +80,15 @@ void MainMenuScene::Update(Game& game) {
         rect.y += rect.vel_y;
     }
 
-    if (this->play_button.IsLeftClicked()) {
-        game.GetSceneManager().GotoNextScene(new PlayScene());
-    }
-
-    if (this->exit_button.IsLeftClicked()) {
-        game.Close();
-    }
+    this->widget_manager.Update(game);
 }
 
 void MainMenuScene::Render() {
     for (auto& rect : this->rects) {
         DrawRectangle(rect.x, rect.y, rect.w, rect.h, rect.color);
     }
-    this->play_button.Render();
-    this->exit_button.Render();
+
+    this->widget_manager.Render();
 }
 
 } // namespace WaveRush

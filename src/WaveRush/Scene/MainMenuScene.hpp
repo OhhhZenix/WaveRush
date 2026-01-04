@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "WaveRush/Scene.hpp"
-#include "WaveRush/Widget/Button.hpp"
+#include "WaveRush/WidgetManager.hpp"
 
 namespace WaveRush {
 
@@ -27,8 +27,7 @@ class MainMenuScene: public Scene {
     };
 
     std::vector<Rect> rects;
-    Button play_button;
-    Button exit_button;
+    WidgetManager widget_manager;
 };
 
 } // namespace WaveRush
