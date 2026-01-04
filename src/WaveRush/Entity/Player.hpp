@@ -6,7 +6,7 @@ namespace WaveRush {
 
 class Player: public Entity {
   public:
-    Player(int x = 0, int y = 0, int width = 32, int height = 32);
+    Player(int x = 0, int y = 0, int width = 24, int height = 24);
     void Update(Game& game) override;
     void Render() override;
 
