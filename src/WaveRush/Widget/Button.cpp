@@ -11,10 +11,10 @@ Button::Button(
     Color hover_color,
     ButtonCallback on_click
 ) {
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
+    this->bounds.x = x;
+    this->bounds.y = y;
+    this->bounds.width = width;
+    this->bounds.height = height;
     this->color = color;
     this->hover_color = hover_color;
     this->on_click = on_click;
@@ -24,8 +24,10 @@ Button::Button(
 
 bool Button::IsHovered() {
     auto mouse_pos = GetMousePosition();
-    return mouse_pos.x >= this->x && mouse_pos.x <= this->x + this->width
-        && mouse_pos.y >= this->y && mouse_pos.y <= this->y + this->height;
+    return mouse_pos.x >= this->bounds.x
+        && mouse_pos.x <= this->bounds.x + this->bounds.width
+        && mouse_pos.y >= this->bounds.y
+        && mouse_pos.y <= this->bounds.y + this->bounds.height;
 }
 
 bool Button::IsLeftClicked() {
@@ -77,15 +79,15 @@ void Button::SetHeight(int height) {
 }
 
 void Button::Update(Game& game) {
-    this->on_click(game);
+    this->on_click(*this, game);
 }
 
 void Button::Render() {
     DrawRectangle(
-        this->x,
-        this->y,
-        this->width,
-        this->height,
+        this->bounds.x,
+        this->bounds.y,
+        this->bounds.width,
+        this->bounds.height,
         this->IsHovered() ? this->hover_color : this->color
     );
 }

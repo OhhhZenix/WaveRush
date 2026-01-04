@@ -8,9 +8,9 @@
 
 namespace WaveRush {
 
-using ButtonCallback = std::function<void(Game&)>;
-
 class Button: public Widget {
+    using ButtonCallback = std::function<void(Button&, Game&)>;
+
   public:
     Button(
         int x = 0,
@@ -19,7 +19,7 @@ class Button: public Widget {
         int height = 60,
         Color color = WHITE,
         Color hoverColor = LIGHTGRAY,
-        ButtonCallback on_click = [](Game&) {}
+        ButtonCallback on_click = [](Button&, Game&) {}
     );
     bool IsHovered();
     bool IsLeftClicked();
