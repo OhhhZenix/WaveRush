@@ -28,6 +28,7 @@ add_executable(
     src/WaveRush/Widget.cpp
     src/WaveRush/WidgetManager.cpp
     src/WaveRush/Widget/Button.cpp
+    src/WaveRush/Widget/Label.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
