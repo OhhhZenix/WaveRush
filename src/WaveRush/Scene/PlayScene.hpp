@@ -2,6 +2,7 @@
 
 #include "WaveRush/EntityManager.hpp"
 #include "WaveRush/Scene.hpp"
+#include "WaveRush/WidgetManager.hpp"
 
 namespace WaveRush {
 
@@ -13,6 +14,7 @@ class PlayScene: public Scene {
 
   private:
     EntityManager entity_manager;
+    WidgetManager widget_manager;
     bool paused = false;
 };
 
