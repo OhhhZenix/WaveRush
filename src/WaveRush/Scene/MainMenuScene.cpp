@@ -37,6 +37,7 @@ MainMenuScene::MainMenuScene() {
     auto button_width = 180;
     auto button_height = 60;
     auto button_count = 2;
+    auto button_font_size = 24;
     auto play_button = new Button();
     play_button->SetX((GAME_WIDTH - button_width) / 2);
     play_button->SetY((GAME_HEIGHT - (button_height * button_count)) / 2);
@@ -49,6 +50,7 @@ MainMenuScene::MainMenuScene() {
         game.GetSceneManager().GotoNextScene(new PlayScene());
     });
     play_button->SetText("Play");
+    play_button->SetFontSize(button_font_size);
     auto exit_button = new Button();
     exit_button->SetX(play_button->GetX());
     exit_button->SetY(
@@ -63,6 +65,7 @@ MainMenuScene::MainMenuScene() {
         game.Close();
     });
     exit_button->SetText("Quit");
+    exit_button->SetFontSize(button_font_size);
     this->widget_manager.AddWidget(play_button);
     this->widget_manager.AddWidget(exit_button);
 }
