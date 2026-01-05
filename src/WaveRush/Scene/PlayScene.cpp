@@ -25,11 +25,10 @@ void PlayScene::Update(Game& game) {
     if (IsKeyPressed(KEY_ESCAPE))
         this->paused = !paused;
 
-    if (!paused)
-        entity_manager.Update(game);
-
     if (paused)
         widget_manager.Update(game);
+    else
+        entity_manager.Update(game);
 }
 
 void PlayScene::Render() {
