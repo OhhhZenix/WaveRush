@@ -7,6 +7,7 @@
 #include "WaveRush/Scene/PlayScene.hpp"
 #include "WaveRush/Utils.hpp"
 #include "WaveRush/Widget/Button.hpp"
+#include "WaveRush/Widget/Label.hpp"
 
 namespace WaveRush {
 
@@ -32,6 +33,14 @@ MainMenuScene::MainMenuScene() {
             (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_y,
         });
     }
+
+    auto game_title = new Label();
+    game_title->SetText("Wave Rush");
+    game_title->SetFontSize(48);
+    game_title->SetColor(WHITE);
+    game_title->SetX((GAME_WIDTH - (48 * 5)) / 2);
+    game_title->SetY(40);
+    this->widget_manager.AddWidget(game_title);
 
     auto button_gap = 20;
     auto button_width = 180;
