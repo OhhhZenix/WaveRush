@@ -3,6 +3,7 @@
 #include <raylib.h>
 
 #include "WaveRush/Constants.hpp"
+#include "WaveRush/Entity/Bouncer.hpp"
 #include "WaveRush/Game.hpp"
 #include "WaveRush/Scene/PlayScene.hpp"
 #include "WaveRush/Utils.hpp"
@@ -15,23 +16,34 @@ MainMenuScene::MainMenuScene() {
     auto w = 16.f;
     auto h = 16.f;
     for (int i = 0; i < 50; i++) {
+        // generate color
         auto color = Color {
             GenerateRandomRange<unsigned char>(0, 255),
             GenerateRandomRange<unsigned char>(0, 255),
             GenerateRandomRange<unsigned char>(0, 255),
             255,
         };
+
+        // generate speed
         auto speed_x = GenerateRandomRange(.5f, 2.f);
         auto speed_y = GenerateRandomRange(.5f, 2.f);
-        this->rects.push_back({
-            GenerateRandomRange<float>(0 + w, GAME_WIDTH - w),
-            GenerateRandomRange<float>(0 + h, GAME_HEIGHT - h),
-            w,
-            h,
-            color,
-            (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_x,
-            (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_y,
-        });
+
+        // create entity
+        auto entity = new Bouncer();
+        entity->SetX(GenerateRandomRange<float>(0 + w, GAME_WIDTH - w));
+        entity->SetY(GenerateRandomRange<float>(0 + h, GAME_HEIGHT - h));
+        entity->SetWidth(w);
+        entity->SetHeight(h);
+        entity->SetVelocityX(
+            (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_x
+        );
+        entity->SetVelocityY(
+            (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_y
+        );
+        entity->SetColor(color);
+
+        // add entity
+        this->entity_manager.AddEntity(entity);
     }
 
     auto game_title = new Label();
@@ -80,24 +92,12 @@ MainMenuScene::MainMenuScene() {
 }
 
 void MainMenuScene::Update(Game& game) {
-    for (auto& rect : this->rects) {
-        if (rect.x <= 0 || rect.x >= GAME_WIDTH - rect.w)
-            rect.vel_x *= -1.f;
-        if (rect.y <= 0 || rect.y >= GAME_HEIGHT - rect.h)
-            rect.vel_y *= -1.f;
-
-        rect.x += rect.vel_x;
-        rect.y += rect.vel_y;
-    }
-
+    this->entity_manager.Update(game);
     this->widget_manager.Update(game);
 }
 
 void MainMenuScene::Render() {
-    for (auto& rect : this->rects) {
-        DrawRectangle(rect.x, rect.y, rect.w, rect.h, rect.color);
-    }
-
+    this->entity_manager.Render();
     this->widget_manager.Render();
 }
 

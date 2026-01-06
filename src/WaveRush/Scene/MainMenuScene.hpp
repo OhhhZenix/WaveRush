@@ -2,8 +2,7 @@
 
 #include <raylib.h>
 
-#include <vector>
-
+#include "WaveRush/EntityManager.hpp"
 #include "WaveRush/Scene.hpp"
 #include "WaveRush/WidgetManager.hpp"
 
@@ -16,17 +15,7 @@ class MainMenuScene: public Scene {
     void Render() override;
 
   private:
-    struct Rect {
-        float x;
-        float y;
-        float w;
-        float h;
-        Color color;
-        float vel_x;
-        float vel_y;
-    };
-
-    std::vector<Rect> rects;
+    EntityManager entity_manager;
     WidgetManager widget_manager;
 };
 
