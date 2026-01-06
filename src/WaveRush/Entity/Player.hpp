@@ -6,28 +6,26 @@ namespace WaveRush {
 
 class Player: public Entity {
   public:
-    Player(int x = 0, int y = 0, int width = 24, int height = 24);
+    float GetX();
+    void SetX(float x);
 
-    int GetX();
-    void SetX(int x);
+    float GetY();
+    void SetY(float y);
 
-    int GetY();
-    void SetY(int y);
+    float GetWidth();
+    void SetWidth(float width);
 
-    int GetWidth();
-    void SetWidth(int width);
-
-    int GetHeight();
-    void SetHeight(int height);
+    float GetHeight();
+    void SetHeight(float height);
 
     void Update(Game& game) override;
     void Render() override;
 
   private:
-    int x;
-    int y;
-    int width;
-    int height;
+    float x = 0.f;
+    float y = 0.f;
+    float width = 24.f;
+    float height = 24.f;
 };
 
 } // namespace WaveRush

@@ -4,54 +4,47 @@
 
 namespace WaveRush {
 
-Player::Player(int x, int y, int width, int height) {
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
-}
-
-int Player::GetX() {
+float Player::GetX() {
     return this->x;
 }
 
-void Player::SetX(int x) {
+void Player::SetX(float x) {
     this->x = x;
 }
 
-int Player::GetY() {
+float Player::GetY() {
     return this->y;
 }
 
-void Player::SetY(int y) {
+void Player::SetY(float y) {
     this->y = y;
 }
 
-int Player::GetWidth() {
+float Player::GetWidth() {
     return this->width;
 }
 
-void Player::SetWidth(int width) {
+void Player::SetWidth(float width) {
     this->width = width;
 }
 
-int Player::GetHeight() {
+float Player::GetHeight() {
     return this->height;
 }
 
-void Player::SetHeight(int height) {
+void Player::SetHeight(float height) {
     this->height = height;
 }
 
 void Player::Update(Game& game) {
     if (IsKeyDown(KEY_A))
-        this->x -= 1;
+        this->x -= 1.f;
     if (IsKeyDown(KEY_D))
-        this->x += 1;
+        this->x += 1.f;
     if (IsKeyDown(KEY_W))
-        this->y -= 1;
+        this->y -= 1.f;
     if (IsKeyDown(KEY_S))
-        this->y += 1;
+        this->y += 1.f;
 }
 
 void Player::Render() {
