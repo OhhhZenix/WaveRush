@@ -4,35 +4,35 @@
 
 namespace WaveRush {
 
-int Bouncer::GetX() {
+float Bouncer::GetX() {
     return this->bounds.x;
 }
 
-void Bouncer::SetX(int x) {
+void Bouncer::SetX(float x) {
     this->bounds.x = x;
 }
 
-int Bouncer::GetY() {
+float Bouncer::GetY() {
     return this->bounds.y;
 }
 
-void Bouncer::SetY(int y) {
+void Bouncer::SetY(float y) {
     this->bounds.y = y;
 }
 
-int Bouncer::GetWidth() {
+float Bouncer::GetWidth() {
     return this->bounds.width;
 }
 
-void Bouncer::SetWidth(int width) {
+void Bouncer::SetWidth(float width) {
     this->bounds.width = width;
 }
 
-int Bouncer::GetHeight() {
+float Bouncer::GetHeight() {
     return this->bounds.height;
 }
 
-void Bouncer::SetHeight(int height) {
+void Bouncer::SetHeight(float height) {
     this->bounds.height = height;
 }
 
@@ -40,11 +40,11 @@ void Bouncer::SetColor(Color color) {
     this->color = color;
 }
 
-void Bouncer::SetVelocityX(int velocity_x) {
+void Bouncer::SetVelocityX(float velocity_x) {
     this->velocity_x = velocity_x;
 }
 
-void Bouncer::SetVelocityY(int velocity_y) {
+void Bouncer::SetVelocityY(float velocity_y) {
     this->velocity_y = velocity_y;
 }
 

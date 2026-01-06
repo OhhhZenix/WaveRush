@@ -8,22 +8,22 @@ namespace WaveRush {
 
 class Bouncer: public Entity {
   public:
-    int GetX();
-    void SetX(int x);
+    float GetX();
+    void SetX(float x);
 
-    int GetY();
-    void SetY(int y);
+    float GetY();
+    void SetY(float y);
 
-    int GetWidth();
-    void SetWidth(int width);
+    float GetWidth();
+    void SetWidth(float width);
 
-    int GetHeight();
-    void SetHeight(int height);
+    float GetHeight();
+    void SetHeight(float height);
 
     void SetColor(Color color);
 
-    void SetVelocityX(int velocity_x);
-    void SetVelocityY(int velocity_y);
+    void SetVelocityX(float velocity_x);
+    void SetVelocityY(float velocity_y);
 
     void Update(Game& game) override;
     void Render() override;
@@ -35,8 +35,8 @@ class Bouncer: public Entity {
         .width = 16,
         .height = 16,
     };
-    int velocity_x = 1;
-    int velocity_y = 1;
+    float velocity_x = 1.f;
+    float velocity_y = 1.f;
     Color color = WHITE;
 };
 
