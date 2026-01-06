@@ -52,7 +52,7 @@ void Player::Update(Game& game) {
 }
 
 void Player::Render() {
-    DrawRectangle(this->x, this->y, this->width, this->height, RED);
+    DrawRectangle(this->x, this->y, this->width, this->height, this->color);
 }
 
 } // namespace WaveRush
