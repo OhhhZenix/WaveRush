@@ -36,6 +36,10 @@ void Player::SetHeight(float height) {
     this->height = height;
 }
 
+void Player::SetColor(Color color) {
+    this->color = color;
+}
+
 void Player::Update(Game& game) {
     if (IsKeyDown(KEY_A))
         this->x -= 1.f;

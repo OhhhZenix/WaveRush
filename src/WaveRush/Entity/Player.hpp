@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WaveRush/Entity.hpp"
+#include "raylib.h"
 
 namespace WaveRush {
 
@@ -18,6 +19,8 @@ class Player: public Entity {
     float GetHeight();
     void SetHeight(float height);
 
+    void SetColor(Color color);
+
     void Update(Game& game) override;
     void Render() override;
 
@@ -26,6 +29,7 @@ class Player: public Entity {
     float y = 0.f;
     float width = 24.f;
     float height = 24.f;
+    Color color = WHITE;
 };
 
 } // namespace WaveRush
