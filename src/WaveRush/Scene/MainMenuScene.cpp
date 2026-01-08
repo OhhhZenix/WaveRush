@@ -29,21 +29,18 @@ MainMenuScene::MainMenuScene() {
         auto speed_y = GenerateRandomRange(.5f, 2.f);
 
         // create entity
-        auto entity = new Bouncer();
-        entity->SetX(GenerateRandomRange<float>(0 + w, GAME_WIDTH - w));
-        entity->SetY(GenerateRandomRange<float>(0 + h, GAME_HEIGHT - h));
-        entity->SetWidth(w);
-        entity->SetHeight(h);
-        entity->SetVelocityX(
+        auto& entity = this->entity_manager.AddEntity<Bouncer>();
+        entity.SetX(GenerateRandomRange<float>(0 + w, GAME_WIDTH - w));
+        entity.SetY(GenerateRandomRange<float>(0 + h, GAME_HEIGHT - h));
+        entity.SetWidth(w);
+        entity.SetHeight(h);
+        entity.SetVelocityX(
             (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_x
         );
-        entity->SetVelocityY(
+        entity.SetVelocityY(
             (GenerateRandomRange<int>(0, 1) ? -1.f : 1.f) * speed_y
         );
-        entity->SetColor(color);
-
-        // add entity
-        this->entity_manager.AddEntity(entity);
+        entity.SetColor(color);
     }
 
     auto game_title = new Label();

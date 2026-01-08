@@ -3,6 +3,7 @@
 #include <raylib.h>
 
 #include "WaveRush/Constants.hpp"
+#include "WaveRush/Entity/Bouncer.hpp"
 #include "WaveRush/Entity/Player.hpp"
 #include "WaveRush/Game.hpp"
 #include "WaveRush/Widget.hpp"
@@ -11,7 +12,12 @@
 namespace WaveRush {
 
 PlayScene::PlayScene() {
-    entity_manager.AddEntity(new Player());
+    entity_manager.AddEntity<Player>();
+    auto& bouncer = entity_manager.AddEntity<Bouncer>();
+    bouncer.SetX(20);
+    bouncer.SetY(20);
+    bouncer.SetVelocityX(5);
+    bouncer.SetVelocityY(5);
 
     auto back_button = new Button();
     back_button->SetX((GAME_WIDTH - 180) / 2);
