@@ -7,10 +7,12 @@
 namespace WaveRush {
 
 template<typename T>
-T GenerateRandomRange(T min, T max) {
-    static std::mt19937 rng(static_cast<unsigned>(
-        std::chrono::system_clock::now().time_since_epoch().count()
-    ));
+auto GenerateRandomRange(T min, T max) -> T {
+    static std::mt19937 rng(
+        static_cast<unsigned>(
+            std::chrono::system_clock::now().time_since_epoch().count()
+        )
+    );
 
     if constexpr (std::is_floating_point_v<T>) {
         std::uniform_real_distribution<T> dist(min, max);

@@ -7,19 +7,15 @@
 
 namespace WaveRush {
 
-Game::Game() {}
-
-Game::~Game() {}
-
-SceneManager& Game::GetSceneManager() {
+auto Game::GetSceneManager() -> SceneManager& {
     return this->scene_manager;
 }
 
-void Game::Close() {
+auto Game::Close() -> void {
     this->should_close = true;
 }
 
-void Game::Run() {
+auto Game::Run() -> void {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(GAME_WIDTH, GAME_HEIGHT, "Wave Rush");
     SetTargetFPS(TARGET_FPS);

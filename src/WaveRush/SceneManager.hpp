@@ -9,12 +9,12 @@ namespace WaveRush {
 
 class SceneManager {
   public:
-    bool HasScenes();
-    Scene& GetCurrentScene();
-    void GotoPreviousScene();
-    void GotoNextScene(Scene* scene);
-    void Update(Game& game);
-    void Render();
+    auto HasScenes() const -> bool;
+    auto GetCurrentScene() -> Scene&;
+    auto GotoPreviousScene() -> void;
+    auto GotoNextScene(Scene* scene) -> void;
+    auto Update(Game& game) -> void;
+    auto Render() -> void;
 
   private:
     std::stack<std::unique_ptr<Scene>> scenes;

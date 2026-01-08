@@ -27,7 +27,7 @@ PlayScene::PlayScene() {
     widget_manager.AddWidget(back_button);
 }
 
-void PlayScene::Update(Game& game) {
+auto PlayScene::Update(Game& game) -> void {
     if (IsKeyPressed(KEY_ESCAPE))
         this->paused = !paused;
 
@@ -37,7 +37,7 @@ void PlayScene::Update(Game& game) {
         entity_manager.Update(game);
 }
 
-void PlayScene::Render() {
+auto PlayScene::Render() -> void {
     entity_manager.Render();
 
     if (paused)

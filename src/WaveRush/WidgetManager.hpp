@@ -9,9 +9,9 @@ namespace WaveRush {
 
 class WidgetManager {
   public:
-    void AddWidget(Widget* widget);
-    void Update(Game& game);
-    void Render();
+    auto AddWidget(Widget* widget) -> void;
+    auto Update(Game& game) -> void;
+    auto Render() -> void;
 
   private:
     std::vector<std::unique_ptr<Widget>> widgets;

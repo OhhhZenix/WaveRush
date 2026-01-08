@@ -2,7 +2,7 @@
 
 namespace WaveRush {
 
-bool Button::IsHovered() {
+auto Button::IsHovered() const -> bool {
     auto mouse_pos = GetMousePosition();
     return mouse_pos.x >= this->bounds.x
         && mouse_pos.x <= this->bounds.x + this->bounds.width
@@ -10,7 +10,7 @@ bool Button::IsHovered() {
         && mouse_pos.y <= this->bounds.y + this->bounds.height;
 }
 
-bool Button::IsLeftClicked() {
+auto Button::IsLeftClicked() const -> bool {
     if (!this->IsHovered())
         return false;
     if (!IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
@@ -18,7 +18,7 @@ bool Button::IsLeftClicked() {
     return true;
 }
 
-bool Button::IsRightClicked() {
+auto Button::IsRightClicked() const -> bool {
     if (!this->IsHovered())
         return false;
     if (!IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
@@ -26,55 +26,55 @@ bool Button::IsRightClicked() {
     return true;
 }
 
-int Button::GetX() const {
+auto Button::GetX() const -> int {
     return this->bounds.x;
 }
 
-void Button::SetX(int x) {
+auto Button::SetX(int x) -> void {
     this->bounds.x = x;
 }
 
-int Button::GetY() const {
+auto Button::GetY() const -> int {
     return this->bounds.y;
 }
 
-void Button::SetY(int y) {
+auto Button::SetY(int y) -> void {
     this->bounds.y = y;
 }
 
-int Button::GetWidth() const {
+auto Button::GetWidth() const -> int {
     return this->bounds.width;
 }
 
-void Button::SetWidth(int width) {
+auto Button::SetWidth(int width) -> void {
     this->bounds.width = width;
 }
 
-int Button::GetHeight() const {
+auto Button::GetHeight() const -> int {
     return this->bounds.height;
 }
 
-void Button::SetHeight(int height) {
+auto Button::SetHeight(int height) -> void {
     this->bounds.height = height;
 }
 
-void Button::SetOnClick(Callback on_click) {
+auto Button::SetOnClick(Callback on_click) -> void {
     this->on_click = on_click;
 }
 
-void Button::SetText(std::string text) {
+auto Button::SetText(std::string text) -> void {
     this->text = text;
 }
 
-void Button::SetFontSize(int font_size) {
+auto Button::SetFontSize(int font_size) -> void {
     this->font_size = font_size;
 }
 
-void Button::Update(Game& game) {
+auto Button::Update(Game& game) -> void {
     this->on_click(*this, game);
 }
 
-void Button::Render() {
+auto Button::Render() -> void {
     DrawRectangle(
         this->bounds.x,
         this->bounds.y,

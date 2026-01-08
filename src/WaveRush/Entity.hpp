@@ -7,8 +7,8 @@ class Game;
 class Entity {
   public:
     virtual ~Entity() = default;
-    virtual void Update(Game& game) = 0;
-    virtual void Render() = 0;
+    virtual auto Update(Game& game) -> void = 0;
+    virtual auto Render() -> void = 0;
 };
 
 } // namespace WaveRush

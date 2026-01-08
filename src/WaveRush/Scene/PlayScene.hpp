@@ -9,8 +9,8 @@ namespace WaveRush {
 class PlayScene: public Scene {
   public:
     PlayScene();
-    void Update(Game& game) override;
-    void Render() override;
+    auto Update(Game& game) -> void override;
+    auto Render() -> void override;
 
   private:
     EntityManager entity_manager;

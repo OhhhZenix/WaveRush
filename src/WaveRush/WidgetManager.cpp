@@ -4,16 +4,16 @@
 
 namespace WaveRush {
 
-void WidgetManager::AddWidget(Widget* widget) {
+auto WidgetManager::AddWidget(Widget* widget) -> void {
     this->widgets.emplace_back(widget);
 }
 
-void WidgetManager::Update(Game& game) {
+auto WidgetManager::Update(Game& game) -> void {
     for (auto& widget : this->widgets)
         widget->Update(game);
 }
 
-void WidgetManager::Render() {
+auto WidgetManager::Render() -> void {
     for (auto& widget : this->widgets)
         widget->Render();
 }

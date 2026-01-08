@@ -7,19 +7,19 @@ namespace WaveRush {
 
 class Player: public Entity {
   public:
-    float GetX();
-    void SetX(float x);
+    auto GetX() const -> float;
+    auto SetX(float x) -> void;
 
-    float GetY();
-    void SetY(float y);
+    auto GetY() const -> float;
+    auto SetY(float y) -> void;
 
-    float GetWidth();
-    void SetWidth(float width);
+    auto GetWidth() const -> float;
+    auto SetWidth(float width) -> void;
 
-    float GetHeight();
-    void SetHeight(float height);
+    auto GetHeight() const -> float;
+    auto SetHeight(float height) -> void;
 
-    void SetColor(Color color);
+    auto SetColor(Color color) -> void;
 
     void Update(Game& game) override;
     void Render() override;

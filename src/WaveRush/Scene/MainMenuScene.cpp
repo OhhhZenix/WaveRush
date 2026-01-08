@@ -91,12 +91,12 @@ MainMenuScene::MainMenuScene() {
     this->widget_manager.AddWidget(exit_button);
 }
 
-void MainMenuScene::Update(Game& game) {
+auto MainMenuScene::Update(Game& game) -> void {
     this->entity_manager.Update(game);
     this->widget_manager.Update(game);
 }
 
-void MainMenuScene::Render() {
+auto MainMenuScene::Render() -> void {
     this->entity_manager.Render();
     this->widget_manager.Render();
 }

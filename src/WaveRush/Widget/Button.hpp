@@ -13,28 +13,28 @@ class Button: public Widget {
   public:
     using Callback = std::function<void(Button&, Game&)>;
 
-    bool IsHovered();
-    bool IsLeftClicked();
-    bool IsRightClicked();
+    auto IsHovered() const -> bool;
+    auto IsLeftClicked() const -> bool;
+    auto IsRightClicked() const -> bool;
 
-    int GetX() const;
-    void SetX(int x);
+    auto GetX() const -> int;
+    auto SetX(int x) -> void;
 
-    int GetY() const;
-    void SetY(int y);
+    auto GetY() const -> int;
+    auto SetY(int y) -> void;
 
-    int GetWidth() const;
-    void SetWidth(int width);
+    auto GetWidth() const -> int;
+    auto SetWidth(int width) -> void;
 
-    int GetHeight() const;
-    void SetHeight(int height);
+    auto GetHeight() const -> int;
+    auto SetHeight(int height) -> void;
 
-    void SetOnClick(Callback on_click);
-    void SetText(std::string text);
-    void SetFontSize(int font_size);
+    auto SetOnClick(Callback on_click) -> void;
+    auto SetText(std::string text) -> void;
+    auto SetFontSize(int font_size) -> void;
 
-    void Update(Game& game) override;
-    void Render() override;
+    auto Update(Game& game) -> void override;
+    auto Render() -> void override;
 
   private:
     Rectangle bounds = {

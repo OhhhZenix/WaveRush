@@ -4,20 +4,20 @@
 
 namespace WaveRush {
 
-EntityManager::EntityList& EntityManager::GetEntities() {
+auto EntityManager::GetEntities() -> EntityManager::EntityList& {
     return this->entities;
 }
 
-void EntityManager::AddEntity(Entity* entity) {
+auto EntityManager::AddEntity(Entity* entity) -> void {
     this->entities.emplace_back(entity);
 }
 
-void EntityManager::Update(Game& game) {
+auto EntityManager::Update(Game& game) -> void {
     for (auto& entity : this->entities)
         entity->Update(game);
 }
 
-void EntityManager::Render() {
+auto EntityManager::Render() -> void {
     for (auto& entity : this->entities)
         entity->Render();
 }

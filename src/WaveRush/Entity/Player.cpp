@@ -4,39 +4,39 @@
 
 namespace WaveRush {
 
-float Player::GetX() {
+auto Player::GetX() const -> float {
     return this->x;
 }
 
-void Player::SetX(float x) {
+auto Player::SetX(float x) -> void {
     this->x = x;
 }
 
-float Player::GetY() {
+auto Player::GetY() const -> float {
     return this->y;
 }
 
-void Player::SetY(float y) {
+auto Player::SetY(float y) -> void {
     this->y = y;
 }
 
-float Player::GetWidth() {
+auto Player::GetWidth() const -> float {
     return this->width;
 }
 
-void Player::SetWidth(float width) {
+auto Player::SetWidth(float width) -> void {
     this->width = width;
 }
 
-float Player::GetHeight() {
+auto Player::GetHeight() const -> float {
     return this->height;
 }
 
-void Player::SetHeight(float height) {
+auto Player::SetHeight(float height) -> void {
     this->height = height;
 }
 
-void Player::SetColor(Color color) {
+auto Player::SetColor(Color color) -> void {
     this->color = color;
 }
 

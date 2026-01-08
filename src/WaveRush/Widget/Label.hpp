@@ -10,18 +10,18 @@ namespace WaveRush {
 
 class Label: public Widget {
   public:
-    void SetText(std::string text);
-    void SetFontSize(int font_size);
-    void SetColor(Color color);
+    auto SetText(std::string text) -> void;
+    auto SetFontSize(int font_size) -> void;
+    auto SetColor(Color color) -> void;
 
-    int GetX();
-    void SetX(int x);
+    auto GetX() const -> int;
+    auto SetX(int x) -> void;
 
-    int GetY();
-    void SetY(int y);
+    auto GetY() const -> int;
+    auto SetY(int y) -> void;
 
-    void Update(Game& game) override;
-    void Render() override;
+    auto Update(Game& game) -> void override;
+    auto Render() -> void override;
 
   private:
     std::string text = "";

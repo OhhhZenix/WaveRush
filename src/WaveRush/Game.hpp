@@ -6,11 +6,10 @@ namespace WaveRush {
 
 class Game {
   public:
-    Game();
-    ~Game();
-    SceneManager& GetSceneManager();
-    void Close();
-    void Run();
+    ~Game() = default;
+    auto GetSceneManager() -> SceneManager&;
+    auto Close() -> void;
+    auto Run() -> void;
 
   private:
     bool should_close = false;

@@ -2,37 +2,37 @@
 
 namespace WaveRush {
 
-void Label::SetText(std::string text) {
+auto Label::SetText(std::string text) -> void {
     this->text = text;
 }
 
-void Label::SetFontSize(int font_size) {
+auto Label::SetFontSize(int font_size) -> void {
     this->font_size = font_size;
 }
 
-void Label::SetColor(Color color) {
+auto Label::SetColor(Color color) -> void {
     this->color = color;
 }
 
-int Label::GetX() {
+auto Label::GetX() const -> int {
     return this->x;
 }
 
-void Label::SetX(int x) {
+auto Label::SetX(int x) -> void {
     this->x = x;
 }
 
-int Label::GetY() {
+auto Label::GetY() const -> int {
     return this->y;
 }
 
-void Label::SetY(int y) {
+auto Label::SetY(int y) -> void {
     this->y = y;
 }
 
-void Label::Update(Game& game) {}
+auto Label::Update(Game& game) -> void {}
 
-void Label::Render() {
+auto Label::Render() -> void {
     if (this->text.empty())
         return;
 

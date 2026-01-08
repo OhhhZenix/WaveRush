@@ -4,47 +4,47 @@
 
 namespace WaveRush {
 
-float Bouncer::GetX() {
+auto Bouncer::GetX() const -> float {
     return this->bounds.x;
 }
 
-void Bouncer::SetX(float x) {
+auto Bouncer::SetX(float x) -> void {
     this->bounds.x = x;
 }
 
-float Bouncer::GetY() {
+auto Bouncer::GetY() const -> float {
     return this->bounds.y;
 }
 
-void Bouncer::SetY(float y) {
+auto Bouncer::SetY(float y) -> void {
     this->bounds.y = y;
 }
 
-float Bouncer::GetWidth() {
+auto Bouncer::GetWidth() const -> float {
     return this->bounds.width;
 }
 
-void Bouncer::SetWidth(float width) {
+auto Bouncer::SetWidth(float width) -> void {
     this->bounds.width = width;
 }
 
-float Bouncer::GetHeight() {
+auto Bouncer::GetHeight() const -> float {
     return this->bounds.height;
 }
 
-void Bouncer::SetHeight(float height) {
+auto Bouncer::SetHeight(float height) -> void {
     this->bounds.height = height;
 }
 
-void Bouncer::SetColor(Color color) {
+auto Bouncer::SetColor(Color color) -> void {
     this->color = color;
 }
 
-void Bouncer::SetVelocityX(float velocity_x) {
+auto Bouncer::SetVelocityX(float velocity_x) -> void {
     this->velocity_x = velocity_x;
 }
 
-void Bouncer::SetVelocityY(float velocity_y) {
+auto Bouncer::SetVelocityY(float velocity_y) -> void {
     this->velocity_y = velocity_y;
 }
 
