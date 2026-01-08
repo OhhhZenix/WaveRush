@@ -12,7 +12,10 @@
 namespace WaveRush {
 
 PlayScene::PlayScene() {
-    entity_manager.AddEntity<Player>();
+    auto& player = entity_manager.AddEntity<Player>();
+    player.SetX((GAME_WIDTH - player.GetWidth()) / 2);
+    player.SetY((GAME_HEIGHT - player.GetHeight()) / 2);
+
     auto& bouncer = entity_manager.AddEntity<Bouncer>();
     bouncer.SetX(20);
     bouncer.SetY(20);
