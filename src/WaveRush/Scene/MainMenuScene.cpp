@@ -43,12 +43,12 @@ MainMenuScene::MainMenuScene() {
         entity.SetColor(color);
     }
 
-    auto& game_title = widget_manager.AddWidget<Label>();
-    game_title.SetText("Wave Rush");
-    game_title.SetFontSize(48);
-    game_title.SetColor(WHITE);
-    game_title.SetX((GAME_WIDTH - (48 * 5)) / 2);
-    game_title.SetY(40);
+    auto& game_label = widget_manager.AddWidget<Label>();
+    game_label.SetText("Wave Rush");
+    game_label.SetFontSize(48);
+    game_label.SetColor(WHITE);
+    game_label.SetX((GAME_WIDTH - (48 * 5)) / 2);
+    game_label.SetY(40);
 
     auto button_gap = 20;
     auto button_width = 180;
