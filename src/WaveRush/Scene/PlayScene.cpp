@@ -22,18 +22,17 @@ PlayScene::PlayScene() {
     bouncer.SetVelocityX(5);
     bouncer.SetVelocityY(5);
 
-    auto back_button = new Button();
-    back_button->SetX((GAME_WIDTH - 180) / 2);
-    back_button->SetY((GAME_HEIGHT - 60) / 2);
-    back_button->SetWidth(180);
-    back_button->SetHeight(60);
-    back_button->SetFontSize(24);
-    back_button->SetText("Back");
-    back_button->SetOnClick([](Button& self, Game& game) {
+    auto& back_button = widget_manager.AddWidget<Button>();
+    back_button.SetX((GAME_WIDTH - 180) / 2);
+    back_button.SetY((GAME_HEIGHT - 60) / 2);
+    back_button.SetWidth(180);
+    back_button.SetHeight(60);
+    back_button.SetFontSize(24);
+    back_button.SetText("Back");
+    back_button.SetOnClick([](Button& self, Game& game) {
         if (self.IsLeftClicked())
             game.GetSceneManager().GotoPreviousScene();
     });
-    widget_manager.AddWidget(back_button);
 }
 
 auto PlayScene::Update(Game& game) -> void {

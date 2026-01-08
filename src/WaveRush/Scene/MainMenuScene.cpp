@@ -43,49 +43,46 @@ MainMenuScene::MainMenuScene() {
         entity.SetColor(color);
     }
 
-    auto game_title = new Label();
-    game_title->SetText("Wave Rush");
-    game_title->SetFontSize(48);
-    game_title->SetColor(WHITE);
-    game_title->SetX((GAME_WIDTH - (48 * 5)) / 2);
-    game_title->SetY(40);
-    this->widget_manager.AddWidget(game_title);
+    auto& game_title = widget_manager.AddWidget<Label>();
+    game_title.SetText("Wave Rush");
+    game_title.SetFontSize(48);
+    game_title.SetColor(WHITE);
+    game_title.SetX((GAME_WIDTH - (48 * 5)) / 2);
+    game_title.SetY(40);
 
     auto button_gap = 20;
     auto button_width = 180;
     auto button_height = 60;
     auto button_count = 2;
     auto button_font_size = 24;
-    auto play_button = new Button();
-    play_button->SetX((GAME_WIDTH - button_width) / 2);
-    play_button->SetY((GAME_HEIGHT - (button_height * button_count)) / 2);
-    play_button->SetWidth(button_width);
-    play_button->SetHeight(button_height);
-    play_button->SetOnClick([](Button& self, Game& game) {
+
+    auto& play_button = widget_manager.AddWidget<Button>();
+    play_button.SetX((GAME_WIDTH - button_width) / 2);
+    play_button.SetY((GAME_HEIGHT - (button_height * button_count)) / 2);
+    play_button.SetWidth(button_width);
+    play_button.SetHeight(button_height);
+    play_button.SetOnClick([](Button& self, Game& game) {
         if (!self.IsLeftClicked())
             return;
 
         game.GetSceneManager().GotoNextScene(new PlayScene());
     });
-    play_button->SetText("Play");
-    play_button->SetFontSize(button_font_size);
-    auto exit_button = new Button();
-    exit_button->SetX(play_button->GetX());
-    exit_button->SetY(
-        play_button->GetY() + play_button->GetHeight() + button_gap
-    );
-    exit_button->SetWidth(button_width);
-    exit_button->SetHeight(button_height);
-    exit_button->SetOnClick([](Button& self, Game& game) {
+    play_button.SetText("Play");
+    play_button.SetFontSize(button_font_size);
+
+    auto& exit_button = widget_manager.AddWidget<Button>();
+    exit_button.SetX(play_button.GetX());
+    exit_button.SetY(play_button.GetY() + play_button.GetHeight() + button_gap);
+    exit_button.SetWidth(button_width);
+    exit_button.SetHeight(button_height);
+    exit_button.SetOnClick([](Button& self, Game& game) {
         if (!self.IsLeftClicked())
             return;
 
         game.Close();
     });
-    exit_button->SetText("Quit");
-    exit_button->SetFontSize(button_font_size);
-    this->widget_manager.AddWidget(play_button);
-    this->widget_manager.AddWidget(exit_button);
+    exit_button.SetText("Quit");
+    exit_button.SetFontSize(button_font_size);
 }
 
 auto MainMenuScene::Update(Game& game) -> void {
