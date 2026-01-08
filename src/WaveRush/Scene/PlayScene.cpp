@@ -8,6 +8,7 @@
 #include "WaveRush/Game.hpp"
 #include "WaveRush/Widget.hpp"
 #include "WaveRush/Widget/Button.hpp"
+#include "WaveRush/Widget/Label.hpp"
 
 namespace WaveRush {
 
@@ -21,6 +22,13 @@ PlayScene::PlayScene() {
     bouncer.SetY(20);
     bouncer.SetVelocityX(5);
     bouncer.SetVelocityY(5);
+
+    auto& pause_label = widget_manager.AddWidget<Label>();
+    pause_label.SetText("Paused");
+    pause_label.SetFontSize(48);
+    pause_label.SetX((GAME_WIDTH - (4 * 40)) / 2);
+    pause_label.SetY(60);
+    pause_label.SetColor(WHITE);
 
     auto& back_button = widget_manager.AddWidget<Button>();
     back_button.SetX((GAME_WIDTH - 180) / 2);
