@@ -25,11 +25,11 @@ class Player: public Entity {
     void Render() override;
 
   private:
-    float x = 0.f;
-    float y = 0.f;
-    float width = 24.f;
-    float height = 24.f;
-    Color color = WHITE;
+    float m_x = 0.f;
+    float m_y = 0.f;
+    float m_width = 24.f;
+    float m_height = 24.f;
+    Color m_color = WHITE;
 };
 
 } // namespace WaveRush
