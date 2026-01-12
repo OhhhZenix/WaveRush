@@ -13,9 +13,9 @@ class PlayScene: public Scene {
     auto Render() -> void override;
 
   private:
-    EntityManager entity_manager;
-    WidgetManager widget_manager;
-    bool paused = false;
+    EntityManager m_entity_manager;
+    WidgetManager m_widget_manager;
+    bool m_paused = false;
 };
 
 } // namespace WaveRush
