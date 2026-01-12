@@ -29,15 +29,15 @@ class Bouncer: public Entity {
     void Render() override;
 
   private:
-    Rectangle bounds = {
+    Rectangle m_bounds = {
         .x = 0,
         .y = 0,
         .width = 16,
         .height = 16,
     };
-    float velocity_x = 1.f;
-    float velocity_y = 1.f;
-    Color color = WHITE;
+    float m_velocity_x = 1.f;
+    float m_velocity_y = 1.f;
+    Color m_color = WHITE;
 };
 
 } // namespace WaveRush

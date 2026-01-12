@@ -5,68 +5,66 @@
 namespace WaveRush {
 
 auto Bouncer::GetX() const -> float {
-    return this->bounds.x;
+    return m_bounds.x;
 }
 
 auto Bouncer::SetX(float x) -> void {
-    this->bounds.x = x;
+    m_bounds.x = x;
 }
 
 auto Bouncer::GetY() const -> float {
-    return this->bounds.y;
+    return m_bounds.y;
 }
 
 auto Bouncer::SetY(float y) -> void {
-    this->bounds.y = y;
+    m_bounds.y = y;
 }
 
 auto Bouncer::GetWidth() const -> float {
-    return this->bounds.width;
+    return m_bounds.width;
 }
 
 auto Bouncer::SetWidth(float width) -> void {
-    this->bounds.width = width;
+    m_bounds.width = width;
 }
 
 auto Bouncer::GetHeight() const -> float {
-    return this->bounds.height;
+    return m_bounds.height;
 }
 
 auto Bouncer::SetHeight(float height) -> void {
-    this->bounds.height = height;
+    m_bounds.height = height;
 }
 
 auto Bouncer::SetColor(Color color) -> void {
-    this->color = color;
+    m_color = color;
 }
 
 auto Bouncer::SetVelocityX(float velocity_x) -> void {
-    this->velocity_x = velocity_x;
+    m_velocity_x = velocity_x;
 }
 
 auto Bouncer::SetVelocityY(float velocity_y) -> void {
-    this->velocity_y = velocity_y;
+    m_velocity_y = velocity_y;
 }
 
 void Bouncer::Update(Game& game) {
-    if (this->bounds.x <= 0
-        || this->bounds.x >= GAME_WIDTH - this->bounds.width)
-        this->velocity_x *= -1.f;
-    if (this->bounds.y <= 0
-        || this->bounds.y >= GAME_HEIGHT - this->bounds.height)
-        this->velocity_y *= -1.f;
+    if (m_bounds.x <= 0 || m_bounds.x >= GAME_WIDTH - m_bounds.width)
+        m_velocity_x *= -1.f;
+    if (m_bounds.y <= 0 || m_bounds.y >= GAME_HEIGHT - m_bounds.height)
+        m_velocity_y *= -1.f;
 
-    this->bounds.x += this->velocity_x;
-    this->bounds.y += this->velocity_y;
+    m_bounds.x += m_velocity_x;
+    m_bounds.y += m_velocity_y;
 }
 
 void Bouncer::Render() {
     DrawRectangle(
-        this->bounds.x,
-        this->bounds.y,
-        this->bounds.width,
-        this->bounds.height,
-        this->color
+        m_bounds.x,
+        m_bounds.y,
+        m_bounds.width,
+        m_bounds.height,
+        m_color
     );
 }
 
