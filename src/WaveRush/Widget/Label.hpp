@@ -24,11 +24,11 @@ class Label: public Widget {
     auto Render() -> void override;
 
   private:
-    std::string text = "";
-    int font_size = 12;
-    Color color = BLACK;
-    int x = 0;
-    int y = 0;
+    std::string m_text = "";
+    int m_font_size = 12;
+    Color m_color = BLACK;
+    int m_x = 0;
+    int m_y = 0;
 };
 
 } // namespace WaveRush
