@@ -79,7 +79,7 @@ MainMenuScene::MainMenuScene() {
         if (!self.IsLeftClicked())
             return;
 
-        game.Close();
+        game.GetWindow().Close();
     });
     exit_button.SetText("Quit");
     exit_button.SetFontSize(button_font_size);

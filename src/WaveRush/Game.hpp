@@ -1,5 +1,6 @@
 #pragma once
 
+#include "WaveRush/Core/Window.hpp"
 #include "WaveRush/SceneManager.hpp"
 
 namespace WaveRush {
@@ -7,12 +8,12 @@ namespace WaveRush {
 class Game {
   public:
     ~Game() = default;
+    auto GetWindow() -> Window&;
     auto GetSceneManager() -> SceneManager&;
-    auto Close() -> void;
     auto Run() -> void;
 
   private:
-    bool should_close = false;
+    Window m_window;
     SceneManager scene_manager;
 };
 
