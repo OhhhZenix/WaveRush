@@ -35,10 +35,7 @@ add_executable(
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-target_link_libraries(
-    ${PROJECT_NAME} PRIVATE
-    raylib
-)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
