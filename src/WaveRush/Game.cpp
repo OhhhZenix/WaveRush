@@ -11,20 +11,20 @@ auto Game::GetWindow() -> Window& {
 }
 
 auto Game::GetSceneManager() -> SceneManager& {
-    return this->scene_manager;
+    return m_scene_manager;
 }
 
 auto Game::Run() -> void {
-    this->GetSceneManager().GotoNextScene(new MainMenuScene());
+    GetSceneManager().GotoNextScene(new MainMenuScene());
 
     while (!m_window.ShouldClose()) {
         // update loop
-        this->GetSceneManager().Update(*this);
+        GetSceneManager().Update(*this);
 
         // draw loop
         BeginDrawing();
         ClearBackground(BLACK);
-        this->GetSceneManager().Render();
+        GetSceneManager().Render();
         EndDrawing();
     }
 }

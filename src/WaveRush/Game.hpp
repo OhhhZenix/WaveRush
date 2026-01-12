@@ -14,7 +14,7 @@ class Game {
 
   private:
     Window m_window;
-    SceneManager scene_manager;
+    SceneManager m_scene_manager;
 };
 
 } // namespace WaveRush
