@@ -16,7 +16,7 @@ class WidgetManager {
             "T must derive from Widget"
         );
 
-        auto& ptr = this->widgets.emplace_back(
+        auto& ptr = m_widgets.emplace_back(
             std::make_unique<T>(std::forward<Args>(args)...)
         );
 
@@ -27,7 +27,7 @@ class WidgetManager {
     auto Render() -> void;
 
   private:
-    std::vector<std::unique_ptr<Widget>> widgets;
+    std::vector<std::unique_ptr<Widget>> m_widgets;
 };
 
 } // namespace WaveRush
