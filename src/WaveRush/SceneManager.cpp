@@ -7,33 +7,33 @@
 namespace WaveRush {
 
 auto SceneManager::HasScenes() const -> bool {
-    return !this->scenes.empty();
+    return !m_scenes.empty();
 }
 
 auto SceneManager::GetCurrentScene() -> Scene& {
-    if (this->scenes.empty())
+    if (m_scenes.empty())
         throw std::runtime_error("SceneManager has no current scene");
-    return *this->scenes.top();
+    return *m_scenes.top();
 }
 
 auto SceneManager::GotoPreviousScene() -> void {
-    if (this->scenes.size() <= 1)
+    if (m_scenes.size() <= 1)
         return;
-    this->scenes.pop();
+    m_scenes.pop();
 }
 
 auto SceneManager::GotoNextScene(Scene* scene) -> void {
-    this->scenes.emplace(scene);
+    m_scenes.emplace(scene);
 }
 
 auto SceneManager::Update(Game& game) -> void {
-    if (this->HasScenes())
-        this->scenes.top()->Update(game);
+    if (HasScenes())
+        m_scenes.top()->Update(game);
 }
 
 auto SceneManager::Render() -> void {
-    if (this->HasScenes())
-        this->scenes.top()->Render();
+    if (HasScenes())
+        m_scenes.top()->Render();
 }
 
 } // namespace WaveRush
