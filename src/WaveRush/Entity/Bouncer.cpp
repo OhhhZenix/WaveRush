@@ -5,67 +5,61 @@
 namespace WaveRush {
 
 auto Bouncer::GetX() const -> float {
-    return m_bounds.x;
+    return bounds_.x;
 }
 
 auto Bouncer::SetX(float x) -> void {
-    m_bounds.x = x;
+    bounds_.x = x;
 }
 
 auto Bouncer::GetY() const -> float {
-    return m_bounds.y;
+    return bounds_.y;
 }
 
 auto Bouncer::SetY(float y) -> void {
-    m_bounds.y = y;
+    bounds_.y = y;
 }
 
 auto Bouncer::GetWidth() const -> float {
-    return m_bounds.width;
+    return bounds_.width;
 }
 
 auto Bouncer::SetWidth(float width) -> void {
-    m_bounds.width = width;
+    bounds_.width = width;
 }
 
 auto Bouncer::GetHeight() const -> float {
-    return m_bounds.height;
+    return bounds_.height;
 }
 
 auto Bouncer::SetHeight(float height) -> void {
-    m_bounds.height = height;
+    bounds_.height = height;
 }
 
 auto Bouncer::SetColor(Color color) -> void {
-    m_color = color;
+    color_ = color;
 }
 
 auto Bouncer::SetVelocityX(float velocity_x) -> void {
-    m_velocity_x = velocity_x;
+    velocity_x_ = velocity_x;
 }
 
 auto Bouncer::SetVelocityY(float velocity_y) -> void {
-    m_velocity_y = velocity_y;
+    velocity_y_ = velocity_y;
 }
 
 void Bouncer::Update(Game& game) {
-    if (m_bounds.x <= 0 || m_bounds.x >= GAME_WIDTH - m_bounds.width)
-        m_velocity_x *= -1.f;
-    if (m_bounds.y <= 0 || m_bounds.y >= GAME_HEIGHT - m_bounds.height)
-        m_velocity_y *= -1.f;
+    if (bounds_.x <= 0 || bounds_.x >= GAME_WIDTH - bounds_.width)
+        velocity_x_ *= -1.f;
+    if (bounds_.y <= 0 || bounds_.y >= GAME_HEIGHT - bounds_.height)
+        velocity_y_ *= -1.f;
 
-    m_bounds.x += m_velocity_x;
-    m_bounds.y += m_velocity_y;
+    bounds_.x += velocity_x_;
+    bounds_.y += velocity_y_;
 }
 
 void Bouncer::Render() {
-    DrawRectangle(
-        m_bounds.x,
-        m_bounds.y,
-        m_bounds.width,
-        m_bounds.height,
-        m_color
-    );
+    DrawRectangle(bounds_.x, bounds_.y, bounds_.width, bounds_.height, color_);
 }
 
 } // namespace WaveRush

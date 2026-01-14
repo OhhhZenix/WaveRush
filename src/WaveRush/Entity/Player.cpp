@@ -5,54 +5,54 @@
 namespace WaveRush {
 
 auto Player::GetX() const -> float {
-    return m_x;
+    return x_;
 }
 
 auto Player::SetX(float x) -> void {
-    m_x = x;
+    x_ = x;
 }
 
 auto Player::GetY() const -> float {
-    return m_y;
+    return y_;
 }
 
 auto Player::SetY(float y) -> void {
-    m_y = y;
+    y_ = y;
 }
 
 auto Player::GetWidth() const -> float {
-    return m_width;
+    return width_;
 }
 
 auto Player::SetWidth(float width) -> void {
-    m_width = width;
+    width_ = width;
 }
 
 auto Player::GetHeight() const -> float {
-    return m_height;
+    return height_;
 }
 
 auto Player::SetHeight(float height) -> void {
-    m_height = height;
+    height_ = height;
 }
 
 auto Player::SetColor(Color color) -> void {
-    m_color = color;
+    color_ = color;
 }
 
 void Player::Update(Game& game) {
     if (IsKeyDown(KEY_A))
-        m_x -= 1.f;
+        x_ -= 1.f;
     if (IsKeyDown(KEY_D))
-        m_x += 1.f;
+        x_ += 1.f;
     if (IsKeyDown(KEY_W))
-        m_y -= 1.f;
+        y_ -= 1.f;
     if (IsKeyDown(KEY_S))
-        m_y += 1.f;
+        y_ += 1.f;
 }
 
 void Player::Render() {
-    DrawRectangle(m_x, m_y, m_width, m_height, m_color);
+    DrawRectangle(x_, y_, width_, height_, color_);
 }
 
 } // namespace WaveRush

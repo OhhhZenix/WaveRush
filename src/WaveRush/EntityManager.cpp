@@ -5,16 +5,16 @@
 namespace WaveRush {
 
 auto EntityManager::GetEntities() -> auto& {
-    return m_entities;
+    return entities_;
 }
 
 auto EntityManager::Update(Game& game) -> void {
-    for (auto& entity : m_entities)
+    for (auto& entity : entities_)
         entity->Update(game);
 }
 
 auto EntityManager::Render() -> void {
-    for (auto& entity : m_entities)
+    for (auto& entity : entities_)
         entity->Render();
 }
 

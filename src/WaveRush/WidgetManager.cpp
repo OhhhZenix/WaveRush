@@ -5,12 +5,12 @@
 namespace WaveRush {
 
 auto WidgetManager::Update(Game& game) -> void {
-    for (auto& widget : this->m_widgets)
+    for (auto& widget : this->widgets_)
         widget->Update(game);
 }
 
 auto WidgetManager::Render() -> void {
-    for (auto& widget : this->m_widgets)
+    for (auto& widget : this->widgets_)
         widget->Render();
 }
 

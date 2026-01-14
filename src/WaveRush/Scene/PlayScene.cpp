@@ -13,24 +13,24 @@
 namespace WaveRush {
 
 PlayScene::PlayScene() {
-    auto& player = m_entity_manager.AddEntity<Player>();
+    auto& player = entity_manager_.AddEntity<Player>();
     player.SetX((GAME_WIDTH - player.GetWidth()) / 2);
     player.SetY((GAME_HEIGHT - player.GetHeight()) / 2);
 
-    auto& bouncer = m_entity_manager.AddEntity<Bouncer>();
+    auto& bouncer = entity_manager_.AddEntity<Bouncer>();
     bouncer.SetX(20);
     bouncer.SetY(20);
     bouncer.SetVelocityX(5);
     bouncer.SetVelocityY(5);
 
-    auto& pause_label = m_widget_manager.AddWidget<Label>();
+    auto& pause_label = widget_manager_.AddWidget<Label>();
     pause_label.SetText("Paused");
     pause_label.SetFontSize(48);
     pause_label.SetX((GAME_WIDTH - (4 * 40)) / 2);
     pause_label.SetY(60);
     pause_label.SetColor(WHITE);
 
-    auto& back_button = m_widget_manager.AddWidget<Button>();
+    auto& back_button = widget_manager_.AddWidget<Button>();
     back_button.SetX((GAME_WIDTH - 180) / 2);
     back_button.SetY((GAME_HEIGHT - 60) / 2);
     back_button.SetWidth(180);
@@ -45,19 +45,19 @@ PlayScene::PlayScene() {
 
 auto PlayScene::Update(Game& game) -> void {
     if (IsKeyPressed(KEY_ESCAPE))
-        m_paused = !m_paused;
+        paused_ = !paused_;
 
-    if (m_paused)
-        m_widget_manager.Update(game);
+    if (paused_)
+        widget_manager_.Update(game);
     else
-        m_entity_manager.Update(game);
+        entity_manager_.Update(game);
 }
 
 auto PlayScene::Render() -> void {
-    m_entity_manager.Render();
+    entity_manager_.Render();
 
-    if (m_paused)
-        m_widget_manager.Render();
+    if (paused_)
+        widget_manager_.Render();
 }
 
 } // namespace WaveRush

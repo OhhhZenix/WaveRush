@@ -7,17 +7,17 @@
 namespace WaveRush {
 
 auto Game::GetWindow() -> Window& {
-    return m_window;
+    return window_;
 }
 
 auto Game::GetSceneManager() -> SceneManager& {
-    return m_scene_manager;
+    return scene_manager_;
 }
 
 auto Game::Run() -> void {
     GetSceneManager().GotoNextScene(new MainMenuScene());
 
-    while (!m_window.ShouldClose()) {
+    while (!window_.ShouldClose()) {
         // update loop
         GetSceneManager().Update(*this);
 

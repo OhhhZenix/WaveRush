@@ -3,40 +3,40 @@
 namespace WaveRush {
 
 auto Label::SetText(std::string text) -> void {
-    m_text = text;
+    text_ = text;
 }
 
 auto Label::SetFontSize(int font_size) -> void {
-    m_font_size = font_size;
+    font_size_ = font_size;
 }
 
 auto Label::SetColor(Color color) -> void {
-    m_color = color;
+    color_ = color;
 }
 
 auto Label::GetX() const -> int {
-    return m_x;
+    return x_;
 }
 
 auto Label::SetX(int x) -> void {
-    m_x = x;
+    x_ = x;
 }
 
 auto Label::GetY() const -> int {
-    return m_y;
+    return y_;
 }
 
 auto Label::SetY(int y) -> void {
-    m_y = y;
+    y_ = y;
 }
 
 auto Label::Update(Game& game) -> void {}
 
 auto Label::Render() -> void {
-    if (m_text.empty())
+    if (text_.empty())
         return;
 
-    DrawText(m_text.c_str(), m_x, m_y, m_font_size, m_color);
+    DrawText(text_.c_str(), x_, y_, font_size_, color_);
 }
 
 } // namespace WaveRush

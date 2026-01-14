@@ -29,7 +29,7 @@ MainMenuScene::MainMenuScene() {
         auto speed_y = GenerateRandomRange(.5f, 2.f);
 
         // create entity
-        auto& entity = this->entity_manager.AddEntity<Bouncer>();
+        auto& entity = this->entity_manager_.AddEntity<Bouncer>();
         entity.SetX(GenerateRandomRange<float>(0 + w, GAME_WIDTH - w));
         entity.SetY(GenerateRandomRange<float>(0 + h, GAME_HEIGHT - h));
         entity.SetWidth(w);
@@ -43,7 +43,7 @@ MainMenuScene::MainMenuScene() {
         entity.SetColor(color);
     }
 
-    auto& game_label = widget_manager.AddWidget<Label>();
+    auto& game_label = widget_manager_.AddWidget<Label>();
     game_label.SetText("Wave Rush");
     game_label.SetFontSize(48);
     game_label.SetColor(WHITE);
@@ -56,7 +56,7 @@ MainMenuScene::MainMenuScene() {
     auto button_count = 2;
     auto button_font_size = 24;
 
-    auto& play_button = widget_manager.AddWidget<Button>();
+    auto& play_button = widget_manager_.AddWidget<Button>();
     play_button.SetX((GAME_WIDTH - button_width) / 2);
     play_button.SetY((GAME_HEIGHT - (button_height * button_count)) / 2);
     play_button.SetWidth(button_width);
@@ -70,7 +70,7 @@ MainMenuScene::MainMenuScene() {
     play_button.SetText("Play");
     play_button.SetFontSize(button_font_size);
 
-    auto& exit_button = widget_manager.AddWidget<Button>();
+    auto& exit_button = widget_manager_.AddWidget<Button>();
     exit_button.SetX(play_button.GetX());
     exit_button.SetY(play_button.GetY() + play_button.GetHeight() + button_gap);
     exit_button.SetWidth(button_width);
@@ -86,13 +86,13 @@ MainMenuScene::MainMenuScene() {
 }
 
 auto MainMenuScene::Update(Game& game) -> void {
-    this->entity_manager.Update(game);
-    this->widget_manager.Update(game);
+    this->entity_manager_.Update(game);
+    this->widget_manager_.Update(game);
 }
 
 auto MainMenuScene::Render() -> void {
-    this->entity_manager.Render();
-    this->widget_manager.Render();
+    this->entity_manager_.Render();
+    this->widget_manager_.Render();
 }
 
 } // namespace WaveRush

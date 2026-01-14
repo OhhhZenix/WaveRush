@@ -17,7 +17,7 @@ class SceneManager {
     auto Render() -> void;
 
   private:
-    std::stack<std::unique_ptr<Scene>> m_scenes;
+    std::stack<std::unique_ptr<Scene>> scenes_;
 };
 
 } // namespace WaveRush

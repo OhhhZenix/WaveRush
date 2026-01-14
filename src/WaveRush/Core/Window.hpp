@@ -11,7 +11,7 @@ class Window {
     auto Close() -> void;
 
   private:
-    bool m_should_close = false;
+    bool should_close_ = false;
 };
 
 } // namespace WaveRush

@@ -13,8 +13,8 @@ class Game {
     auto Run() -> void;
 
   private:
-    Window m_window;
-    SceneManager m_scene_manager;
+    Window window_;
+    SceneManager scene_manager_;
 };
 
 } // namespace WaveRush

@@ -16,7 +16,7 @@ class EntityManager {
             "T must derive from Entity"
         );
 
-        auto& ptr = this->m_entities.emplace_back(
+        auto& ptr = this->entities_.emplace_back(
             std::make_unique<T>(std::forward<Args>(args)...)
         );
 
@@ -29,7 +29,7 @@ class EntityManager {
     auto Render() -> void;
 
   private:
-    std::vector<std::unique_ptr<Entity>> m_entities;
+    std::vector<std::unique_ptr<Entity>> entities_;
 };
 
 } // namespace WaveRush

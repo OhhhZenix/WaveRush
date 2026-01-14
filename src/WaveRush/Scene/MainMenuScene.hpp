@@ -15,8 +15,8 @@ class MainMenuScene: public Scene {
     auto Render() -> void override;
 
   private:
-    EntityManager entity_manager;
-    WidgetManager widget_manager;
+    EntityManager entity_manager_;
+    WidgetManager widget_manager_;
 };
 
 } // namespace WaveRush

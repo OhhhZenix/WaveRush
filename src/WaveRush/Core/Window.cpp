@@ -18,11 +18,11 @@ Window::~Window() {
 }
 
 auto Window::ShouldClose() const -> bool {
-    return m_should_close || WindowShouldClose();
+    return should_close_ || WindowShouldClose();
 }
 
 auto Window::Close() -> void {
-    m_should_close = true;
+    should_close_ = true;
 }
 
 } // namespace WaveRush
