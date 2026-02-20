@@ -12,25 +12,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/raylib.cmake)
 
-add_executable(
-    ${PROJECT_NAME}
-    src/Main.cpp
-    src/WaveRush/Utils.cpp
-    src/WaveRush/Game.cpp
-    src/WaveRush/Core/Window.cpp
-    src/WaveRush/Entity.cpp
-    src/WaveRush/EntityManager.cpp
-    src/WaveRush/Entity/Player.cpp
-    src/WaveRush/Entity/Bouncer.cpp
-    src/WaveRush/Scene.cpp
-    src/WaveRush/SceneManager.cpp
-    src/WaveRush/Scene/MainMenuScene.cpp
-    src/WaveRush/Scene/PlayScene.cpp
-    src/WaveRush/Widget.cpp
-    src/WaveRush/WidgetManager.cpp
-    src/WaveRush/Widget/Button.cpp
-    src/WaveRush/Widget/Label.cpp
+file(GLOB_RECURSE sources
+    CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
 )
+
+add_executable(${PROJECT_NAME} ${sources})
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
