@@ -4,7 +4,7 @@
 
 namespace WaveRush {
 
-auto EntityManager::GetEntities() -> auto& {
+auto EntityManager::GetEntities() -> EntityVec& {
     return entities_;
 }
 

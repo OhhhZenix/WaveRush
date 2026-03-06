@@ -7,6 +7,8 @@
 
 namespace WaveRush {
 
+using EntityVec = std::vector<std::unique_ptr<Entity>>;
+
 class EntityManager {
   public:
     template<typename T, typename... Args>
@@ -23,13 +25,13 @@ class EntityManager {
         return static_cast<T&>(*ptr);
     }
 
-    auto GetEntities() -> auto&;
+    auto GetEntities() -> EntityVec&;
 
     auto Update(Game& game) -> void;
     auto Render() -> void;
 
   private:
-    std::vector<std::unique_ptr<Entity>> entities_;
+    EntityVec entities_;
 };
 
 } // namespace WaveRush
