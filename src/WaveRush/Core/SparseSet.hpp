@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "WaveRush/Utils.hpp"
+
 namespace WaveRush {
 template<typename K, typename V>
 class SparseSet {
@@ -43,7 +45,7 @@ class SparseSet {
     }
 
     // Returns a pointer to the value associated with 'key', or nullptr if not found
-    auto get(K key) -> std::optional<std::reference_wrapper<V>> {
+    auto get(K key) -> OptionalRef<V> {
         auto it = sparse_.find(key);
         if (it != sparse_.end()) {
             return dense_[it->second];
