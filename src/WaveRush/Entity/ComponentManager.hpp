@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstddef>
+#include <functional>
+#include <optional>
 #include <vector>
 
 #include "WaveRush/Core/AnyMap.hpp"
@@ -16,12 +18,13 @@ class ComponentManager {
     }
 
     template<typename T>
-    auto getComponentArray() -> std::vector<T>* {
+    auto getComponentArray()
+        -> std::optional<std::reference_wrapper<std::vector<T>>> {
         auto sparse_set = components_.get<SparseSet<size_t, T>>();
         if (sparse_set) {
-            return &sparse_set->data();
+            return sparse_set->get().data();
         }
-        return nullptr;
+        return std::nullopt;
     }
 
   private:
