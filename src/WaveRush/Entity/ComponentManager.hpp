@@ -21,7 +21,7 @@ class ComponentManager {
     }
 
     template<typename T>
-    auto getComponentArray() -> OptionalRef<std::vector<T>> {
+    auto getComponents() -> OptionalRef<std::vector<T>> {
         auto sparse_set = components_.get<ComponentSparseSet<T>>();
         if (sparse_set) {
             return sparse_set->get().data();
