@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstddef>
+#include <functional>
+#include <optional>
 #include <unordered_map>
 #include <vector>
 
@@ -41,12 +43,12 @@ class SparseSet {
     }
 
     // Returns a pointer to the value associated with 'key', or nullptr if not found
-    auto get(K key) -> V* {
+    auto get(K key) -> std::optional<std::reference_wrapper<V>> {
         auto it = sparse_.find(key);
         if (it != sparse_.end()) {
-            return &dense_[it->second];
+            return dense_[it->second];
         }
-        return nullptr;
+        return std::nullopt;
     }
 
     auto data() -> std::vector<V>& {
