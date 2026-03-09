@@ -15,13 +15,15 @@ class AnyMap {
     }
 
     template<typename T>
-    auto get() -> T* {
+    auto get() -> std::optional<std::reference_wrapper<T>> {
         std::type_index idx = typeid(T);
         auto it = data_.find(idx);
         if (it != data_.end()) {
-            return std::any_cast<T>(&it->second);
+            if (auto ptr = std::any_cast<T>(&it->second)) {
+                return std::ref(*ptr);
+            }
         }
-        return nullptr;
+        return std::nullopt;
     }
 
   private:
