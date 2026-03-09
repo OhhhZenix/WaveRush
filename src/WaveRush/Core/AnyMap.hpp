@@ -1,6 +1,8 @@
 #pragma once
 
 #include <any>
+#include <functional>
+#include <optional>
 #include <typeindex>
 #include <unordered_map>
 
