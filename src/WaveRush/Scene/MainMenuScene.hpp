@@ -2,7 +2,6 @@
 
 #include <raylib.h>
 
-#include "WaveRush/EntityManager.hpp"
 #include "WaveRush/Scene.hpp"
 #include "WaveRush/WidgetManager.hpp"
 
@@ -15,7 +14,6 @@ class MainMenuScene: public Scene {
     auto Render() -> void override;
 
   private:
-    EntityManager entity_manager_;
     WidgetManager widget_manager_;
 };
 
