@@ -1,10 +1,15 @@
 #pragma once
 
 #include <chrono>
+#include <functional>
+#include <optional>
 #include <random>
 #include <type_traits>
 
 namespace WaveRush {
+
+template<typename T>
+using OptionalRef = std::optional<std::reference_wrapper<T>>;
 
 template<typename T>
 auto GenerateRandomRange(T min, T max) -> T {
