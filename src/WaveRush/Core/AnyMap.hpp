@@ -6,6 +6,8 @@
 #include <typeindex>
 #include <unordered_map>
 
+#include "WaveRush/Utils.hpp"
+
 namespace WaveRush {
 
 class AnyMap {
@@ -17,7 +19,7 @@ class AnyMap {
     }
 
     template<typename T>
-    auto get() -> std::optional<std::reference_wrapper<T>> {
+    auto get() -> OptionalRef<T> {
         std::type_index idx = typeid(T);
         auto it = data_.find(idx);
         if (it != data_.end()) {
