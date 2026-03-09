@@ -49,6 +49,10 @@ class SparseSet {
         return nullptr;
     }
 
+    std::vector<V>& data() {
+        return dense_;
+    }
+
   private:
     std::unordered_map<K, size_t> sparse_; // Maps key to index in data_
     std::vector<V> dense_; // Stores actual data values contiguously
