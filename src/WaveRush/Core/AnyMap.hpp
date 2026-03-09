@@ -9,13 +9,13 @@ namespace WaveRush {
 class AnyMap {
   public:
     template<typename T>
-    void insert(T item) {
+    auto insert(T item) -> void {
         std::type_index idx = typeid(T);
         data_.insert({idx, std::any(std::move(item))});
     }
 
     template<typename T>
-    T* get() {
+    auto get() -> T* {
         std::type_index idx = typeid(T);
         auto it = data_.find(idx);
         if (it != data_.end()) {
