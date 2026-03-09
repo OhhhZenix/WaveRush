@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 4.2.3)
 project(WaveRush)
 
 set(OUT_DIR ${CMAKE_BINARY_DIR})
