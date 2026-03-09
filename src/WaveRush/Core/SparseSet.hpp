@@ -9,7 +9,7 @@ template<typename K, typename V>
 class SparseSet {
   public:
     // Adds a new key-value pair if the key does not already exist
-    void add(K key, V value) {
+    auto add(K key, V value) -> void {
         if (sparse_.find(key) == sparse_.end()) {
             size_t index = dense_.size();
             sparse_[key] = index; // Map the key to the index in the data vector
@@ -18,7 +18,7 @@ class SparseSet {
     }
 
     // Removes the key-value pair corresponding to 'key'
-    void remove(K key) {
+    auto remove(K key) -> void {
         auto it = sparse_.find(key);
         if (it != sparse_.end()) {
             size_t index = it->second;
@@ -41,7 +41,7 @@ class SparseSet {
     }
 
     // Returns a pointer to the value associated with 'key', or nullptr if not found
-    V* get(K key) {
+    auto get(K key) -> V* {
         auto it = sparse_.find(key);
         if (it != sparse_.end()) {
             return &dense_[it->second];
@@ -49,7 +49,7 @@ class SparseSet {
         return nullptr;
     }
 
-    std::vector<V>& data() {
+    auto data() -> std::vector<V>& {
         return dense_;
     }
 
