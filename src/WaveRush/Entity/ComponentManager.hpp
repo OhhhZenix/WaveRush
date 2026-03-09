@@ -2,32 +2,32 @@
 
 #include <cstddef>
 #include <optional>
-#include <vector>
 
 #include "WaveRush/Core/AnyMap.hpp"
 #include "WaveRush/Core/SparseSet.hpp"
+#include "WaveRush/Entity/EntityManager.hpp"
 #include "WaveRush/Utils.hpp"
 
 namespace WaveRush {
 
 template<typename T>
-using ComponentSparseSet = SparseSet<size_t, T>;
+using ComponentSparseSet = SparseSet<EntityId, T>;
 
 class ComponentManager {
   public:
     template<typename T>
     auto registerComponent() -> void {
-        components_.insert(SparseSet<size_t, T>());
+        components_.insert(ComponentSparseSet<T>());
     }
 
-    template<typename T>
-    auto getComponents() -> OptionalRef<std::vector<T>> {
-        auto sparse_set = components_.get<ComponentSparseSet<T>>();
-        if (sparse_set) {
-            return sparse_set->get().data();
-        }
-        return std::nullopt;
-    }
+    // template<typename T>
+    // auto getComponents() -> OptionalRef<std::vector<T>> {
+    //     auto sparse_set = components_.get<ComponentSparseSet<T>>();
+    //     if (sparse_set) {
+    //         return sparse_set->get().data();
+    //     }
+    //     return std::nullopt;
+    // }
 
     template<typename T>
     auto addComponent(size_t entity, T component) -> void {
