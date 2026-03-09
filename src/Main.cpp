@@ -1,5 +1,3 @@
-#include <memory>
-
 #include "WaveRush/Game.hpp"
 
 auto main() -> int {
