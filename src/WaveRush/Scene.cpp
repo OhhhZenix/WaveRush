@@ -1,1 +1,0 @@
-#include "WaveRush/Scene.hpp"
