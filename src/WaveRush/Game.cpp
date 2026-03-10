@@ -2,6 +2,11 @@
 
 #include <raylib.h>
 
+#include <cstdint>
+#include <iostream>
+#include <vector>
+
+#include "WaveRush/Entity/EntityManager.hpp"
 #include "WaveRush/Scene/MainMenuScene.hpp"
 
 namespace WaveRush {
@@ -24,6 +29,8 @@ auto Game::Run() -> void {
         // draw loop
         BeginDrawing();
         ClearBackground(BLACK);
+        float dt = GetFrameTime();
+        std::cout << (1 / dt) << std::endl;
         GetSceneManager().Render();
         EndDrawing();
     }
