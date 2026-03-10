@@ -2,11 +2,8 @@
 
 #include <raylib.h>
 
-#include <cstdint>
 #include <iostream>
-#include <vector>
 
-#include "WaveRush/Entity/EntityManager.hpp"
 #include "WaveRush/Scene/MainMenuScene.hpp"
 
 namespace WaveRush {
