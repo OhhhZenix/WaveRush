@@ -11,6 +11,7 @@ class Game {
     ~Game() = default;
     auto GetWindow() -> Window&;
     auto GetSceneManager() -> SceneManager&;
+    auto GetEntityManager() -> EntityManager&;
     auto Run() -> void;
 
   private:
