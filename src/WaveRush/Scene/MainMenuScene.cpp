@@ -2,17 +2,19 @@
 
 #include <raylib.h>
 
-#include "WaveRush/Constants.hpp"
 #include "WaveRush/Game.hpp"
-#include "WaveRush/Utils.hpp"
-#include "WaveRush/Widget/Button.hpp"
-#include "WaveRush/Widget/Label.hpp"
 
 namespace WaveRush {
 
-MainMenuScene::MainMenuScene() {}
+MainMenuScene::MainMenuScene(Game& game) {}
 
 auto MainMenuScene::Update(Game& game) -> void {
+    for (EntityHandle entity : game.GetEntityManager().GetActiveEntities()) {
+        CPosition& pos = game.GetEntityManager().GetPosition(entity);
+        if (pos.exists) {
+            pos.x += 1;
+        }
+    }
     this->widget_manager_.Update(game);
 }
 

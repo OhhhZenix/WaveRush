@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include "WaveRush/Entity/EntityManager.hpp"
+#include "WaveRush/Entity/Player.hpp"
 #include "WaveRush/Scene/MainMenuScene.hpp"
 
 namespace WaveRush {
@@ -21,7 +23,9 @@ auto Game::GetEntityManager() -> EntityManager& {
 }
 
 auto Game::Run() -> void {
-    GetSceneManager().GotoNextScene(new MainMenuScene());
+    GetSceneManager().GotoNextScene(new MainMenuScene(*this));
+
+    CreatePlayer(*this);
 
     while (!window_.ShouldClose()) {
         // update loop
@@ -32,7 +36,6 @@ auto Game::Run() -> void {
         ClearBackground(BLACK);
         float dt = GetFrameTime();
         std::cout << (1 / dt) << std::endl;
-        GetEntityManager().IsValid({});
         GetSceneManager().Render();
         EndDrawing();
     }

@@ -2,14 +2,14 @@
 
 #include <raylib.h>
 
-#include "WaveRush/Scene.hpp"
+#include "WaveRush/Scene/SceneManager.hpp"
 #include "WaveRush/WidgetManager.hpp"
 
 namespace WaveRush {
 
 class MainMenuScene: public Scene {
   public:
-    MainMenuScene();
+    MainMenuScene(Game& game);
     auto Update(Game& game) -> void override;
     auto Render() -> void override;
 

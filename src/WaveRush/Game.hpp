@@ -2,7 +2,7 @@
 
 #include "WaveRush/Core/Window.hpp"
 #include "WaveRush/Entity/EntityManager.hpp"
-#include "WaveRush/SceneManager.hpp"
+#include "WaveRush/Scene/SceneManager.hpp"
 
 namespace WaveRush {
 

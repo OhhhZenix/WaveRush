@@ -1,8 +1,6 @@
-#include "WaveRush/SceneManager.hpp"
+#include "WaveRush/Scene/SceneManager.hpp"
 
 #include <stdexcept>
-
-#include "WaveRush/Scene.hpp"
 
 namespace WaveRush {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WaveRush/Scene.hpp"
+#include "WaveRush/Scene/SceneManager.hpp"
 #include "WaveRush/WidgetManager.hpp"
 
 namespace WaveRush {
