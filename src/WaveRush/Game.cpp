@@ -16,6 +16,10 @@ auto Game::GetSceneManager() -> SceneManager& {
     return scene_manager_;
 }
 
+auto Game::GetEntityManager() -> EntityManager& {
+    return entity_manager_;
+}
+
 auto Game::Run() -> void {
     GetSceneManager().GotoNextScene(new MainMenuScene());
 
@@ -28,6 +32,7 @@ auto Game::Run() -> void {
         ClearBackground(BLACK);
         float dt = GetFrameTime();
         std::cout << (1 / dt) << std::endl;
+        GetEntityManager().IsValid({});
         GetSceneManager().Render();
         EndDrawing();
     }
