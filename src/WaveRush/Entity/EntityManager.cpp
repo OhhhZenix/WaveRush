@@ -12,7 +12,7 @@ EntityManager::EntityManager(size_t max_entities) {
     }
 }
 
-auto EntityManager::createEntity() -> std::optional<EntityHandle> {
+auto EntityManager::CreateEntity() -> std::optional<EntityHandle> {
     if (!free_ids_.empty()) {
         EntityId id = free_ids_.front();
         free_ids_.pop();
@@ -22,13 +22,13 @@ auto EntityManager::createEntity() -> std::optional<EntityHandle> {
     return std::nullopt;
 }
 
-auto EntityManager::isValid(EntityHandle handle) -> bool {
+auto EntityManager::IsValid(EntityHandle handle) -> bool {
     return handle.index < max_entities_
         && handle.generations == generations_[handle.index];
 }
 
-auto EntityManager::deleteEntity(EntityHandle handle) -> void {
-    if (!isValid(handle))
+auto EntityManager::DeleteEntity(EntityHandle handle) -> void {
+    if (!IsValid(handle))
         return;
 
     generations_[handle.index] += 1;
@@ -44,7 +44,7 @@ auto EntityManager::deleteEntity(EntityHandle handle) -> void {
     free_ids_.push(handle.index);
 }
 
-auto EntityManager::getActiveEntities() -> std::vector<EntityId>& {
+auto EntityManager::GetActiveEntities() -> std::vector<EntityId>& {
     return used_ids_;
 }
 
