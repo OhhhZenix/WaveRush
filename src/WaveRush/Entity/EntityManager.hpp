@@ -28,10 +28,10 @@ struct EntityHandle {
 class EntityManager {
   public:
     EntityManager(size_t max_entities);
-    auto createEntity() -> std::optional<EntityHandle>;
-    auto isValid(EntityHandle handle) -> bool;
-    auto deleteEntity(EntityHandle handle) -> void;
-    auto getActiveEntities() -> std::vector<EntityId>&;
+    auto CreateEntity() -> std::optional<EntityHandle>;
+    auto IsValid(EntityHandle handle) -> bool;
+    auto DeleteEntity(EntityHandle handle) -> void;
+    auto GetActiveEntities() -> std::vector<EntityId>&;
 
     auto getPosition(EntityId entity) -> CPosition& {
         return positions_[entity];
