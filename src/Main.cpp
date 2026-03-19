@@ -6,52 +6,12 @@
 #include <ctime>
 
 #include "WaveRush/Arena.h"
+#include "WaveRush/Entity.h"
 #include "WaveRush/Vec2f.h"
 
 #define GAME_WIDTH 640
 #define GAME_HEIGHT 360
-#define MAX_ENTITIES 1'000
 #define MAX_INPUT 300
-
-enum EntityKind {
-    EntityKind_None,
-    EntityKind_Player,
-    EntityKind_Bouncer,
-};
-
-struct EntityManager {
-    Vec2f* position;
-    Vec2f* velocity;
-    Vec2f* size;
-    EntityKind* kind;
-    bool* alive;
-    size_t count;
-};
-
-void wr_entity_manager_init(EntityManager* entities, Arena* arena) {
-    entities->position =
-        (Vec2f*)wr_arena_push(arena, sizeof(Vec2f) * MAX_ENTITIES);
-    entities->velocity =
-        (Vec2f*)wr_arena_push(arena, sizeof(Vec2f) * MAX_ENTITIES);
-    entities->size = (Vec2f*)wr_arena_push(arena, sizeof(Vec2f) * MAX_ENTITIES);
-    entities->kind =
-        (EntityKind*)wr_arena_push(arena, sizeof(EntityKind) * MAX_ENTITIES);
-    entities->alive = (bool*)wr_arena_push(arena, sizeof(bool) * MAX_ENTITIES);
-    entities->count = 0;
-
-    for (size_t i = 0; i < MAX_ENTITIES; i++) {
-        entities->position[i] = {0, 0};
-        entities->velocity[i] = {0, 0};
-        entities->size[i] = {0, 0};
-        entities->kind[i] = EntityKind_None;
-        entities->alive[i] = false;
-    }
-}
-
-size_t wr_create_entity(EntityManager* entity_manager) {
-    assert(entity_manager->count < MAX_ENTITIES && "Reached max entity count");
-    return entity_manager->count++;
-}
 
 void wr_spawn_bouncer(EntityManager* entity_manager) {
     size_t bouncer = wr_create_entity(entity_manager);
