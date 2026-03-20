@@ -1,6 +1,8 @@
 #include "WaveRush/Vec2f.h"
 
-void vec2f_add(Vec2f* a, Vec2f* b) {
-    a->x += b->x;
-    a->y += b->y;
+Vec2f vec2f_add(Vec2f* a, Vec2f* b) {
+    return Vec2f {
+        .x = a->x + b->x,
+        .y = a->y + b->y,
+    };
 }
