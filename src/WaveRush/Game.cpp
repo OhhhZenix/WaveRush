@@ -22,6 +22,8 @@ void wr_spawn_bouncer(EntityManager* entity_manager) {
 }
 
 void wr_game_init(Game* game, Arena* main_allocator) {
+    game->entity_manager = (EntityManager*)
+        wr_arena_push(main_allocator, sizeof(*game->entity_manager));
     wr_entity_manager_init(game->entity_manager, main_allocator);
     wr_spawn_bouncer(game->entity_manager);
     wr_spawn_bouncer(game->entity_manager);
