@@ -8,14 +8,16 @@
 #define MAX_ENTITIES 1'000
 
 void wr_entity_manager_init(EntityManager* entities, Arena* arena) {
-    entities->position =
-        (Vec2f*)wr_arena_push(arena, sizeof(Vec2f) * MAX_ENTITIES);
-    entities->velocity =
-        (Vec2f*)wr_arena_push(arena, sizeof(Vec2f) * MAX_ENTITIES);
-    entities->size = (Vec2f*)wr_arena_push(arena, sizeof(Vec2f) * MAX_ENTITIES);
-    entities->kind =
-        (EntityKind*)wr_arena_push(arena, sizeof(EntityKind) * MAX_ENTITIES);
-    entities->alive = (bool*)wr_arena_push(arena, sizeof(bool) * MAX_ENTITIES);
+    entities->position = (Vec2f*)
+        wr_arena_push(arena, sizeof(*entities->position) * MAX_ENTITIES);
+    entities->velocity = (Vec2f*)
+        wr_arena_push(arena, sizeof(*entities->velocity) * MAX_ENTITIES);
+    entities->size =
+        (Vec2f*)wr_arena_push(arena, sizeof(*entities->size) * MAX_ENTITIES);
+    entities->kind = (EntityKind*)
+        wr_arena_push(arena, sizeof(*entities->kind) * MAX_ENTITIES);
+    entities->alive =
+        (bool*)wr_arena_push(arena, sizeof(*entities->alive) * MAX_ENTITIES);
     entities->count = 0;
 
     for (size_t i = 0; i < MAX_ENTITIES; i++) {
