@@ -5,4 +5,4 @@ struct Vec2f {
     float y;
 };
 
-void vec2f_add(Vec2f* a, Vec2f* b);
+Vec2f vec2f_add(Vec2f* a, Vec2f* b);
