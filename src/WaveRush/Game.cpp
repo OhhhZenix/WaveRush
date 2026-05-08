@@ -9,16 +9,19 @@
 #include "WaveRush/Arena.h"
 #include "WaveRush/Bouncer.h"
 #include "WaveRush/Entity.h"
+#include "WaveRush/Player.h"
 #include "WaveRush/Vec2f.h"
 
 void wr_game_init(Game* game, Arena* main_allocator) {
     game->entity_manager = (EntityManager*)
         wr_arena_push(main_allocator, sizeof(*game->entity_manager));
     wr_entity_manager_init(game->entity_manager, main_allocator);
-    wr_spawn_bouncer(game->entity_manager);
-    wr_spawn_bouncer(game->entity_manager);
-    wr_spawn_bouncer(game->entity_manager);
-    wr_spawn_bouncer(game->entity_manager);
+
+    for (int i = 0; i < 10; i++) {
+        wr_spawn_bouncer(game->entity_manager);
+    }
+
+    wr_spawn_player(game->entity_manager);
 }
 
 void wr_physics_system(EntityManager* entity_manager, float dt) {
@@ -57,6 +60,7 @@ void wr_game_tick(Game* game, Arena* frame_allocator) {
     float dt = GetFrameTime();
     wr_physics_system(game->entity_manager, dt);
     wr_bouncer_movement_system(game->entity_manager);
+    wr_player_movement_system(game->entity_manager);
 
     // render
     wr_simple_render_system(game->entity_manager);
