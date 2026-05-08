@@ -7,6 +7,8 @@
 #include "WaveRush/Vec2f.h"
 #include "raylib.h"
 
+constexpr float PLAYER_SPEED = 2;
+
 void wr_spawn_player(EntityManager* entity_manager) {
     size_t player = wr_create_entity(entity_manager);
     entity_manager->alive[player] = true;
@@ -28,17 +30,17 @@ void wr_player_movement_system(EntityManager* entity_manager) {
         }
 
         if (IsKeyDown(KEY_W)) {
-            entity_manager->velocity[i].y = -1;
+            entity_manager->velocity[i].y = -PLAYER_SPEED;
         } else if (IsKeyDown(KEY_S)) {
-            entity_manager->velocity[i].y = 1;
+            entity_manager->velocity[i].y = PLAYER_SPEED;
         } else {
             entity_manager->velocity[i].y = 0;
         }
 
         if (IsKeyDown(KEY_A)) {
-            entity_manager->velocity[i].x = -1;
+            entity_manager->velocity[i].x = -PLAYER_SPEED;
         } else if (IsKeyDown(KEY_D)) {
-            entity_manager->velocity[i].x = 1;
+            entity_manager->velocity[i].x = PLAYER_SPEED;
         } else {
             entity_manager->velocity[i].x = 0;
         }
