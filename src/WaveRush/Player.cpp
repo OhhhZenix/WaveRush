@@ -5,6 +5,7 @@
 #include "WaveRush/Entity.h"
 #include "WaveRush/Game.h"
 #include "WaveRush/Vec2f.h"
+#include "raylib.h"
 
 void wr_spawn_player(EntityManager* entity_manager) {
     size_t player = wr_create_entity(entity_manager);
@@ -14,4 +15,32 @@ void wr_spawn_player(EntityManager* entity_manager) {
     entity_manager->position[player].y = rand() % (GAME_HEIGHT - 32);
     entity_manager->velocity[player] = {0, 0};
     entity_manager->size[player] = {32, 32};
+}
+
+void wr_player_movement_system(EntityManager* entity_manager) {
+    for (size_t i = 0; i < entity_manager->count; i++) {
+        if (!entity_manager->alive[i]) {
+            continue;
+        }
+
+        if (entity_manager->kind[i] != EntityKind_Player) {
+            continue;
+        }
+
+        if (IsKeyDown(KEY_W)) {
+            entity_manager->velocity[i].y = -1;
+        } else if (IsKeyDown(KEY_S)) {
+            entity_manager->velocity[i].y = 1;
+        } else {
+            entity_manager->velocity[i].y = 0;
+        }
+
+        if (IsKeyDown(KEY_A)) {
+            entity_manager->velocity[i].x = -1;
+        } else if (IsKeyDown(KEY_D)) {
+            entity_manager->velocity[i].x = 1;
+        } else {
+            entity_manager->velocity[i].x = 0;
+        }
+    }
 }
