@@ -7,7 +7,7 @@
 #include "WaveRush/Vec2f.h"
 #include "raylib.h"
 
-constexpr float PLAYER_SPEED = 2;
+#define PLAYER_SPEED 2
 
 void wr_spawn_player(EntityManager* entity_manager) {
     size_t player = wr_create_entity(entity_manager);
