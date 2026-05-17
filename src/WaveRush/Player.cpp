@@ -13,11 +13,14 @@ void wr_spawn_player(EntityManager* entity_manager) {
     size_t player = wr_create_entity(entity_manager);
     entity_manager->alive[player] = true;
     entity_manager->kind[player] = EntityKind_Player;
-    entity_manager->position[player] = {
-        (float)(rand() % (GAME_WIDTH - 32)),
-        (float)(rand() % (GAME_HEIGHT - 32))
+    entity_manager->position[player] = Vec2f {
+        .x = static_cast<float>(rand() % (GAME_WIDTH - 32)),
+        .y = static_cast<float>(rand() % (GAME_HEIGHT - 32)),
     };
-    entity_manager->velocity[player] = {0, 0};
+    entity_manager->velocity[player] = Vec2f {
+        .x = 0,
+        .y = 0,
+    };
     entity_manager->size[player] = {32, 32};
 }
 
