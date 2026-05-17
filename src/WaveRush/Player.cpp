@@ -21,7 +21,10 @@ void wr_spawn_player(EntityManager* entity_manager) {
         .x = 0,
         .y = 0,
     };
-    entity_manager->size[player] = {32, 32};
+    entity_manager->size[player] = {
+        .x = 32,
+        .y = 32,
+    };
 }
 
 void wr_player_movement_system(EntityManager* entity_manager) {
