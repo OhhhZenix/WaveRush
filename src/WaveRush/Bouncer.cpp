@@ -19,7 +19,10 @@ void wr_spawn_bouncer(EntityManager* entity_manager) {
         .x = static_cast<float>((rand() % 2) * 2 - 1),
         .y = static_cast<float>((rand() % 2) * 2 - 1),
     };
-    entity_manager->size[bouncer] = {16, 16};
+    entity_manager->size[bouncer] = {
+        .x = 16,
+        .y = 16,
+    };
 }
 
 void wr_bouncer_movement_system(EntityManager* entity_manager) {
