@@ -1,4 +1,5 @@
 #include "WaveRush/GUI/WidgetManager.hpp"
+#include <algorithm>
 
 WidgetManager::~WidgetManager() {
 	if (!m_WidgetList.empty()) {
