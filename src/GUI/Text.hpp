@@ -1,5 +1,4 @@
 #include "GUI/Widget.hpp"
-#include "Math/Vec2.hpp"
 
 class Text : public Widget {
 private:
