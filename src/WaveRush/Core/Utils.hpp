@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cmath>
+#include <glm/glm.hpp>
+#include <random>
+
 #define SquaredValue(a) ((a) * (a))
 
 #define LerpValue(a, b, t) ((a) + ((t) * ((b) - (a))))

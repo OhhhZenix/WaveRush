@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL_ttf.h>
+#include <string>
 #include <unordered_map>
 
 class FontManager {
