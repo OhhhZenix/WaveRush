@@ -26,7 +26,7 @@ ParticleSystem::ParticleSystem(const glm::vec2& p_Position, size_t p_ParticleNum
 void ParticleSystem::ProcessUpdate(float p_DeltaTime) {
 	// Check if hook
 	if (m_Hook) {
-		m_Position = m_Hook->GetPosition() + (m_Hook->GetShape().Size / 2);
+		m_Position = m_Hook->GetPosition() + (m_Hook->GetShape().Size / 2.0f);
 	}
 
 	for (Particle& p : m_ParticleList) {
