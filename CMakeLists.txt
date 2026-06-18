@@ -17,7 +17,7 @@ add_executable(${TARGET_NAME} ${SRCS})
 target_include_directories(${TARGET_NAME} PUBLIC src)
 
 # Linking libraries
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2 SDL2main SDL2_ttf glm)
+target_link_libraries(${TARGET_NAME} PRIVATE SDL2main SDL2 SDL2_ttf glm)
 
 # Post build
 add_custom_command(
