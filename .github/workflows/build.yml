@@ -22,12 +22,20 @@ jobs:
         with:
           version: 4.3.0
 
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libfreetype6-dev
+
       - name: Show CMake version
         run: cmake --version
 
       - name: Configure
         run: >
-          cmake -B build
+          cmake -S .
+          -B build
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
 
       - name: Build
