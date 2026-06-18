@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 4.3)
 project(WaveRush)
 
 set(CMAKE_CXX_STANDARD 26)
