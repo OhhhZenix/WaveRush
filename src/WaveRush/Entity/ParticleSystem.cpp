@@ -1,6 +1,6 @@
 #include "ParticleSystem.hpp"
 
-#include "Core/Utils.hpp"
+#include "WaveRush/Core/Utils.hpp"
 
 ParticleDescriptor::ParticleDescriptor(float p_Lifetime, float p_MinVelocity, float p_MaxVelocity, SDL_Color p_InitialColor, SDL_Color p_FinalColor, glm::vec2 p_InitialSize, glm::vec2 p_FinalSize) {
 	Lifetime = p_Lifetime;

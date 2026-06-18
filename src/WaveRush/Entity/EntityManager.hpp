@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/PCH.hpp"
-#include "Entity/Entity.hpp"
+#include "WaveRush/Core/PCH.hpp"
+#include "WaveRush/Entity/Entity.hpp"
 
 class EntityManager {
 private:

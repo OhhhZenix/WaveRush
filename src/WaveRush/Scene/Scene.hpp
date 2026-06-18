@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Entity/EntityManager.hpp"
-#include "GUI/WidgetManager.hpp"
+#include "WaveRush/Entity/EntityManager.hpp"
+#include "WaveRush/GUI/WidgetManager.hpp"
 
 class Scene {
 private:

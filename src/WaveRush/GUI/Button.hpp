@@ -1,5 +1,5 @@
-#include "GUI/Widget.hpp"
 #include "Math/Vec2.hpp"
+#include "WaveRush/GUI/Widget.hpp"
 
 class Button : public Widget {
 private:

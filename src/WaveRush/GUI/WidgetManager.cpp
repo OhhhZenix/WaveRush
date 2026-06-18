@@ -1,4 +1,4 @@
-#include "GUI/WidgetManager.hpp"
+#include "WaveRush/GUI/WidgetManager.hpp"
 
 WidgetManager::~WidgetManager() {
 	if (!m_WidgetList.empty()) {

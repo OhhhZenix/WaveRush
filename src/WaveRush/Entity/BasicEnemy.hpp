@@ -1,16 +1,15 @@
 #pragma once
 
-#include "Core/Game.hpp"
-#include "Core/Utils.hpp"
-#include "Entity/Entity.hpp"
+#include "WaveRush/Core/Game.hpp"
+#include "WaveRush/Core/Utils.hpp"
+#include "WaveRush/Entity/Entity.hpp"
 
-class SmartEnemy : public Entity {
+class BasicEnemy : public Entity {
 private:
-	float m_Attraction;
-	float m_Repulsion;
+	float m_Speed;
 
 public:
-	explicit SmartEnemy(
+	explicit BasicEnemy(
 			const glm::vec2& p_Position = glm::vec2(
 					Random<float>(0, Game::Instance().GetSettings().Width),
 					Random<float>(0, Game::Instance().GetSettings().Height)));

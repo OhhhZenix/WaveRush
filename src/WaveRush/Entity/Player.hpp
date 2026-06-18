@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity/Entity.hpp"
+#include "WaveRush/Entity/Entity.hpp"
 
 class Player : public Entity {
 private:

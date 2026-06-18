@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/PCH.hpp"
+#include "WaveRush/Core/PCH.hpp"
 
 #define SquaredValue(a) ((a) * (a))
 

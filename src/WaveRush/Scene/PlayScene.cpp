@@ -1,10 +1,10 @@
 #include "PlayScene.hpp"
 
-#include "Entity/BasicEnemy.hpp"
-#include "Entity/ParticleSystem.hpp"
-#include "Entity/Player.hpp"
-#include "Entity/SmartEnemy.hpp"
-#include "GUI/Text.hpp"
+#include "WaveRush/Entity/BasicEnemy.hpp"
+#include "WaveRush/Entity/ParticleSystem.hpp"
+#include "WaveRush/Entity/Player.hpp"
+#include "WaveRush/Entity/SmartEnemy.hpp"
+#include "WaveRush/GUI/Text.hpp"
 
 PlayScene::PlayScene() {
 	ParticleDescriptor f_EnemyParticle =

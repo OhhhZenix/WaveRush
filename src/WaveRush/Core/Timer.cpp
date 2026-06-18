@@ -1,6 +1,6 @@
 #include "Timer.hpp"
 
-#include "Core/PCH.hpp"
+#include "WaveRush/Core/PCH.hpp"
 
 Timer::Timer() {
 	m_StartTime = 0;

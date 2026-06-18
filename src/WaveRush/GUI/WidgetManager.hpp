@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/PCH.hpp"
-#include "GUI/Widget.hpp"
+#include "WaveRush/Core/PCH.hpp"
+#include "WaveRush/GUI/Widget.hpp"
 
 class WidgetManager {
 private:

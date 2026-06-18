@@ -1,5 +1,5 @@
-#include "Core/Game.hpp"
-#include "Scene/PlayScene.hpp"
+#include "WaveRush/Core/Game.hpp"
+#include "WaveRush/Scene/PlayScene.hpp"
 
 // This kind of setup is need for SDL or else it will fail
 int main(int argc, char* argv[]) {

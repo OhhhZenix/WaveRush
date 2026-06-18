@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
-#include "Core/Game.hpp"
-#include "Core/Utils.hpp"
+#include "WaveRush/Core/Game.hpp"
+#include "WaveRush/Core/Utils.hpp"
 
 float VelocityByLevel(uint32_t p_Level) {
 	return 600.0f + (static_cast<float>(p_Level - 1) * 100.0f);

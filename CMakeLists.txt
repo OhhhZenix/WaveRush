@@ -16,7 +16,7 @@ add_executable(${TARGET_NAME} ${SRCS})
 target_include_directories(${TARGET_NAME} PUBLIC src)
 
 # Creates precompiled header
-target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
+target_precompile_headers(${TARGET_NAME} PRIVATE src/WaveRush/Core/PCH.hpp)
 
 # Linking libraries
 target_link_libraries(${TARGET_NAME} PRIVATE SDL2 SDL2_ttf glm)

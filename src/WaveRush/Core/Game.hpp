@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/PCH.hpp"
 #include "FontManager.hpp"
-#include "Scene/SceneManager.hpp"
+#include "WaveRush/Core/PCH.hpp"
+#include "WaveRush/Scene/SceneManager.hpp"
 
 struct WindowSettings {
 	std::string Title = "WaveRush";

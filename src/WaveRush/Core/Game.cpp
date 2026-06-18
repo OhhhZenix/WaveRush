@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-#include "Core/Timer.hpp"
+#include "WaveRush/Core/Timer.hpp"
 
 Game::Game() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {

@@ -1,6 +1,6 @@
 #include "Text.hpp"
 
-#include "Core/Game.hpp"
+#include "WaveRush/Core/Game.hpp"
 
 Text::Text(const glm::vec2& p_Position, const std::string& p_FontPath, const std::string& p_Text, SDL_Color p_Color) :
 		Widget(p_Position) {

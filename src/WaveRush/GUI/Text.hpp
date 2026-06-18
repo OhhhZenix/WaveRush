@@ -1,4 +1,4 @@
-#include "GUI/Widget.hpp"
+#include "WaveRush/GUI/Widget.hpp"
 
 class Text : public Widget {
 private:

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Shape/RectangleShape.hpp"
+#include "WaveRush/Shape/RectangleShape.hpp"
 
 enum class EntityType {
 	Entity = 0,

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene/Scene.hpp"
+#include "WaveRush/Scene/Scene.hpp"
 
 class PlayScene : public Scene {
 private:
