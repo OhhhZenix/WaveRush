@@ -4,6 +4,7 @@ project(WaveRush)
 set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 
 include(cmake/SDL2.cmake)
 include(cmake/SDL2_ttf.cmake)
