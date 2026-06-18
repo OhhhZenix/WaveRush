@@ -1,5 +1,8 @@
 #include "WaveRush/GUI/Widget.hpp"
 
+#include <SDL_ttf.h>
+#include <string>
+
 class Text : public Widget {
 private:
 	std::string m_Text;

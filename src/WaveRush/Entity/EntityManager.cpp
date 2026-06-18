@@ -1,4 +1,5 @@
 #include "EntityManager.hpp"
+#include <algorithm>
 
 EntityManager::~EntityManager() {
 	if (!m_Entities.empty()) {
