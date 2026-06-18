@@ -1,6 +1,7 @@
 #pragma once
 
-#include "WaveRush/Core/PCH.hpp"
+#include <SDL_ttf.h>
+#include <unordered_map>
 
 class FontManager {
 private:

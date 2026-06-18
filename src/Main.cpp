@@ -2,7 +2,7 @@
 #include "WaveRush/Scene/PlayScene.hpp"
 
 // This kind of setup is need for SDL or else it will fail
-int main(int argc, char* argv[]) {
+auto main(int argc, char* argv[]) -> int {
 	// Unused argc, argv
 	(void)argc;
 	(void)argv;

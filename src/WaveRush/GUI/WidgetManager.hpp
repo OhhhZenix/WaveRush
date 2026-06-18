@@ -1,6 +1,5 @@
 #pragma once
 
-#include "WaveRush/Core/PCH.hpp"
 #include "WaveRush/GUI/Widget.hpp"
 
 class WidgetManager {

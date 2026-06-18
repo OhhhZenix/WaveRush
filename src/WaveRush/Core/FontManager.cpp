@@ -1,5 +1,7 @@
 #include "FontManager.hpp"
 
+#include <iostream>
+
 FontManager::~FontManager() {
 	if (!m_FontList.empty()) {
 		for (auto& [f_Key, f_Value] : m_FontList) {

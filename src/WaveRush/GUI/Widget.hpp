@@ -1,6 +1,7 @@
 #pragma once
 
-#include "WaveRush/Core/PCH.hpp"
+#include <SDL.h>
+#include <glm/glm.hpp>
 
 class Widget {
 protected:

@@ -2,6 +2,7 @@
 
 #include "WaveRush/Entity/EntityManager.hpp"
 #include "WaveRush/GUI/WidgetManager.hpp"
+#include <SDL.h>
 
 class Scene {
 private:

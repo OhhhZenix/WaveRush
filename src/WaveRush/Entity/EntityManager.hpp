@@ -1,7 +1,8 @@
 #pragma once
 
-#include "WaveRush/Core/PCH.hpp"
 #include "WaveRush/Entity/Entity.hpp"
+#include <SDL.h>
+#include <vector>
 
 class EntityManager {
 private:

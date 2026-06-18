@@ -1,6 +1,7 @@
 #pragma once
 
-#include "WaveRush/Core/PCH.hpp"
+#include <SDL.h>
+#include <glm/glm.hpp>
 
 struct RectangleShape {
 	SDL_Color Color = { 0, 0, 0, 255 };

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "WaveRush/Core/PCH.hpp"
-
 #define SquaredValue(a) ((a) * (a))
 
 #define LerpValue(a, b, t) ((a) + ((t) * ((b) - (a))))

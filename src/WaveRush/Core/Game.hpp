@@ -1,7 +1,7 @@
 #pragma once
 
-#include "FontManager.hpp"
-#include "WaveRush/Core/PCH.hpp"
+#include "WaveRush/Core/FontManager.hpp"
+
 #include "WaveRush/Scene/SceneManager.hpp"
 
 struct WindowSettings {

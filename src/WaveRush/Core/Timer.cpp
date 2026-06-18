@@ -1,7 +1,5 @@
 #include "Timer.hpp"
 
-#include "WaveRush/Core/PCH.hpp"
-
 Timer::Timer() {
 	m_StartTime = 0;
 	m_PausedTime = 0;
