@@ -1,7 +1,7 @@
 #pragma once
 
 #include "WaveRush/Entity/Entity.hpp"
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <vector>
 
 class EntityManager {

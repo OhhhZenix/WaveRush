@@ -1,6 +1,6 @@
 #include "WaveRush/GUI/Widget.hpp"
 
-#include <SDL_ttf.h>
+#include <SDL3/SDL_ttf.h>
 #include <string>
 
 class Text : public Widget {

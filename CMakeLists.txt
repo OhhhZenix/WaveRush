@@ -4,10 +4,9 @@ project(WaveRush)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 
-include(cmake/SDL2.cmake)
-include(cmake/SDL2_ttf.cmake)
+include(cmake/SDL3.cmake)
+include(cmake/SDL3_ttf.cmake)
 include(cmake/glm.cmake)
 
 # Target
@@ -17,7 +16,7 @@ add_executable(${TARGET_NAME} ${SRCS})
 target_include_directories(${TARGET_NAME} PUBLIC src)
 
 # Linking libraries
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2main SDL2 SDL2_ttf glm)
+target_link_libraries(${TARGET_NAME} PRIVATE SDL3 SDL3_ttf glm)
 
 # Post build
 add_custom_command(
