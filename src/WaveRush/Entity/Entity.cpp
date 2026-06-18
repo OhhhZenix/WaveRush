@@ -10,13 +10,13 @@ void Entity::ProcessEvents(SDL_Event& p_Event) {}
 void Entity::ProcessUpdate(float p_DeltaTime) {}
 
 void Entity::ProcessRender(SDL_Renderer* p_Renderer) {
-	SDL_Rect f_Rect{ (int)m_Position.x, (int)m_Position.y, (int)m_Shape.Size.x, (int)m_Shape.Size.x };
+	SDL_FRect f_Rect{ (float)m_Position.x, (float)m_Position.y, (float)m_Shape.Size.x, (float)m_Shape.Size.x };
 
 	if (m_Shape.OutlineThickness > 0) {
-		SDL_Rect f_Outline{ static_cast<int>(f_Rect.x - m_Shape.OutlineThickness),
-			static_cast<int>(f_Rect.y - m_Shape.OutlineThickness),
-			static_cast<int>(f_Rect.w + (m_Shape.OutlineThickness * 2)),
-			static_cast<int>(f_Rect.h + (m_Shape.OutlineThickness * 2)) };
+		SDL_FRect f_Outline{ static_cast<float>(f_Rect.x - m_Shape.OutlineThickness),
+			static_cast<float>(f_Rect.y - m_Shape.OutlineThickness),
+			static_cast<float>(f_Rect.w + (m_Shape.OutlineThickness * 2)),
+			static_cast<float>(f_Rect.h + (m_Shape.OutlineThickness * 2)) };
 		SDL_SetRenderDrawColor(p_Renderer, m_Shape.OutlineColor.r, m_Shape.OutlineColor.g, m_Shape.OutlineColor.b, m_Shape.OutlineColor.a);
 		SDL_RenderFillRect(p_Renderer, &f_Outline);
 	}

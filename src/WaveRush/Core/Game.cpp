@@ -3,25 +3,24 @@
 #include "WaveRush/Core/Timer.hpp"
 
 Game::Game() {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (SDL_Init(SDL_INIT_VIDEO) == false) {
 		std::exit(EXIT_FAILURE);
 	}
 
-	if (TTF_Init() < 0) {
+	if (TTF_Init() == false) {
 		std::exit(EXIT_FAILURE);
 	}
 
 	m_Window = SDL_CreateWindow(
 			m_Settings.Title.c_str(),
-			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			m_Settings.Width, m_Settings.Height,
-			SDL_WINDOW_SHOWN);
+			0);
 
 	if (m_Window == nullptr) {
 		std::exit(EXIT_FAILURE);
 	}
 
-	m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED);
+	m_Renderer = SDL_CreateRenderer(m_Window, nullptr);
 
 	if (m_Renderer == nullptr) {
 		std::exit(EXIT_FAILURE);
@@ -97,7 +96,7 @@ void Game::ProcessEvents(SDL_Event& p_Event) {
 	m_SceneManager.GetActiveScene().GetEntityManager().ProcessEvents(p_Event);
 	m_SceneManager.GetActiveScene().ProcessEvents(p_Event);
 
-	if (p_Event.type == SDL_QUIT) {
+	if (p_Event.type == SDL_EVENT_QUIT) {
 		m_Running = false;
 	}
 }

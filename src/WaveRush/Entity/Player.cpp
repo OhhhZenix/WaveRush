@@ -19,8 +19,8 @@ Player::Player(const glm::vec2& p_Position) :
 }
 
 void Player::ProcessEvents(SDL_Event& p_Event) {
-	if (p_Event.type == SDL_KEYUP) {
-		switch (p_Event.key.keysym.sym) {
+	if (p_Event.type == SDL_EVENT_KEY_UP) {
+		switch (p_Event.key.key) {
 			case SDLK_LSHIFT: {
 				m_VelocityLevel = ClampValue(1, 10, m_VelocityLevel + 1);
 				float f_NewVelocity = VelocityByLevel(m_VelocityLevel);
@@ -42,7 +42,7 @@ void Player::ProcessEvents(SDL_Event& p_Event) {
 void Player::ProcessUpdate(float p_DeltaTime) {
 	// Check for player input for movement
 	SDL_PumpEvents();
-	const uint8_t* f_KeyboardState = SDL_GetKeyboardState(nullptr);
+	const bool* f_KeyboardState = SDL_GetKeyboardState(nullptr);
 
 	if (f_KeyboardState[SDL_SCANCODE_W] || f_KeyboardState[SDL_SCANCODE_UP]) {
 		m_Position.y -= m_Velocity.y * p_DeltaTime;

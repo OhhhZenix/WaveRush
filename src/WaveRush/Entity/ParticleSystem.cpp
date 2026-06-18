@@ -72,11 +72,11 @@ void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer) {
 				LerpValue(m_ParticleDesc.FinalSize.x, m_ParticleDesc.InitialSize.x, p.Life / m_ParticleDesc.Lifetime),
 				LerpValue(m_ParticleDesc.FinalSize.y, m_ParticleDesc.InitialSize.y, p.Life / m_ParticleDesc.Lifetime));
 
-		SDL_Rect f_Rect = {
-			(int)(p.Position.x - (f_Size.x / 2)),
-			(int)(p.Position.y - (f_Size.y / 2)),
-			(int)f_Size.x,
-			(int)f_Size.y
+		SDL_FRect f_Rect = {
+			(float)(p.Position.x - (f_Size.x / 2)),
+			(float)(p.Position.y - (f_Size.y / 2)),
+			(float)f_Size.x,
+			(float)f_Size.y
 		};
 
 		SDL_SetRenderDrawColor(
