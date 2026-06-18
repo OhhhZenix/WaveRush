@@ -7,7 +7,7 @@ private:
 	int32_t m_VelocityLevel;
 
 public:
-	explicit Player(const Vec2<float>& p_Position = Vec2<float>());
+	explicit Player(const glm::vec2& p_Position = glm::vec2());
 
 	void ProcessEvents(SDL_Event& p_Event) override;
 

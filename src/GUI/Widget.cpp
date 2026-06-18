@@ -1,6 +1,6 @@
 #include "Widget.hpp"
 
-Widget::Widget(const Vec2<float>& p_Position) {
+Widget::Widget(const glm::vec2& p_Position) {
 	m_Position = p_Position;
 }
 

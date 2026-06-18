@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 project(WaveRush)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/SDL2.cmake)
 include(cmake/SDL2_ttf.cmake)
+include(cmake/glm.cmake)
 
 # Target
 set(TARGET_NAME WaveRush)
@@ -16,11 +18,8 @@ target_include_directories(${TARGET_NAME} PUBLIC src)
 # Creates precompiled header
 target_precompile_headers(${TARGET_NAME} PRIVATE src/Core/PCH.hpp)
 
-# Linking SDL
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
-
-# Linking SDL-TTF
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2_ttf)
+# Linking libraries
+target_link_libraries(${TARGET_NAME} PRIVATE SDL2 SDL2_ttf glm)
 
 # Post build
 add_custom_command(

@@ -2,7 +2,7 @@
 
 #include "Core/Game.hpp"
 
-Text::Text(const Vec2<float>& p_Position, const std::string& p_FontPath, const std::string& p_Text, SDL_Color p_Color) :
+Text::Text(const glm::vec2& p_Position, const std::string& p_FontPath, const std::string& p_Text, SDL_Color p_Color) :
 		Widget(p_Position) {
 	m_Text = p_Text;
 	m_Color = p_Color;
@@ -25,8 +25,8 @@ void Text::ProcessRender(SDL_Renderer* p_Renderer) {
 	}
 
 	static SDL_Rect f_FontRect = {
-		static_cast<int>(m_Position.X),
-		static_cast<int>(m_Position.Y),
+		static_cast<int>(m_Position.x),
+		static_cast<int>(m_Position.y),
 		m_FontSurface->w,
 		m_FontSurface->h
 	};

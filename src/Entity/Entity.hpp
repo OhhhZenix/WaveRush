@@ -14,8 +14,8 @@ class Entity {
 protected:
 	EntityType m_EntityType;
 	RectangleShape m_Shape;
-	Vec2<float> m_Position;
-	Vec2<float> m_Velocity;
+	glm::vec2 m_Position;
+	glm::vec2 m_Velocity;
 	uint32_t m_Layer;
 
 public:
@@ -35,13 +35,13 @@ public:
 
 	void SetShape(const RectangleShape& p_Shape);
 
-	[[nodiscard]] const Vec2<float>& GetPosition() const;
+	[[nodiscard]] const glm::vec2& GetPosition() const;
 
-	void SetPosition(const Vec2<float>& p_Position);
+	void SetPosition(const glm::vec2& p_Position);
 
-	[[nodiscard]] const Vec2<float>& GetVelocity() const;
+	[[nodiscard]] const glm::vec2& GetVelocity() const;
 
-	void SetVelocity(const Vec2<float>& p_Velocity);
+	void SetVelocity(const glm::vec2& p_Velocity);
 
 	[[nodiscard]] const uint32_t& GetLayer() const;
 

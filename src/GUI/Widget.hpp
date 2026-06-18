@@ -1,14 +1,13 @@
 #pragma once
 
 #include "Core/PCH.hpp"
-#include "Math/Vec2.hpp"
 
 class Widget {
 protected:
-	Vec2<float> m_Position;
+	glm::vec2 m_Position;
 
 public:
-	explicit Widget(const Vec2<float>& p_Position = Vec2<float>());
+	explicit Widget(const glm::vec2& p_Position = glm::vec2(0, 0));
 
 	virtual ~Widget() = default;
 

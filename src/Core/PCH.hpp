@@ -2,11 +2,11 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <immintrin.h>
-#include <xmmintrin.h>
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 #include <functional>
+#include <glm/glm.hpp>
 #include <iostream>
 #include <random>
 #include <sstream>

@@ -10,7 +10,7 @@ private:
 
 public:
 	explicit BasicEnemy(
-			const Vec2<float>& p_Position = Vec2<float>(
+			const glm::vec2& p_Position = glm::vec2(
 					Random<float>(0, Game::Instance().GetSettings().Width),
 					Random<float>(0, Game::Instance().GetSettings().Height)));
 

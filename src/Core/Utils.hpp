@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/PCH.hpp"
-#include "Math/Vec2.hpp"
 
 #define SquaredValue(a) ((a) * (a))
 
@@ -27,7 +26,7 @@ struct PolarCoord {
 	float Angle;
 	float Magnitude;
 
-	Vec2<float> ToCartesian() const {
+	glm::vec2 ToCartesian() const {
 		return {
 			Magnitude * cos(Angle),
 			Magnitude * sin(Angle)

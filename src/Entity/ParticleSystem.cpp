@@ -2,7 +2,7 @@
 
 #include "Core/Utils.hpp"
 
-ParticleDescriptor::ParticleDescriptor(float p_Lifetime, float p_MinVelocity, float p_MaxVelocity, SDL_Color p_InitialColor, SDL_Color p_FinalColor, Vec2<float> p_InitialSize, Vec2<float> p_FinalSize) {
+ParticleDescriptor::ParticleDescriptor(float p_Lifetime, float p_MinVelocity, float p_MaxVelocity, SDL_Color p_InitialColor, SDL_Color p_FinalColor, glm::vec2 p_InitialSize, glm::vec2 p_FinalSize) {
 	Lifetime = p_Lifetime;
 	MinVelocity = p_MinVelocity;
 	MaxVelocity = p_MaxVelocity;
@@ -12,7 +12,7 @@ ParticleDescriptor::ParticleDescriptor(float p_Lifetime, float p_MinVelocity, fl
 	FinalSize = p_FinalSize;
 }
 
-ParticleSystem::ParticleSystem(const Vec2<float>& p_Position, size_t p_ParticleNum, const ParticleDescriptor& p_ParticleDesc) :
+ParticleSystem::ParticleSystem(const glm::vec2& p_Position, size_t p_ParticleNum, const ParticleDescriptor& p_ParticleDesc) :
 		Entity(EntityType::Particle) {
 	m_Position = p_Position;
 	m_ParticleList.resize(p_ParticleNum);
@@ -39,8 +39,8 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime) {
 		// reset dead particle
 		if (p.Life <= 0) {
 			p.Life = m_ParticleDesc.Lifetime;
-			p.Position.Y = m_Position.Y;
-			p.Position.X = m_Position.X;
+			p.Position.y = m_Position.y;
+			p.Position.x = m_Position.x;
 			p.Delay = Random<float>(0.0, m_ParticleDesc.Lifetime * 0.5);
 
 			float f_Magnitude = Random<float>(
@@ -49,7 +49,7 @@ void ParticleSystem::ProcessUpdate(float p_DeltaTime) {
 
 			float f_Angle = Random<float>(0.1, 2 * 3.1415926535f);
 
-			p.Velocity = Vec2<float>(
+			p.Velocity = glm::vec2(
 					f_Magnitude * cos(f_Angle),
 					f_Magnitude * sin(f_Angle));
 
@@ -68,15 +68,15 @@ void ParticleSystem::ProcessRender(SDL_Renderer* p_Renderer) {
 		}
 
 		// Correct Resizing
-		Vec2<float> f_Size = Vec2<float>(
-				LerpValue(m_ParticleDesc.FinalSize.X, m_ParticleDesc.InitialSize.X, p.Life / m_ParticleDesc.Lifetime),
-				LerpValue(m_ParticleDesc.FinalSize.Y, m_ParticleDesc.InitialSize.Y, p.Life / m_ParticleDesc.Lifetime));
+		glm::vec2 f_Size = glm::vec2(
+				LerpValue(m_ParticleDesc.FinalSize.x, m_ParticleDesc.InitialSize.x, p.Life / m_ParticleDesc.Lifetime),
+				LerpValue(m_ParticleDesc.FinalSize.y, m_ParticleDesc.InitialSize.y, p.Life / m_ParticleDesc.Lifetime));
 
 		SDL_Rect f_Rect = {
-			(int)(p.Position.X - (f_Size.X / 2)),
-			(int)(p.Position.Y - (f_Size.Y / 2)),
-			(int)f_Size.X,
-			(int)f_Size.Y
+			(int)(p.Position.x - (f_Size.x / 2)),
+			(int)(p.Position.y - (f_Size.y / 2)),
+			(int)f_Size.x,
+			(int)f_Size.y
 		};
 
 		SDL_SetRenderDrawColor(

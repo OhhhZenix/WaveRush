@@ -1,6 +1,6 @@
 #include "SmartEnemy.hpp"
 
-SmartEnemy::SmartEnemy(const Vec2<float>& p_Position) :
+SmartEnemy::SmartEnemy(const glm::vec2& p_Position) :
 		Entity(EntityType::SmartEnemy), m_Attraction(0.001), m_Repulsion(-0.005) {
 	m_Position = p_Position;
 	m_Shape.Color = { 150, 0, 255, 255 };
@@ -18,14 +18,14 @@ void SmartEnemy::ProcessUpdate(float p_DeltaTime) {
 
 	for (Entity* f_Entity : f_EntityList) {
 		if (f_Entity->GetEntityType() == EntityType::Player) {
-			m_Position = Vec2<float>(
-					LerpValue(m_Position.X, f_Entity->GetPosition().X, m_Attraction),
-					LerpValue(m_Position.Y, f_Entity->GetPosition().Y, m_Attraction));
+			m_Position = glm::vec2(
+					LerpValue(m_Position.x, f_Entity->GetPosition().x, m_Attraction),
+					LerpValue(m_Position.y, f_Entity->GetPosition().y, m_Attraction));
 		} else if (f_Entity->GetEntityType() == EntityType::SmartEnemy) {
-			if (Distance2D(m_Position.X, m_Position.Y, f_Entity->GetPosition().X, f_Entity->GetPosition().Y) < 100) {
-				m_Position = Vec2<float>(
-						LerpValue(m_Position.X, f_Entity->GetPosition().X, m_Repulsion),
-						LerpValue(m_Position.Y, f_Entity->GetPosition().Y, m_Repulsion));
+			if (Distance2D(m_Position.x, m_Position.y, f_Entity->GetPosition().x, f_Entity->GetPosition().y) < 100) {
+				m_Position = glm::vec2(
+						LerpValue(m_Position.x, f_Entity->GetPosition().x, m_Repulsion),
+						LerpValue(m_Position.y, f_Entity->GetPosition().y, m_Repulsion));
 			}
 		}
 	}

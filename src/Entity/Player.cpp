@@ -7,7 +7,7 @@ float VelocityByLevel(uint32_t p_Level) {
 	return 600.0f + (static_cast<float>(p_Level - 1) * 100.0f);
 }
 
-Player::Player(const Vec2<float>& p_Position) :
+Player::Player(const glm::vec2& p_Position) :
 		Entity(EntityType::Player) {
 	m_VelocityLevel = 1;
 	m_Position = p_Position;
@@ -45,22 +45,22 @@ void Player::ProcessUpdate(float p_DeltaTime) {
 	const uint8_t* f_KeyboardState = SDL_GetKeyboardState(nullptr);
 
 	if (f_KeyboardState[SDL_SCANCODE_W] || f_KeyboardState[SDL_SCANCODE_UP]) {
-		m_Position.Y -= m_Velocity.Y * p_DeltaTime;
+		m_Position.y -= m_Velocity.y * p_DeltaTime;
 	}
 
 	if (f_KeyboardState[SDL_SCANCODE_S] || f_KeyboardState[SDL_SCANCODE_DOWN]) {
-		m_Position.Y += m_Velocity.Y * p_DeltaTime;
+		m_Position.y += m_Velocity.y * p_DeltaTime;
 	}
 
 	if (f_KeyboardState[SDL_SCANCODE_A] || f_KeyboardState[SDL_SCANCODE_LEFT]) {
-		m_Position.X -= m_Velocity.X * p_DeltaTime;
+		m_Position.x -= m_Velocity.x * p_DeltaTime;
 	}
 
 	if (f_KeyboardState[SDL_SCANCODE_D] || f_KeyboardState[SDL_SCANCODE_RIGHT]) {
-		m_Position.X += m_Velocity.X * p_DeltaTime;
+		m_Position.x += m_Velocity.x * p_DeltaTime;
 	}
 
 	// Clamping the position
-	m_Position.X = ClampValue(0, Game::Instance().GetSettings().Width - m_Shape.Size.X, m_Position.X);
-	m_Position.Y = ClampValue(0, Game::Instance().GetSettings().Height - m_Shape.Size.Y, m_Position.Y);
+	m_Position.x = ClampValue(0, Game::Instance().GetSettings().Width - m_Shape.Size.x, m_Position.x);
+	m_Position.y = ClampValue(0, Game::Instance().GetSettings().Height - m_Shape.Size.y, m_Position.y);
 }
