@@ -9,16 +9,16 @@ include(cmake/SDL3.cmake)
 include(cmake/SDL3_ttf.cmake)
 include(cmake/glm.cmake)
 
-# Target
-set(TARGET_NAME WaveRush)
-file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
-add_executable(${TARGET_NAME} ${SRCS})
-target_include_directories(${TARGET_NAME} PUBLIC src)
+add_executable(
+        ${PROJECT_NAME} 
+        src/Main.cpp
+        src/WaveRush/Core/Game.cpp
+)
 
-# Linking libraries
-target_link_libraries(${TARGET_NAME} PRIVATE SDL3::SDL3 SDL3_ttf::SDL3_ttf glm)
+target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-# Post build
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_ttf::SDL3_ttf glm)
+
 add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory

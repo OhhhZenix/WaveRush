@@ -1,23 +1,9 @@
 #include "WaveRush/Core/Game.hpp"
-#include "WaveRush/Scene/PlayScene.hpp"
 
-// This kind of setup is need for SDL or else it will fail
 auto main(int argc, char* argv[]) -> int {
-	// Unused argc, argv
-	(void)argc;
-	(void)argv;
-
-	// Game Instance
-	auto& f_Instance = Game::Instance();
-
-	// Init
-	f_Instance.GetFontManager().LoadFont("assets/fonts/JetBrainsMono.ttf");
-	f_Instance.GetFontManager().LoadFont("assets/fonts/Alphakind.ttf");
-	f_Instance.GetSceneManager().SetActiveScene(new PlayScene());
-
-	// Runs the game
-	f_Instance.Run();
-
-	// Exit the program
-	return 0;
+  (void)argc;
+  (void)argv;
+  wr::Game game;
+  game.run();
+  return 0;
 }

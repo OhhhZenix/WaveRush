@@ -1,113 +1,89 @@
 #include "Game.hpp"
 
-#include "WaveRush/Core/Timer.hpp"
+#include <cstdint>
+
+namespace wr {
 
 Game::Game() {
-	if (SDL_Init(SDL_INIT_VIDEO) == false) {
-		std::exit(EXIT_FAILURE);
-	}
+  if (SDL_Init(SDL_INIT_VIDEO) == false) {
+    SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
+    return;
+  }
 
-	if (TTF_Init() == false) {
-		std::exit(EXIT_FAILURE);
-	}
+  window_ = SDL_CreateWindow("WaveRush", 640, 360, 0);
 
-	m_Window = SDL_CreateWindow(
-			m_Settings.Title.c_str(),
-			m_Settings.Width, m_Settings.Height,
-			0);
+  if (window_ == nullptr) {
+    SDL_Log("Failed to create window: %s", SDL_GetError());
+    return;
+  }
 
-	if (m_Window == nullptr) {
-		std::exit(EXIT_FAILURE);
-	}
+  SDL_GPUShaderFormat gpu_flags = {};
+  gpu_flags |= SDL_GPU_SHADERFORMAT_SPIRV;
+  gpu_flags |= SDL_GPU_SHADERFORMAT_DXIL;
+  gpu_flags |= SDL_GPU_SHADERFORMAT_METALLIB;
 
-	m_Renderer = SDL_CreateRenderer(m_Window, nullptr);
+  gpu_ = SDL_CreateGPUDevice(gpu_flags, false, nullptr);
 
-	if (m_Renderer == nullptr) {
-		std::exit(EXIT_FAILURE);
-	}
+  if (gpu_ == nullptr) {
+    SDL_Log("Failed to create GPU device: %s", SDL_GetError());
+    return;
+  }
 
-	m_FontManager = new FontManager();
-	m_Running = true;
+  if (SDL_ClaimWindowForGPUDevice(gpu_, window_) == false) {
+    SDL_Log("Failed to claim window: %s", SDL_GetError());
+    return;
+  }
+
+  running_ = true;
 }
 
 Game::~Game() {
-	delete m_FontManager;
-	SDL_DestroyRenderer(m_Renderer);
-	SDL_DestroyWindow(m_Window);
-	TTF_Quit();
-	SDL_Quit();
+  SDL_ReleaseWindowFromGPUDevice(gpu_, window_);
+  SDL_DestroyGPUDevice(gpu_);
+  SDL_DestroyWindow(window_);
+  SDL_Quit();
 }
 
-Game& Game::Instance() {
-	static Game s_Instance;
-	return s_Instance;
+auto Game::run() -> void {
+  while (running_) {
+    SDL_Event event = {};
+    while (SDL_PollEvent(&event)) {
+      if (event.type == SDL_EVENT_QUIT) {
+        running_ = false;
+      }
+    }
+
+    SDL_GPUCommandBuffer* cmd = SDL_AcquireGPUCommandBuffer(gpu_);
+
+    if (!cmd) {
+      continue;
+    }
+
+    SDL_GPUTexture* swapchainTexture = nullptr;
+    std::uint32_t width = 0;
+    std::uint32_t height = 0;
+
+    if (SDL_WaitAndAcquireGPUSwapchainTexture(cmd, window_, &swapchainTexture,
+                                              &width, &height)) {
+      if (swapchainTexture) {
+        SDL_GPUColorTargetInfo colorTarget = {};
+        colorTarget.texture = swapchainTexture;
+        colorTarget.clear_color.r = 0.1f;
+        colorTarget.clear_color.g = 0.2f;
+        colorTarget.clear_color.b = 0.4f;
+        colorTarget.clear_color.a = 1.0f;
+        colorTarget.load_op = SDL_GPU_LOADOP_CLEAR;
+        colorTarget.store_op = SDL_GPU_STOREOP_STORE;
+
+        SDL_GPURenderPass* pass =
+            SDL_BeginGPURenderPass(cmd, &colorTarget, 1, nullptr);
+
+        SDL_EndGPURenderPass(pass);
+      }
+    }
+
+    SDL_SubmitGPUCommandBuffer(cmd);
+  }
 }
 
-void Game::Run() {
-	SDL_Event f_Event;
-	Timer f_DeltaTimer;
-	float f_DeltaTime = 1.0f / 60.0f;
-
-	while (m_Running) {
-		// Event related work
-		while (SDL_PollEvent(&f_Event)) {
-			ProcessEvents(f_Event);
-		}
-
-		// Update related work
-		ProcessUpdate(f_DeltaTime);
-
-		// Render related work
-		// Set clear color
-		SDL_SetRenderDrawColor(m_Renderer, 64, 64, 64, 255);
-
-		// Clear screen
-		SDL_RenderClear(m_Renderer);
-
-		// Renders everything
-		ProcessRender(m_Renderer);
-
-		// Update screen
-		SDL_RenderPresent(m_Renderer);
-
-		// Resets the delta time
-		f_DeltaTime = static_cast<float>(f_DeltaTimer.GetTicks()) / 1000.0f;
-		f_DeltaTimer.Start();
-	}
-}
-
-SDL_Renderer* Game::GetRenderer() {
-	return m_Renderer;
-}
-
-WindowSettings& Game::GetSettings() {
-	return m_Settings;
-}
-
-FontManager& Game::GetFontManager() {
-	return *m_FontManager;
-}
-
-SceneManager& Game::GetSceneManager() {
-	return m_SceneManager;
-}
-
-void Game::ProcessEvents(SDL_Event& p_Event) {
-	m_SceneManager.GetActiveScene().GetEntityManager().ProcessEvents(p_Event);
-	m_SceneManager.GetActiveScene().ProcessEvents(p_Event);
-
-	if (p_Event.type == SDL_EVENT_QUIT) {
-		m_Running = false;
-	}
-}
-
-void Game::ProcessUpdate(float p_DeltaTime) {
-	m_SceneManager.GetActiveScene().GetEntityManager().ProcessUpdate(p_DeltaTime);
-	m_SceneManager.GetActiveScene().ProcessUpdate(p_DeltaTime);
-}
-
-void Game::ProcessRender(SDL_Renderer* p_Renderer) {
-	m_SceneManager.GetActiveScene().GetEntityManager().ProcessRender(p_Renderer);
-	m_SceneManager.GetActiveScene().ProcessRender(p_Renderer);
-	m_SceneManager.GetActiveScene().GetWidgetManager().ProcessRender(p_Renderer);
-}
+}  // namespace wr

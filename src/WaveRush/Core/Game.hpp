@@ -1,59 +1,24 @@
 #pragma once
 
-#include "WaveRush/Core/FontManager.hpp"
+#include <SDL3/SDL.h>
 
-#include "WaveRush/Scene/SceneManager.hpp"
+namespace wr {
 
-struct WindowSettings {
-	std::string Title = "WaveRush";
-	uint32_t Width = 1280;
-	uint32_t Height = 720;
+struct Game {
+ public:
+  Game();
+  ~Game();
+  Game(const Game&) = delete;             // copy constructor
+  Game& operator=(const Game&) = delete;  // copy assignment operator
+  Game(Game&&) = delete;                  // move constructor
+  Game& operator=(Game&&) = delete;       // move assignment operator
+
+  auto run() -> void;
+
+ private:
+  SDL_Window* window_;
+  SDL_GPUDevice* gpu_;
+  bool running_;
 };
 
-class Game {
-private:
-	SDL_Window* m_Window;
-	SDL_Renderer* m_Renderer;
-	FontManager* m_FontManager;
-	SceneManager m_SceneManager;
-	WindowSettings m_Settings;
-	bool m_Running;
-
-private:
-	Game();
-
-	~Game();
-
-public:
-	static Game& Instance();
-
-	void Run();
-
-	SDL_Renderer* GetRenderer();
-
-	WindowSettings& GetSettings();
-
-	FontManager& GetFontManager();
-
-	SceneManager& GetSceneManager();
-
-private:
-	void ProcessEvents(SDL_Event& p_Event);
-
-	void ProcessUpdate(float p_DeltaTime);
-
-	void ProcessRender(SDL_Renderer* p_Renderer);
-
-public:
-	// Copy construct
-	Game(Game const&) = delete;
-
-	// Move construct
-	Game(Game&&) = delete;
-
-	// Copy assign
-	Game& operator=(Game const&) = delete;
-
-	// Move assign
-	Game& operator=(Game&&) = delete;
-};
+}  // namespace wr
