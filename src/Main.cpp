@@ -1,4 +1,4 @@
-#include "WaveRush/Core/Game.hpp"
+#include "WaveRush/Core/Game.h"
 
 auto main(int argc, char* argv[]) -> int {
   (void)argc;

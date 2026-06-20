@@ -13,6 +13,7 @@ add_executable(
         ${PROJECT_NAME} 
         src/Main.cpp
         src/WaveRush/Core/Game.cpp
+        src/WaveRush/Core/Arena.cpp
         src/WaveRush/Entity/World.cpp
 )
 

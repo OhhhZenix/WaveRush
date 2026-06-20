@@ -2,7 +2,7 @@
 
 #include <SDL3/SDL.h>
 
-#include "WaveRush/Entity/World.hpp"
+#include "WaveRush/Entity/World.h"
 
 namespace wr {
 
