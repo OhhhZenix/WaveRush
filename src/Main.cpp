@@ -1,9 +1,13 @@
 #include "WaveRush/Core/Game.h"
 
-int main(int argc, char* argv[]) {
-  (void)argc;
-  (void)argv;
-  wr::Game game;
-  game.run();
+int main() {
+  wr_game game;
+
+  if (wr_game_init(&game) == true) {
+      wr_game_run(&game);
+  }
+
+  wr_game_cleanup(&game);
+
   return 0;
 }
