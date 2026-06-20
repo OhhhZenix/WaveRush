@@ -33,7 +33,6 @@ void wr_game_init(wr_game* game){
     }
 
     game->running = true;
-
 }
 
 void wr_game_cleanup(wr_game* game){
@@ -59,11 +58,10 @@ void wr_game_run(wr_game* game) {
       }
 
       SDL_GPUTexture* swapchainTexture = nullptr;
-      std::uint32_t width = 0;
-      std::uint32_t height = 0;
+      uint32_t width = 0;
+      uint32_t height = 0;
 
-      if (SDL_WaitAndAcquireGPUSwapchainTexture(cmd, game->window, &swapchainTexture,
-                                                &width, &height)) {
+      if (SDL_WaitAndAcquireGPUSwapchainTexture(cmd, game->window, &swapchainTexture, &width, &height)) {
         if (swapchainTexture) {
           SDL_GPUColorTargetInfo colorTarget = {};
           colorTarget.texture = swapchainTexture;
@@ -74,8 +72,7 @@ void wr_game_run(wr_game* game) {
           colorTarget.load_op = SDL_GPU_LOADOP_CLEAR;
           colorTarget.store_op = SDL_GPU_STOREOP_STORE;
 
-          SDL_GPURenderPass* pass =
-              SDL_BeginGPURenderPass(cmd, &colorTarget, 1, nullptr);
+          SDL_GPURenderPass* pass = SDL_BeginGPURenderPass(cmd, &colorTarget, 1, nullptr);
           // render
           SDL_EndGPURenderPass(pass);
         }
