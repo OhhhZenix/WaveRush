@@ -2,6 +2,8 @@
 
 #include <SDL3/SDL.h>
 
+#include "WaveRush/Entity/World.hpp"
+
 namespace wr {
 
 struct Game {
@@ -16,6 +18,7 @@ struct Game {
   auto run() -> void;
 
  private:
+  World world_;
   SDL_Window* window_;
   SDL_GPUDevice* gpu_;
   bool running_;

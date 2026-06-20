@@ -45,6 +45,11 @@ Game::~Game() {
 }
 
 auto Game::run() -> void {
+  auto& e = world_.addEntity();
+  e.type = EntityType::Player;
+  e.position = {100.0f, 100.0f};
+  world_.removeEntity(e);
+
   while (running_) {
     SDL_Event event = {};
     while (SDL_PollEvent(&event)) {
@@ -77,7 +82,7 @@ auto Game::run() -> void {
 
         SDL_GPURenderPass* pass =
             SDL_BeginGPURenderPass(cmd, &colorTarget, 1, nullptr);
-
+        // render
         SDL_EndGPURenderPass(pass);
       }
     }
