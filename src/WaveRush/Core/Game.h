@@ -10,6 +10,6 @@ struct wr_game {
     bool running;
 };
 
-bool wr_game_init(wr_game* game);
+void wr_game_init(wr_game* game);
 void wr_game_cleanup(wr_game* game);
 void wr_game_run(wr_game* game);

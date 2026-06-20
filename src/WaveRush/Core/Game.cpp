@@ -2,17 +2,17 @@
 
 #include <cstdint>
 
-bool wr_game_init(wr_game* game){
+void wr_game_init(wr_game* game){
     if (SDL_Init(SDL_INIT_VIDEO) == false) {
       SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
-      return false;
+      return;
     }
 
     game->window = SDL_CreateWindow("WaveRush", 640, 360, 0);
 
     if (game->window == nullptr) {
       SDL_Log("Failed to create window: %s", SDL_GetError());
-      return false;
+      return;
     }
 
     SDL_GPUShaderFormat gpu_flags = {};
@@ -24,17 +24,16 @@ bool wr_game_init(wr_game* game){
 
     if (game->gpu == nullptr) {
       SDL_Log("Failed to create GPU device: %s", SDL_GetError());
-      return false;
+      return;
     }
 
     if (SDL_ClaimWindowForGPUDevice(game->gpu, game->window) == false) {
       SDL_Log("Failed to claim window: %s", SDL_GetError());
-      return false;
+      return;
     }
 
     game->running = true;
 
-    return true;
 }
 
 void wr_game_cleanup(wr_game* game){
