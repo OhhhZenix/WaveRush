@@ -14,6 +14,11 @@ enum class wr_entity_type : uint32_t {
   Particle,
 };
 
+struct wr_entity_handle {
+  uint32_t index;
+  uint32_t generation;
+};
+
 struct wr_entity {
   wr_entity_type type;
   glm::vec2 position;
@@ -22,9 +27,8 @@ struct wr_entity {
 
 struct wr_world {
   wr_entity* entities;
-  size_t next_slot;
 };
 
 void wr_world_init(wr_world* world, wr_arena* arena, size_t max_entities);
-wr_entity* wr_world_add_entity(wr_world* world);
-void wr_world_remove_entity(wr_world* world, wr_entity* entity);
+wr_entity_handle wr_world_add_entity(wr_world* world);
+void wr_world_remove_entity(wr_world* world, wr_entity_handle handle);
