@@ -1,13 +1,12 @@
 #pragma once
 
-#include <array>
 #include <cstddef>
 #include <cstdint>
 #include <glm/glm.hpp>
 
-namespace wr {
+#include "WaveRush/Core/Arena.h"
 
-enum class EntityType : std::uint32_t {
+enum class wr_entity_type : uint32_t {
   Entity = 0,
   Player,
   BasicEnemy,
@@ -15,24 +14,17 @@ enum class EntityType : std::uint32_t {
   Particle,
 };
 
-class Entity {
- public:
-  EntityType type;
+struct wr_entity {
+  wr_entity_type type;
   glm::vec2 position;
   bool dead;
 };
 
-class World {
- public:
-  using Storage = std::array<Entity, 1024>;
-
-  auto addEntity() -> Entity&;
-  auto removeEntity(Entity& entity) -> void;
-  auto getEntities() -> Storage&;
-
- private:
-  Storage entities_;
-  std::size_t next_slot_ = 0;
+struct wr_world {
+  wr_entity* entities;
+  size_t next_slot;
 };
 
-}  // namespace wr
+void wr_world_init(wr_world* world, wr_arena* arena, size_t max_entities);
+wr_entity* wr_world_add_entity(wr_world* world);
+void wr_world_remove_entity(wr_world* world, wr_entity* entity);

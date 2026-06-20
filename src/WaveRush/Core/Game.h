@@ -18,7 +18,7 @@ struct Game {
   auto run() -> void;
 
  private:
-  World world_;
+  wr_world world_;
   SDL_Window* window_;
   SDL_GPUDevice* gpu_;
   bool running_;

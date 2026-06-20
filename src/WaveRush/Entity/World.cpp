@@ -1,18 +1,19 @@
 #include "World.h"
 
-namespace wr {
+#include <cstring>
 
-auto World::addEntity() -> Entity& {
-  while (entities_.at(next_slot_).dead == false) {
-    next_slot_ = (next_slot_ + 1) % entities_.size();
-  }
-  auto& e = entities_.at(next_slot_++);
-  e.dead = false;
-  return e;
+void wr_world_init(wr_world* world, wr_arena* arena, size_t max_entities) {
+  world->entities =
+      (wr_entity*)wr_arena_alloc(arena, sizeof(wr_entity) * max_entities);
+  world->next_slot = 0;
 }
 
-auto World::removeEntity(Entity& entity) -> void { entity.dead = true; }
+wr_entity* wr_world_add_entity(wr_world* world) {
+  wr_entity* entity = &world->entities[world->next_slot++];
+  memset(entity, 0, sizeof(wr_entity));
+  return entity;
+}
 
-auto World::getEntities() -> Storage& { return entities_; }
-
-}  // namespace wr
+void wr_world_remove_entity(wr_world* world, wr_entity* entity) {
+  entity->dead = true;
+}

@@ -45,10 +45,10 @@ Game::~Game() {
 }
 
 auto Game::run() -> void {
-  auto& e = world_.addEntity();
-  e.type = EntityType::Player;
-  e.position = {100.0f, 100.0f};
-  world_.removeEntity(e);
+  wr_entity* e = wr_world_add_entity(&world_);
+  e->type = wr_entity_type::Player;
+  e->position = {100.0f, 100.0f};
+  wr_world_remove_entity(&world_, e);
 
   while (running_) {
     SDL_Event event = {};
