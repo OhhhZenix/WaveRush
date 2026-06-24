@@ -7,7 +7,13 @@
 #include "WaveRush/Core/Arena.h"
 #include "WaveRush/Core/Queue.h"
 
+enum class wr_entity_tag : uint32_t {
+  nil = 0,
+  player,
+};
+
 struct wr_entity {
+  wr_entity_tag tag;
   glm::vec3 position;
   glm::vec3 rotation;
   glm::vec3 scale;
