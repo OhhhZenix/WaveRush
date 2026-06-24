@@ -9,6 +9,8 @@
 
 struct wr_entity {
   glm::vec3 position;
+  glm::vec3 rotation;
+  glm::vec3 scale;
 };
 
 struct wr_entity_ref {
