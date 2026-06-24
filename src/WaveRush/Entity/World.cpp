@@ -23,7 +23,7 @@ void wr_world_init(wr_world* world, wr_arena* arena, size_t max_entities) {
 }
 
 wr_entity* wr_world_get(wr_world* world, wr_entity_ref ref) {
-  if (ref.index <= 0) {
+  if (ref.index < 0) {
     return nullptr;
   }
 
@@ -45,6 +45,7 @@ wr_entity* wr_world_get(wr_world* world, wr_entity_ref ref) {
 wr_entity_ref wr_world_add(wr_world* world) {
   size_t index = 0;
   wr_queue_pop(&world->free_slots, &index);
+  world->used[index] = true;
   return {
       .index = index,
       .generation = world->generations[index],
