@@ -51,6 +51,7 @@ void wr_game_run(wr_game* game) {
   for (size_t i = 0; i < 1000; i++) {
     wr_entity_ref ref = wr_world_add(&game->world);
     wr_entity* entity = wr_world_get(&game->world, ref);
+    entity->tag = wr_entity_tag::player;
     entity->position = {1, 2, 3};
   }
 
@@ -64,7 +65,7 @@ void wr_game_run(wr_game* game) {
 
     SDL_GPUCommandBuffer* cmd = SDL_AcquireGPUCommandBuffer(game->gpu);
 
-    if (!cmd) {
+    if (cmd == nullptr) {
       continue;
     }
 
