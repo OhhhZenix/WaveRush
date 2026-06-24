@@ -1,11 +1,64 @@
 #include "World.h"
 
+#include <cassert>
 #include <cstring>
 
-void wr_world_init(wr_world* world, wr_arena* arena, size_t max_entities) {}
+#include "WaveRush/Core/Queue.h"
 
-wr_entity_handle wr_world_add_entity(wr_world* world) {
-  return {};
+void wr_world_init(wr_world* world, wr_arena* arena, size_t max_entities) {
+  world->entities =
+      (wr_entity*)wr_arena_alloc(arena, sizeof(wr_entity) * max_entities);
+
+  world->generations =
+      (uint32_t*)wr_arena_alloc(arena, sizeof(uint32_t) * max_entities);
+
+  world->used = (bool*)wr_arena_alloc(arena, sizeof(bool) * max_entities);
+
+  world->length = max_entities;
+
+  wr_queue_init(&world->free_slots, max_entities, arena);
+  for (size_t i = 0; i < max_entities; i++) {
+    wr_queue_push(&world->free_slots, i);
+  }
 }
 
-void wr_world_remove_entity(wr_world* world, wr_entity_handle entity) {}
+wr_entity* wr_world_get(wr_world* world, wr_entity_ref ref) {
+  if (ref.index <= 0) {
+    return nullptr;
+  }
+
+  if (ref.index > world->length) {
+    return nullptr;
+  }
+
+  if (ref.generation != world->generations[ref.index]) {
+    return nullptr;
+  }
+
+  if (world->used[ref.index] == false) {
+    return nullptr;
+  }
+
+  return &world->entities[ref.index];
+}
+
+wr_entity_ref wr_world_add(wr_world* world) {
+  size_t index = 0;
+  wr_queue_pop(&world->free_slots, &index);
+  return {
+      .index = index,
+      .generation = world->generations[index],
+  };
+}
+
+void wr_world_rem(wr_world* world, wr_entity_ref ref) {
+  wr_entity* entity = wr_world_get(world, ref);
+
+  if (entity == nullptr) {
+    return;
+  }
+
+  wr_queue_push(&world->free_slots, ref.index);
+  world->generations[ref.index] += 1;
+  world->used[ref.index] = false;
+}
