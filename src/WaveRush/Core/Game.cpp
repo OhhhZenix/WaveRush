@@ -2,6 +2,7 @@
 
 #include <cstdint>
 
+#include "WaveRush/Core/Arena.h"
 #include "WaveRush/Entity/World.h"
 
 void wr_game_init(wr_game* game) {
@@ -34,6 +35,8 @@ void wr_game_init(wr_game* game) {
     return;
   }
 
+  wr_arena_init(&game->arena, 1024 * 1024);
+  wr_world_init(&game->world, &game->arena, 1024);
   game->running = true;
 }
 
@@ -45,6 +48,12 @@ void wr_game_cleanup(wr_game* game) {
 }
 
 void wr_game_run(wr_game* game) {
+  for (size_t i = 0; i < 1000; i++) {
+    wr_entity_ref ref = wr_world_add(&game->world);
+    wr_entity* entity = wr_world_get(&game->world, ref);
+    entity->position = {1, 2, 3};
+  }
+
   while (game->running) {
     SDL_Event event = {};
     while (SDL_PollEvent(&event)) {
