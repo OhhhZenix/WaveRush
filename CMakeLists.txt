@@ -10,10 +10,11 @@ include(cmake/SDL3_ttf.cmake)
 include(cmake/glm.cmake)
 
 add_executable(
-        ${PROJECT_NAME} 
+        ${PROJECT_NAME}
         src/Main.cpp
         src/WaveRush/Core/Game.cpp
         src/WaveRush/Core/Arena.cpp
+        src/WaveRush/Core/Queue.cpp
         src/WaveRush/Entity/World.cpp
 )
 
