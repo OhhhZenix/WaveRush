@@ -12,13 +12,13 @@ void wr_world_init(wr_world* world, wr_arena* arena, size_t max_entities) {
   world->generations =
       (uint32_t*)wr_arena_alloc(arena, sizeof(uint32_t) * max_entities);
 
-  world->used = (bool*)wr_arena_alloc(arena, sizeof(bool) * max_entities);
+  world->alive = (bool*)wr_arena_alloc(arena, sizeof(bool) * max_entities);
 
-  world->length = max_entities;
+  world->capacity = max_entities;
 
-  wr_queue_init(&world->free_slots, max_entities, arena);
+  wr_queue_init(&world->free_slots, max_entities, sizeof(size_t), arena);
   for (size_t i = 0; i < max_entities; i++) {
-    wr_queue_push(&world->free_slots, i);
+    wr_queue_push(&world->free_slots, &i);
   }
 }
 
@@ -27,7 +27,7 @@ wr_entity* wr_world_get(wr_world* world, wr_entity_ref ref) {
     return nullptr;
   }
 
-  if (ref.index > world->length) {
+  if (ref.index > world->capacity) {
     return nullptr;
   }
 
@@ -35,7 +35,7 @@ wr_entity* wr_world_get(wr_world* world, wr_entity_ref ref) {
     return nullptr;
   }
 
-  if (world->used[ref.index] == false) {
+  if (world->alive[ref.index] == false) {
     return nullptr;
   }
 
@@ -45,7 +45,7 @@ wr_entity* wr_world_get(wr_world* world, wr_entity_ref ref) {
 wr_entity_ref wr_world_add(wr_world* world) {
   size_t index = 0;
   wr_queue_pop(&world->free_slots, &index);
-  world->used[index] = true;
+  world->alive[index] = true;
   return {
       .index = index,
       .generation = world->generations[index],
@@ -59,7 +59,7 @@ void wr_world_rem(wr_world* world, wr_entity_ref ref) {
     return;
   }
 
-  wr_queue_push(&world->free_slots, ref.index);
+  wr_queue_push(&world->free_slots, &ref.index);
   world->generations[ref.index] += 1;
-  world->used[ref.index] = false;
+  world->alive[ref.index] = false;
 }
