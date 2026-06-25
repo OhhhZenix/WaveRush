@@ -48,7 +48,7 @@ void wr_game_cleanup(wr_game* game) {
 }
 
 void wr_game_run(wr_game* game) {
-  for (size_t i = 0; i < 1000; i++) {
+  for (size_t i = 0; i < 2000; i++) {
     wr_entity_ref ref = wr_world_add(&game->world);
     wr_entity* entity = wr_world_get(&game->world, ref);
     entity->tag = wr_entity_tag::player;
