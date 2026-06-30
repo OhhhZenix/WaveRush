@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/SDL3.cmake)
+include(cmake/SDL3_shadercross.cmake)
 include(cmake/SDL3_ttf.cmake)
 include(cmake/glm.cmake)
 
@@ -20,7 +21,7 @@ add_executable(
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_ttf::SDL3_ttf glm)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_shadercross::SDL3_shadercross SDL3_ttf::SDL3_ttf glm)
 
 add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
