@@ -46,128 +46,132 @@ void wr_game_init(wr_game* game) {
   }
 
   // load the vertex shader code
-  size_t vertexCodeSize = 0;
-  void* vertexCode = SDL_LoadFile("assets/shaders/vertex.spv", &vertexCodeSize);
+  size_t vertex_code_size = 0;
+  void* vertex_code =
+      SDL_LoadFile("assets/shaders/vertex.spv", &vertex_code_size);
 
   // create the vertex shader
-  SDL_ShaderCross_SPIRV_Info vertexInfo{};
-  vertexInfo.bytecode = (Uint8*)vertexCode;
-  vertexInfo.bytecode_size = vertexCodeSize;
-  vertexInfo.entrypoint = "main";
-  vertexInfo.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_VERTEX;
+  SDL_ShaderCross_SPIRV_Info vertex_info = {};
+  vertex_info.bytecode = (Uint8*)vertex_code;
+  vertex_info.bytecode_size = vertex_code_size;
+  vertex_info.entrypoint = "main";
+  vertex_info.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_VERTEX;
 
   // figure out shader metadata
-  SDL_ShaderCross_GraphicsShaderMetadata* vertexMetadata =
-      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)vertexCode, vertexCodeSize,
-                                           0);
+  SDL_ShaderCross_GraphicsShaderMetadata* vertex_metadata =
+      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)vertex_code,
+                                           vertex_code_size, 0);
 
   // cross compile to the appropriate shaderformat and create a shader object
-  SDL_GPUShader* vertexShader = SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
-      game->gpu, &vertexInfo, &vertexMetadata->resource_info, 0);
+  SDL_GPUShader* vertex_shader = SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
+      game->gpu, &vertex_info, &vertex_metadata->resource_info, 0);
 
   // don't forget to free metadata when you no longer need it
-  SDL_free(vertexMetadata);
+  SDL_free(vertex_metadata);
 
   // free the file
-  SDL_free(vertexCode);
+  SDL_free(vertex_code);
 
   // load the fragment shader code
-  size_t fragmentCodeSize = 0;
-  void* fragmentCode =
-      SDL_LoadFile("assets/shaders/fragment.spv", &fragmentCodeSize);
+  size_t fragment_code_size = 0;
+  void* fragment_code =
+      SDL_LoadFile("assets/shaders/fragment.spv", &fragment_code_size);
 
   // create the fragment shader
-  SDL_ShaderCross_SPIRV_Info fragmentInfo{};
-  fragmentInfo.bytecode = (Uint8*)fragmentCode;
-  fragmentInfo.bytecode_size = fragmentCodeSize;
-  fragmentInfo.entrypoint = "main";
-  fragmentInfo.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_FRAGMENT;
+  SDL_ShaderCross_SPIRV_Info fragment_info = {};
+  fragment_info.bytecode = (Uint8*)fragment_code;
+  fragment_info.bytecode_size = fragment_code_size;
+  fragment_info.entrypoint = "main";
+  fragment_info.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_FRAGMENT;
 
-  SDL_ShaderCross_GraphicsShaderMetadata* framgentMetadata =
-      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)fragmentCode,
-                                           fragmentCodeSize, 0);
-  SDL_GPUShader* fragmentShader =
+  SDL_ShaderCross_GraphicsShaderMetadata* framgent_metadata =
+      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)fragment_code,
+                                           fragment_code_size, 0);
+
+  SDL_GPUShader* fragment_shader =
       SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
-          game->gpu, &fragmentInfo, &framgentMetadata->resource_info, 0);
-  SDL_free(framgentMetadata);
+          game->gpu, &fragment_info, &framgent_metadata->resource_info, 0);
+  SDL_free(framgent_metadata);
 
   // free the file
-  SDL_free(fragmentCode);
+  SDL_free(fragment_code);
 
   // create the graphics pipeline
-  SDL_GPUGraphicsPipelineCreateInfo pipelineInfo{};
-  pipelineInfo.vertex_shader = vertexShader;
-  pipelineInfo.fragment_shader = fragmentShader;
-  pipelineInfo.primitive_type = SDL_GPU_PRIMITIVETYPE_TRIANGLELIST;
+  SDL_GPUGraphicsPipelineCreateInfo pipeline_info{};
+  pipeline_info.vertex_shader = vertex_shader;
+  pipeline_info.fragment_shader = fragment_shader;
+  pipeline_info.primitive_type = SDL_GPU_PRIMITIVETYPE_TRIANGLELIST;
 
   // describe the vertex buffers
-  SDL_GPUVertexBufferDescription vertexBufferDesctiptions[1];
-  vertexBufferDesctiptions[0].slot = 0;
-  vertexBufferDesctiptions[0].input_rate = SDL_GPU_VERTEXINPUTRATE_VERTEX;
-  vertexBufferDesctiptions[0].instance_step_rate = 0;
-  vertexBufferDesctiptions[0].pitch = sizeof(Vertex);
+  SDL_GPUVertexBufferDescription vertex_buffer_desctiptions[1];
+  vertex_buffer_desctiptions[0].slot = 0;
+  vertex_buffer_desctiptions[0].input_rate = SDL_GPU_VERTEXINPUTRATE_VERTEX;
+  vertex_buffer_desctiptions[0].instance_step_rate = 0;
+  vertex_buffer_desctiptions[0].pitch = sizeof(Vertex);
 
-  pipelineInfo.vertex_input_state.num_vertex_buffers = 1;
-  pipelineInfo.vertex_input_state.vertex_buffer_descriptions =
-      vertexBufferDesctiptions;
+  pipeline_info.vertex_input_state.num_vertex_buffers = 1;
+  pipeline_info.vertex_input_state.vertex_buffer_descriptions =
+      vertex_buffer_desctiptions;
 
   // describe the vertex attribute
-  SDL_GPUVertexAttribute vertexAttributes[2];
+  SDL_GPUVertexAttribute vertex_attributes[2];
 
   // a_position
-  vertexAttributes[0].buffer_slot = 0;
-  vertexAttributes[0].location = 0;
-  vertexAttributes[0].format = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT3;
-  vertexAttributes[0].offset = 0;
+  vertex_attributes[0].buffer_slot = 0;
+  vertex_attributes[0].location = 0;
+  vertex_attributes[0].format = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT3;
+  vertex_attributes[0].offset = 0;
 
   // a_color
-  vertexAttributes[1].buffer_slot = 0;
-  vertexAttributes[1].location = 1;
-  vertexAttributes[1].format = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT4;
-  vertexAttributes[1].offset = sizeof(float) * 3;
+  vertex_attributes[1].buffer_slot = 0;
+  vertex_attributes[1].location = 1;
+  vertex_attributes[1].format = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT4;
+  vertex_attributes[1].offset = sizeof(float) * 3;
 
-  pipelineInfo.vertex_input_state.num_vertex_attributes = 2;
-  pipelineInfo.vertex_input_state.vertex_attributes = vertexAttributes;
+  pipeline_info.vertex_input_state.num_vertex_attributes = 2;
+  pipeline_info.vertex_input_state.vertex_attributes = vertex_attributes;
 
   // describe the color target
-  SDL_GPUColorTargetDescription colorTargetDescriptions[1];
-  colorTargetDescriptions[0] = {};
-  colorTargetDescriptions[0].blend_state.enable_blend = true;
-  colorTargetDescriptions[0].blend_state.color_blend_op = SDL_GPU_BLENDOP_ADD;
-  colorTargetDescriptions[0].blend_state.alpha_blend_op = SDL_GPU_BLENDOP_ADD;
-  colorTargetDescriptions[0].blend_state.src_color_blendfactor =
+  SDL_GPUColorTargetDescription color_target_descriptions[1];
+  color_target_descriptions[0] = {};
+  color_target_descriptions[0].blend_state.enable_blend = true;
+  color_target_descriptions[0].blend_state.color_blend_op = SDL_GPU_BLENDOP_ADD;
+  color_target_descriptions[0].blend_state.alpha_blend_op = SDL_GPU_BLENDOP_ADD;
+  color_target_descriptions[0].blend_state.src_color_blendfactor =
       SDL_GPU_BLENDFACTOR_SRC_ALPHA;
-  colorTargetDescriptions[0].blend_state.dst_color_blendfactor =
+  color_target_descriptions[0].blend_state.dst_color_blendfactor =
       SDL_GPU_BLENDFACTOR_ONE_MINUS_SRC_ALPHA;
-  colorTargetDescriptions[0].blend_state.src_alpha_blendfactor =
+  color_target_descriptions[0].blend_state.src_alpha_blendfactor =
       SDL_GPU_BLENDFACTOR_SRC_ALPHA;
-  colorTargetDescriptions[0].blend_state.dst_alpha_blendfactor =
+  color_target_descriptions[0].blend_state.dst_alpha_blendfactor =
       SDL_GPU_BLENDFACTOR_ONE_MINUS_SRC_ALPHA;
-  colorTargetDescriptions[0].format =
+  color_target_descriptions[0].format =
       SDL_GetGPUSwapchainTextureFormat(game->gpu, game->window);
 
-  pipelineInfo.target_info.num_color_targets = 1;
-  pipelineInfo.target_info.color_target_descriptions = colorTargetDescriptions;
+  pipeline_info.target_info.num_color_targets = 1;
+  pipeline_info.target_info.color_target_descriptions =
+      color_target_descriptions;
 
   // create the pipeline
   game->graphics_pipeline =
-      SDL_CreateGPUGraphicsPipeline(game->gpu, &pipelineInfo);
+      SDL_CreateGPUGraphicsPipeline(game->gpu, &pipeline_info);
 
   // we don't need to store the shaders after creating the pipeline
-  SDL_ReleaseGPUShader(game->gpu, vertexShader);
-  SDL_ReleaseGPUShader(game->gpu, fragmentShader);
+  SDL_ReleaseGPUShader(game->gpu, vertex_shader);
+  SDL_ReleaseGPUShader(game->gpu, fragment_shader);
 
   // create the vertex buffer
-  SDL_GPUBufferCreateInfo bufferInfo = {};
-  bufferInfo.size = sizeof(vertices);
-  bufferInfo.usage = SDL_GPU_BUFFERUSAGE_VERTEX;
-  game->vertex_buffer = SDL_CreateGPUBuffer(game->gpu, &bufferInfo);
+  SDL_GPUBufferCreateInfo buffer_info = {};
+  buffer_info.size = sizeof(vertices);
+  buffer_info.usage = SDL_GPU_BUFFERUSAGE_VERTEX;
+  game->vertex_buffer = SDL_CreateGPUBuffer(game->gpu, &buffer_info);
 
   // create a transfer buffer to upload to the vertex buffer
-  SDL_GPUTransferBufferCreateInfo transferInfo = {};
-  transferInfo.size = sizeof(vertices);
-  transferInfo.usage = SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD;
-  game->transfer_buffer = SDL_CreateGPUTransferBuffer(game->gpu, &transferInfo);
+  SDL_GPUTransferBufferCreateInfo transfer_info = {};
+  transfer_info.size = sizeof(vertices);
+  transfer_info.usage = SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD;
+  game->transfer_buffer =
+      SDL_CreateGPUTransferBuffer(game->gpu, &transfer_info);
 
   // fill the transfer buffer
   Vertex* data = (Vertex*)SDL_MapGPUTransferBuffer(
@@ -178,8 +182,8 @@ void wr_game_init(wr_game* game) {
   SDL_UnmapGPUTransferBuffer(game->gpu, game->transfer_buffer);
 
   // start a copy pass
-  SDL_GPUCommandBuffer* commandBuffer = SDL_AcquireGPUCommandBuffer(game->gpu);
-  SDL_GPUCopyPass* copyPass = SDL_BeginGPUCopyPass(commandBuffer);
+  SDL_GPUCommandBuffer* command_buffer = SDL_AcquireGPUCommandBuffer(game->gpu);
+  SDL_GPUCopyPass* copy_pass = SDL_BeginGPUCopyPass(command_buffer);
 
   // where is the data
   SDL_GPUTransferBufferLocation location = {};
@@ -193,11 +197,11 @@ void wr_game_init(wr_game* game) {
   region.offset = 0;
 
   // upload the data
-  SDL_UploadToGPUBuffer(copyPass, &location, &region, true);
+  SDL_UploadToGPUBuffer(copy_pass, &location, &region, true);
 
   // end the copy pass
-  SDL_EndGPUCopyPass(copyPass);
-  SDL_SubmitGPUCommandBuffer(commandBuffer);
+  SDL_EndGPUCopyPass(copy_pass);
+  SDL_SubmitGPUCommandBuffer(command_buffer);
 
   // game
   wr_arena_init(&game->arena, 1024 * 1024);
@@ -231,45 +235,46 @@ void wr_game_run(wr_game* game) {
       }
     }
 
-    SDL_GPUCommandBuffer* cmd = SDL_AcquireGPUCommandBuffer(game->gpu);
+    SDL_GPUCommandBuffer* command_buffer =
+        SDL_AcquireGPUCommandBuffer(game->gpu);
 
-    SDL_GPUTexture* swapchainTexture = nullptr;
+    SDL_GPUTexture* swapchain_texture = nullptr;
     uint32_t width = 0;
     uint32_t height = 0;
-    SDL_WaitAndAcquireGPUSwapchainTexture(cmd, game->window, &swapchainTexture,
-                                          &width, &height);
+    SDL_WaitAndAcquireGPUSwapchainTexture(command_buffer, game->window,
+                                          &swapchain_texture, &width, &height);
 
-    if (swapchainTexture) {
-      SDL_GPUColorTargetInfo colorTarget = {};
-      colorTarget.texture = swapchainTexture;
-      colorTarget.clear_color.r = 0.1f;
-      colorTarget.clear_color.g = 0.2f;
-      colorTarget.clear_color.b = 0.4f;
-      colorTarget.clear_color.a = 1.0f;
-      colorTarget.load_op = SDL_GPU_LOADOP_CLEAR;
-      colorTarget.store_op = SDL_GPU_STOREOP_STORE;
+    if (swapchain_texture) {
+      SDL_GPUColorTargetInfo color_target = {};
+      color_target.texture = swapchain_texture;
+      color_target.clear_color.r = 0.1f;
+      color_target.clear_color.g = 0.2f;
+      color_target.clear_color.b = 0.4f;
+      color_target.clear_color.a = 1.0f;
+      color_target.load_op = SDL_GPU_LOADOP_CLEAR;
+      color_target.store_op = SDL_GPU_STOREOP_STORE;
 
-      SDL_GPURenderPass* pass =
-          SDL_BeginGPURenderPass(cmd, &colorTarget, 1, nullptr);
+      SDL_GPURenderPass* render_pass =
+          SDL_BeginGPURenderPass(command_buffer, &color_target, 1, nullptr);
 
       // bind the pipeline
-      SDL_BindGPUGraphicsPipeline(pass, game->graphics_pipeline);
+      SDL_BindGPUGraphicsPipeline(render_pass, game->graphics_pipeline);
 
       // bind the vertex buffer
-      SDL_GPUBufferBinding bufferBindings[1];
-      bufferBindings[0].buffer =
-          game->vertex_buffer;       // index 0 is slot 0 in this example
-      bufferBindings[0].offset = 0;  // start from the first byte
+      SDL_GPUBufferBinding buffer_bindings[1];
+      buffer_bindings[0].buffer =
+          game->vertex_buffer;        // index 0 is slot 0 in this example
+      buffer_bindings[0].offset = 0;  // start from the first byte
 
-      SDL_BindGPUVertexBuffers(pass, 0, bufferBindings,
+      SDL_BindGPUVertexBuffers(render_pass, 0, buffer_bindings,
                                1);  // bind one buffer starting from slot 0
 
       // issue a draw call
-      SDL_DrawGPUPrimitives(pass, 3, 1, 0, 0);
+      SDL_DrawGPUPrimitives(render_pass, 3, 1, 0, 0);
 
-      SDL_EndGPURenderPass(pass);
+      SDL_EndGPURenderPass(render_pass);
     }
 
-    SDL_SubmitGPUCommandBuffer(cmd);
+    SDL_SubmitGPUCommandBuffer(command_buffer);
   }
 }
