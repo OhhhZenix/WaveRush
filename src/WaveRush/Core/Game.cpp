@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <SDL3_shadercross/SDL_shadercross.h>
+
 #include <cstdint>
 
 #include "WaveRush/Core/Arena.h"
@@ -30,12 +32,8 @@ void wr_game_init(wr_game* game) {
     return;
   }
 
-  SDL_GPUShaderFormat gpu_flags = {};
-  gpu_flags |= SDL_GPU_SHADERFORMAT_SPIRV;
-  gpu_flags |= SDL_GPU_SHADERFORMAT_DXIL;
-  gpu_flags |= SDL_GPU_SHADERFORMAT_METALLIB;
-
-  game->gpu = SDL_CreateGPUDevice(gpu_flags, false, nullptr);
+  game->gpu = SDL_CreateGPUDevice(SDL_ShaderCross_GetSPIRVShaderFormats(),
+                                  false, nullptr);
 
   if (game->gpu == nullptr) {
     SDL_Log("Failed to create GPU device: %s", SDL_GetError());
@@ -52,18 +50,23 @@ void wr_game_init(wr_game* game) {
   void* vertexCode = SDL_LoadFile("assets/shaders/vertex.spv", &vertexCodeSize);
 
   // create the vertex shader
-  SDL_GPUShaderCreateInfo vertexInfo = {};
-  vertexInfo.code = (Uint8*)vertexCode;
-  vertexInfo.code_size = vertexCodeSize;
+  SDL_ShaderCross_SPIRV_Info vertexInfo{};
+  vertexInfo.bytecode = (Uint8*)vertexCode;
+  vertexInfo.bytecode_size = vertexCodeSize;
   vertexInfo.entrypoint = "main";
-  vertexInfo.format = SDL_GPU_SHADERFORMAT_SPIRV;
-  vertexInfo.stage = SDL_GPU_SHADERSTAGE_VERTEX;
-  vertexInfo.num_samplers = 0;
-  vertexInfo.num_storage_buffers = 0;
-  vertexInfo.num_storage_textures = 0;
-  vertexInfo.num_uniform_buffers = 0;
+  vertexInfo.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_VERTEX;
 
-  SDL_GPUShader* vertexShader = SDL_CreateGPUShader(game->gpu, &vertexInfo);
+  // figure out shader metadata
+  SDL_ShaderCross_GraphicsShaderMetadata* vertexMetadata =
+      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)vertexCode, vertexCodeSize,
+                                           0);
+
+  // cross compile to the appropriate shaderformat and create a shader object
+  SDL_GPUShader* vertexShader = SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
+      game->gpu, &vertexInfo, &vertexMetadata->resource_info, 0);
+
+  // don't forget to free metadata when you no longer need it
+  SDL_free(vertexMetadata);
 
   // free the file
   SDL_free(vertexCode);
@@ -74,18 +77,19 @@ void wr_game_init(wr_game* game) {
       SDL_LoadFile("assets/shaders/fragment.spv", &fragmentCodeSize);
 
   // create the fragment shader
-  SDL_GPUShaderCreateInfo fragmentInfo = {};
-  fragmentInfo.code = (Uint8*)fragmentCode;
-  fragmentInfo.code_size = fragmentCodeSize;
+  SDL_ShaderCross_SPIRV_Info fragmentInfo{};
+  fragmentInfo.bytecode = (Uint8*)fragmentCode;
+  fragmentInfo.bytecode_size = fragmentCodeSize;
   fragmentInfo.entrypoint = "main";
-  fragmentInfo.format = SDL_GPU_SHADERFORMAT_SPIRV;
-  fragmentInfo.stage = SDL_GPU_SHADERSTAGE_FRAGMENT;
-  fragmentInfo.num_samplers = 0;
-  fragmentInfo.num_storage_buffers = 0;
-  fragmentInfo.num_storage_textures = 0;
-  fragmentInfo.num_uniform_buffers = 0;
+  fragmentInfo.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_FRAGMENT;
 
-  SDL_GPUShader* fragmentShader = SDL_CreateGPUShader(game->gpu, &fragmentInfo);
+  SDL_ShaderCross_GraphicsShaderMetadata* framgentMetadata =
+      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)fragmentCode,
+                                           fragmentCodeSize, 0);
+  SDL_GPUShader* fragmentShader =
+      SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
+          game->gpu, &fragmentInfo, &framgentMetadata->resource_info, 0);
+  SDL_free(framgentMetadata);
 
   // free the file
   SDL_free(fragmentCode);
