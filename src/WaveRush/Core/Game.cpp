@@ -202,7 +202,10 @@ void wr_game_init(wr_game* game) {
 }
 
 void wr_game_cleanup(wr_game* game) {
-  SDL_ReleaseWindowFromGPUDevice(game->gpu, game->window);
+  SDL_ReleaseGPUBuffer(game->gpu, game->vertex_buffer);
+  SDL_ReleaseGPUTransferBuffer(game->gpu, game->transfer_buffer);
+  SDL_ReleaseGPUGraphicsPipeline(game->gpu, game->graphics_pipeline);
+  // SDL_ReleaseWindowFromGPUDevice(game->gpu, game->window);
   SDL_DestroyGPUDevice(game->gpu);
   SDL_DestroyWindow(game->window);
   SDL_Quit();
@@ -244,7 +247,22 @@ void wr_game_run(wr_game* game) {
 
       SDL_GPURenderPass* pass =
           SDL_BeginGPURenderPass(cmd, &colorTarget, 1, nullptr);
-      // render
+
+      // bind the pipeline
+      SDL_BindGPUGraphicsPipeline(pass, game->graphics_pipeline);
+
+      // bind the vertex buffer
+      SDL_GPUBufferBinding bufferBindings[1];
+      bufferBindings[0].buffer =
+          game->vertex_buffer;       // index 0 is slot 0 in this example
+      bufferBindings[0].offset = 0;  // start from the first byte
+
+      SDL_BindGPUVertexBuffers(pass, 0, bufferBindings,
+                               1);  // bind one buffer starting from slot 0
+
+      // issue a draw call
+      SDL_DrawGPUPrimitives(pass, 3, 1, 0, 0);
+
       SDL_EndGPURenderPass(pass);
     }
 
