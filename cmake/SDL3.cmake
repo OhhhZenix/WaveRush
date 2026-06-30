@@ -6,4 +6,6 @@ FetchContent_Declare(
     GIT_TAG        release-3.4.10
 )
 
+set(SDL_EXAMPLES OFF CACHE BOOL "")
+
 FetchContent_MakeAvailable(SDL3)
