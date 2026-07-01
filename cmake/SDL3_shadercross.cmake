@@ -6,7 +6,7 @@ FetchContent_Declare(
     GIT_TAG        main
 )
 
-set(SDLSHADERCROSS_DXC OFF CACHE BOOL "")
+set(SDLSHADERCROSS_DXC ON CACHE BOOL "")
 set(SDLSHADERCROSS_VENDORED ON CACHE BOOL "")
 
 FetchContent_MakeAvailable(SDL3_shadercross)

@@ -45,56 +45,82 @@ void wr_game_init(wr_game* game) {
     return;
   }
 
-  // load the vertex shader code
-  size_t vertex_code_size = 0;
-  void* vertex_code =
-      SDL_LoadFile("assets/shaders/vertex.spv", &vertex_code_size);
+  SDL_Log("%s", SDL_GetGPUDeviceDriver(game->gpu));
 
-  // create the vertex shader
-  SDL_ShaderCross_SPIRV_Info vertex_info = {};
-  vertex_info.bytecode = (Uint8*)vertex_code;
-  vertex_info.bytecode_size = vertex_code_size;
-  vertex_info.entrypoint = "main";
+  // load the vertex shader code
+  size_t vertex_source_size = 0;
+  char* vertex_source =
+      (char*)SDL_LoadFile("assets/shaders/vertex.hlsl", &vertex_source_size);
+
+  // Describe the HLSL shader
+  SDL_ShaderCross_HLSL_Info vertex_hlsl{};
+  vertex_hlsl.source = vertex_source;
+  vertex_hlsl.entrypoint = "VSMain";
+  vertex_hlsl.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_VERTEX;
+
+  // Compile HLSL -> SPIR-V
+  size_t vertex_spirv_size = 0;
+  void* vertex_spirv =
+      SDL_ShaderCross_CompileSPIRVFromHLSL(&vertex_hlsl, &vertex_spirv_size);
+
+  // SPIR-V info
+  SDL_ShaderCross_SPIRV_Info vertex_info{};
+  vertex_info.bytecode = (Uint8*)vertex_spirv;
+  vertex_info.bytecode_size = vertex_spirv_size;
+  vertex_info.entrypoint = "VSMain";
   vertex_info.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_VERTEX;
 
-  // figure out shader metadata
+  // Reflect
   SDL_ShaderCross_GraphicsShaderMetadata* vertex_metadata =
-      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)vertex_code,
-                                           vertex_code_size, 0);
+      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)vertex_spirv,
+                                           vertex_spirv_size, 0);
 
-  // cross compile to the appropriate shaderformat and create a shader object
+  // Create GPU shader
   SDL_GPUShader* vertex_shader = SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
       game->gpu, &vertex_info, &vertex_metadata->resource_info, 0);
 
-  // don't forget to free metadata when you no longer need it
   SDL_free(vertex_metadata);
-
-  // free the file
-  SDL_free(vertex_code);
+  SDL_free(vertex_spirv);
+  SDL_free(vertex_source);
 
   // load the fragment shader code
-  size_t fragment_code_size = 0;
-  void* fragment_code =
-      SDL_LoadFile("assets/shaders/fragment.spv", &fragment_code_size);
+  size_t fragment_source_size = 0;
+  char* fragment_source = (char*)SDL_LoadFile("assets/shaders/fragment.hlsl",
+                                              &fragment_source_size);
 
-  // create the fragment shader
-  SDL_ShaderCross_SPIRV_Info fragment_info = {};
-  fragment_info.bytecode = (Uint8*)fragment_code;
-  fragment_info.bytecode_size = fragment_code_size;
-  fragment_info.entrypoint = "main";
+  SDL_ShaderCross_HLSL_Info fragment_hlsl{};
+  fragment_hlsl.source = fragment_source;
+  fragment_hlsl.entrypoint = "PSMain";
+  fragment_hlsl.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_FRAGMENT;
+
+  size_t fragment_spirv_size = 0;
+  void* fragment_spirv = SDL_ShaderCross_CompileSPIRVFromHLSL(
+      &fragment_hlsl, &fragment_spirv_size);
+
+  SDL_ShaderCross_SPIRV_Info fragment_info{};
+  fragment_info.bytecode = (Uint8*)fragment_spirv;
+  fragment_info.bytecode_size = fragment_spirv_size;
+  fragment_info.entrypoint = "PSMain";
   fragment_info.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_FRAGMENT;
 
-  SDL_ShaderCross_GraphicsShaderMetadata* framgent_metadata =
-      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)fragment_code,
-                                           fragment_code_size, 0);
+  SDL_ShaderCross_GraphicsShaderMetadata* fragment_metadata =
+      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)fragment_spirv,
+                                           fragment_spirv_size, 0);
 
   SDL_GPUShader* fragment_shader =
       SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
-          game->gpu, &fragment_info, &framgent_metadata->resource_info, 0);
-  SDL_free(framgent_metadata);
+          game->gpu, &fragment_info, &fragment_metadata->resource_info, 0);
 
-  // free the file
-  SDL_free(fragment_code);
+  SDL_free(fragment_metadata);
+  SDL_free(fragment_spirv);
+  SDL_free(fragment_source);
+
+  if (!vertex_shader || !fragment_shader) {
+    SDL_Log("Shader creation failed");
+    return;
+  }
+
+  SDL_Log("VS: %p FS: %p", vertex_shader, fragment_shader);
 
   // create the graphics pipeline
   SDL_GPUGraphicsPipelineCreateInfo pipeline_info{};
