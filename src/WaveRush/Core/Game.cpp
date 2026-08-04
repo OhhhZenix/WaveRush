@@ -251,6 +251,7 @@ void wr_game_run(wr_game* game) {
     wr_entity* entity = wr_world_get(&game->world, ref);
     entity->tag = wr_entity_tag::player;
     entity->position = {1, 2, 3};
+    entity->scale = {2, 2, 2};
   }
 
   while (game->running) {
