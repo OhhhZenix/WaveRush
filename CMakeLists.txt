@@ -8,20 +8,30 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(cmake/SDL3.cmake)
 include(cmake/SDL3_shadercross.cmake)
 include(cmake/SDL3_ttf.cmake)
+include(cmake/sokol.cmake)
+include(cmake/sokol_tools_bin.cmake)
 include(cmake/glm.cmake)
 
 add_executable(
         ${PROJECT_NAME}
-        src/Main.cpp
-        src/WaveRush/Core/Game.cpp
-        src/WaveRush/Core/Arena.cpp
-        src/WaveRush/Core/Queue.cpp
-        src/WaveRush/Entity/World.cpp
+        src/Main.cc
+        src/WaveRush/Core/Game.cc
+        src/WaveRush/Core/Arena.cc
+        src/WaveRush/Core/Queue.cc
+        src/WaveRush/Entity/World.cc
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_shadercross::SDL3_shadercross SDL3_ttf::SDL3_ttf glm)
+
+if (APPLE)
+    target_sources(${PROJECT_NAME} PRIVATE src/WaveRush/Sokol.mm)
+else()
+    target_sources(${PROJECT_NAME} PRIVATE src/WaveRush/Sokol.cc)
+endif()
+
+target_link_libraries(${PROJECT_NAME} PRIVATE sokol)
 
 add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
