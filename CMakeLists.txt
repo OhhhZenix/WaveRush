@@ -5,13 +5,6 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(cmake/SDL3.cmake)
-include(cmake/SDL3_shadercross.cmake)
-include(cmake/SDL3_ttf.cmake)
-include(cmake/sokol.cmake)
-include(cmake/sokol_tools_bin.cmake)
-include(cmake/glm.cmake)
-
 add_executable(
         ${PROJECT_NAME}
         src/Main.cc
@@ -23,15 +16,14 @@ add_executable(
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_shadercross::SDL3_shadercross SDL3_ttf::SDL3_ttf glm)
+find_package(SDL3 CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
-if (APPLE)
-    target_sources(${PROJECT_NAME} PRIVATE src/WaveRush/Sokol.mm)
-else()
-    target_sources(${PROJECT_NAME} PRIVATE src/WaveRush/Sokol.cc)
-endif()
+find_package(SDL3_ttf CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_ttf::SDL3_ttf)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE sokol)
+find_package(glm CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 
 add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD

@@ -1,8 +1,8 @@
 {
-  "name": "wave-rush",
-  "version": "1.0.0",
   "dependencies": [
-    "sdl2",
-    "sdl2-ttf"
+    "sdl3",
+    "sdl3-ttf",
+    "sdl3-shadercross",
+    "glm"
   ]
 }
