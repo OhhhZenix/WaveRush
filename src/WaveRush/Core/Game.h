@@ -6,7 +6,8 @@
 
 struct wr_game {
   wr_world world;
-  wr_arena arena;
+  wr_arena main_allocator;
+  wr_arena frame_allocator;
 
   SDL_Window* window;
   SDL_GPUDevice* gpu;

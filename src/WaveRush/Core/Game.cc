@@ -231,8 +231,9 @@ SDL_AppResult wr_game_init(wr_game* game) {
   SDL_SubmitGPUCommandBuffer(command_buffer);
 
   // game
-  wr_arena_init(&game->arena, 1024 * 1024);
-  wr_world_init(&game->world, &game->arena, 1024);
+  wr_arena_init(&game->main_allocator, 1024 * 1024);
+  wr_arena_init(&game->frame_allocator, 1024 * 1024);
+  wr_world_init(&game->world, &game->main_allocator, 1024);
 
   return SDL_APP_CONTINUE;
 }
@@ -278,6 +279,7 @@ SDL_AppResult wr_game_iterate(wr_game* game) {
   }
 
   SDL_SubmitGPUCommandBuffer(command_buffer);
+  wr_arena_reset(&game->frame_allocator);
 
   return SDL_APP_CONTINUE;
 }
@@ -298,4 +300,6 @@ void wr_game_cleanup(wr_game* game) {
   SDL_DestroyGPUDevice(game->gpu);
   SDL_DestroyWindow(game->window);
   SDL_Quit();
+  wr_arena_cleanup(&game->frame_allocator);
+  wr_arena_cleanup(&game->main_allocator);
 }
