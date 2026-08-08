@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include <SDL3/SDL_init.h>
 #include <SDL3_shadercross/SDL_shadercross.h>
 
 #include <cstdint>
@@ -19,17 +20,17 @@ static Vertex vertices[]{
     {0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f}    // bottom right vertex
 };
 
-void wr_game_init(wr_game* game) {
+SDL_AppResult wr_game_init(wr_game* game) {
   if (SDL_Init(SDL_INIT_VIDEO) == false) {
     SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
-    return;
+    return SDL_APP_FAILURE;
   }
 
   game->window = SDL_CreateWindow("WaveRush", 640, 360, 0);
 
   if (game->window == nullptr) {
     SDL_Log("Failed to create window: %s", SDL_GetError());
-    return;
+    return SDL_APP_FAILURE;
   }
 
   game->gpu = SDL_CreateGPUDevice(SDL_ShaderCross_GetSPIRVShaderFormats(),
@@ -37,12 +38,12 @@ void wr_game_init(wr_game* game) {
 
   if (game->gpu == nullptr) {
     SDL_Log("Failed to create GPU device: %s", SDL_GetError());
-    return;
+    return SDL_APP_FAILURE;
   }
 
   if (SDL_ClaimWindowForGPUDevice(game->gpu, game->window) == false) {
     SDL_Log("Failed to claim window: %s", SDL_GetError());
-    return;
+    return SDL_APP_FAILURE;
   }
 
   SDL_Log("%s", SDL_GetGPUDeviceDriver(game->gpu));
@@ -117,7 +118,7 @@ void wr_game_init(wr_game* game) {
 
   if (!vertex_shader || !fragment_shader) {
     SDL_Log("Shader creation failed");
-    return;
+    return SDL_APP_FAILURE;
   }
 
   SDL_Log("VS: %p FS: %p", vertex_shader, fragment_shader);
@@ -233,6 +234,61 @@ void wr_game_init(wr_game* game) {
   wr_arena_init(&game->arena, 1024 * 1024);
   wr_world_init(&game->world, &game->arena, 1024);
   game->running = true;
+
+  return SDL_APP_CONTINUE;
+}
+
+SDL_AppResult wr_game_iterate(wr_game* game) {
+  SDL_GPUCommandBuffer* command_buffer = SDL_AcquireGPUCommandBuffer(game->gpu);
+
+  SDL_GPUTexture* swapchain_texture = nullptr;
+  uint32_t width = 0;
+  uint32_t height = 0;
+  SDL_WaitAndAcquireGPUSwapchainTexture(command_buffer, game->window,
+                                        &swapchain_texture, &width, &height);
+
+  if (swapchain_texture) {
+    SDL_GPUColorTargetInfo color_target = {};
+    color_target.texture = swapchain_texture;
+    color_target.clear_color.r = 0.1f;
+    color_target.clear_color.g = 0.2f;
+    color_target.clear_color.b = 0.4f;
+    color_target.clear_color.a = 1.0f;
+    color_target.load_op = SDL_GPU_LOADOP_CLEAR;
+    color_target.store_op = SDL_GPU_STOREOP_STORE;
+
+    SDL_GPURenderPass* render_pass =
+        SDL_BeginGPURenderPass(command_buffer, &color_target, 1, nullptr);
+
+    // bind the pipeline
+    SDL_BindGPUGraphicsPipeline(render_pass, game->graphics_pipeline);
+
+    // bind the vertex buffer
+    SDL_GPUBufferBinding buffer_bindings[1];
+    buffer_bindings[0].buffer =
+        game->vertex_buffer;        // index 0 is slot 0 in this example
+    buffer_bindings[0].offset = 0;  // start from the first byte
+
+    SDL_BindGPUVertexBuffers(render_pass, 0, buffer_bindings,
+                             1);  // bind one buffer starting from slot 0
+
+    // issue a draw call
+    SDL_DrawGPUPrimitives(render_pass, 3, 1, 0, 0);
+
+    SDL_EndGPURenderPass(render_pass);
+  }
+
+  SDL_SubmitGPUCommandBuffer(command_buffer);
+
+  return SDL_APP_CONTINUE;
+}
+
+SDL_AppResult wr_game_event(wr_game* game, SDL_Event* event) {
+  if (event->type == SDL_EVENT_QUIT) {
+    return SDL_APP_SUCCESS;
+  }
+
+  return SDL_APP_CONTINUE;
 }
 
 void wr_game_cleanup(wr_game* game) {
@@ -243,65 +299,4 @@ void wr_game_cleanup(wr_game* game) {
   SDL_DestroyGPUDevice(game->gpu);
   SDL_DestroyWindow(game->window);
   SDL_Quit();
-}
-
-void wr_game_run(wr_game* game) {
-  for (size_t i = 0; i < 2000; i++) {
-    wr_entity_ref ref = wr_world_add(&game->world);
-    wr_entity* entity = wr_world_get(&game->world, ref);
-    entity->tag = wr_entity_tag::player;
-    entity->position = {1, 2, 3};
-    entity->scale = {2, 2, 2};
-  }
-
-  while (game->running) {
-    SDL_Event event = {};
-    while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_EVENT_QUIT) {
-        game->running = false;
-      }
-    }
-
-    SDL_GPUCommandBuffer* command_buffer =
-        SDL_AcquireGPUCommandBuffer(game->gpu);
-
-    SDL_GPUTexture* swapchain_texture = nullptr;
-    uint32_t width = 0;
-    uint32_t height = 0;
-    SDL_WaitAndAcquireGPUSwapchainTexture(command_buffer, game->window,
-                                          &swapchain_texture, &width, &height);
-
-    if (swapchain_texture) {
-      SDL_GPUColorTargetInfo color_target = {};
-      color_target.texture = swapchain_texture;
-      color_target.clear_color.r = 0.1f;
-      color_target.clear_color.g = 0.2f;
-      color_target.clear_color.b = 0.4f;
-      color_target.clear_color.a = 1.0f;
-      color_target.load_op = SDL_GPU_LOADOP_CLEAR;
-      color_target.store_op = SDL_GPU_STOREOP_STORE;
-
-      SDL_GPURenderPass* render_pass =
-          SDL_BeginGPURenderPass(command_buffer, &color_target, 1, nullptr);
-
-      // bind the pipeline
-      SDL_BindGPUGraphicsPipeline(render_pass, game->graphics_pipeline);
-
-      // bind the vertex buffer
-      SDL_GPUBufferBinding buffer_bindings[1];
-      buffer_bindings[0].buffer =
-          game->vertex_buffer;        // index 0 is slot 0 in this example
-      buffer_bindings[0].offset = 0;  // start from the first byte
-
-      SDL_BindGPUVertexBuffers(render_pass, 0, buffer_bindings,
-                               1);  // bind one buffer starting from slot 0
-
-      // issue a draw call
-      SDL_DrawGPUPrimitives(render_pass, 3, 1, 0, 0);
-
-      SDL_EndGPURenderPass(render_pass);
-    }
-
-    SDL_SubmitGPUCommandBuffer(command_buffer);
-  }
 }

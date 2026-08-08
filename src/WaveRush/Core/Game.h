@@ -17,6 +17,7 @@ struct wr_game {
   bool running;
 };
 
-void wr_game_init(wr_game* game);
+SDL_AppResult wr_game_init(wr_game* game);
+SDL_AppResult wr_game_iterate(wr_game* game);
+SDL_AppResult wr_game_event(wr_game* game, SDL_Event* event);
 void wr_game_cleanup(wr_game* game);
-void wr_game_run(wr_game* game);
