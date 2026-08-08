@@ -233,7 +233,6 @@ SDL_AppResult wr_game_init(wr_game* game) {
   // game
   wr_arena_init(&game->arena, 1024 * 1024);
   wr_world_init(&game->world, &game->arena, 1024);
-  game->running = true;
 
   return SDL_APP_CONTINUE;
 }

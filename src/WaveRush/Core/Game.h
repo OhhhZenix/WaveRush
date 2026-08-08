@@ -13,8 +13,6 @@ struct wr_game {
   SDL_GPUBuffer* vertex_buffer;
   SDL_GPUTransferBuffer* transfer_buffer;
   SDL_GPUGraphicsPipeline* graphics_pipeline;
-
-  bool running;
 };
 
 SDL_AppResult wr_game_init(wr_game* game);
