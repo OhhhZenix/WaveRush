@@ -23,3 +23,5 @@ void* wr_arena_alloc(wr_arena* arena, size_t size) {
   arena->offset += size;
   return ptr;
 }
+
+void wr_arena_reset(wr_arena* arena) { arena->offset = 0; }
