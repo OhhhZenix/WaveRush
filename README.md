@@ -13,7 +13,7 @@ Here are some questions and answers to get started.
 To generate the project use:
 
 ```sh
-cmake -S . -B build
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
 ```
 
 ### How to build the project?
