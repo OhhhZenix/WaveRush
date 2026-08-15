@@ -6,7 +6,7 @@
     {
       "name": "glad",
       "features": [
-        "gl-api-46"
+        "gl-api-33"
       ]
     }
   ]
