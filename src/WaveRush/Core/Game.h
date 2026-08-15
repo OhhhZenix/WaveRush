@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 
+#include "WaveRush/Core/Shader.h"
 #include "WaveRush/Entity/World.h"
 
 struct wr_game {
@@ -11,6 +12,8 @@ struct wr_game {
 
   SDL_Window* window;
   SDL_GLContext gl;
+
+  wr_shader shader;
 };
 
 SDL_AppResult wr_game_init(wr_game* game);

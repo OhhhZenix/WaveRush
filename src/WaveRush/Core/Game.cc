@@ -4,9 +4,13 @@
 #include <glad/glad.h>
 
 #include "WaveRush/Core/Arena.h"
+#include "WaveRush/Core/Shader.h"
 #include "WaveRush/Entity/World.h"
 
 SDL_AppResult wr_game_init(wr_game* game) {
+  wr_arena_init(&game->main_allocator, 1024 * 1024);
+  wr_arena_init(&game->frame_allocator, 1024 * 1024);
+
   if (SDL_Init(SDL_INIT_VIDEO) == false) {
     SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
     return SDL_APP_FAILURE;
@@ -38,14 +42,18 @@ SDL_AppResult wr_game_init(wr_game* game) {
 
   SDL_Log("OpenGL version: %s", glGetString(GL_VERSION));
 
-  wr_arena_init(&game->main_allocator, 1024 * 1024);
-  wr_arena_init(&game->frame_allocator, 1024 * 1024);
   wr_world_init(&game->world, &game->main_allocator, 1024);
+
+  wr_shader_from_file(&game->shader, &game->frame_allocator,
+                      "assets/shaders/vertex.glsl",
+                      "assets/shaders/fragment.glsl");
+  wr_shader_bind(&game->shader);
 
   return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult wr_game_iterate(wr_game* game) {
+  wr_arena_reset(&game->frame_allocator);
   glClearColor(0.7f, 0.9f, 0.1f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
   // do stuff
