@@ -6,18 +6,6 @@
 #include "WaveRush/Core/Arena.h"
 #include "WaveRush/Entity/World.h"
 
-struct Vertex {
-  float x, y, z;     // vec3 position
-  float r, g, b, a;  // vec4 color
-};
-
-// a list of vertices
-static Vertex vertices[]{
-    {0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f},    // top vertex
-    {-0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f},  // bottom left vertex
-    {0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f}    // bottom right vertex
-};
-
 SDL_AppResult wr_game_init(wr_game* game) {
   if (SDL_Init(SDL_INIT_VIDEO) == false) {
     SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
@@ -60,7 +48,7 @@ SDL_AppResult wr_game_init(wr_game* game) {
 SDL_AppResult wr_game_iterate(wr_game* game) {
   glClearColor(0.7f, 0.9f, 0.1f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
-
+  // do stuff
   SDL_GL_SwapWindow(game->window);
   return SDL_APP_CONTINUE;
 }
