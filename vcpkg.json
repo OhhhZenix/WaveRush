@@ -2,7 +2,12 @@
   "dependencies": [
     "sdl3",
     "sdl3-ttf",
-    "sdl3-shadercross",
-    "glm"
+    "glm",
+    {
+      "name": "glad",
+      "features": [
+        "gl-api-46"
+      ]
+    }
   ]
 }

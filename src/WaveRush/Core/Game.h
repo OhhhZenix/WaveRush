@@ -10,10 +10,7 @@ struct wr_game {
   wr_arena frame_allocator;
 
   SDL_Window* window;
-  SDL_GPUDevice* gpu;
-  SDL_GPUBuffer* vertex_buffer;
-  SDL_GPUTransferBuffer* transfer_buffer;
-  SDL_GPUGraphicsPipeline* graphics_pipeline;
+  SDL_GLContext gl;
 };
 
 SDL_AppResult wr_game_init(wr_game* game);
