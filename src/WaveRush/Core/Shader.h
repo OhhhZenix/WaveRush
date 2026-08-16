@@ -1,6 +1,9 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include "WaveRush/Core/Arena.h"
+
 struct wr_shader {
   unsigned int program;
 };
@@ -20,3 +23,5 @@ void wr_shader_set_bool(wr_shader* shader, const char* name, bool value);
 void wr_shader_set_int(wr_shader* shader, const char* name, int value);
 
 void wr_shader_set_float(wr_shader* shader, const char* name, float value);
+
+void wr_shader_set_float4(wr_shader* shader, const char* name, glm::vec4 value);
