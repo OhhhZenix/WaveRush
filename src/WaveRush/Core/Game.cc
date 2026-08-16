@@ -45,8 +45,8 @@ SDL_AppResult wr_game_init(wr_game* game) {
   wr_world_init(&game->world, &game->main_allocator, 1024);
 
   wr_shader_from_file(&game->shader, &game->frame_allocator,
-                      "assets/shaders/vertex.glsl",
-                      "assets/shaders/fragment.glsl");
+                      "assets/shaders/default.vert",
+                      "assets/shaders/default.frag");
   wr_shader_bind(&game->shader);
 
   return SDL_APP_CONTINUE;
