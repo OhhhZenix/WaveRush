@@ -59,19 +59,12 @@ SDL_AppResult wr_game_init(wr_game* game) {
       0.0f,  0.5f,  0.0f   // top
   };
 
-  glGenVertexArrays(1, &game->VAO);
-  glGenBuffers(1, &game->VBO);
+  wr_vertex_array_init(&game->vertex_array);
+  wr_vertex_buffer_init(&game->vertex_buffer, vertices, sizeof(vertices),
+                        GL_STATIC_DRAW);
 
-  glBindVertexArray(game->VAO);
-  glBindBuffer(GL_ARRAY_BUFFER, game->VBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-  // Position attribute
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-  glEnableVertexAttribArray(0);
-
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindVertexArray(0);
+  wr_vertex_array_link_attribute(&game->vertex_array, &game->vertex_buffer, 0,
+                                 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 
   game->elapsed_time = 0.0f;
 
@@ -96,7 +89,7 @@ SDL_AppResult wr_game_iterate(wr_game* game) {
   wr_shader_set_float4(&game->shader, "ourColor",
                        glm::vec4(red, green, blue, 1.0f));
 
-  glBindVertexArray(game->VAO);
+  wr_vertex_array_bind(&game->vertex_array);
   glDrawArrays(GL_TRIANGLES, 0, 3);
 
   SDL_GL_SwapWindow(game->window);
@@ -112,8 +105,8 @@ SDL_AppResult wr_game_event(wr_game* game, SDL_Event* event) {
 }
 
 void wr_game_cleanup(wr_game* game) {
-  glDeleteBuffers(1, &game->VBO);
-  glDeleteVertexArrays(1, &game->VAO);
+  wr_vertex_buffer_cleanup(&game->vertex_buffer);
+  wr_vertex_array_cleanup(&game->vertex_array);
   SDL_GL_DestroyContext(game->gl);
   SDL_DestroyWindow(game->window);
   SDL_Quit();

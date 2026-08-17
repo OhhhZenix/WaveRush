@@ -3,6 +3,8 @@
 #include <SDL3/SDL.h>
 
 #include "WaveRush/Core/Shader.h"
+#include "WaveRush/Core/VertexArray.h"
+#include "WaveRush/Core/VertexBuffer.h"
 #include "WaveRush/Entity/World.h"
 
 struct wr_game {
@@ -14,8 +16,9 @@ struct wr_game {
   SDL_GLContext gl;
 
   wr_shader shader;
+  wr_vertex_array vertex_array;
+  wr_vertex_buffer vertex_buffer;
 
-  unsigned int VAO, VBO;
   float elapsed_time;
 };
 
