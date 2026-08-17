@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 
+#include "WaveRush/Core/IndexBuffer.h"
 #include "WaveRush/Core/VertexBuffer.h"
 
 void wr_vertex_array_init(wr_vertex_array* vertex_array) {
@@ -31,5 +32,12 @@ void wr_vertex_array_link_attribute(wr_vertex_array* vertex_array,
   glEnableVertexAttribArray(layout_index);
 
   wr_vertex_buffer_unbind();
+  wr_vertex_array_unbind();
+}
+
+void wr_vertex_array_link_index_buffer(wr_vertex_array* vertex_array,
+                                       wr_index_buffer* index_buffer) {
+  wr_vertex_array_bind(vertex_array);
+  wr_index_buffer_bind(index_buffer);
   wr_vertex_array_unbind();
 }
