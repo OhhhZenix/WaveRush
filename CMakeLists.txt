@@ -12,6 +12,7 @@ add_executable(
         src/WaveRush/Core/Arena.cc
         src/WaveRush/Core/Queue.cc
         src/WaveRush/Core/Shader.cc
+        src/WaveRush/Core/VertexBuffer.cc
         src/WaveRush/Entity/World.cc
 )
 
