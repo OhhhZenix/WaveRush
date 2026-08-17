@@ -52,19 +52,52 @@ SDL_AppResult wr_game_init(wr_game* game) {
                       "assets/shaders/default.frag");
   wr_shader_bind(&game->shader);
 
-  // Initialize triangle vertices
+  // Three non-overlapping triangles with an index buffer.
   float vertices[] = {
-      -0.5f, -0.5f, 0.0f,  // bottom left
-      0.5f,  -0.5f, 0.0f,  // bottom right
-      0.0f,  0.5f,  0.0f   // top
+      // Triangle 1: left side
+      -0.85f,
+      -0.75f,
+      0.0f,
+      -0.45f,
+      -0.75f,
+      0.0f,
+      -0.65f,
+      0.05f,
+      0.0f,
+
+      // Triangle 2: center/right side
+      0.10f,
+      -0.75f,
+      0.0f,
+      0.85f,
+      -0.75f,
+      0.0f,
+      0.50f,
+      0.10f,
+      0.0f,
+
+      // Triangle 3: top area
+      -0.25f,
+      0.55f,
+      0.0f,
+      0.25f,
+      0.55f,
+      0.0f,
+      0.00f,
+      1.00f,
+      0.0f,
   };
+
+  uint32_t indices[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
   wr_vertex_array_init(&game->vertex_array);
   wr_vertex_buffer_init(&game->vertex_buffer, vertices, sizeof(vertices),
                         GL_STATIC_DRAW);
+  wr_index_buffer_init(&game->index_buffer, indices, 9, GL_STATIC_DRAW);
 
   wr_vertex_array_link_attribute(&game->vertex_array, &game->vertex_buffer, 0,
                                  3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+  wr_vertex_array_link_index_buffer(&game->vertex_array, &game->index_buffer);
 
   game->elapsed_time = 0.0f;
 
@@ -90,7 +123,7 @@ SDL_AppResult wr_game_iterate(wr_game* game) {
                      glm::vec4(red, green, blue, 1.0f));
 
   wr_vertex_array_bind(&game->vertex_array);
-  glDrawArrays(GL_TRIANGLES, 0, 3);
+  glDrawElements(GL_TRIANGLES, game->index_buffer.count, GL_UNSIGNED_INT, 0);
 
   SDL_GL_SwapWindow(game->window);
   return SDL_APP_CONTINUE;
@@ -105,6 +138,7 @@ SDL_AppResult wr_game_event(wr_game* game, SDL_Event* event) {
 }
 
 void wr_game_cleanup(wr_game* game) {
+  wr_index_buffer_cleanup(&game->index_buffer);
   wr_vertex_buffer_cleanup(&game->vertex_buffer);
   wr_vertex_array_cleanup(&game->vertex_array);
   SDL_GL_DestroyContext(game->gl);
