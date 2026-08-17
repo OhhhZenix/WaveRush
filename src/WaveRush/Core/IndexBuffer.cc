@@ -5,6 +5,7 @@
 void wr_index_buffer_init(wr_index_buffer* index_buffer,
                           const uint32_t* indices, uint32_t count,
                           uint32_t usage) {
+  index_buffer->count = count;
   glGenBuffers(1, &index_buffer->id);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer->id);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(GLuint), indices, usage);
