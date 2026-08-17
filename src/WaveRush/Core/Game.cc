@@ -3,6 +3,9 @@
 #include <SDL3/SDL_init.h>
 #include <glad/glad.h>
 
+#include <cmath>
+#include <glm/glm.hpp>
+
 #include "WaveRush/Core/Arena.h"
 #include "WaveRush/Core/Shader.h"
 #include "WaveRush/Entity/World.h"
@@ -49,14 +52,53 @@ SDL_AppResult wr_game_init(wr_game* game) {
                       "assets/shaders/default.frag");
   wr_shader_bind(&game->shader);
 
+  // Initialize triangle vertices
+  float vertices[] = {
+      -0.5f, -0.5f, 0.0f,  // bottom left
+      0.5f,  -0.5f, 0.0f,  // bottom right
+      0.0f,  0.5f,  0.0f   // top
+  };
+
+  glGenVertexArrays(1, &game->VAO);
+  glGenBuffers(1, &game->VBO);
+
+  glBindVertexArray(game->VAO);
+  glBindBuffer(GL_ARRAY_BUFFER, game->VBO);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+  // Position attribute
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(0);
+
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
+
+  game->elapsed_time = 0.0f;
+
   return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult wr_game_iterate(wr_game* game) {
   wr_arena_reset(&game->frame_allocator);
-  glClearColor(0.7f, 0.9f, 0.1f, 1.0f);
+  game->elapsed_time += 0.016f;  // ~60 FPS
+
+  glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
-  // do stuff
+
+  // Animate color over time
+  float red = (std::sin(game->elapsed_time * 0.5f) + 1.0f) / 2.0f;
+  float green = (std::sin(game->elapsed_time * 0.5f + 2.094f) + 1.0f) /
+                2.0f;  // 2π/3 phase offset
+  float blue = (std::sin(game->elapsed_time * 0.5f + 4.189f) + 1.0f) /
+               2.0f;  // 4π/3 phase offset
+
+  // wr_shader_bind(&game->shader);
+  wr_shader_set_float4(&game->shader, "ourColor",
+                       glm::vec4(red, green, blue, 1.0f));
+
+  glBindVertexArray(game->VAO);
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+
   SDL_GL_SwapWindow(game->window);
   return SDL_APP_CONTINUE;
 }
@@ -70,6 +112,8 @@ SDL_AppResult wr_game_event(wr_game* game, SDL_Event* event) {
 }
 
 void wr_game_cleanup(wr_game* game) {
+  glDeleteBuffers(1, &game->VBO);
+  glDeleteVertexArrays(1, &game->VAO);
   SDL_GL_DestroyContext(game->gl);
   SDL_DestroyWindow(game->window);
   SDL_Quit();

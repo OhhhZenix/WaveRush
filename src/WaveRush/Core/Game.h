@@ -14,6 +14,9 @@ struct wr_game {
   SDL_GLContext gl;
 
   wr_shader shader;
+
+  unsigned int VAO, VBO;
+  float elapsed_time;
 };
 
 SDL_AppResult wr_game_init(wr_game* game);
