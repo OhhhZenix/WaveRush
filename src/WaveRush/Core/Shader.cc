@@ -8,8 +8,8 @@
 
 void wr_shader_init(wr_shader* shader, const char* vertex_source,
                     const char* fragment_source) {
-  unsigned int vertex_shader = 0;
-  unsigned int fragment_shader = 0;
+  uint32_t vertex_shader = 0;
+  uint32_t fragment_shader = 0;
   int success = 0;
   int buffer_size = 512;
   char info_log[buffer_size];

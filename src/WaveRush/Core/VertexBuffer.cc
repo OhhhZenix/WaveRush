@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 
 void wr_vertex_buffer_init(wr_vertex_buffer* vertex_buffer, const void* data,
-                           size_t size, unsigned int usage) {
+                           size_t size, uint32_t usage) {
   glGenBuffers(1, &vertex_buffer->id);
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer->id);
   glBufferData(GL_ARRAY_BUFFER, size, data, usage);

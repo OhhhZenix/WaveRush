@@ -1,11 +1,12 @@
 #pragma once
 
+#include <cstdint>
 #include <glm/glm.hpp>
 
 #include "WaveRush/Core/Arena.h"
 
 struct wr_shader {
-  unsigned int program;
+  uint32_t program;
 };
 
 void wr_shader_init(wr_shader* shader, const char* vertex_source,
