@@ -2,10 +2,7 @@
 
 #include <SDL3/SDL.h>
 
-#include "WaveRush/Core/IndexBuffer.h"
-#include "WaveRush/Core/Shader.h"
-#include "WaveRush/Core/VertexArray.h"
-#include "WaveRush/Core/VertexBuffer.h"
+#include "WaveRush/Core/Renderer.h"
 #include "WaveRush/Entity/World.h"
 
 struct wr_game {
@@ -16,12 +13,7 @@ struct wr_game {
   SDL_Window* window;
   SDL_GLContext gl;
 
-  wr_shader shader;
-  wr_vertex_array vertex_array;
-  wr_vertex_buffer vertex_buffer;
-  wr_index_buffer index_buffer;
-
-  float elapsed_time;
+  wr_renderer renderer;
 };
 
 SDL_AppResult wr_game_init(wr_game* game);

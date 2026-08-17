@@ -15,6 +15,7 @@ add_executable(
         src/WaveRush/Core/IndexBuffer.cc
         src/WaveRush/Core/VertexBuffer.cc
         src/WaveRush/Core/VertexArray.cc
+        src/WaveRush/Core/Renderer.cc
         src/WaveRush/Entity/World.cc
 )
 
