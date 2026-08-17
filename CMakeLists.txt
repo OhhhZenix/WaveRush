@@ -13,6 +13,7 @@ add_executable(
         src/WaveRush/Core/Queue.cc
         src/WaveRush/Core/Shader.cc
         src/WaveRush/Core/VertexBuffer.cc
+        src/WaveRush/Core/VertexArray.cc
         src/WaveRush/Entity/World.cc
 )
 
