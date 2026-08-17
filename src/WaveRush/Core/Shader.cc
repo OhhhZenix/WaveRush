@@ -107,8 +107,7 @@ void wr_shader_set_float(wr_shader* shader, const char* name, float value) {
   glUniform1f(glGetUniformLocation(shader->program, name), value);
 }
 
-void wr_shader_set_float4(wr_shader* shader, const char* name,
-                          glm::vec4 value) {
+void wr_shader_set_vec4(wr_shader* shader, const char* name, glm::vec4 value) {
   glUniform4f(glGetUniformLocation(shader->program, name), value.x, value.y,
               value.z, value.w);
 }

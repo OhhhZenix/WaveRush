@@ -24,4 +24,4 @@ void wr_shader_set_int(wr_shader* shader, const char* name, int value);
 
 void wr_shader_set_float(wr_shader* shader, const char* name, float value);
 
-void wr_shader_set_float4(wr_shader* shader, const char* name, glm::vec4 value);
+void wr_shader_set_vec4(wr_shader* shader, const char* name, glm::vec4 value);

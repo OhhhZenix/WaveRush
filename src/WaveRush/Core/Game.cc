@@ -86,8 +86,8 @@ SDL_AppResult wr_game_iterate(wr_game* game) {
                2.0f;  // 4π/3 phase offset
 
   // wr_shader_bind(&game->shader);
-  wr_shader_set_float4(&game->shader, "ourColor",
-                       glm::vec4(red, green, blue, 1.0f));
+  wr_shader_set_vec4(&game->shader, "ourColor",
+                     glm::vec4(red, green, blue, 1.0f));
 
   wr_vertex_array_bind(&game->vertex_array);
   glDrawArrays(GL_TRIANGLES, 0, 3);
