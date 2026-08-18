@@ -1,6 +1,8 @@
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
+
 namespace wr {
 
 class VertexBuffer {

@@ -2,6 +2,8 @@
 
 #include <glad/glad.h>
 
+#include <cstddef>
+
 namespace wr {
 
 VertexBuffer::VertexBuffer(const void* data, std::size_t size,
