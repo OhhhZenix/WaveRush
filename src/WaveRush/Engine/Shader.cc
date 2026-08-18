@@ -64,7 +64,6 @@ void Shader::compile(std::string_view vertex_source,
                      std::string_view fragment_source) {
   auto compile_shader = [](GLenum type, std::string_view source) -> GLuint {
     const GLuint shader = glCreateShader(type);
-
     const GLchar* source_ptr = source.data();
     const GLint source_length = static_cast<GLint>(source.size());
 
@@ -108,7 +107,6 @@ void Shader::compile(std::string_view vertex_source,
   }
 
   const GLuint program = glCreateProgram();
-
   glAttachShader(program, vertex_shader);
   glAttachShader(program, fragment_shader);
   glLinkProgram(program);
