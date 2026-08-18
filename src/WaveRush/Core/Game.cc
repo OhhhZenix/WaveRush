@@ -3,11 +3,9 @@
 #include <SDL3/SDL_init.h>
 #include <glad/glad.h>
 
-#include <cmath>
 #include <glm/glm.hpp>
 
 #include "WaveRush/Core/Arena.h"
-#include "WaveRush/Core/Shader.h"
 #include "WaveRush/Entity/World.h"
 
 SDL_AppResult wr_game_init(wr_game* game) {
