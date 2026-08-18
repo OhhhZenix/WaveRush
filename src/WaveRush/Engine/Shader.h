@@ -9,9 +9,9 @@ namespace wr {
 
 class Shader {
  public:
-  explicit Shader(std::string_view vertex, std::string_view fragment);
-  explicit Shader(const std::filesystem::path& vertex,
-                  const std::filesystem::path& fragment);
+  Shader(std::string_view vertex, std::string_view fragment);
+  Shader(const std::filesystem::path& vertex,
+         const std::filesystem::path& fragment);
   ~Shader();
   Shader(const Shader&) = delete;
   Shader& operator=(const Shader&) = delete;
