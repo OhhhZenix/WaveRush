@@ -62,6 +62,7 @@ SDL_AppResult App::init() {
 SDL_AppResult App::iterate() {
   glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
+  shader_->set_vec4("ourColor", glm::vec4(1.f, 0.5f, 0.f, 1.f));
   SDL_GL_SwapWindow(window_);
   return SDL_APP_CONTINUE;
 }
