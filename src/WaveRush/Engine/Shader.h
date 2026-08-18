@@ -25,6 +25,9 @@ class Shader {
   void set_vec4(std::string_view name, glm::vec4 value) const;
 
  private:
+  void compile(std::string_view vertex_source,
+               std::string_view fragment_source);
+
   std::uint32_t id_;
 };
 
