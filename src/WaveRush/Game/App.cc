@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 
 #include <glm/glm.hpp>
+#include <memory>
 
 namespace wr {
 
@@ -45,13 +46,22 @@ SDL_AppResult App::init() {
 
   SDL_Log("OpenGL version: %s", glGetString(GL_VERSION));
 
+  shader_ = std::make_unique<wr::Shader>(
+      std::filesystem::path("assets/shaders/default.vert"),
+      std::filesystem::path("assets/shaders/default.frag"));
+  vbo_ = std::make_unique<wr::VertexBuffer>(nullptr, 0, GL_STATIC_DRAW);
+  ibo_ = std::make_unique<wr::IndexBuffer>(nullptr, 0, GL_STATIC_DRAW);
+  vao_ = std::make_unique<wr::VertexArray>();
+
+  vao_->link_attribute(*vbo_, 0, 0, 0, 0, nullptr);
+  vao_->link_index_buffer(*ibo_);
+
   return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult App::iterate() {
   glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
-
   SDL_GL_SwapWindow(window_);
   return SDL_APP_CONTINUE;
 }
