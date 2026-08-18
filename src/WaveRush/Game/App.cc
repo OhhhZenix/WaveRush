@@ -3,6 +3,7 @@
 #include <SDL3/SDL_init.h>
 #include <glad/glad.h>
 
+#include <filesystem>
 #include <glm/glm.hpp>
 #include <memory>
 
@@ -46,15 +47,29 @@ SDL_AppResult App::init() {
 
   SDL_Log("OpenGL version: %s", glGetString(GL_VERSION));
 
+  // Create triangle vertex data
+  float vertices[] = {-0.5f, -0.5f, 0.0f,   // Bottom-left
+                      0.5f,  -0.5f, 0.0f,   // Bottom-right
+                      0.0f,  0.5f,  0.0f};  // Top
+
+  std::uint32_t indices[] = {0, 1, 2};
+
+  // Create VAO, VBO, IBO
+  vao_ = std::make_unique<wr::VertexArray>();
+  vao_->bind();
+
+  vbo_ = std::make_unique<wr::VertexBuffer>(vertices, sizeof(vertices),
+                                            GL_STATIC_DRAW);
+  vao_->link_attribute(*vbo_, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+
+  ibo_ = std::make_unique<wr::IndexBuffer>(indices, 3, GL_STATIC_DRAW);
+  vao_->link_index_buffer(*ibo_);
+
+  vao_->unbind();
+
   shader_ = std::make_unique<wr::Shader>(
       std::filesystem::path("assets/shaders/default.vert"),
       std::filesystem::path("assets/shaders/default.frag"));
-  vbo_ = std::make_unique<wr::VertexBuffer>(nullptr, 0, GL_STATIC_DRAW);
-  ibo_ = std::make_unique<wr::IndexBuffer>(nullptr, 0, GL_STATIC_DRAW);
-  vao_ = std::make_unique<wr::VertexArray>();
-
-  vao_->link_attribute(*vbo_, 0, 0, 0, 0, nullptr);
-  vao_->link_index_buffer(*ibo_);
 
   return SDL_APP_CONTINUE;
 }
@@ -62,7 +77,14 @@ SDL_AppResult App::init() {
 SDL_AppResult App::iterate() {
   glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
+
+  shader_->bind();
   shader_->set_vec4("ourColor", glm::vec4(1.f, 0.5f, 0.f, 1.f));
+
+  vao_->bind();
+  glDrawElements(GL_TRIANGLES, ibo_->get_count(), GL_UNSIGNED_INT, nullptr);
+  vao_->unbind();
+
   SDL_GL_SwapWindow(window_);
   return SDL_APP_CONTINUE;
 }
