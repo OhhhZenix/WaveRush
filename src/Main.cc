@@ -2,34 +2,33 @@
 
 #include <SDL3/SDL_main.h>
 
-#include "WaveRush/Core/Game.h"
+#include "WaveRush/Game/App.h"
 
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char** argv) {
-  wr_game* game = (wr_game*)malloc(sizeof(wr_game));
+  wr::App* App = new wr::App();
 
-  if (game == nullptr) {
+  if (App == nullptr) {
     return SDL_APP_FAILURE;
   }
 
-  *appstate = game;
+  *appstate = App;
 
-  return wr_game_init(game);
+  return App->init();
 }
 
 SDL_AppResult SDL_AppIterate(void* appstate) {
-  wr_game* game = (wr_game*)appstate;
-  return wr_game_iterate(game);
+  wr::App* App = (wr::App*)appstate;
+  return App->iterate();
 }
 
 SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event) {
-  wr_game* game = (wr_game*)appstate;
-  return wr_game_event(game, event);
+  wr::App* App = (wr::App*)appstate;
+  return App->event(event);
 }
 
 void SDL_AppQuit(void* appstate, SDL_AppResult result) {
   if (appstate != nullptr) {
-    wr_game* game = (wr_game*)appstate;
-    wr_game_cleanup(game);
-    free(game);
+    wr::App* App = (wr::App*)appstate;
+    delete App;
   }
 }

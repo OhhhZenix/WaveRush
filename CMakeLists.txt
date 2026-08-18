@@ -8,15 +8,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_executable(
         ${PROJECT_NAME}
         src/Main.cc
-        src/WaveRush/Core/Game.cc
-        src/WaveRush/Core/Arena.cc
-        src/WaveRush/Core/Queue.cc
-        src/WaveRush/Core/Shader.cc
-        src/WaveRush/Core/IndexBuffer.cc
-        src/WaveRush/Core/VertexBuffer.cc
-        src/WaveRush/Core/VertexArray.cc
-        src/WaveRush/Core/Renderer.cc
-        src/WaveRush/Entity/World.cc
+        src/WaveRush/Engine/Shader.cc
+        src/WaveRush/Engine/VertexArray.cc
+        src/WaveRush/Engine/VertexBuffer.cc
+        src/WaveRush/Engine/IndexBuffer.cc
+        src/WaveRush/Game/App.cc
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
