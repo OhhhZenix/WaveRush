@@ -5,10 +5,12 @@
 namespace wr {
 
 IndexBuffer::IndexBuffer(const void* data, std::uint32_t count,
-                         std::uint32_t usage) {
+                         std::uint32_t usage)
+    : count_(count) {
   glGenBuffers(1, &id_);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, count, data, usage);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(std::uint32_t), data,
+               usage);
 }
 
 IndexBuffer::~IndexBuffer() { glDeleteBuffers(1, &id_); }

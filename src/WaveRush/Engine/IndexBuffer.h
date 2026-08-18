@@ -14,6 +14,7 @@ class IndexBuffer {
   IndexBuffer& operator=(IndexBuffer&&) = delete;
   void bind() const;
   void unbind() const;
+  std::uint32_t get_count() const { return count_; }
 
  private:
   std::uint32_t id_;
