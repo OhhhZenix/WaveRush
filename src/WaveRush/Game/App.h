@@ -2,6 +2,13 @@
 
 #include <SDL3/SDL.h>
 
+#include <memory>
+
+#include "WaveRush/Engine/IndexBuffer.h"
+#include "WaveRush/Engine/Shader.h"
+#include "WaveRush/Engine/VertexArray.h"
+#include "WaveRush/Engine/VertexBuffer.h"
+
 namespace wr {
 
 class App {
@@ -19,6 +26,10 @@ class App {
  private:
   SDL_Window* window_;
   SDL_GLContext gl_;
+  std::unique_ptr<wr::Shader> shader_;
+  std::unique_ptr<wr::VertexArray> vao_;
+  std::unique_ptr<wr::VertexBuffer> vbo_;
+  std::unique_ptr<wr::IndexBuffer> ibo_;
 };
 
 };  // namespace wr
