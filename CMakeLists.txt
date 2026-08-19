@@ -25,6 +25,7 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/libsdl-org/SDL_shadercross
         GIT_TAG main
 )
+set(SDLSHADERCROSS_DXC ON CACHE BOOL "")
 set(SDLSHADERCROSS_VENDORED ON CACHE BOOL "")
 FetchContent_MakeAvailable(SDL3_shadercross)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_shadercross::SDL3_shadercross)
