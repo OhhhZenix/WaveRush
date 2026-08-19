@@ -3,6 +3,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_shadercross/SDL_shadercross.h>
 
+#include <cstdint>
 #include <glm/glm.hpp>
 
 namespace wr {
@@ -45,10 +46,39 @@ SDL_AppResult App::init() {
   return SDL_APP_CONTINUE;
 }
 
-SDL_AppResult App::iterate() { return SDL_APP_CONTINUE; }
+SDL_AppResult App::iterate() {
+  SDL_GPUCommandBuffer* command_buffer = SDL_AcquireGPUCommandBuffer(gpu_);
+
+  SDL_GPUTexture* swapchain_texture;
+  std::uint32_t width;
+  std::uint32_t height;
+  SDL_WaitAndAcquireGPUSwapchainTexture(command_buffer, window_,
+                                        &swapchain_texture, &width, &height);
+
+  if (swapchain_texture != nullptr) {
+    SDL_GPUColorTargetInfo color_target_info;
+    color_target_info.clear_color = {255 / 255.0f, 219 / 255.0f, 187 / 255.0f,
+                                     255 / 255.0f};
+    color_target_info.load_op = SDL_GPU_LOADOP_CLEAR;
+    color_target_info.store_op = SDL_GPU_STOREOP_STORE;
+    color_target_info.texture = swapchain_texture;
+
+    SDL_GPURenderPass* render_pass =
+        SDL_BeginGPURenderPass(command_buffer, &color_target_info, 1, nullptr);
+    // do stuff
+    SDL_EndGPURenderPass(render_pass);
+  }
+
+  SDL_SubmitGPUCommandBuffer(command_buffer);
+  return SDL_APP_CONTINUE;
+}
 
 SDL_AppResult App::event(SDL_Event* event) {
   if (event->type == SDL_EVENT_QUIT) {
+    return SDL_APP_SUCCESS;
+  }
+
+  if (event->type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
     return SDL_APP_SUCCESS;
   }
 
