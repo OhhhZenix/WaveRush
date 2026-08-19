@@ -172,8 +172,8 @@ SDL_AppResult App::init() {
       color_target_descriptions;
 
   // create the pipeline
-  graphics_pipeline = SDL_CreateGPUGraphicsPipeline(gpu_, &pipeline_info);
-  if (graphics_pipeline == nullptr) {
+  graphics_pipeline_ = SDL_CreateGPUGraphicsPipeline(gpu_, &pipeline_info);
+  if (graphics_pipeline_ == nullptr) {
     SDL_Log("Failed to create graphics pipeline: %s", SDL_GetError());
     SDL_ReleaseGPUShader(gpu_, vertex_shader);
     SDL_ReleaseGPUShader(gpu_, fragment_shader);
@@ -188,8 +188,8 @@ SDL_AppResult App::init() {
   SDL_GPUBufferCreateInfo buffer_info = {};
   buffer_info.size = sizeof(vertices);
   buffer_info.usage = SDL_GPU_BUFFERUSAGE_VERTEX;
-  vertex_buffer = SDL_CreateGPUBuffer(gpu_, &buffer_info);
-  if (vertex_buffer == nullptr) {
+  vertex_buffer_ = SDL_CreateGPUBuffer(gpu_, &buffer_info);
+  if (vertex_buffer_ == nullptr) {
     SDL_Log("Failed to create vertex buffer: %s", SDL_GetError());
     return SDL_APP_FAILURE;
   }
@@ -198,15 +198,15 @@ SDL_AppResult App::init() {
   SDL_GPUTransferBufferCreateInfo transfer_info = {};
   transfer_info.size = sizeof(vertices);
   transfer_info.usage = SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD;
-  transfer_buffer = SDL_CreateGPUTransferBuffer(gpu_, &transfer_info);
-  if (transfer_buffer == nullptr) {
+  transfer_buffer_ = SDL_CreateGPUTransferBuffer(gpu_, &transfer_info);
+  if (transfer_buffer_ == nullptr) {
     SDL_Log("Failed to create transfer buffer: %s", SDL_GetError());
     return SDL_APP_FAILURE;
   }
 
   // fill the transfer buffer
   Vertex* data =
-      (Vertex*)SDL_MapGPUTransferBuffer(gpu_, transfer_buffer, false);
+      (Vertex*)SDL_MapGPUTransferBuffer(gpu_, transfer_buffer_, false);
   if (data == nullptr) {
     SDL_Log("Failed to map transfer buffer: %s", SDL_GetError());
     return SDL_APP_FAILURE;
@@ -214,7 +214,7 @@ SDL_AppResult App::init() {
 
   SDL_memcpy(data, (void*)vertices, sizeof(vertices));
 
-  SDL_UnmapGPUTransferBuffer(gpu_, transfer_buffer);
+  SDL_UnmapGPUTransferBuffer(gpu_, transfer_buffer_);
 
   // start a copy pass
   SDL_GPUCommandBuffer* command_buffer = SDL_AcquireGPUCommandBuffer(gpu_);
@@ -222,12 +222,12 @@ SDL_AppResult App::init() {
 
   // where is the data
   SDL_GPUTransferBufferLocation location = {};
-  location.transfer_buffer = transfer_buffer;
+  location.transfer_buffer = transfer_buffer_;
   location.offset = 0;
 
   // where to upload the data
   SDL_GPUBufferRegion region = {};
-  region.buffer = vertex_buffer;
+  region.buffer = vertex_buffer_;
   region.size = sizeof(vertices);
   region.offset = 0;
 
@@ -268,12 +268,12 @@ SDL_AppResult App::iterate() {
         SDL_BeginGPURenderPass(command_buffer, &color_target_info, 1, nullptr);
 
     // bind the pipeline
-    SDL_BindGPUGraphicsPipeline(render_pass, graphics_pipeline);
+    SDL_BindGPUGraphicsPipeline(render_pass, graphics_pipeline_);
 
     // bind the vertex buffer
     SDL_GPUBufferBinding buffer_bindings[1];
     buffer_bindings[0].buffer =
-        vertex_buffer;              // index 0 is slot 0 in this example
+        vertex_buffer_;             // index 0 is slot 0 in this example
     buffer_bindings[0].offset = 0;  // start from the first byte
 
     SDL_BindGPUVertexBuffers(render_pass, 0, buffer_bindings,
