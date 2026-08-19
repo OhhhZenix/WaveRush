@@ -2,6 +2,8 @@
 
 #include <SDL3/SDL.h>
 
+#include <glm/glm.hpp>
+
 namespace wr {
 
 class App {
@@ -15,6 +17,9 @@ class App {
   SDL_AppResult init();
   SDL_AppResult iterate();
   SDL_AppResult event(SDL_Event* event);
+  void draw_quad(glm::vec2 position, glm::vec2 size, glm::vec4 color);
+  void draw_line(glm::vec2 position_a, glm::vec2 position_b, float thickness,
+                 glm::vec4 color);
 
  private:
   SDL_Window* window_;
