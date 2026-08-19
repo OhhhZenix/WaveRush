@@ -2,7 +2,7 @@
 
 #include <SDL3/SDL_main.h>
 
-#include "WaveRush/Game/App.h"
+#include "WaveRush/App.h"
 
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char** argv) {
   wr::App* App = new wr::App();

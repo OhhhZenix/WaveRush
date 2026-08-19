@@ -8,11 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_executable(
         ${PROJECT_NAME}
         src/Main.cc
-        src/WaveRush/Engine/Shader.cc
-        src/WaveRush/Engine/VertexArray.cc
-        src/WaveRush/Engine/VertexBuffer.cc
-        src/WaveRush/Engine/IndexBuffer.cc
-        src/WaveRush/Game/App.cc
+        src/WaveRush/App.cc
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
@@ -23,8 +19,15 @@ target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 find_package(SDL3_ttf CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_ttf::SDL3_ttf)
 
-find_package(glad CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE glad::glad)
+include(FetchContent)
+FetchContent_Declare(
+        SDL3_shadercross
+        GIT_REPOSITORY https://github.com/libsdl-org/SDL_shadercross
+        GIT_TAG main
+)
+set(SDLSHADERCROSS_VENDORED ON CACHE BOOL "")
+FetchContent_MakeAvailable(SDL3_shadercross)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_shadercross::SDL3_shadercross)
 
 find_package(glm CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
