@@ -17,8 +17,11 @@ class App {
   SDL_AppResult event(SDL_Event* event);
 
  private:
-  SDL_Window* window_;
-  SDL_GPUDevice* gpu_;
+  SDL_Window* window_ = nullptr;
+  SDL_GPUDevice* gpu_ = nullptr;
+  SDL_GPUBuffer* vertex_buffer = nullptr;
+  SDL_GPUTransferBuffer* transfer_buffer = nullptr;
+  SDL_GPUGraphicsPipeline* graphics_pipeline = nullptr;
 };
 
 };  // namespace wr
