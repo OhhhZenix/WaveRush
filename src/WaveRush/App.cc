@@ -1,6 +1,7 @@
 #include "App.h"
 
 #include <SDL3/SDL.h>
+#include <SDL3/SDL_gpu.h>
 #include <SDL3_shadercross/SDL_shadercross.h>
 
 #include <cstdint>
@@ -56,12 +57,18 @@ SDL_AppResult App::iterate() {
                                         &swapchain_texture, &width, &height);
 
   if (swapchain_texture != nullptr) {
-    SDL_GPUColorTargetInfo color_target_info;
-    color_target_info.clear_color = {255 / 255.0f, 219 / 255.0f, 187 / 255.0f,
-                                     255 / 255.0f};
-    color_target_info.load_op = SDL_GPU_LOADOP_CLEAR;
-    color_target_info.store_op = SDL_GPU_STOREOP_STORE;
-    color_target_info.texture = swapchain_texture;
+    SDL_GPUColorTargetInfo color_target_info = {
+        .texture = swapchain_texture,
+        .clear_color =
+            {
+                255 / 255.0f,
+                219 / 255.0f,
+                187 / 255.0f,
+                255 / 255.0f,
+            },
+        .load_op = SDL_GPU_LOADOP_CLEAR,
+        .store_op = SDL_GPU_STOREOP_STORE,
+    };
 
     SDL_GPURenderPass* render_pass =
         SDL_BeginGPURenderPass(command_buffer, &color_target_info, 1, nullptr);
