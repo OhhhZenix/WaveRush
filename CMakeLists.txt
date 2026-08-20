@@ -19,16 +19,19 @@ target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 find_package(SDL3_ttf CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_ttf::SDL3_ttf)
 
-include(FetchContent)
-FetchContent_Declare(
-        SDL3_shadercross
-        GIT_REPOSITORY https://github.com/libsdl-org/SDL_shadercross
-        GIT_TAG main
-)
-set(SDLSHADERCROSS_DXC ON CACHE BOOL "")
-set(SDLSHADERCROSS_VENDORED ON CACHE BOOL "")
-FetchContent_MakeAvailable(SDL3_shadercross)
+find_package(SDL3_shadercross CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_shadercross::SDL3_shadercross)
+
+# include(FetchContent)
+# FetchConteqnt_Declare(
+#         SDL3_shadercross
+#         GIT_REPOSITORY https://github.com/libsdl-org/SDL_shadercross
+#         GIT_TAG main
+# )
+# set(SDLSHADERCROSS_DXC ON CACHE BOOL "")
+# set(SDLSHADERCROSS_VENDORED ON CACHE BOOL "")
+# FetchContent_MakeAvailable(SDL3_shadercross)
+# target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_shadercross::SDL3_shadercross)
 
 find_package(glm CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)

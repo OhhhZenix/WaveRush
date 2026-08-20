@@ -81,7 +81,7 @@ SDL_AppResult App::init() {
     return SDL_APP_FAILURE;
   }
 
-  window_ = SDL_CreateWindow("WaveRush", 640, 360, SDL_WINDOW_OPENGL);
+  window_ = SDL_CreateWindow("WaveRush", 640, 360, 0);
 
   if (window_ == nullptr) {
     SDL_Log("Failed to create window: %s", SDL_GetError());
