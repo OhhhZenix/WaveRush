@@ -301,4 +301,6 @@ SDL_AppResult App::event(SDL_Event* event) {
   return SDL_APP_CONTINUE;
 }
 
+void App::draw_quad(glm::vec2 position, glm::vec2 size, glm::vec4 color) {}
+
 }  // namespace wr
