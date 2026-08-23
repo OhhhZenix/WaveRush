@@ -30,10 +30,6 @@ class App {
 
   SDL_Window* window_;
   SDL_GPUDevice* gpu_;
-
-  SDL_GPUTransferBuffer* transfer_buffer_;
-  SDL_GPUBuffer* vertex_buffer_;
-  SDL_GPUGraphicsPipeline* graphics_pipeline_;
 };
 
 };  // namespace wr
