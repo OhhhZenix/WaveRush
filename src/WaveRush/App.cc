@@ -101,10 +101,11 @@ SDL_GPUShader* App::load_shader(std::string_view path,
     return nullptr;
   }
 
-  SDL_ShaderCross_HLSL_Info hlsl_info;
-  hlsl_info.source = source;
-  hlsl_info.entrypoint = entry_point.data();
-  hlsl_info.shader_stage = stage;
+  SDL_ShaderCross_HLSL_Info hlsl_info = {
+      .source = source,
+      .entrypoint = entry_point.data(),
+      .shader_stage = stage,
+  };
 
   std::size_t spirv_size = 0;
   void* spirv = SDL_ShaderCross_CompileSPIRVFromHLSL(&hlsl_info, &spirv_size);
@@ -115,11 +116,12 @@ SDL_GPUShader* App::load_shader(std::string_view path,
     return nullptr;
   }
 
-  SDL_ShaderCross_SPIRV_Info spirv_info;
-  spirv_info.bytecode = (std::uint8_t*)spirv;
-  spirv_info.bytecode_size = spirv_size;
-  spirv_info.entrypoint = entry_point.data();
-  spirv_info.shader_stage = stage;
+  SDL_ShaderCross_SPIRV_Info spirv_info = {
+      .bytecode = (std::uint8_t*)spirv,
+      .bytecode_size = spirv_size,
+      .entrypoint = entry_point.data(),
+      .shader_stage = stage,
+  };
 
   SDL_ShaderCross_GraphicsShaderMetadata* metadata =
       SDL_ShaderCross_ReflectGraphicsSPIRV((std::uint8_t*)spirv, spirv_size, 0);
