@@ -69,9 +69,10 @@ SDL_AppResult App::iterate() {
         .load_op = SDL_GPU_LOADOP_CLEAR,
         .store_op = SDL_GPU_STOREOP_STORE,
     };
+
     SDL_GPURenderPass* render_pass =
         SDL_BeginGPURenderPass(command_buffer, &color_target_info, 1, nullptr);
-    // do stuff
+
     SDL_EndGPURenderPass(render_pass);
   }
 
