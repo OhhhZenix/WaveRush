@@ -6,54 +6,6 @@
 
 #include <cstdint>
 #include <glm/glm.hpp>
-#include <string_view>
-
-SDL_GPUShader* load_shader(SDL_GPUDevice* gpu, std::string_view path,
-                           std::string_view entry_point,
-                           SDL_ShaderCross_ShaderStage stage) {
-  std::size_t source_size = 0;
-  char* source = (char*)SDL_LoadFile(path.data(), &source_size);
-  if (source == nullptr) {
-    SDL_Log("Failed to load shader '%s': %s", path.data(), SDL_GetError());
-    return nullptr;
-  }
-
-  SDL_ShaderCross_HLSL_Info hlsl_info;
-  hlsl_info.source = source;
-  hlsl_info.entrypoint = entry_point.data();
-  hlsl_info.shader_stage = stage;
-
-  std::size_t vertex_spirv_size = 0;
-  void* spirv =
-      SDL_ShaderCross_CompileSPIRVFromHLSL(&hlsl_info, &vertex_spirv_size);
-  SDL_free(source);
-  if (spirv == nullptr) {
-    SDL_Log("Failed to compile shader '%s': %s", path.data(), SDL_GetError());
-    return nullptr;
-  }
-
-  SDL_ShaderCross_SPIRV_Info spirv_info;
-  spirv_info.bytecode = (Uint8*)spirv;
-  spirv_info.bytecode_size = vertex_spirv_size;
-  spirv_info.entrypoint = entry_point.data();
-  spirv_info.shader_stage = stage;
-
-  SDL_ShaderCross_GraphicsShaderMetadata* metadata =
-      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)spirv, vertex_spirv_size, 0);
-  if (metadata == nullptr) {
-    SDL_Log("Failed to reflect shader '%s': %s", path.data(), SDL_GetError());
-    SDL_free(spirv);
-    return nullptr;
-  }
-
-  SDL_GPUShader* shader = SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
-      gpu, &spirv_info, &metadata->resource_info, 0);
-
-  SDL_free(metadata);
-  SDL_free(spirv);
-
-  return shader;
-}
 
 namespace wr {
 
@@ -91,18 +43,6 @@ SDL_AppResult App::init() {
   }
 
   SDL_Log("%s", SDL_GetGPUDeviceDriver(gpu_));
-
-  SDL_GPUShader* vertex_shader =
-      load_shader(gpu_, "assets/shaders/quad.vs.hlsl", "VSMain",
-                  SDL_SHADERCROSS_SHADERSTAGE_VERTEX);
-  SDL_GPUShader* fragment_shader =
-      load_shader(gpu_, "assets/shaders/quad.fs.hlsl", "PSMain",
-                  SDL_SHADERCROSS_SHADERSTAGE_FRAGMENT);
-
-  if (!vertex_shader || !fragment_shader) {
-    SDL_Log("Shader creation failed");
-    return SDL_APP_FAILURE;
-  }
 
   return SDL_APP_CONTINUE;
 }
