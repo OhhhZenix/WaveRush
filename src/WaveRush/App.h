@@ -34,15 +34,6 @@ class App {
   SDL_GPUTransferBuffer* transfer_buffer_;
   SDL_GPUBuffer* vertex_buffer_;
   SDL_GPUGraphicsPipeline* graphics_pipeline_;
-
-  SDL_GPUBuffer* quad_vertex_buffer_;
-  SDL_GPUGraphicsPipeline* quad_graphics_pipeline_;
-
-  SDL_GPUBuffer* circle_vertex_buffer_;
-  SDL_GPUGraphicsPipeline* circle_graphics_pipeline_;
-
-  SDL_GPUBuffer* line_vertex_buffer_;
-  SDL_GPUGraphicsPipeline* line_graphics_pipeline_;
 };
 
 };  // namespace wr
