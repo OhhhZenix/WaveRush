@@ -1,8 +1,10 @@
 #pragma once
 
 #include <SDL3/SDL.h>
+#include <SDL3_shadercross/SDL_shadercross.h>
 
 #include <glm/glm.hpp>
+#include <string_view>
 
 namespace wr {
 
@@ -22,6 +24,10 @@ class App {
                  glm::vec4 color);
 
  private:
+  SDL_GPUShader* load_shader(std::string_view path,
+                             std::string_view entry_point,
+                             SDL_ShaderCross_ShaderStage stage);
+
   SDL_Window* window_;
   SDL_GPUDevice* gpu_;
 

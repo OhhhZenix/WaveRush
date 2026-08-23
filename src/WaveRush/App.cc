@@ -89,4 +89,53 @@ SDL_AppResult App::event(SDL_Event* event) {
 
 void App::draw_quad(glm::vec2 position, glm::vec2 size, glm::vec4 color) {}
 
+SDL_GPUShader* App::load_shader(std::string_view path,
+                                std::string_view entry_point,
+                                SDL_ShaderCross_ShaderStage stage) {
+  std::size_t source_size = 0;
+  char* source = (char*)SDL_LoadFile(path.data(), &source_size);
+
+  if (source == nullptr) {
+    SDL_Log("Failed to load shader '%s': %s", path.data(), SDL_GetError());
+    return nullptr;
+  }
+
+  SDL_ShaderCross_HLSL_Info hlsl_info;
+  hlsl_info.source = source;
+  hlsl_info.entrypoint = entry_point.data();
+  hlsl_info.shader_stage = stage;
+
+  std::size_t spirv_size = 0;
+  void* spirv = SDL_ShaderCross_CompileSPIRVFromHLSL(&hlsl_info, &spirv_size);
+  SDL_free(source);
+
+  if (spirv == nullptr) {
+    SDL_Log("Failed to compile shader '%s': %s", path.data(), SDL_GetError());
+    return nullptr;
+  }
+
+  SDL_ShaderCross_SPIRV_Info spirv_info;
+  spirv_info.bytecode = (Uint8*)spirv;
+  spirv_info.bytecode_size = spirv_size;
+  spirv_info.entrypoint = entry_point.data();
+  spirv_info.shader_stage = stage;
+
+  SDL_ShaderCross_GraphicsShaderMetadata* metadata =
+      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)spirv, spirv_size, 0);
+
+  if (metadata == nullptr) {
+    SDL_Log("Failed to reflect shader '%s': %s", path.data(), SDL_GetError());
+    SDL_free(spirv);
+    return nullptr;
+  }
+
+  SDL_GPUShader* shader = SDL_ShaderCross_CompileGraphicsShaderFromSPIRV(
+      gpu_, &spirv_info, &metadata->resource_info, 0);
+
+  SDL_free(metadata);
+  SDL_free(spirv);
+
+  return shader;
+}
+
 }  // namespace wr
