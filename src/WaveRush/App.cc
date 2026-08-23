@@ -115,13 +115,13 @@ SDL_GPUShader* App::load_shader(std::string_view path,
   }
 
   SDL_ShaderCross_SPIRV_Info spirv_info;
-  spirv_info.bytecode = (Uint8*)spirv;
+  spirv_info.bytecode = (std::uint8_t*)spirv;
   spirv_info.bytecode_size = spirv_size;
   spirv_info.entrypoint = entry_point.data();
   spirv_info.shader_stage = stage;
 
   SDL_ShaderCross_GraphicsShaderMetadata* metadata =
-      SDL_ShaderCross_ReflectGraphicsSPIRV((Uint8*)spirv, spirv_size, 0);
+      SDL_ShaderCross_ReflectGraphicsSPIRV((std::uint8_t*)spirv, spirv_size, 0);
 
   if (metadata == nullptr) {
     SDL_Log("Failed to reflect shader '%s': %s", path.data(), SDL_GetError());
