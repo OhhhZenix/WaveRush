@@ -4,6 +4,7 @@ FetchContent_Declare(
     sokol
     GIT_REPOSITORY https://github.com/floooh/sokol
     GIT_TAG master
+    GIT_SHALLOW TRUE
 )
 
 FetchContent_MakeAvailable(sokol)
