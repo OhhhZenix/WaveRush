@@ -1,26 +1,11 @@
 #include "App.h"
 
-#include <raylib.h>
-
 namespace wr {
 
-App::App() {
-  InitWindow(1280, 720, "WaveRush");
-  running_ = true;
-}
+App::App() {}
 
-App::~App() {
-  CloseWindow();
-  running_ = false;
-}
+App::~App() {}
 
-void App::run() {
-  while (WindowShouldClose() == false && running_ == true) {
-    BeginDrawing();
-    ClearBackground(RAYWHITE);
-    // do stuff
-    EndDrawing();
-  }
-}
+void App::run() {}
 
 }  // namespace wr
