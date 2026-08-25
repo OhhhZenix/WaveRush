@@ -36,6 +36,8 @@ void frame(void) {
   sg_commit();
 }
 
+void event(const sapp_event* e) {}
+
 void cleanup(void) { sg_shutdown(); }
 
 sapp_desc sokol_main(int argc, char* argv[]) {
@@ -43,6 +45,7 @@ sapp_desc sokol_main(int argc, char* argv[]) {
       .init_cb = init,
       .frame_cb = frame,
       .cleanup_cb = cleanup,
+      .event_cb = event,
       .width = 800,
       .height = 600,
       .window_title = "Simple Sokol Example",
