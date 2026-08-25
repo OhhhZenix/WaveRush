@@ -5,16 +5,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(FetchContent)
-
-FetchContent_Declare(
-        raylib
-        GIT_REPOSITORY https://github.com/raysan5/raylib.git
-        GIT_TAG master
-)
-FetchContent_MakeAvailable(raylib)
-
-find_package(glm CONFIG REQUIRED)
+include(cmake/raylib.cmake)
+include(cmake/sokol.cmake)
+include(cmake/sokol-tools-bin.cmake)
+include(cmake/glm.cmake)
 
 add_executable(
         ${PROJECT_NAME}
