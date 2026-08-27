@@ -38,17 +38,12 @@ if(APPLE)
         )
     endif()
 elseif(LINUX)
-    find_package(Threads REQUIRED)
     target_link_libraries(
         sokol INTERFACE
         X11
         Xi
         Xcursor
         GL
-        asound
-        dl
-        m
-        Threads::Threads
     )
 elseif(WIN32)
     target_link_libraries(
