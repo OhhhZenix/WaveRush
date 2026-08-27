@@ -44,7 +44,6 @@ elseif(LINUX)
         X11
         Xi
         Xcursor
-        GL
         Vulkan::Vulkan
     )
 elseif(WIN32)
