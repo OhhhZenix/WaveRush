@@ -1,9 +1,9 @@
 #define SOKOL_IMPL
 
-#if defined(__APPLE__)
-#define SOKOL_METAL
-#elif defined(__EMSCRIPTEN__)
+#if defined(__EMSCRIPTEN__)
 #define SOKOL_WGPU
+#elif defined(__APPLE__)
+#define SOKOL_METAL
 #elif defined(__linux__)
 #define SOKOL_VULKAN
 #elif defined(_WIN32)
