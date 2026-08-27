@@ -32,9 +32,8 @@ if(APPLE)
             "$<LINK_LIBRARY:FRAMEWORK,Cocoa>"
             "$<LINK_LIBRARY:FRAMEWORK,Metal>"
             "$<LINK_LIBRARY:FRAMEWORK,MetalKit>"
-            "$<LINK_LIBRARY:FRAMEWORK,OpenGL>"
             "$<LINK_LIBRARY:FRAMEWORK,QuartzCore>"
-            "$<LINK_LIBRARY:FRAMEWORK,AudioToolbox>"
+            # "$<LINK_LIBRARY:FRAMEWORK,AudioToolbox>"
         )
     endif()
 elseif(LINUX)
