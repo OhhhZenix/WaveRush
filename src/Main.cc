@@ -5,7 +5,7 @@
 #elif defined(__EMSCRIPTEN__)
 #define SOKOL_WGPU
 #elif defined(__linux__)
-#define SOKOL_GLCORE
+#define SOKOL_VULKAN
 #elif defined(_WIN32)
 #define SOKOL_GLCORE
 #else
