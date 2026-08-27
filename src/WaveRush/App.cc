@@ -1,11 +1,18 @@
 #include "App.h"
 
-namespace wr {
+namespace wr
+{
 
-App::App() {}
+App::App()
+{
+}
 
-App::~App() {}
+App::~App()
+{
+}
 
-void App::run() {}
+void App::run()
+{
+}
 
-}  // namespace wr
+} // namespace wr
