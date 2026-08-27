@@ -52,6 +52,6 @@ sapp_desc sokol_main(int argc, char* argv[]) {
       .event_cb = event,
       .width = 800,
       .height = 600,
-      .window_title = "Simple Sokol Example",
+      .window_title = "Wave Rush",
   };
 }
