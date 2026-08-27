@@ -32,7 +32,7 @@ add_custom_command(
         "${SOKOL_SHDC_PATH}"
         --input assets/shader.glsl
         --output src/WaveRush/Shader.h
-        --slang spirv_vk:glsl430:metal_macos:wgsl
+        --slang wgsl:metal_macos:spirv_vk:hlsl5
         DEPENDS ${CMAKE_SOURCE_DIR}/assets/shader.glsl
         COMMENT "Generating shader header from shader.glsl"
 )
