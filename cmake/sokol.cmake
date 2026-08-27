@@ -14,28 +14,14 @@ add_library(sokol INTERFACE)
 target_include_directories(sokol INTERFACE ${sokol_SOURCE_DIR} ${sokol_SOURCE_DIR}/util)
 
 if(APPLE)
-    if(IOS)
-        target_link_libraries(
-            sokol INTERFACE
-            "$<LINK_LIBRARY:FRAMEWORK,Foundation>"
-            "$<LINK_LIBRARY:FRAMEWORK,GLKit>"
-            "$<LINK_LIBRARY:FRAMEWORK,Metal>"
-            "$<LINK_LIBRARY:FRAMEWORK,MetalKit>"
-            "$<LINK_LIBRARY:FRAMEWORK,OpenGLES>"
-            "$<LINK_LIBRARY:FRAMEWORK,UIKit>"
-            "$<LINK_LIBRARY:FRAMEWORK,AudioToolbox>"
-            "$<LINK_LIBRARY:FRAMEWORK,AVFoundation>"
-        )
-    else()
-        target_link_libraries(
-            sokol INTERFACE
-            "$<LINK_LIBRARY:FRAMEWORK,Cocoa>"
-            "$<LINK_LIBRARY:FRAMEWORK,Metal>"
-            "$<LINK_LIBRARY:FRAMEWORK,MetalKit>"
-            "$<LINK_LIBRARY:FRAMEWORK,QuartzCore>"
-            # "$<LINK_LIBRARY:FRAMEWORK,AudioToolbox>"
-        )
-    endif()
+    target_link_libraries(
+        sokol INTERFACE
+        "$<LINK_LIBRARY:FRAMEWORK,Cocoa>"
+        "$<LINK_LIBRARY:FRAMEWORK,Metal>"
+        "$<LINK_LIBRARY:FRAMEWORK,MetalKit>"
+        "$<LINK_LIBRARY:FRAMEWORK,QuartzCore>"
+        # "$<LINK_LIBRARY:FRAMEWORK,AudioToolbox>"
+    )
 elseif(LINUX)
     find_package(Vulkan REQUIRED)
     target_link_libraries(
