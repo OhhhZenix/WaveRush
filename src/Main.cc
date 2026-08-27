@@ -7,7 +7,7 @@
 #elif defined(__linux__)
 #define SOKOL_VULKAN
 #elif defined(_WIN32)
-#define SOKOL_GLCORE
+#define SOKOL_D3D11
 #else
 #error "platform not supported"
 #endif
