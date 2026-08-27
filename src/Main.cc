@@ -9,7 +9,7 @@
 #elif defined(_WIN32)
 #define SOKOL_GLCORE
 #else
-#error "Currently not supported"
+#error "platform not supported"
 #endif
 
 #include <sokol_app.h>
