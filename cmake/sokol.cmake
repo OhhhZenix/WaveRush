@@ -38,12 +38,14 @@ if(APPLE)
         )
     endif()
 elseif(LINUX)
+    find_package(Vulkan REQUIRED)
     target_link_libraries(
         sokol INTERFACE
         X11
         Xi
         Xcursor
         GL
+        Vulkan::Vulkan
     )
 elseif(WIN32)
     target_link_libraries(
