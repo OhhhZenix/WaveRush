@@ -4,8 +4,12 @@
 #define SOKOL_METAL
 #elif defined(__EMSCRIPTEN__)
 #define SOKOL_WGPU
-#else
+#elif defined(__linux__)
 #define SOKOL_GLCORE
+#elif defined(_WIN32)
+#define SOKOL_GLCORE
+#else
+#error "Currently not supported"
 #endif
 
 #include <sokol_app.h>
