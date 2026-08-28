@@ -1,6 +1,5 @@
 #include "WaveRush/App.h"
 #include "WaveRush/Contants.h"
-#include "WaveRush/Sokol.h"
 
 #include <memory>
 
