@@ -12,11 +12,12 @@ include(cmake/glm.cmake)
 add_executable(
         ${PROJECT_NAME}
         src/Main.cc
+        src/WaveRush/Sokol.cc
         src/WaveRush/App.cc
 )
 
 if(APPLE)
-        set_source_files_properties(src/Main.cc PROPERTIES LANGUAGE OBJCXX)
+        set_source_files_properties(src/WaveRush/Sokol.cc PROPERTIES LANGUAGE OBJCXX)
 endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
