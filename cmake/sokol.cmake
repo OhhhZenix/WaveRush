@@ -26,10 +26,14 @@ elseif(LINUX)
     find_package(Vulkan REQUIRED)
     target_link_libraries(
         sokol INTERFACE
+        # window
         X11
         Xi
         Xcursor
+        # graphics
         Vulkan::Vulkan
+        # audio
+        asound
     )
 elseif(WIN32)
     target_link_libraries(
