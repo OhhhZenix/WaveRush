@@ -7,4 +7,3 @@ WarningsAsErrors: 'cppcoreguidelines-*'
 
 # Ensure header files are also checked, omitting external libraries
 HeaderFilterRegex: 'src/.*'
-...
