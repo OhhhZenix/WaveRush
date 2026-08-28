@@ -3,21 +3,36 @@
 namespace wr
 {
 
-App::App()
+void App::init()
+{
+    sg_setup((sg_desc){
+        .logger = {.func = slog_func},
+        .environment = sglue_environment(),
+    });
+
+    pass_action_.colors[0] = {
+        .load_action = SG_LOADACTION_CLEAR,
+        .clear_value = {1.0f, 0.0f, 0.0f, 1.0f},
+    };
+}
+
+void App::frame()
+{
+    const float step = 0.01f;
+    float g = pass_action_.colors[0].clear_value.g + step;
+    pass_action_.colors[0].clear_value.g = (g > 1.0f) ? 0.0f : g;
+    sg_begin_pass((sg_pass){.action = pass_action_, .swapchain = sglue_swapchain()});
+    sg_end_pass();
+    sg_commit();
+}
+
+void App::event(const sapp_event *e)
 {
 }
 
-App::~App()
+void App::cleanup()
 {
-}
-
-void App::run()
-{
-}
-
-RenderData &App::get_render_data()
-{
-    return render_data_;
+    sg_shutdown();
 }
 
 } // namespace wr
