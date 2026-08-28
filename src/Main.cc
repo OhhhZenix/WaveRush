@@ -1,8 +1,6 @@
 #include "WaveRush/App.h"
 #include "WaveRush/Contants.h"
 
-#include <memory>
-
 void init(void *user_data)
 {
     wr::App *app = static_cast<wr::App *>(user_data);
@@ -31,7 +29,7 @@ sapp_desc sokol_main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
-    std::unique_ptr<wr::App> user_data = std::make_unique<wr::App>();
+    static wr::App user_data;
     return (sapp_desc){
         .user_data = &user_data,
         .init_userdata_cb = init,
