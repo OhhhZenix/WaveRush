@@ -16,6 +16,8 @@ class App
 
   private:
     sg_pass_action pass_action_ = {};
+    sg_pipeline trig_pip_ = {};
+    sg_bindings trig_bind_ = {};
 };
 
 }; // namespace wr
