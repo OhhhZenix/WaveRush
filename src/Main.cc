@@ -38,6 +38,6 @@ sapp_desc sokol_main(int argc, char *argv[])
         .event_userdata_cb = event,
         .width = wr::GAME_WIDTH,
         .height = wr::GAME_HEIGHT,
-        .window_title = "Wave Rush",
+        .window_title = wr::GAME_TITLE,
     };
 }
