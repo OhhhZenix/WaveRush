@@ -3,9 +3,16 @@
 #include "WaveRush/Shader.h"
 
 #include <array>
+#include <glm/glm.hpp>
 
 namespace wr
 {
+
+struct QuadVertex
+{
+    glm::vec3 position;
+    glm::vec4 color;
+};
 
 void App::init()
 {
@@ -14,11 +21,10 @@ void App::init()
         .environment = sglue_environment(),
     });
 
-    // Vertex data: position (3 floats) + color (4 floats) per vertex
-    constexpr std::array<float, 21> vertices{{
-        0.0f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f, // Top vertex
-        0.5f,  -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, // Bottom-right vertex
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, // Bottom-left vertex
+    constexpr std::array<QuadVertex, 3> vertices = {{
+        {{0.0f, 0.5f, 0.5f}, {1.0f, 0.0f, 0.0f, 1.0f}},
+        {{0.5f, -0.5f, 0.5f}, {0.0f, 1.0f, 0.0f, 1.0f}},
+        {{-0.5f, -0.5f, 0.5f}, {0.0f, 0.0f, 1.0f, 1.0f}},
     }};
 
     trig_bind_.vertex_buffers[0] = sg_make_buffer({
@@ -31,7 +37,7 @@ void App::init()
     sg_pipeline_desc pipeline_desc = {};
     pipeline_desc.shader = shd;
     pipeline_desc.layout.attrs[ATTR_triangle_position].format = SG_VERTEXFORMAT_FLOAT3;
-    pipeline_desc.layout.attrs[ATTR_triangle_color0].format = SG_VERTEXFORMAT_FLOAT4;
+    pipeline_desc.layout.attrs[ATTR_triangle_color].format = SG_VERTEXFORMAT_FLOAT4;
     pipeline_desc.label = "triangle-pipeline";
     trig_pip_ = sg_make_pipeline(pipeline_desc);
 
