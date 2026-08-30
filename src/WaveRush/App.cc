@@ -31,7 +31,7 @@ void App::init()
     quad_bind_.vertex_buffers[0] = sg_make_buffer({
         .usage = {.vertex_buffer = true},
         .data = SG_RANGE(vertices),
-        .label = "vertex-buffer",
+        .label = "quad-vertices",
     });
 
     constexpr std::array<std::uint16_t, 6> indices = {0, 1, 2, 0, 2, 3};
