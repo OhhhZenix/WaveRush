@@ -42,7 +42,6 @@ void App::init()
     });
 
     sg_shader shd = sg_make_shader(quad_shader_desc(sg_query_backend()));
-
     sg_pipeline_desc pipeline_desc = {};
     pipeline_desc.shader = shd;
     pipeline_desc.index_type = SG_INDEXTYPE_UINT16;
