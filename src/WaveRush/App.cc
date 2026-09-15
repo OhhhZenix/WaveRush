@@ -52,10 +52,7 @@ void App::frame()
         .swapchain = sglue_swapchain(),
     });
     // stuff
-    draw_quad({100.0f, 100.0f}, {100.0f, 100.0f}, {1, 0, 0, 1});
-    draw_quad({250.0f, 100.0f}, {100.0f, 100.0f}, {0, 1, 0, 1});
-    draw_quad({400.0f, 100.0f}, {100.0f, 100.0f}, {0, 0, 1, 1});
-    draw_quad({0.0f, 0.0f}, {10.0f, 10.0f}, {1, 1, 1, 1});
+    draw_quad({-0.5f, -0.5f}, {1.0f, 1.0f}, {1.0f, 0.0f, 0.0f, 1.0f});
 
     flush_quads();
     sg_end_pass();
@@ -73,6 +70,11 @@ void App::cleanup()
 
 void App::flush_quads()
 {
+    if (quad_vertices_.empty() || quad_indices_.empty())
+    {
+        return;
+    }
+
     sg_update_buffer(quad_bind_.vertex_buffers[0], SG_RANGE(quad_vertices_));
     sg_update_buffer(quad_bind_.index_buffer, SG_RANGE(quad_indices_));
 
@@ -97,31 +99,30 @@ void App::draw_quad(const glm::vec2 &pos, const glm::vec2 &size, const glm::vec4
 
     const std::uint32_t vertex_offset = static_cast<std::uint32_t>(quad_vertices_.size());
 
-    glm::mat4 transform(1.0f);
-    transform = glm::translate(transform, glm::vec3(pos, 0.0f));
-    transform = glm::scale(transform, glm::vec3(size, 1.0f));
+    quad_vertices_.push_back({
+        .position = {pos.x, pos.y, 0.0f},
+        .color = color,
+    });
 
-    const std::array<glm::vec4, wr::VERTICES_PER_QUAD> corners = {
-        glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
-        glm::vec4(1.0f, 0.0f, 0.0f, 1.0f),
-        glm::vec4(1.0f, 1.0f, 0.0f, 1.0f),
-        glm::vec4(0.0f, 1.0f, 0.0f, 1.0f),
-    };
+    quad_vertices_.push_back({
+        .position = {pos.x + size.x, pos.y, 0.0f},
+        .color = color,
+    });
 
-    for (const glm::vec4 &corner : corners)
-    {
-        quad_vertices_.push_back({
-            .position = glm::vec3(corner),
-            .color = color,
-        });
-    }
+    quad_vertices_.push_back({
+        .position = {pos.x + size.x, pos.y + size.y, 0.0f},
+        .color = color,
+    });
 
-    // triangle 1
+    quad_vertices_.push_back({
+        .position = {pos.x, pos.y + size.y, 0.0f},
+        .color = color,
+    });
+
     quad_indices_.push_back(vertex_offset + 0);
     quad_indices_.push_back(vertex_offset + 1);
     quad_indices_.push_back(vertex_offset + 2);
 
-    // triangle 2
     quad_indices_.push_back(vertex_offset + 2);
     quad_indices_.push_back(vertex_offset + 3);
     quad_indices_.push_back(vertex_offset + 0);
