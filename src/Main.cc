@@ -1,43 +1,21 @@
-#include "WaveRush/App.h"
-#include "WaveRush/Contants.h"
+#include <glm/glm.hpp>
+#include <raylib.h>
 
-void init(void *user_data)
-{
-    wr::App *app = static_cast<wr::App *>(user_data);
-    app->init();
-}
+constexpr const int game_width = 1280;
+constexpr const int game_height = 720;
 
-void frame(void *user_data)
-{
-    wr::App *app = static_cast<wr::App *>(user_data);
-    app->frame();
-}
+int main() {
+  InitWindow(game_width, game_height, "sdd");
 
-void event(const sapp_event *e, void *user_data)
-{
-    wr::App *app = static_cast<wr::App *>(user_data);
-    app->event(e);
-}
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    glm::ivec2 pos = {190, 200};
+    DrawText("Congrats! You created your first window!", pos.x, pos.y, 20, LIGHTGRAY);
+    EndDrawing();
+  }
 
-void cleanup(void *user_data)
-{
-    wr::App *app = static_cast<wr::App *>(user_data);
-    app->cleanup();
-}
+  CloseWindow();
 
-sapp_desc sokol_main(int argc, char *argv[])
-{
-    (void)argc;
-    (void)argv;
-    static wr::App user_data;
-    return (sapp_desc){
-        .user_data = &user_data,
-        .init_userdata_cb = init,
-        .frame_userdata_cb = frame,
-        .cleanup_userdata_cb = cleanup,
-        .event_userdata_cb = event,
-        .width = wr::GAME_WIDTH,
-        .height = wr::GAME_HEIGHT,
-        .window_title = wr::GAME_TITLE,
-    };
+  return 0;
 }
