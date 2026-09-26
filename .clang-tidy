@@ -1,9 +1,4 @@
 ---
-# Enable all C++ Core Guidelines checks
-Checks: '-*,cppcoreguidelines-*'
-
-# Turn matching violations into build-stopping errors (Optional)
+Checks: '-*,cppcoreguidelines-*,bugprone-*,cert-*,modernize-*,performance-*'
 WarningsAsErrors: 'cppcoreguidelines-*'
-
-# Ensure header files are also checked, omitting external libraries
 HeaderFilterRegex: 'src/.*'
