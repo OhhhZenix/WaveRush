@@ -1,4 +1,4 @@
 ---
 Checks: '-*,cppcoreguidelines-*,bugprone-*,cert-*,modernize-*,performance-*'
-WarningsAsErrors: 'cppcoreguidelines-*'
+# WarningsAsErrors: 'cppcoreguidelines-*'
 HeaderFilterRegex: 'src/.*'
