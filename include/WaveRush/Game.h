@@ -11,8 +11,11 @@ namespace wr {
     Game(Game&& game) = delete;                 // move construct
     Game& operator=(Game&& game) = delete;      // move assign
     void Run();
+    bool IsRunning() const;
+    void SetRunning(bool value);
 
   private:
+    bool running_;
   };
 
 } // namespace wr

@@ -6,9 +6,15 @@
 
 namespace wr {
 
-  Game::Game() { InitWindow(wr::GAME_WIDTH, wr::GAME_HEIGHT, "Wave Rush"); }
+  Game::Game() {
+    InitWindow(wr::GAME_WIDTH, wr::GAME_HEIGHT, "Wave Rush");
+    running_ = true;
+  }
 
-  Game::~Game() { CloseWindow(); }
+  Game::~Game() {
+    CloseWindow();
+    running_ = false;
+  }
 
   void Game::Run() {
     while (!WindowShouldClose()) {
@@ -18,5 +24,9 @@ namespace wr {
       EndDrawing();
     }
   }
+
+  bool Game::IsRunning() const { return running_; }
+
+  void Game::SetRunning(bool value) { running_ = value; }
 
 } // namespace wr
