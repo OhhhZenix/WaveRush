@@ -10,10 +10,11 @@ include(cmake/glm.cmake)
 
 add_executable(
         ${PROJECT_NAME}
-        src/Main.cc
+        ./src/Main.cc
+        ./src/WaveRush/Game.cc
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC src)
+target_include_directories(${PROJECT_NAME} PUBLIC ./include)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib glm::glm)
 
