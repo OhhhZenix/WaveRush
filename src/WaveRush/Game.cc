@@ -1,6 +1,7 @@
 #include "WaveRush/Game.h"
 
 #include "WaveRush/Constant.h"
+#include "WaveRush/Entity.h"
 
 #include <raylib.h>
 
@@ -17,10 +18,13 @@ namespace wr {
   }
 
   void Game::Run() {
-    while (!WindowShouldClose()) {
+    wr::Player player{0, 0};
+    while (!WindowShouldClose() && IsRunning()) {
       BeginDrawing();
+      player.OnUpdate(*this);
+
       ClearBackground(RAYWHITE);
-      DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+      player.OnRender(*this);
       EndDrawing();
     }
   }
