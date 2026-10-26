@@ -18,7 +18,16 @@ namespace wr {
 
   class Player : public Entity {
   public:
-    Player(float x, float y);
+    Player(float x, float y) {
+      x_ = x;
+      y_ = y;
+    }
+
+    ~Player() = default;
+
+    void OnUpdate(wr::Game& game) override {}
+
+    void OnRender(const wr::Game& game) override {}
 
   private:
     float x_;
