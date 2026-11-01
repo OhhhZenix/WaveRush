@@ -1,5 +1,7 @@
 #pragma once
 
+#include "WaveRush/Entity/Player.h"
+
 namespace wr {
 
   class Game {
@@ -16,6 +18,7 @@ namespace wr {
 
   private:
     bool running_;
+    wr::Player player_;
   };
 
 } // namespace wr
