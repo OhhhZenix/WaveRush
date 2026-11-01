@@ -18,9 +18,9 @@ namespace wr {
 
   void Game::Run() {
     while (!WindowShouldClose() && IsRunning()) {
-      BeginDrawing();
       player_.Update();
 
+      BeginDrawing();
       ClearBackground(RAYWHITE);
       player_.Render();
       EndDrawing();
