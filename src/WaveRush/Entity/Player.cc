@@ -8,7 +8,7 @@ namespace wr {
 
   float Player::GetY() const { return y_; }
 
-  void Player::Update() {
+  void Player::Update(wr::Game& game) {
     // Update player logic here
   }
 

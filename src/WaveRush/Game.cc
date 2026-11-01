@@ -19,7 +19,7 @@ namespace wr {
   void Game::Run() {
     while (!WindowShouldClose() && IsRunning()) {
       BeginDrawing();
-      player_.Update();
+      player_.Update(*this);
 
       ClearBackground(RAYWHITE);
       player_.Render();
