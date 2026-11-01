@@ -11,9 +11,8 @@ namespace wr {
   float Player::GetY() const { return y_; }
 
   void Player::Update() {
-    float dt = GetFrameTime();
-    x_ += 20 * dt;
-    y_ += 20 * dt;
+    x_ += 2;
+    y_ += 2;
   }
 
   void Player::Render() { DrawRectangle(x_, y_, 32, 32, BLACK); }

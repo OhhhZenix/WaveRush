@@ -7,6 +7,7 @@
 namespace wr {
 
   Game::Game() {
+    SetTargetFPS(wr::GAME_FPS);
     InitWindow(wr::GAME_WIDTH, wr::GAME_HEIGHT, "Wave Rush");
     running_ = true;
   }
