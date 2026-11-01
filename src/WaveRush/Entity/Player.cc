@@ -8,4 +8,12 @@ namespace wr {
 
   float Player::GetY() const { return y_; }
 
+  void Player::Update() {
+    // Update player logic here
+  }
+
+  void Player::Render() {
+    // Render player here
+  }
+
 } // namespace wr

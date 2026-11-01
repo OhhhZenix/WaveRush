@@ -1,7 +1,6 @@
 #include "WaveRush/Game.h"
 
 #include "WaveRush/Constant.h"
-#include "WaveRush/Entity.h"
 
 #include <raylib.h>
 
@@ -18,13 +17,12 @@ namespace wr {
   }
 
   void Game::Run() {
-    wr::Player player{0, 0};
     while (!WindowShouldClose() && IsRunning()) {
       BeginDrawing();
-      player.OnUpdate(*this);
+      player_.Update();
 
       ClearBackground(RAYWHITE);
-      player.OnRender(*this);
+      player_.Render();
       EndDrawing();
     }
   }
