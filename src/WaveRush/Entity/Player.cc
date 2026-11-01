@@ -11,8 +11,9 @@ namespace wr {
   float Player::GetY() const { return y_; }
 
   void Player::Update() {
-    x_ += 0.05F; // Move player to the right
-    y_ += 0.05F; // Move player down
+    float dt = GetFrameTime();
+    x_ += 20 * dt;
+    y_ += 20 * dt;
   }
 
   void Player::Render() { DrawRectangle(x_, y_, 32, 32, BLACK); }
