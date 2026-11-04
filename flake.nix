@@ -10,17 +10,15 @@
     in
     {
       devShells.${system}.default = pkgs.mkShell {
-        CC = "${pkgs.gcc}/bin/gcc";
-        CXX = "${pkgs.gcc}/bin/g++";
+        CC = "${pkgs.clang}/bin/clang";
+        CXX = "${pkgs.clang}/bin/clang++";
         OBJCXX = "${pkgs.clang}/bin/clang++";
 
         packages = with pkgs; [
           # tools
           clang
-          gcc
           cmake
           gnumake
-          ninja
           pkg-config
 
           # libs
