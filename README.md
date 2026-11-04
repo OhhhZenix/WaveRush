@@ -6,6 +6,16 @@
 
 Here are some questions and answers to get started.
 
+### Using Nix
+
+Enter the development environment before configuring and building:
+
+```sh
+nix develop
+```
+
+Then follow the CMake steps below.
+
 ### How to generate the project?
 
 To generate the project use:
