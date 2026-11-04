@@ -15,12 +15,15 @@
         OBJCXX = "${pkgs.clang}/bin/clang++";
 
         packages = with pkgs; [
+          # tools
           clang
           gcc
           cmake
           gnumake
           ninja
           pkg-config
+
+          # libs
           alsa-lib
           libGL
           libx11
