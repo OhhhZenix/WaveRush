@@ -16,8 +16,8 @@
 
         packages = with pkgs; [
           clang
-          cmake
           gcc
+          cmake
           gnumake
           ninja
           pkg-config
