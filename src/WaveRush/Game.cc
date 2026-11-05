@@ -19,6 +19,7 @@ namespace wr {
 
   void Game::Run() {
     bool ok = !WindowShouldClose() && IsRunning();
+
     while (ok) {
       player_.Update();
 
