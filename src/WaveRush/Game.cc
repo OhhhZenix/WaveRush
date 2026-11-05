@@ -18,9 +18,7 @@ namespace wr {
   }
 
   void Game::Run() {
-    bool ok = !WindowShouldClose() && IsRunning();
-
-    while (ok) {
+    while (!WindowShouldClose() && IsRunning()) {
       player_.Update();
 
       BeginDrawing();
