@@ -3,11 +3,17 @@
 #include <cstddef>
 #include <string>
 #include <tuple>
+#include <utility>
 #include <vector>
 
 namespace wr {
 
   using ComponentPool = std::tuple<std::vector<int>>;
+
+  template <typename Tuple, std::size_t... Is>
+  void reserve_tuple(Tuple& tuple, std::size_t capacity, std::index_sequence<Is...>) {
+    (std::get<Is>(tuple).reserve(capacity), ...);
+  }
 
   class EntityPool {
   public:
