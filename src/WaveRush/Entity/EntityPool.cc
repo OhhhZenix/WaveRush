@@ -14,7 +14,7 @@ namespace wr {
 
   template <typename T> auto EntityPool::hasComponent() -> bool { return false; }
 
-  template <typename T> auto EntityPool::getComponent() -> T& { return {}; }
+  template <typename T> auto EntityPool::getComponent() -> T& { return T{}; }
 
   EntityPool::EntityPool(std::size_t max_entities) : max_entities_(max_entities), num_entities_(0) {
     std::apply([max_entities](auto&... vec) { (vec.reserve(max_entities), ...); }, components_);
