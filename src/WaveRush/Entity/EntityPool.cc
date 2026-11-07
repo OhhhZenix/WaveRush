@@ -17,9 +17,10 @@ namespace wr {
   template <typename T> auto EntityPool::getComponent() -> T& { return {}; }
 
   EntityPool::EntityPool(std::size_t max_entities) : max_entities_(max_entities), num_entities_(0) {
-    alive_.reserve(max_entities);
-    tags_.reserve(max_entities);
     std::apply([max_entities](auto&... vec) { (vec.reserve(max_entities), ...); }, components_);
+    generation_.reserve(max_entities);
+    tags_.reserve(max_entities);
+    alive_.reserve(max_entities);
   }
 
 } // namespace wr
