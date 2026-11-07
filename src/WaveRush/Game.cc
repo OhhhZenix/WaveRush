@@ -6,10 +6,9 @@
 
 namespace wr {
 
-  Game::Game() {
+  Game::Game() : running_(true) {
     SetTargetFPS(wr::GAME_FPS);
     InitWindow(wr::GAME_WIDTH, wr::GAME_HEIGHT, "Wave Rush");
-    running_ = true;
   }
 
   Game::~Game() {
@@ -28,7 +27,7 @@ namespace wr {
     }
   }
 
-  bool Game::IsRunning() const { return running_; }
+  auto Game::IsRunning() -> bool { return running_; }
 
   void Game::SetRunning(bool value) { running_ = value; }
 
