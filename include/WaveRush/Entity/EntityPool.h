@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <cstdint>
 #include <string>
 #include <tuple>
 #include <vector>
@@ -16,11 +17,12 @@ namespace wr {
     template <typename T> auto getComponent() -> T&;
 
   private:
+    ComponentPool components_;
+    std::vector<std::uint32_t> generation_;
+    std::vector<std::string> tags_;
+    std::vector<bool> alive_;
     std::size_t max_entities_;
     std::size_t num_entities_;
-    std::vector<bool> alive_;
-    std::vector<std::string> tags_;
-    ComponentPool components_;
 
     EntityPool(std::size_t max_entities);
   };
