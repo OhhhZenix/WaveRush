@@ -7,14 +7,14 @@
 
 namespace wr {
 
-  EntityPool& EntityPool::Instance() {
+  auto EntityPool::Instance() -> EntityPool& {
     static EntityPool pool(wr::MAX_ENTITIES);
     return pool;
   }
 
-  template <typename T> bool EntityPool::hasComponent() { return false; }
+  template <typename T> auto EntityPool::hasComponent() -> bool { return false; }
 
-  template <typename T> T& EntityPool::getComponent() { return {}; }
+  template <typename T> auto EntityPool::getComponent() -> T& { return {}; }
 
   EntityPool::EntityPool(std::size_t max_entities) : max_entities_(max_entities), num_entities_(0) {
     alive_.reserve(max_entities);
