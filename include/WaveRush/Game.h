@@ -8,12 +8,12 @@ namespace wr {
   public:
     Game();
     ~Game();
-    Game(const Game& game) = delete;            // copy construct
-    Game& operator=(const Game& game) = delete; // copy assign
-    Game(Game&& game) = delete;                 // move construct
-    Game& operator=(Game&& game) = delete;      // move assign
+    Game(const Game& game) = delete;                    // copy construct
+    Game(Game&& game) = delete;                         // move construct
+    auto operator=(const Game& game) -> Game& = delete; // copy assign
+    auto operator=(Game&& game) -> Game& = delete;      // move assign
     void Run();
-    bool IsRunning() const;
+    auto IsRunning() -> bool;
     void SetRunning(bool value);
 
   private:
