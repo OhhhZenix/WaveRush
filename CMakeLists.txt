@@ -16,7 +16,6 @@ add_executable(
         ${PROJECT_NAME}
         ./src/Main.cc
         ./src/WaveRush/Game.cc
-        ./src/WaveRush/Entity/Player.cc
         ./src/WaveRush/Entity/EntityPool.cc
 )
 
