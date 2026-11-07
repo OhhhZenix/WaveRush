@@ -1,6 +1,6 @@
 #include "WaveRush/Game.h"
 
-int main() {
+auto main() -> int {
   wr::Game game;
   game.Run();
   return 0;
